@@ -13,7 +13,7 @@ export default defineType({
       name: "category",
       title: "Category",
       type: "string",
-      options: { list: ["Research", "Product", "Changelog", "Opinion", "Clinical"] },
+      options: { list: ["Research", "Product", "Engineering", "Opinion", "Clinical"] },
     }),
     defineField({
       name: "author",
