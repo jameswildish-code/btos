@@ -3,6 +3,44 @@ import Link from "next/link";
 import { getBlogPost } from "@/lib/sanity";
 import { PortableText } from "@portabletext/react";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Block = { _type: string; style?: string; children?: { text: string }[]; [k: string]: any };
+
+function slugify(text: string) {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function extractTOC(body: Block[]) {
+  if (!Array.isArray(body)) return [];
+  return body
+    .filter((b) => b._type === "block" && (b.style === "h2" || b.style === "h3"))
+    .map((b) => {
+      const text = b.children?.map((c) => c.text).join("") ?? "";
+      return { text, id: slugify(text) };
+    });
+}
+
+function coverDate(iso: string) {
+  if (!iso) return "— / —";
+  const d = new Date(iso);
+  return `${String(d.getMonth() + 1).padStart(2, "0")} / ${String(d.getFullYear()).slice(2)}`;
+}
+
+const ptComponents = {
+  block: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    h2: ({ children, value }: any) => {
+      const text = value?.children?.map((c: { text: string }) => c.text).join("") ?? "";
+      return <h2 id={slugify(text)}>{children}</h2>;
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    h3: ({ children, value }: any) => {
+      const text = value?.children?.map((c: { text: string }) => c.text).join("") ?? "";
+      return <h3 id={slugify(text)}>{children}</h3>;
+    },
+  },
+};
+
 // Static fallback for the featured article
 const FEATURED = {
   title: "The case against the quarterly checkup.",
@@ -78,23 +116,24 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       <div className="wrap">
         <div className="a-cover">
-          <div className="clabel">04 / 26</div>
-          <div className="ctag">Research · {post.readTime} min read</div>
+          <div className="clabel">{coverDate(post.publishedAt)}</div>
+          <div className="ctag">{post.category} · {post.readTime ?? "—"} min read</div>
         </div>
 
+        {(() => {
+          const toc = extractTOC(post.body);
+          return (
         <div className="body-layout">
           <div className="toc">
             <div className="toc-head">Contents</div>
-            <a href="#problem">The problem with quarterly</a>
-            <a href="#cost">The cost of the gap</a>
-            <a href="#continuous">What continuous data shows</a>
-            <a href="#clinical">The clinical shift</a>
-            <a href="#consent">The consent question</a>
+            {toc.length > 0 ? toc.map((h) => (
+              <a key={h.id} href={`#${h.id}`}>{h.text}</a>
+            )) : <span style={{ color: "var(--muted)", fontSize: 11 }}>Add H2 headings in the body to generate contents.</span>}
           </div>
 
           <div className="content">
             {post.body?.length ? (
-              <PortableText value={post.body} />
+              <PortableText value={post.body} components={ptComponents} />
             ) : (
               <p style={{ color: "var(--muted)", fontStyle: "italic" }}>No body content yet — add text in the Body field in Sanity Studio.</p>
             )}
@@ -107,6 +146,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <a href="#" style={{ color: "var(--muted)" }}>Copy link</a>
           </div>
         </div>
+          );
+        })()}
       </div>
 
       <section className="related">

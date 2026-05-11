@@ -44,6 +44,7 @@ export default async function BlogPage() {
         .post .art .label { position:absolute; left:14px; bottom:12px; font-family:var(--font-display); font-size:32px; line-height:1; color:rgba(255,255,255,.92); }
         .post-meta { font-family:var(--font-mono); font-size:10px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; display:flex; gap:12px; }
         .post h3 { font-family:var(--font-display); font-weight:400; font-size:22px; line-height:1.15; margin:0; letter-spacing:-.01em; }
+        .post-excerpt { font-size:13px; color:var(--muted); margin:0; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
         .post-footer { margin-top:auto; display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; }
         .art-a { background:linear-gradient(135deg,#1F2A48 0%,#2A4A6E 100%); }
         .art-b { background:linear-gradient(135deg,#2FBFA3 0%,#1A8E78 100%); }

@@ -11,6 +11,7 @@ type Post = {
   _id: string;
   slug: { current: string };
   title: string;
+  excerpt?: string;
   category: string;
   publishedAt: string;
   author?: { name: string };
@@ -89,8 +90,9 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
                     <span>{post.readTime} min</span>
                   </div>
                   <h3>{post.title}</h3>
+                  {post.excerpt && <p className="post-excerpt">{post.excerpt}</p>}
                   <div className="post-footer">
-                    <span>{post.author?.name}</span>
+                    <span>{post.author?.name ?? "BiotrackOS"}</span>
                     <span>{formatDate(post.publishedAt)}</span>
                   </div>
                 </Link>

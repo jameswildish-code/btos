@@ -36,7 +36,8 @@ export async function getBlogPost(slug: string) {
   return client.fetch(
     `*[_type == "blogPost" && slug.current == $slug][0] {
       _id, title, slug, excerpt, publishedAt, category, body,
-      "author": author->{ name, role, image }
+      "author": author->{ name, role, image },
+      "readTime": round(length(pt::text(body)) / 5 / 180)
     }`,
     { slug }
   );
