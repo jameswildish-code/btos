@@ -10,7 +10,7 @@ const FEATURED = {
   publishedAt: "2026-05-04",
   author: { name: "Dr. Sofia Holm", role: "Head of Clinical Research · BiotrackOS" },
   readTime: 12,
-  body: null as null,
+  body: null as unknown[] | null,
 };
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
