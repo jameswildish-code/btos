@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Continuum Longevity — BiotrackOS</title>
+<link rel="stylesheet" href="../assets/shared.css" />
+<style>
+  .cs-hero { padding: 64px 0 56px; border-bottom: 1px solid var(--line); }
+  .crumbs { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .cs-hero h1 em { color: var(--ink-2); font-style: italic; }
+  .meta-row {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 24px;
+    margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line);
+  }
+  .meta-row .lab { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .meta-row .v { font-size: 14px; margin-top: 6px; }
+
+  .body { padding: 80px 0; }
+  .body .layout { display: grid; grid-template-columns: 220px 1fr 240px; gap: 48px; align-items: start; }
+  .toc { position: sticky; top: 96px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .toc a { display: block; padding: 6px 0; color: var(--muted); }
+  .toc a:hover { color: var(--ink); }
+  .content h2 { font-family: var(--font-display); font-weight: 400; font-size: 40px; line-height: 1.05; margin: 56px 0 16px; letter-spacing: -0.01em; }
+  .content h2:first-child { margin-top: 0; }
+  .content p { font-size: 18px; line-height: 1.65; color: var(--ink-2); }
+  .content blockquote {
+    margin: 32px 0; padding: 24px 28px;
+    border-left: 3px solid var(--teal-bright);
+    background: var(--bg-2);
+    font-family: var(--font-display); font-size: 28px; line-height: 1.25; font-style: italic;
+    color: var(--ink);
+  }
+  .content blockquote cite { display: block; margin-top: 12px; font-family: var(--font-mono); font-style: normal; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .pullquote {
+    margin: 56px 0;
+    text-align: center;
+    font-family: var(--font-display); font-size: 44px; line-height: 1.05; letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .stat-rail { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 16px; }
+  .stat-rail .card { padding: 22px; }
+  .stat-rail .v { font-family: var(--font-display); font-size: 48px; line-height: 1; }
+  .stat-rail .v em { font-style: italic; color: var(--teal); }
+  .stat-rail .l { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+  .image-block { background: var(--bg-2); border: 1px solid var(--line); border-radius: 18px; padding: 24px; margin: 32px 0; }
+
+  @media (max-width: 1000px) {
+    .body .layout { grid-template-columns: 1fr; }
+    .toc, .stat-rail { position: static; }
+    .meta-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body data-page="customers" data-prefix="../">
+
+<main>
+  <section class="cs-hero">
+    <div class="wrap-w">
+      <div class="crumbs"><a href="../customers.html">Customers</a> / Continuum Longevity</div>
+      <span class="eyebrow"><span class="dot"></span> Case study · Longevity</span>
+      <h1 class="h1" style="margin-top:16px;max-width:18ch;">"We retired five<br/>dashboards <em>in a weekend.</em>"</h1>
+      <div class="meta-row">
+        <div><div class="lab">Customer</div><div class="v">Continuum Longevity · 4 clinics</div></div>
+        <div><div class="lab">Founded</div><div class="v">Copenhagen · 2019</div></div>
+        <div><div class="lab">Patients</div><div class="v">2,140 active panels</div></div>
+        <div><div class="lab">Live on BiotrackOS</div><div class="v">Since Aug 2024</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="body">
+    <div class="wrap-w">
+      <div class="layout">
+        <nav class="toc">
+          <div style="color:var(--ink);margin-bottom:14px;">CONTENTS</div>
+          <a href="#before">01 / The before</a>
+          <a href="#rollout">02 / The rollout</a>
+          <a href="#change">03 / What changed</a>
+          <a href="#today">04 / Today</a>
+        </nav>
+
+        <article class="content">
+          <h2 id="before">The before.</h2>
+          <p>In 2024, Continuum's medical director Dr. Daria Kowalski was running a longevity practice across four clinics — and five vendor dashboards. Apple Health for one set of patients. Whoop for another. Garmin for the runners. A bespoke spreadsheet for the bloods.</p>
+          <p>"Every Monday, we spent the first two hours of clinic reconciling data instead of reading it," she remembers. "Patients showed up for their quarterly with a watch, a ring, a scale, and three apps — and we were the part of the system holding all of it together with PDFs."</p>
+
+          <blockquote>
+            We retired five dashboards in a weekend. Our clinicians stopped reconciling data and started reading it.
+            <cite>Dr. Daria Kowalski · Medical Director, Continuum</cite>
+          </blockquote>
+
+          <h2 id="rollout">The rollout.</h2>
+          <p>Continuum went live on BiotrackOS in a single weekend. On Friday afternoon, their head of operations sent a one-tap consent link to every active patient. By Sunday night, 92% had connected — most without writing back.</p>
+          <p>"It was the easiest patient communication we've ever sent," Kowalski says. "One screen, one button, no app downloads they hadn't already done."</p>
+
+          <div class="image-block">
+            <span class="eyebrow"><span class="dot"></span> Cohort 04 · 60-day recovery score</span>
+            <div id="cs-heat" style="display:grid;grid-template-columns:repeat(30,1fr);gap:2px;margin-top:14px;"></div>
+            <div style="display:flex;justify-content:space-between;margin-top:10px;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">
+              <span>Patient ↓</span><span>214 patients · 60d</span><span>Time →</span>
+            </div>
+          </div>
+
+          <h2 id="change">What changed.</h2>
+          <p>Six weeks in, Kowalski's clinicians had stopped opening every other dashboard. By month two, the Continuum team had built nine custom cohort views — by program, by year of enrollment, by adherence — and was running their weekly clinical review off three saved searches.</p>
+
+          <div class="pullquote">"Reconciliation used to be a job. Now it's just a screen."</div>
+
+          <p>The bigger surprise was patient-side. Continuum's white-labeled consumer app — same data, on the patient's phone — drove a 41% lift in self-reported adherence within 90 days. "People look at their numbers because they can finally <em>see</em> them all at once," Kowalski says.</p>
+
+          <h2 id="today">Today.</h2>
+          <p>Continuum is rolling BiotrackOS across two more clinics in 2026 and using the API to pipe deduplicated records into their Epic instance — closing the loop they'd been holding shut with spreadsheets for six years.</p>
+          <p>"It feels like the boring infrastructure we always wanted," Kowalski says. "And our patients tell us their bodies feel less like a mystery. That's the whole job."</p>
+        </article>
+
+        <aside class="stat-rail">
+          <div class="card">
+            <div class="v">93<em>%</em></div>
+            <div class="l">Clinician adoption · week 1</div>
+          </div>
+          <div class="card">
+            <div class="v">5 → 1</div>
+            <div class="l">Vendor dashboards retired</div>
+          </div>
+          <div class="card">
+            <div class="v">+41<em>%</em></div>
+            <div class="l">Self-reported adherence · 90d</div>
+          </div>
+          <div class="card">
+            <div class="v">2.1k</div>
+            <div class="l">Active patient panels</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+  (function(){
+    const el = document.getElementById('cs-heat');
+    if (!el) return;
+    const palette = ['#EDEAE0','#D6E8DC','#A8D6BF','#6FBFA0','#1F8A7A'];
+    let html = '';
+    for (let i = 0; i < 30*14; i++) {
+      const r = Math.random();
+      let c;
+      if (r < 0.04) c = '#C46A6A';
+      else if (r < 0.30) c = palette[4];
+      else if (r < 0.55) c = palette[3];
+      else if (r < 0.78) c = palette[2];
+      else c = palette[1];
+      html += `<span style="aspect-ratio:1/1;border-radius:2px;background:${c};opacity:${0.6 + Math.random()*0.4}"></span>`;
+    }
+    el.innerHTML = html;
+  })();
+</script>
+<script src="../assets/shared.js"></script>
+</body>
+</html>

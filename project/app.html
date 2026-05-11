@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BiotrackOS App — Every signal in one place</title>
+<link rel="stylesheet" href="assets/shared.css" />
+<style>
+  body { background: var(--bg); }
+  .app-hero {
+    padding: 80px 0 64px;
+    position: relative; overflow: hidden;
+    background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 60%);
+    border-bottom: 1px solid var(--line);
+  }
+  .app-hero .g { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+  .app-hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(56px, 7vw, 96px); line-height: 0.98; letter-spacing: -0.02em; margin: 16px 0; max-width: 16ch; text-wrap: balance; }
+  .app-hero h1 em { color: var(--teal); font-style: italic; }
+  .app-hero .stores { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+  .store {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 12px 20px; border-radius: 14px;
+    background: var(--ink); color: var(--bg);
+    font-size: 15px;
+  }
+  .store small { display: block; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #807C6F; }
+  .store .label { font-weight: 500; line-height: 1.1; }
+
+  .phones {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    position: relative;
+  }
+  .phone {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 32px; padding: 12px;
+    box-shadow: 0 30px 60px -30px rgba(20,18,12,0.25);
+    aspect-ratio: 9/19;
+    overflow: hidden; position: relative;
+  }
+  .phone img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
+  .phone.lift  { transform: translateY(-32px); }
+  .phone.lift2 { transform: translateY(-16px); }
+
+  .ribbon {
+    background: var(--ink); color: #C9C5B6; padding: 16px 0;
+    overflow: hidden; position: relative;
+  }
+  .ribbon .track {
+    display: flex; gap: 48px;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    animation: scroll 50s linear infinite;
+    width: max-content;
+  }
+  .ribbon .track span::before {
+    content: "●"; color: var(--teal-bright); margin-right: 12px; font-size: 8px; vertical-align: middle;
+  }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* Feature sections — alternating */
+  .feat {
+    padding: 96px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .feat .g { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .feat.flip .g { grid-template-columns: 1fr 1fr; direction: rtl; }
+  .feat.flip .g > * { direction: ltr; }
+  .feat h2 { font-family: var(--font-display); font-weight: 400; font-size: 56px; line-height: 1.02; letter-spacing: -0.01em; margin: 16px 0 16px; max-width: 14ch; text-wrap: balance; }
+  .feat h2 em { color: var(--ink-2); font-style: italic; }
+  .feat p { color: var(--ink-2); font-size: 18px; line-height: 1.55; max-width: 46ch; }
+  .feat .bullets { margin-top: 20px; display: grid; gap: 10px; }
+  .feat .bullets div { display: grid; grid-template-columns: 18px 1fr; gap: 10px; font-size: 14px; }
+  .feat .bullets div::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--teal-bright); margin-top: 8px; }
+
+  .phone-single {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 36px; padding: 14px;
+    box-shadow: 0 30px 60px -30px rgba(20,18,12,0.25);
+    width: 320px; aspect-ratio: 9/19;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .phone-single img { width: 100%; height: 100%; object-fit: cover; border-radius: 22px; }
+
+  /* Connected stack */
+  .stack {
+    padding: 96px 0; background: var(--bg-2); border-bottom: 1px solid var(--line);
+  }
+  .stack .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+  .stack .chip { padding: 10px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 13px; }
+  .stack .chip strong { font-weight: 500; }
+  .stack .chip small { color: var(--muted); margin-left: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* Pricing snapshot */
+  .price {
+    padding: 96px 0;
+  }
+  .price-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+  .pc {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
+    padding: 28px; display: flex; flex-direction: column;
+  }
+  .pc.dark { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .pc .name { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .pc.dark .name { color: #807C6F; }
+  .pc .num { font-family: var(--font-display); font-size: 52px; line-height: 1; margin: 14px 0 12px; letter-spacing: -0.02em; }
+  .pc .num small { font-family: var(--font-sans); font-size: 13px; color: var(--muted); margin-left: 6px; }
+  .pc.dark .num small { color: #807C6F; }
+  .pc p { color: var(--muted); margin: 0 0 18px; font-size: 13px; max-width: 30ch; }
+  .pc.dark p { color: #C9C5B6; }
+  .pc ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; font-size: 14px; }
+  .pc li { padding: 8px 0; border-top: 1px dashed var(--line); }
+  .pc.dark li { border-color: #2A2F4A; }
+  .pc .cta { margin-top: auto; padding-top: 20px; }
+
+  /* Clinic crosslink */
+  .clinic-x {
+    background: var(--ink); color: var(--bg); padding: 80px 0;
+    position: relative; overflow: hidden;
+  }
+  .clinic-x::before { content:""; position:absolute; inset:0; background: radial-gradient(ellipse at top left, rgba(47,191,163,.15), transparent 60%); }
+  .clinic-x .g { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; position: relative; }
+  .clinic-x h2 { font-family: var(--font-display); font-weight: 400; font-size: 48px; line-height: 1.05; letter-spacing: -0.01em; margin: 12px 0 12px; max-width: 16ch; }
+  .clinic-x h2 em { color: var(--mint); font-style: italic; }
+  .clinic-x p { color: #C9C5B6; max-width: 44ch; }
+
+  /* CTA */
+  .cta-foot { padding: 96px 0; text-align: center; }
+  .cta-foot h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(48px, 6vw, 84px); line-height: 1.02; letter-spacing: -0.02em; margin: 0; }
+  .cta-foot h2 em { color: var(--teal); font-style: italic; }
+
+  @media (max-width:900px) {
+    .app-hero .g, .feat .g, .feat.flip .g, .clinic-x .g, .price-cards, .phones { grid-template-columns: 1fr; gap: 24px; }
+    .phones { grid-template-columns: repeat(2, 1fr); }
+    .phone.lift, .phone.lift2 { transform: none; }
+    .feat.flip .g { direction: ltr; }
+  }
+</style>
+</head>
+<body data-page="app" data-prefix="">
+
+<main>
+  <section class="app-hero">
+    <div class="wrap-w">
+      <div class="g">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> BiotrackOS for iPhone &amp; Android</span>
+          <h1>Your body's data,<br/>in one place — <em>finally.</em></h1>
+          <p class="lede" style="max-width:42ch;">Every wearable, every lab panel, every genome — one continuous record on your phone, with insights you'd otherwise pay a clinician to read. Free forever. Pro from $9/month.</p>
+          <div class="stores">
+            <a class="store" href="#"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 12.5c0-3 2.5-4.5 2.5-4.5s-1.4-2-3.5-2c-1.5 0-2.5 1-3.5 1s-2-1-3.5-1c-2.5 0-5 2.5-5 6.5 0 3.5 3 7.5 5 7.5 1 0 1.5-.7 3-.7s2 .7 3 .7c2 0 4-3.5 4-5.5 0-1-1-2-2-2zM15 5c1-.7 1.5-2 1.5-3-1 0-2.3.7-3 1.5-.5.7-1 2-1 3 1 0 2-.7 2.5-1.5z"/></svg><span><small>Download on</small><span class="label">App Store</span></span></a>
+            <a class="store" href="#"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3l16 9-16 9V3zm12.5 9L6 5.8v12.4l9.5-6.2z"/></svg><span><small>Get it on</small><span class="label">Google Play</span></span></a>
+          </div>
+        </div>
+        <div class="phones">
+          <div class="phone lift"><img src="assets/img/app-health.png" alt="Health overview" /></div>
+          <div class="phone"><img src="assets/img/app-vo2.png" alt="VO₂ max screen" /></div>
+          <div class="phone lift2"><img src="assets/img/app-journal.png" alt="Health journal" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon">
+    <div class="track">
+      <span>Every wearable</span><span>Apple Health</span><span>Whoop</span><span>Garmin</span><span>Oura</span><span>Withings</span><span>Polar</span><span>Samsung Health</span><span>Reebok Ring</span><span>KP Pharma bloods</span><span>Muhdo DNA</span><span>Muhdo Epigenetics</span><span>DataPharm Rx</span><span>and growing</span>
+      <span>Every wearable</span><span>Apple Health</span><span>Whoop</span><span>Garmin</span><span>Oura</span><span>Withings</span><span>Polar</span><span>Samsung Health</span><span>Reebok Ring</span><span>KP Pharma bloods</span><span>Muhdo DNA</span><span>Muhdo Epigenetics</span><span>DataPharm Rx</span><span>and growing</span>
+    </div>
+  </div>
+
+  <!-- FEATURE 1 -->
+  <section class="feat">
+    <div class="wrap-w">
+      <div class="g">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> One record</span>
+          <h2>Every signal you<br/>generate — <em>deduped.</em></h2>
+          <p>You don't need three apps that all show heart rate. BiotrackOS pulls from every wearable, every CGM, every lab panel — then resolves overlapping sources into one continuous record.</p>
+          <div class="bullets">
+            <div>Auto-deduplication across wearables (Apple + Whoop + Garmin all measure HRV — we pick the best signal).</div>
+            <div>Time-aligned across instruments. A sleep score, a glucose curve, and a Rx refill on the same axis.</div>
+            <div>Imported once, referenced forever — genome, bloods, biological age.</div>
+          </div>
+        </div>
+        <div class="phone-single"><img src="assets/img/app-health.png" alt="Health overview" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 2 -->
+  <section class="feat flip" style="background: var(--bg-2);">
+    <div class="wrap-w">
+      <div class="g">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Trends &amp; metrics</span>
+          <h2>Trends that<br/><em>actually move.</em></h2>
+          <p>Most apps show you a score and a smiley face. We show you the line — over weeks, months, years — with the context that explains the shape of it.</p>
+          <div class="bullets">
+            <div>VO₂ max, HRV, resting HR, sleep efficiency — charted over weeks and years.</div>
+            <div>Plain-language analysis on every metric: <em>"VO₂ max trended upward by 1.4% vs. earlier in the period."</em></div>
+            <div>Range bands grounded in clinical data — not vibes.</div>
+          </div>
+        </div>
+        <div class="phone-single"><img src="assets/img/app-vo2.png" alt="VO₂ max screen" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 3 -->
+  <section class="feat">
+    <div class="wrap-w">
+      <div class="g">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Health journal</span>
+          <h2>Your day,<br/><em>in signals.</em></h2>
+          <p>Auto-captured moments from every stream — plus your own notes — in one timeline that reads like a journal, not a dashboard.</p>
+          <div class="bullets">
+            <div>Sleep, workouts, hydration, mood, nutrition, Rx — automatically logged.</div>
+            <div>Hand-write the bits that matter — a tight lower back, a missed run, a great meal.</div>
+            <div>Searchable across years. Find the last time you felt this way.</div>
+          </div>
+        </div>
+        <div class="phone-single"><img src="assets/img/app-journal.png" alt="Journal" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="stack">
+    <div class="wrap-w">
+      <span class="eyebrow"><span class="dot"></span> Connect</span>
+      <h2 class="h1" style="margin-top:12px;max-width:18ch;">Bring whatever<br/>you already own.</h2>
+      <div class="row">
+        <span class="chip"><strong>Apple Health</strong><small>Live</small></span>
+        <span class="chip"><strong>Whoop</strong><small>Live</small></span>
+        <span class="chip"><strong>Garmin</strong><small>Live</small></span>
+        <span class="chip"><strong>Oura</strong><small>Live</small></span>
+        <span class="chip"><strong>Withings</strong><small>Live</small></span>
+        <span class="chip"><strong>Polar</strong><small>Live</small></span>
+        <span class="chip"><strong>Samsung Health</strong><small>Live</small></span>
+        <span class="chip"><strong>Reebok Smart Ring</strong><small>Live</small></span>
+        <span class="chip"><strong>Fitbit</strong><small>Live</small></span>
+        <span class="chip"><strong>Dexcom CGM</strong><small>Beta</small></span>
+        <span class="chip"><strong>Levels / Lingo</strong><small>Beta</small></span>
+        <span class="chip"><strong>KP Pharma bloods</strong><small>Live</small></span>
+        <span class="chip"><strong>Muhdo DNA</strong><small>Live</small></span>
+        <span class="chip"><strong>Muhdo Epigenetics</strong><small>Live</small></span>
+        <span class="chip"><strong>DataPharm Rx</strong><small>Live</small></span>
+        <span class="chip"><strong>CityEHR</strong><small>Live</small></span>
+        <span class="chip"><strong>Your service?</strong><small>via marketplace</small></span>
+      </div>
+      <p style="margin-top:24px;color:var(--muted);"><a href="marketplace.html">See the full marketplace →</a></p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="price">
+    <div class="wrap-w">
+      <span class="eyebrow"><span class="dot"></span> App pricing</span>
+      <h2 class="h1" style="margin-top:12px;max-width:18ch;">Free forever<br/>for most people.</h2>
+      <div class="price-cards">
+        <div class="pc">
+          <div class="name">Free</div>
+          <div class="num">$0<small>forever</small></div>
+          <p>Your entire health, in one place. The version most people stay on.</p>
+          <ul>
+            <li>Every connected source</li>
+            <li>Health timeline &amp; journal</li>
+            <li>30-day trend graphs</li>
+            <li>Manual logging</li>
+          </ul>
+          <div class="cta"><a class="btn btn-ghost" href="#">Get the app</a></div>
+        </div>
+        <div class="pc dark">
+          <div class="name">Pro · most popular</div>
+          <div class="num">$9<small>/ month</small></div>
+          <p>For people who train, recover, and want signal — not slop.</p>
+          <ul>
+            <li>Everything in Free</li>
+            <li>Unlimited history</li>
+            <li>VO₂max &amp; HRV coaching</li>
+            <li>Weekly digests + alerts</li>
+          </ul>
+          <div class="cta"><a class="btn btn-accent" href="pricing.html">14-day free trial</a></div>
+        </div>
+        <div class="pc">
+          <div class="name">Premium</div>
+          <div class="num">$29<small>/ month</small></div>
+          <p>For people running their own longevity protocol.</p>
+          <ul>
+            <li>Everything in Pro</li>
+            <li>Annual blood panel included</li>
+            <li>Concierge onboarding</li>
+            <li>Partner gear discounts</li>
+          </ul>
+          <div class="cta"><a class="btn btn-primary" href="pricing.html">See pricing</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLINIC CROSSLINK -->
+  <section class="clinic-x">
+    <div class="wrap-w">
+      <div class="g">
+        <div>
+          <span class="eyebrow" style="color:#807C6F;"><span class="dot"></span> Looking for clinics?</span>
+          <h2>Run a clinic, lab,<br/>or team? <em>BiotrackOS<br/>is also a platform.</em></h2>
+          <p>The same record powers our team workspace. Connect every wearable, lab, and genome your people already use — then run cohort dashboards and write back into your EHR.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-self:end;">
+          <a class="btn btn-accent" href="product.html">See the platform <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" style="border-color:#2A2F4A;color:#C9C5B6;" href="contact.html">Book a demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <section class="cta-foot">
+    <div class="wrap-w">
+      <span class="eyebrow"><span class="dot"></span> Get the app</span>
+      <h2 style="margin-top:16px;">Your body has been<br/>generating data for years.<br/><em>Now you can read it.</em></h2>
+      <div class="stores" style="justify-content:center;margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;">
+        <a class="store" href="#"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 12.5c0-3 2.5-4.5 2.5-4.5s-1.4-2-3.5-2c-1.5 0-2.5 1-3.5 1s-2-1-3.5-1c-2.5 0-5 2.5-5 6.5 0 3.5 3 7.5 5 7.5 1 0 1.5-.7 3-.7s2 .7 3 .7c2 0 4-3.5 4-5.5 0-1-1-2-2-2zM15 5c1-.7 1.5-2 1.5-3-1 0-2.3.7-3 1.5-.5.7-1 2-1 3 1 0 2-.7 2.5-1.5z"/></svg><span><small>Download on</small><span class="label">App Store</span></span></a>
+        <a class="store" href="#"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3l16 9-16 9V3zm12.5 9L6 5.8v12.4l9.5-6.2z"/></svg><span><small>Get it on</small><span class="label">Google Play</span></span></a>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="assets/shared.js"></script>
+</body>
+</html>

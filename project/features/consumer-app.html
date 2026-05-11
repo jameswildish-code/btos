@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Consumer app — BiotrackOS</title>
+<link rel="stylesheet" href="../assets/shared.css" />
+<style>
+  .f-hero { padding: 64px 0 24px; }
+  .crumbs { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .f-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: end; }
+  .f-grid h1 { margin-top: 12px; }
+
+  .f-stage {
+    margin: 56px 0;
+    background: var(--ink); border-radius: 28px; padding: 56px;
+    position: relative; overflow: hidden; color: var(--bg);
+  }
+  .f-stage::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(47,191,163,.18), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 0% 100%, rgba(209,242,74,.10), transparent 60%);
+  }
+  .f-stage > * { position: relative; }
+  .phones-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    justify-items: center; margin-top: 32px;
+  }
+  .phones-row .phone:nth-child(1) { transform: translateY(20px); }
+  .phones-row .phone:nth-child(3) { transform: translateY(20px); }
+
+  .sub { display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+    padding: 72px 0; border-top: 1px solid var(--line); align-items: center; }
+  .sub.flip { direction: rtl; }
+  .sub.flip > * { direction: ltr; }
+  .sub h2 { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1.02; margin: 16px 0; }
+  .sub p { color: var(--ink-2); max-width: 44ch; }
+  .sub-bullets { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
+  .sub-bullets li {
+    display: grid; grid-template-columns: 14px 1fr; gap: 12px;
+    padding: 10px 0; border-top: 1px dashed var(--line);
+    font-size: 14px;
+  }
+  .sub-bullets li::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--teal-bright); margin-top:8px; }
+
+  .related { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .related a { border:1px solid var(--line); border-radius:16px; padding:24px; background:var(--surface); display:flex; flex-direction:column; }
+  .related a .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--muted); }
+  .related a h5 { font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.05; margin: 14px 0 8px; }
+  .related a p { color: var(--muted); font-size: 13px; margin: 0; }
+
+  @media (max-width: 1000px) {
+    .f-grid, .sub, .sub.flip, .related { grid-template-columns: 1fr; gap: 28px; }
+    .sub.flip { direction: ltr; }
+    .phones-row { grid-template-columns: 1fr; }
+    .f-stage { padding: 28px; }
+  }
+</style>
+</head>
+<body data-page="product" data-prefix="../">
+
+<main>
+  <section class="f-hero">
+    <div class="wrap-w">
+      <div class="crumbs"><a href="../product.html">Product</a> / Consumer app</div>
+      <div class="f-grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Feature · F.02</span>
+          <h1 class="h1">Your body's data,<br/><em>finally in one place.</em></h1>
+        </div>
+        <p class="lede">
+          The BiotrackOS app gives people a single, sense-making view of every signal — pulled automatically from the watches, rings, and scales they already own. No chart-staring. No re-entry. No app-graveyard.
+        </p>
+      </div>
+
+      <div class="f-stage">
+        <span class="eyebrow" style="color:#807C6F;"><span class="dot"></span> iOS · Android · iPad</span>
+        <h2 class="h-display" style="color:var(--bg);margin-top:16px;font-size:clamp(40px,5vw,72px);">Auto-captured.<br/><em style="color:var(--mint);">Always quiet.</em></h2>
+        <div class="phones-row">
+          <div class="phone"><div class="phone-notch"></div><div class="phone-screen"><img src="../assets/img/app-health.png" alt="Health"/></div></div>
+          <div class="phone"><div class="phone-notch"></div><div class="phone-screen"><img src="../assets/img/app-journal.png" alt="Journal"/></div></div>
+          <div class="phone"><div class="phone-notch"></div><div class="phone-screen"><img src="../assets/img/app-vo2.png" alt="VO2"/></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap-w">
+
+      <div class="sub">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 01</span>
+          <h2>Every signal,<br/>one screen.</h2>
+          <p>Step counts from iPhone, VO₂ from Apple Watch, recovery from Whoop, sleep from Oura, weight from Withings — all merged into one canonical record. The app does the reconciliation; you just see your day.</p>
+          <ul class="sub-bullets">
+            <li>22 wearable &amp; app sources supported on day one</li>
+            <li>Automatic dedupe across devices</li>
+            <li>Manual entry for what your devices miss</li>
+            <li>Offline-first — your record lives on your phone</li>
+          </ul>
+        </div>
+        <div style="display:flex;justify-content:center;">
+          <div class="phone"><div class="phone-notch"></div><div class="phone-screen"><img src="../assets/img/app-health2.png" alt="All signals"/></div></div>
+        </div>
+      </div>
+
+      <div class="sub flip">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 02</span>
+          <h2>The journal, written<br/>for you, by your body.</h2>
+          <p>A continuous, human-readable log of everything that happened today — runs, naps, mood check-ins, meals — pulled from the apps you already use. Add notes when you want. Skip them when you don't.</p>
+          <ul class="sub-bullets">
+            <li>Chronological day view across all sources</li>
+            <li>Note-taking with mood &amp; symptom tagging</li>
+            <li>Streams: Workouts · Sleep · Mind &amp; Mood · Nutrition</li>
+            <li>Searchable across years</li>
+          </ul>
+        </div>
+        <div style="display:flex;justify-content:center;">
+          <div class="phone"><div class="phone-notch"></div><div class="phone-screen"><img src="../assets/img/app-journal.png" alt="Journal"/></div></div>
+        </div>
+      </div>
+
+      <div class="sub">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 03</span>
+          <h2>Trends, explained<br/>like a friend would.</h2>
+          <p>Charts are a feature, not the answer. BiotrackOS reads the same data your clinician does and writes a one-line summary in plain English — with a why, not just a what.</p>
+          <ul class="sub-bullets">
+            <li>"VO₂ trending up 1.4%" — with the period &amp; range</li>
+            <li>Body-aware framing (poor → fair → good → superior)</li>
+            <li>Linked articles for context, not clickbait</li>
+            <li>Weekly digest, never daily noise</li>
+          </ul>
+        </div>
+        <div style="display:flex;justify-content:center;">
+          <div class="phone"><div class="phone-notch"></div><div class="phone-screen"><img src="../assets/img/app-vo2.png" alt="VO2 trend"/></div></div>
+        </div>
+      </div>
+
+      <div class="sub flip" id="consent">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 04</span>
+          <h2>Share with your<br/>clinic. Revoke any time.</h2>
+          <p>If your clinic, coach, or insurer is on BiotrackOS, one tap links your account. Granular consents let you share VO₂ but not weight, sleep but not mood — and pull the cord whenever you want.</p>
+          <ul class="sub-bullets">
+            <li>Granular per-metric, per-recipient consent</li>
+            <li>Time-bounded shares (e.g. "next 90 days")</li>
+            <li>Audit log of every read</li>
+            <li>One-tap revoke from your phone</li>
+          </ul>
+        </div>
+        <div style="display:flex;justify-content:center;">
+          <div class="phone"><div class="phone-notch"></div><div class="phone-screen"><img src="../assets/img/app-weight.png" alt="Weight"/></div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-w">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Keep reading</span>
+          <h2 class="h2" style="margin-top:16px;">Related capabilities</h2>
+        </div>
+      </div>
+      <div class="related">
+        <a href="clinic-dashboard.html"><span class="num">F.01</span><h5>Clinic dashboard</h5><p>The clinician's side of the same record.</p></a>
+        <a href="../integrations.html"><span class="num">F.03</span><h5>Integrations</h5><p>Wearables, labs, genomics, epigenetics, and Rx \u2014 deduped into one record.</p></a>
+        <a href="../pricing.html"><span class="num">PRICING</span><h5>Free, Pro, Premium</h5><p>For consumers. Plus team tiers for clinics.</p></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+<script src="../assets/shared.js"></script>
+</body>
+</html>

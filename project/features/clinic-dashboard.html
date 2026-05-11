@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Clinic dashboard — BiotrackOS</title>
+<link rel="stylesheet" href="../assets/shared.css" />
+<style>
+  .f-hero { padding: 64px 0 24px; }
+  .crumbs { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .crumbs a { color: var(--muted); }
+  .crumbs a:hover { color: var(--ink); }
+  .f-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: end; }
+  .f-grid h1 { margin-top: 12px; }
+
+  .f-stage {
+    margin: 56px 0;
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 24px; padding: 36px;
+  }
+  .f-stage .browser { width: 100%; }
+  .f-stage .browser-body { padding: 24px; background: var(--bg-2); }
+
+  /* Sub-feature blocks */
+  .sub {
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px;
+    padding: 72px 0; border-top: 1px solid var(--line);
+    align-items: center;
+  }
+  .sub.flip { grid-template-columns: 1.1fr 1fr; direction: rtl; }
+  .sub.flip > * { direction: ltr; }
+  .sub h2 { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1.02; letter-spacing: -0.01em; margin: 16px 0; }
+  .sub p { color: var(--ink-2); max-width: 44ch; }
+  .sub-bullets { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
+  .sub-bullets li {
+    display: grid; grid-template-columns: 14px 1fr; gap: 12px;
+    padding: 10px 0; border-top: 1px dashed var(--line);
+    font-size: 14px;
+  }
+  .sub-bullets li::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal-bright); margin-top: 8px;
+  }
+
+  .mock {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 18px; padding: 22px;
+    box-shadow: 0 30px 60px -30px rgba(11,17,48,0.18);
+  }
+
+  .related { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .related a {
+    border: 1px solid var(--line); border-radius: 16px; padding: 24px;
+    background: var(--surface); display: flex; flex-direction: column;
+  }
+  .related a .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--muted); }
+  .related a h5 { font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.05; margin: 14px 0 8px; }
+  .related a p { color: var(--muted); font-size: 13px; margin: 0; }
+
+  .cta-strip {
+    background: var(--ink); color: var(--bg); border-radius: 24px;
+    padding: 56px; display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; align-items: center;
+  }
+  .cta-strip h3 { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1.02; margin: 0; }
+  .cta-strip .actions { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+
+  @media (max-width: 1000px) {
+    .f-grid, .sub, .sub.flip, .cta-strip, .related { grid-template-columns: 1fr; gap: 28px; }
+    .sub.flip { direction: ltr; }
+    .cta-strip { padding: 32px; }
+    .cta-strip .actions { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body data-page="product" data-prefix="../">
+
+<main>
+  <section class="f-hero">
+    <div class="wrap-w">
+      <div class="crumbs"><a href="../product.html">Product</a> / Clinic dashboard</div>
+      <div class="f-grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Feature · F.01</span>
+          <h1 class="h1">Run your practice<br/>on <em>one screen.</em></h1>
+        </div>
+        <p class="lede">
+          Replace the patchwork of vendor dashboards and CSV exports. BiotrackOS gives clinicians a population view of every patient under care and a longitudinal record for every body — synced live, every minute, from every device.
+        </p>
+      </div>
+
+      <div class="f-stage">
+        <div class="browser">
+          <div class="browser-bar">
+            <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+            <div class="addr">app.biotrackos.com/cohorts/longevity-04</div>
+          </div>
+          <div class="browser-body" style="padding:0;">
+            <div style="display:grid;grid-template-columns:240px 1fr;min-height:480px;">
+              <!-- Side rail -->
+              <aside style="padding:24px;border-right:1px solid var(--line);background:var(--surface);">
+                <div class="eyebrow">Cohorts</div>
+                <div style="display:grid;gap:8px;margin-top:14px;font-size:13px;">
+                  <a style="padding:8px 10px;border-radius:8px;background:var(--ink);color:var(--bg);">Longevity 04</a>
+                  <a style="padding:8px 10px;border-radius:8px;color:var(--ink-2);">Sports recovery</a>
+                  <a style="padding:8px 10px;border-radius:8px;color:var(--ink-2);">Cardiac watch</a>
+                  <a style="padding:8px 10px;border-radius:8px;color:var(--ink-2);">Post-op rehab</a>
+                  <a style="padding:8px 10px;border-radius:8px;color:var(--ink-2);">Wellness Q2</a>
+                </div>
+                <div class="eyebrow" style="margin-top:28px;">Filters</div>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;">
+                  <span class="chip" style="padding:4px 10px;font-size:10px;">VO₂ &lt; 35</span>
+                  <span class="chip" style="padding:4px 10px;font-size:10px;">HRV ↓ 14d</span>
+                  <span class="chip" style="padding:4px 10px;font-size:10px;">Sleep &lt; 6h</span>
+                </div>
+              </aside>
+
+              <!-- Main -->
+              <div style="padding:24px;background:var(--bg-2);">
+                <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:18px;">
+                  <div>
+                    <div class="eyebrow"><span class="dot"></span> Cohort 04 · Longevity · 214 patients</div>
+                    <h4 style="margin:6px 0 0;font-size:20px;">May 4 — 12 patients flagged in the last 24h</h4>
+                  </div>
+                  <div style="display:flex;gap:8px;">
+                    <span class="chip">Export FHIR</span>
+                    <span class="chip"><span class="dot"></span> Live</span>
+                  </div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;">
+                  <div class="card" style="padding:16px;">
+                    <div class="eyebrow">AVG VO₂</div>
+                    <div style="font-family:var(--font-display);font-size:36px;line-height:1;margin-top:4px;">42.1</div>
+                    <div class="mono" style="font-size:11px;color:var(--teal);margin-top:4px;">↑ 0.8 · 30d</div>
+                  </div>
+                  <div class="card" style="padding:16px;">
+                    <div class="eyebrow">AVG HRV</div>
+                    <div style="font-family:var(--font-display);font-size:36px;line-height:1;margin-top:4px;">58</div>
+                    <div class="mono" style="font-size:11px;color:var(--teal);margin-top:4px;">↑ 2 ms · 7d</div>
+                  </div>
+                  <div class="card" style="padding:16px;">
+                    <div class="eyebrow">ADHERENCE</div>
+                    <div style="font-family:var(--font-display);font-size:36px;line-height:1;margin-top:4px;">91<span style="font-size:18px;color:var(--muted);">%</span></div>
+                  </div>
+                  <div class="card" style="padding:16px;background:#0B1130;color:var(--bg);border-color:#0B1130;">
+                    <div class="eyebrow" style="color:#807C6F;">FLAGS · 24H</div>
+                    <div style="font-family:var(--font-display);font-size:36px;line-height:1;margin-top:4px;color:var(--lime);">12</div>
+                  </div>
+                </div>
+
+                <!-- Patient table -->
+                <div class="card" style="padding:0;overflow:hidden;">
+                  <div style="padding:14px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;">
+                    <span class="eyebrow">Flagged patients</span>
+                    <span class="eyebrow" style="color:var(--ink);">12 of 214</span>
+                  </div>
+                  <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                    <thead>
+                      <tr style="font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">
+                        <th style="text-align:left;padding:10px 18px;font-weight:500;">Patient</th>
+                        <th style="text-align:left;padding:10px 8px;font-weight:500;">Signal</th>
+                        <th style="text-align:left;padding:10px 8px;font-weight:500;">Source</th>
+                        <th style="text-align:left;padding:10px 8px;font-weight:500;">Trend</th>
+                        <th style="text-align:right;padding:10px 18px;font-weight:500;">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style="border-top:1px solid var(--line);">
+                        <td style="padding:12px 18px;">Maria Alvarez · 38</td>
+                        <td style="padding:12px 8px;">VO₂ ↓ 3.1%</td>
+                        <td style="padding:12px 8px;" class="mono" >APPLE · WHOOP</td>
+                        <td style="padding:12px 8px;"><svg width="80" height="20" viewBox="0 0 80 20"><polyline points="0,12 12,10 24,14 36,9 48,11 60,15 72,17 80,18" fill="none" stroke="#C46A6A" stroke-width="1.5"/></svg></td>
+                        <td style="padding:12px 18px;text-align:right;"><span class="chip" style="background:#FBEDED;color:#C46A6A;border-color:#F4CFCB;">Review</span></td>
+                      </tr>
+                      <tr style="border-top:1px solid var(--line);">
+                        <td style="padding:12px 18px;">Sam Whitford · 52</td>
+                        <td style="padding:12px 8px;">Sleep eff. &lt; 75%</td>
+                        <td style="padding:12px 8px;" class="mono">WHOOP</td>
+                        <td style="padding:12px 8px;"><svg width="80" height="20" viewBox="0 0 80 20"><polyline points="0,8 12,9 24,11 36,12 48,13 60,15 72,17 80,18" fill="none" stroke="#C46A6A" stroke-width="1.5"/></svg></td>
+                        <td style="padding:12px 18px;text-align:right;"><span class="chip" style="background:#FBEDED;color:#C46A6A;border-color:#F4CFCB;">Review</span></td>
+                      </tr>
+                      <tr style="border-top:1px solid var(--line);">
+                        <td style="padding:12px 18px;">Liam Park · 44</td>
+                        <td style="padding:12px 8px;">HRV ↑ 18 ms</td>
+                        <td style="padding:12px 8px;" class="mono">OURA</td>
+                        <td style="padding:12px 8px;"><svg width="80" height="20" viewBox="0 0 80 20"><polyline points="0,16 12,14 24,12 36,10 48,8 60,7 72,5 80,4" fill="none" stroke="#1F8A7A" stroke-width="1.5"/></svg></td>
+                        <td style="padding:12px 18px;text-align:right;"><span class="chip" style="background:var(--mint-soft);color:var(--teal);border-color:var(--mint);">Note</span></td>
+                      </tr>
+                      <tr style="border-top:1px solid var(--line);">
+                        <td style="padding:12px 18px;">Hana Nakamura · 29</td>
+                        <td style="padding:12px 8px;">RHR ↑ 9 bpm</td>
+                        <td style="padding:12px 8px;" class="mono">GARMIN</td>
+                        <td style="padding:12px 8px;"><svg width="80" height="20" viewBox="0 0 80 20"><polyline points="0,16 12,14 24,12 36,13 48,11 60,9 72,7 80,5" fill="none" stroke="#C46A6A" stroke-width="1.5"/></svg></td>
+                        <td style="padding:12px 18px;text-align:right;"><span class="chip" style="background:#FBEDED;color:#C46A6A;border-color:#F4CFCB;">Flag</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sub features -->
+  <section>
+    <div class="wrap-w">
+
+      <div class="sub" id="cohort">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 01</span>
+          <h2>Cohort dashboards<br/>with population insights.</h2>
+          <p>Slice 200 patients by metric, by program, or by adherence — then heat-map a year of data in a single frame. Spot drift before it becomes a flag.</p>
+          <ul class="sub-bullets">
+            <li>Heatmap any metric across any cohort</li>
+            <li>Built-in segmentation by program, age, sex, adherence</li>
+            <li>Diff cohorts side by side</li>
+            <li>Saved views shared across the care team</li>
+          </ul>
+        </div>
+        <div class="mock">
+          <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+            <span class="eyebrow"><span class="dot"></span> 214 patients · last 60 days</span>
+            <span class="chip">Heatmap</span>
+          </div>
+          <div id="big-heat" style="display:grid;grid-template-columns:repeat(30,1fr);gap:2px;"></div>
+          <div style="display:flex;justify-content:space-between;margin-top:10px;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">
+            <span>← Lower</span><span>Recovery score · 60d</span><span>Higher →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub flip" id="record">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 02</span>
+          <h2>Individual client<br/>management.</h2>
+          <p>Every patient gets a longitudinal record built from every source they've ever connected — plus clinical notes, attachments, and a shared timeline with their consumer app.</p>
+          <ul class="sub-bullets">
+            <li>Single longitudinal record per patient</li>
+            <li>Side-by-side timeline of clinical &amp; lifestyle events</li>
+            <li>Clinician notes &amp; attachments</li>
+            <li>Built-in messaging back to the consumer app</li>
+          </ul>
+        </div>
+        <div class="mock">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+            <div style="width:42px;height:42px;border-radius:50%;background:var(--mint);color:var(--teal);display:grid;place-items:center;font-family:var(--font-mono);font-weight:600;">MA</div>
+            <div>
+              <h5 style="margin:0;">Maria Alvarez · 38</h5>
+              <div class="mono" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Patient · enrolled 14 mo · Apple · Whoop · Garmin</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+            <div class="card-flat" style="padding:12px;"><div class="eyebrow">VO₂</div><div style="font-family:var(--font-display);font-size:24px;line-height:1;margin-top:2px;">48.6</div></div>
+            <div class="card-flat" style="padding:12px;"><div class="eyebrow">RHR</div><div style="font-family:var(--font-display);font-size:24px;line-height:1;margin-top:2px;">57</div></div>
+            <div class="card-flat" style="padding:12px;"><div class="eyebrow">HRV</div><div style="font-family:var(--font-display);font-size:24px;line-height:1;margin-top:2px;">62</div></div>
+          </div>
+          <div style="display:grid;gap:8px;font-size:13px;">
+            <div style="display:grid;grid-template-columns:80px 1fr;gap:12px;padding-bottom:8px;border-bottom:1px dashed var(--line);">
+              <span class="mono" style="font-size:11px;color:var(--muted);">MAY 4</span>
+              <div><strong>Annual physical</strong><div style="color:var(--muted);">Bloods drawn · ApoB 78 · LDL 92</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:80px 1fr;gap:12px;padding-bottom:8px;border-bottom:1px dashed var(--line);">
+              <span class="mono" style="font-size:11px;color:var(--muted);">APR 21</span>
+              <div><strong>Zone 2 plan started</strong><div style="color:var(--muted);">Target 4× 45 min · HR 130-145</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:80px 1fr;gap:12px;">
+              <span class="mono" style="font-size:11px;color:var(--muted);">MAR 12</span>
+              <div><strong>Sleep coaching</strong><div style="color:var(--muted);">Caffeine cut-off 10:00 · cold plunge protocol</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub" id="alerts">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 03</span>
+          <h2>Rules-based alerts<br/>that route themselves.</h2>
+          <p>Set a threshold or trend rule once. The right clinician sees it in their inbox, the right patient sees it in their app — and nothing else fires.</p>
+          <ul class="sub-bullets">
+            <li>Threshold &amp; trend rules across any signal</li>
+            <li>Route by program, clinician, or on-call rota</li>
+            <li>Snooze, escalate, and acknowledge in one click</li>
+            <li>Auditable history of every alert &amp; action</li>
+          </ul>
+        </div>
+        <div class="mock">
+          <div style="display:flex;justify-content:space-between;margin-bottom:14px;">
+            <span class="eyebrow"><span class="dot"></span> Inbox · 12 open</span>
+            <span class="chip">Today</span>
+          </div>
+          <div style="display:grid;gap:10px;">
+            <div style="display:grid;grid-template-columns:auto 1fr auto;gap:14px;padding:14px;border:1px solid var(--line);border-radius:12px;align-items:center;">
+              <div style="width:8px;height:40px;background:#C46A6A;border-radius:4px;"></div>
+              <div>
+                <strong style="font-size:14px;">Maria Alvarez — RHR ↑ 9 bpm vs 14d avg</strong>
+                <div class="mono" style="font-size:11px;color:var(--muted);margin-top:2px;">Rule · RHR_TREND · routed to Dr. Kowalski</div>
+              </div>
+              <span class="chip" style="background:#FBEDED;color:#C46A6A;border-color:#F4CFCB;">Review</span>
+            </div>
+            <div style="display:grid;grid-template-columns:auto 1fr auto;gap:14px;padding:14px;border:1px solid var(--line);border-radius:12px;align-items:center;">
+              <div style="width:8px;height:40px;background:var(--amber);border-radius:4px;"></div>
+              <div>
+                <strong style="font-size:14px;">Sam Whitford — sleep efficiency &lt; 75%</strong>
+                <div class="mono" style="font-size:11px;color:var(--muted);margin-top:2px;">Rule · SLEEP_EFF · 4 nights in a row</div>
+              </div>
+              <span class="chip">Snoozed</span>
+            </div>
+            <div style="display:grid;grid-template-columns:auto 1fr auto;gap:14px;padding:14px;border:1px solid var(--line);border-radius:12px;align-items:center;">
+              <div style="width:8px;height:40px;background:var(--teal-bright);border-radius:4px;"></div>
+              <div>
+                <strong style="font-size:14px;">Liam Park — HRV ↑ 18 ms · 14d</strong>
+                <div class="mono" style="font-size:11px;color:var(--muted);margin-top:2px;">Note · positive trend · auto-celebrate in app</div>
+              </div>
+              <span class="chip" style="background:var(--mint-soft);color:var(--teal);border-color:var(--mint);">Note</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub flip" id="reports">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 04</span>
+          <h2>Reports your<br/>patients want to read.</h2>
+          <p>Generate branded PDFs, FHIR bundles, or CSVs from any cohort or individual — on demand or on a schedule. Templates designed for human eyes, not just clinicians'.</p>
+          <ul class="sub-bullets">
+            <li>White-labeled patient-facing reports</li>
+            <li>Scheduled exports to S3, SFTP, EHR</li>
+            <li>FHIR R4 bundles &amp; HL7 v2 messages</li>
+            <li>Inline annotations from the care team</li>
+          </ul>
+        </div>
+        <div class="mock" style="padding:0;overflow:hidden;background:var(--bg-2);">
+          <div style="padding:24px;background:var(--surface);border-bottom:1px solid var(--line);">
+            <div class="mono" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);">Quarterly performance report</div>
+            <h4 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1;margin:8px 0 4px;">Q2 · Maria Alvarez</h4>
+            <div class="mono" style="font-size:11px;letter-spacing:.12em;color:var(--muted);">Continuum Longevity · prepared May 4, 2026</div>
+          </div>
+          <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div class="card" style="padding:14px;">
+              <div class="eyebrow">VO₂ MAX</div>
+              <div style="font-family:var(--font-display);font-size:36px;margin-top:4px;">48.6</div>
+              <svg viewBox="0 0 200 30" width="100%" height="30"><polyline points="0,24 25,22 50,20 75,18 100,16 125,12 150,10 175,8 200,6" fill="none" stroke="#1F8A7A" stroke-width="1.5"/></svg>
+            </div>
+            <div class="card" style="padding:14px;">
+              <div class="eyebrow">HRV</div>
+              <div style="font-family:var(--font-display);font-size:36px;margin-top:4px;">62</div>
+              <svg viewBox="0 0 200 30" width="100%" height="30"><polyline points="0,20 25,22 50,18 75,16 100,18 125,14 150,12 175,10 200,8" fill="none" stroke="#1F8A7A" stroke-width="1.5"/></svg>
+            </div>
+          </div>
+          <div style="padding:0 20px 20px;font-size:13px;color:var(--ink-2);">
+            <strong>Summary.</strong> Maria's aerobic capacity climbed 1.4% across Q2 while resting HR fell 3 bpm. Sleep efficiency dipped during the Italy trip in late April; recovery patterns since suggest she has returned to baseline.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="section">
+    <div class="wrap-w">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Keep reading</span>
+          <h2 class="h2" style="margin-top:16px;">Related capabilities</h2>
+        </div>
+      </div>
+      <div class="related">
+        <a href="consumer-app.html">
+          <span class="num">F.02</span>
+          <h5>Consumer app</h5>
+          <p>The other side of the screen — same data, in the person's hands.</p>
+        </a>
+        <a href="protocols.html">
+          <span class="num">F.05</span>
+          <h5>Protocols</h5>
+          <p>Turn biomarkers &amp; trends into recommendations — your catalog, your sign-off.</p>
+        </a>
+        <a href="../integrations.html">
+          <span class="num">F.03</span>
+          <h5>Integration layer</h5>
+          <p>Wearables, labs, genomics, epigenetics, Rx — reconciled into a single record.</p>
+        </a>
+        <a href="../customers/continuum.html">
+          <span class="num">CASE</span>
+          <h5>Continuum Longevity</h5>
+          <p>How a 4-clinic longevity practice retired five dashboards in one weekend.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="padding-top:0;">
+    <div class="wrap-w">
+      <div class="cta-strip">
+        <h3>See the dashboard<br/>with your own cohort.</h3>
+        <div class="actions">
+          <a class="btn btn-accent" href="../contact.html">Book a 30-min walkthrough <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" style="border-color:#2A2F4A;color:#C9C5B6;" href="../pricing.html">See pricing</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    const el = document.getElementById('big-heat');
+    if (!el) return;
+    const palette = ['#EDEAE0','#D6E8DC','#A8D6BF','#6FBFA0','#1F8A7A'];
+    let html = '';
+    for (let i = 0; i < 30 * 14; i++) {
+      const r = Math.random();
+      let c;
+      if (r < 0.04) c = '#C46A6A';
+      else if (r < 0.30) c = palette[4];
+      else if (r < 0.55) c = palette[3];
+      else if (r < 0.78) c = palette[2];
+      else c = palette[1];
+      html += `<span style="aspect-ratio:1/1;border-radius:2px;background:${c};opacity:${0.6 + Math.random()*0.4}"></span>`;
+    }
+    el.innerHTML = html;
+  })();
+</script>
+
+<script src="../assets/shared.js"></script>
+</body>
+</html>

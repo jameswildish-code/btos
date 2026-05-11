@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Developer docs — BiotrackOS</title>
+<link rel="stylesheet" href="assets/shared.css" />
+<style>
+  .pg { padding: 80px 0 96px; }
+  .pg .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  .pg h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(56px,6vw,96px); line-height: 0.95; letter-spacing: -0.02em; margin: 24px 0 0; max-width: 16ch; }
+  .pg h1 em { color: var(--ink-2); font-style: italic; }
+  .pg .lede { font-size: 19px; line-height: 1.5; color: var(--ink-2); margin: 28px 0 0; max-width: 56ch; }
+  .pg h2 { font-family: var(--font-display); font-weight: 400; font-size: 36px; line-height: 1.05; margin: 64px 0 16px; letter-spacing: -0.01em; }
+  .pg h3 { font-family: var(--font-display); font-weight: 400; font-size: 22px; margin: 0 0 8px; }
+  .pg p, .pg li { font-size: 15px; line-height: 1.65; color: var(--ink-2); }
+  .pg .meta-row { display:flex; gap: 32px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); flex-wrap: wrap; }
+</style></head>
+<body data-page="docs" data-prefix=""><main>
+<section class="pg"><div class="wrap">
+<span class="eyebrow"><span class="dot"></span> Developer docs</span>
+<h1>Build on the <em>connected record.</em></h1>
+<p class="lede">REST + GraphQL + FHIR + webhooks. OAuth 2.1 + SCIM for SSO. Sandbox keys ship with synthetic Members so you can build before you sign.</p>
+
+<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;margin-top:48px;align-items:start;">
+<div>
+<h2 style="margin-top:0;">Quickstart</h2>
+<pre style="background:#0E1014;color:#E8E5D8;padding:24px;font-family:var(--font-mono);font-size:13px;line-height:1.6;overflow:auto;border-radius:0;margin:0;">$ <span style="color:#7DCFB6;">curl</span> https://api.biotrackos.com/v2/members \
+  -H <span style="color:#E5C07B;">"Authorization: Bearer $BIOTRACK_KEY"</span>
+
+<span style="color:#5C6370;">{
+  "data": [
+    {
+      "id": "mem_4xQ2",
+      "name": "J. Patel",
+      "sources": ["oura", "thriva", "muhdo"],
+      "last_sync": "2026-05-11T08:42:11Z"
+    }
+  ]
+}</span></pre>
+</div>
+<div style="border:1px solid var(--line);padding:24px;background:var(--bg);">
+<h3 style="font-size:22px;">Get a sandbox key</h3>
+<p style="margin:0 0 16px;">No credit card. Includes 12 synthetic Members across all source types.</p>
+<a href="contact.html" class="btn btn-primary btn-sm">Request access <span class="arrow">→</span></a>
+</div>
+</div>
+
+<h2>Reference</h2>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);">
+
+<a href="#" style="display:block;padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:var(--bg);">
+  <div style="font-family:var(--font-display);font-size:18px;margin-bottom:8px;">REST API</div>
+  <div style="font-size:13px;color:var(--ink-2);">/v2/members, /v2/observations, /v2/sources, /v2/cohorts</div>
+</a>
+<a href="#" style="display:block;padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:var(--bg);">
+  <div style="font-family:var(--font-display);font-size:18px;margin-bottom:8px;">GraphQL</div>
+  <div style="font-size:13px;color:var(--ink-2);">Single query endpoint. Subscriptions over WebSocket.</div>
+</a>
+<a href="#" style="display:block;padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:var(--bg);">
+  <div style="font-family:var(--font-display);font-size:18px;margin-bottom:8px;">FHIR R5</div>
+  <div style="font-size:13px;color:var(--ink-2);">Read & write against /fhir. Bulk export ($export).</div>
+</a>
+<a href="#" style="display:block;padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:var(--bg);">
+  <div style="font-family:var(--font-display);font-size:18px;margin-bottom:8px;">Webhooks</div>
+  <div style="font-size:13px;color:var(--ink-2);">Per-event subscriptions, HMAC-signed, retry-with-backoff.</div>
+</a>
+<a href="#" style="display:block;padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:var(--bg);">
+  <div style="font-family:var(--font-display);font-size:18px;margin-bottom:8px;">SDKs</div>
+  <div style="font-size:13px;color:var(--ink-2);">TypeScript, Python, Swift, Kotlin, .NET.</div>
+</a>
+<a href="#" style="display:block;padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:var(--bg);">
+  <div style="font-family:var(--font-display);font-size:18px;margin-bottom:8px;">Auth</div>
+  <div style="font-size:13px;color:var(--ink-2);">OAuth 2.1 + PKCE. SCIM 2.0 for org provisioning.</div>
+</a>
+<a href="#" style="display:block;padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:var(--bg);">
+  <div style="font-family:var(--font-display);font-size:18px;margin-bottom:8px;">Rate limits</div>
+  <div style="font-size:13px;color:var(--ink-2);">5k req/min default. Higher on Production tier.</div>
+</a>
+<a href="#" style="display:block;padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:var(--bg);">
+  <div style="font-family:var(--font-display);font-size:18px;margin-bottom:8px;">Status</div>
+  <div style="font-size:13px;color:var(--ink-2);">status.biotrackos.com — uptime & incidents.</div>
+</a>
+</div>
+
+<h2>Guides</h2>
+<ul>
+<li><a href="#">Onboard a new clinic in 6 hours</a></li>
+<li><a href="#">Connect a wearable source (OAuth + token refresh)</a></li>
+<li><a href="#">Subscribe to alert webhooks</a></li>
+<li><a href="#">FHIR bulk export for research</a></li>
+<li><a href="#">Building on top of BiotrackOS — a partner's reference architecture</a></li>
+</ul>
+</div></section></main>
+<script src="assets/shared.js"></script></body></html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Customers — BiotrackOS</title>
+<link rel="stylesheet" href="assets/shared.css" />
+<style>
+  .c-hero { padding: 72px 0 56px; border-bottom: 1px solid var(--line); }
+  .c-hero .g { display:grid; grid-template-columns:1.3fr 1fr; gap:64px; align-items:end; }
+
+  .c-feature {
+    margin-top: 56px;
+    background: var(--ink); color: var(--bg);
+    border-radius: 28px; padding: 56px; position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center;
+  }
+  .c-feature::before { content:""; position:absolute; inset:0;
+    background: radial-gradient(ellipse at top right, rgba(47,191,163,.18), transparent 60%); }
+  .c-feature > * { position: relative; }
+  .c-feature h2 { font-family: var(--font-display); font-weight: 400; font-size: 56px; line-height: 1.02; letter-spacing: -0.01em; margin: 16px 0; }
+  .c-feature .stats { display:flex; gap: 40px; margin: 24px 0 32px; flex-wrap: wrap; }
+  .c-feature .stats .num { font-family: var(--font-display); font-size: 48px; line-height: 1; color: var(--lime); }
+  .c-feature .stats .lab { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; color: #C9C5B6; text-transform: uppercase; margin-top: 6px; }
+
+  .c-grid { padding: 96px 0; }
+  .grid-rows { display: grid; gap: 16px; }
+  .crow { display: grid; grid-template-columns: 200px 1fr auto; gap: 32px; padding: 28px 0; border-top: 1px solid var(--line); align-items: center; }
+  .crow .logo { font-family: var(--font-display); font-size: 28px; color: var(--ink-2); }
+  .crow h4 { font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.02; margin: 0 0 6px; }
+  .crow p  { color: var(--muted); margin: 0; max-width: 60ch; font-size: 14px; }
+  .crow .stats { display: flex; gap: 32px; }
+  .crow .stats .v { font-family: var(--font-display); font-size: 28px; line-height: 1; }
+  .crow .stats .l { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .crow .go { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+
+  @media (max-width:1000px){ .c-hero .g, .c-feature, .crow { grid-template-columns: 1fr; gap: 32px; } .c-feature { padding: 28px; } }
+</style>
+</head>
+<body data-page="customers" data-prefix="">
+
+<main>
+  <section class="c-hero">
+    <div class="wrap-w">
+      <div class="g">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Customers</span>
+          <h1 class="h1">114 clinics. Five sports clubs.<br/><em>One platform underneath.</em></h1>
+        </div>
+        <p class="lede">A few of the teams who replaced their dashboards, exports, and CSV pipelines with BiotrackOS — and what changed.</p>
+      </div>
+
+      <a class="c-feature" href="customers/continuum.html">
+        <div>
+          <span class="eyebrow" style="color:#807C6F;"><span class="dot"></span> Featured · Longevity</span>
+          <h2>How Continuum<br/>retired five dashboards<br/><em style="color:var(--mint);">in a weekend.</em></h2>
+          <div class="stats">
+            <div><div class="num">4×</div><div class="lab">Clinics live</div></div>
+            <div><div class="num">2,140</div><div class="lab">Active patients</div></div>
+            <div><div class="num">93%</div><div class="lab">Clinician adoption · w1</div></div>
+          </div>
+          <span class="btn btn-accent">Read the case study <span class="arrow">→</span></span>
+        </div>
+        <div>
+          <div class="browser" style="box-shadow:0 30px 60px -30px rgba(0,0,0,0.4);">
+            <div class="browser-bar">
+              <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+              <div class="addr">continuum.biotrackos.com</div>
+            </div>
+            <div style="padding:24px;background:var(--bg-2);">
+              <div style="display:flex;justify-content:space-between;margin-bottom:12px;"><span class="eyebrow">Continuum · cohort 04</span><span class="chip"><span class="dot"></span> Live</span></div>
+              <div id="ch-cont" style="display:grid;grid-template-columns:repeat(28,1fr);gap:2px;"></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="c-grid">
+    <div class="wrap-w">
+      <span class="eyebrow"><span class="dot"></span> More customers</span>
+      <h2 class="h1" style="margin-top:16px;max-width:18ch;">Quiet results across<br/>five markets.</h2>
+      <div class="grid-rows" style="margin-top:32px;">
+        <a class="crow" href="customers/continuum.html">
+          <div><div class="logo">Continuum</div><span class="mono" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;">Longevity · Copenhagen</span></div>
+          <div>
+            <h4>From five vendor dashboards to one merged record.</h4>
+            <p>A 4-clinic longevity practice rolled out BiotrackOS in a single weekend — and retired five separate vendor dashboards by Monday morning.</p>
+          </div>
+          <div style="display:flex;gap:24px;align-items:center;">
+            <div class="stats"><div><div class="v">4×</div><div class="l">Clinics</div></div><div><div class="v">93<span style="font-size:18px;">%</span></div><div class="l">Adoption · w1</div></div></div>
+            <div class="go">Read →</div>
+          </div>
+        </a>
+        <a class="crow" href="#">
+          <div><div class="logo">North Sport Lab</div><span class="mono" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;">Performance · Oslo</span></div>
+          <div>
+            <h4>Coach- and athlete-side views, synced live.</h4>
+            <p>An elite track &amp; field group replaced spreadsheets with a single dashboard their coaches and athletes both check before every session.</p>
+          </div>
+          <div style="display:flex;gap:24px;align-items:center;">
+            <div class="stats"><div><div class="v">42</div><div class="l">Athletes</div></div><div><div class="v">11<span style="font-size:18px;">%</span></div><div class="l">VO₂ ↑ y/y</div></div></div>
+            <div class="go">Read →</div>
+          </div>
+        </a>
+        <a class="crow" href="#">
+          <div><div class="logo">Helsana</div><span class="mono" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;">Insurer · Zurich</span></div>
+          <div>
+            <h4>Consented streams, never surveys.</h4>
+            <p>A Swiss insurer launched a wellness program with continuous biometric data — instead of quarterly attestations — and saw engagement triple.</p>
+          </div>
+          <div style="display:flex;gap:24px;align-items:center;">
+            <div class="stats"><div><div class="v">12.4k</div><div class="l">Members</div></div><div><div class="v">3.1<span style="font-size:18px;">×</span></div><div class="l">Engagement</div></div></div>
+            <div class="go">Read →</div>
+          </div>
+        </a>
+        <a class="crow" href="#">
+          <div><div class="logo">Atlas Mfg.</div><span class="mono" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;">Corporate · Lisbon</span></div>
+          <div>
+            <h4>Aggregate-only insights, individually private.</h4>
+            <p>A 1,400-person manufacturing org built a recovery and sleep program their people actually trust — because the company never sees individual data.</p>
+          </div>
+          <div style="display:flex;gap:24px;align-items:center;">
+            <div class="stats"><div><div class="v">68<span style="font-size:18px;">%</span></div><div class="l">Participation</div></div><div><div class="v">+0.4h</div><div class="l">Sleep avg</div></div></div>
+            <div class="go">Read →</div>
+          </div>
+        </a>
+        <a class="crow" href="#">
+          <div><div class="logo">Forge &amp; Field</div><span class="mono" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;">Boutique gym · London</span></div>
+          <div>
+            <h4>Programming that adapts overnight.</h4>
+            <p>A members-only gym uses BiotrackOS recovery data to rewrite the next morning's classes — automatically. Member retention up 22%.</p>
+          </div>
+          <div style="display:flex;gap:24px;align-items:center;">
+            <div class="stats"><div><div class="v">+22<span style="font-size:18px;">%</span></div><div class="l">Retention</div></div><div><div class="v">340</div><div class="l">Members</div></div></div>
+            <div class="go">Read →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function(){
+    const el = document.getElementById('ch-cont');
+    if (!el) return;
+    const palette = ['#2A2F4A','#23345C','#2A4A6E','#2F6F84','#2FBFA3','#D1F24A'];
+    let html = '';
+    for (let i = 0; i < 28*16; i++) {
+      const r = Math.random();
+      let c;
+      if (r < 0.06) c = palette[5];
+      else if (r < 0.30) c = palette[4];
+      else if (r < 0.55) c = palette[3];
+      else if (r < 0.78) c = palette[2];
+      else c = palette[1];
+      html += `<span style="aspect-ratio:1/1;border-radius:2px;background:${c};opacity:${0.6 + Math.random()*0.4}"></span>`;
+    }
+    el.innerHTML = html;
+  })();
+</script>
+<script src="assets/shared.js"></script>
+</body>
+</html>

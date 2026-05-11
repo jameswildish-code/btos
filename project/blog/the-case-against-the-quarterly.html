@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The case against the quarterly checkup — BiotrackOS</title>
+<link rel="stylesheet" href="../assets/shared.css" />
+<style>
+  .a-hero { padding: 56px 0 32px; }
+  .crumbs { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .a-hero h1 { max-width: 22ch; }
+  .a-hero h1 em { color: var(--ink-2); font-style: italic; }
+  .a-meta { display: flex; gap: 20px; align-items: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .ava-sm { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--mint), var(--mint-soft)); display: grid; place-items: center; font-family: var(--font-display); color: var(--teal); }
+  .a-meta .b { font-size: 14px; }
+  .a-meta .b .name { font-weight: 500; }
+  .a-meta .b .sub { color: var(--muted); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px; }
+
+  .a-cover {
+    margin: 32px 0 56px;
+    aspect-ratio: 21/9; border-radius: 24px;
+    background: linear-gradient(135deg, #1F2A48 0%, #2A4A6E 50%, #2FBFA3 100%);
+    position: relative; overflow: hidden;
+  }
+  .a-cover::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(to right, transparent 0, transparent 19px, rgba(255,255,255,0.05) 19px, rgba(255,255,255,0.05) 20px),
+      repeating-linear-gradient(to bottom, transparent 0, transparent 19px, rgba(255,255,255,0.05) 19px, rgba(255,255,255,0.05) 20px);
+  }
+  .a-cover .label { position: absolute; left: 40px; bottom: 32px; color: rgba(255,255,255,0.9); font-family: var(--font-display); font-size: 96px; line-height: 0.9; }
+  .a-cover .tag  { position: absolute; right: 40px; top: 32px; color: rgba(255,255,255,0.7); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+
+  .body { padding: 0 0 96px; }
+  .body .layout { display: grid; grid-template-columns: 220px 1fr 220px; gap: 48px; align-items: start; }
+  .toc { position: sticky; top: 96px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .toc div { color: var(--ink); margin-bottom: 14px; }
+  .toc a { display: block; padding: 6px 0; color: var(--muted); }
+  .share { position: sticky; top: 96px; }
+  .share div { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .share a { display: block; padding: 8px 0; }
+
+  .content { max-width: 70ch; }
+  .content > p:first-of-type::first-letter { font-family: var(--font-display); font-size: 72px; line-height: 0.85; float: left; padding: 6px 12px 0 0; }
+  .content h2 { font-family: var(--font-display); font-weight: 400; font-size: 36px; line-height: 1.1; margin: 56px 0 16px; letter-spacing: -0.01em; }
+  .content p { font-size: 18px; line-height: 1.7; color: var(--ink-2); margin: 0 0 18px; }
+  .content blockquote {
+    margin: 36px -20px; padding: 28px 32px;
+    border-left: 3px solid var(--teal-bright);
+    background: var(--bg-2);
+    font-family: var(--font-display); font-size: 28px; line-height: 1.25; font-style: italic;
+    color: var(--ink);
+  }
+  .content figure { margin: 36px 0; }
+  .content figure .img {
+    aspect-ratio: 16/9; border-radius: 16px;
+    background: linear-gradient(135deg, var(--bg-2), var(--surface));
+    border: 1px solid var(--line);
+    display: grid; place-items: center;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--muted-2); text-transform: uppercase;
+  }
+  .content figcaption { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 12px; }
+  .content ul { padding-left: 18px; }
+  .content ul li { font-size: 18px; line-height: 1.7; color: var(--ink-2); margin-bottom: 8px; }
+
+  .pull {
+    margin: 56px 0;
+    font-family: var(--font-display); font-size: 44px; line-height: 1.05; letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .related { padding: 80px 0; background: var(--bg-2); border-top: 1px solid var(--line); }
+  .related-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 32px; }
+  .related a {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 16px; padding: 24px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .related h4 { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+  .related .meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+  @media (max-width:1000px) {
+    .body .layout { grid-template-columns: 1fr; }
+    .toc, .share { position: static; }
+    .related-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body data-page="blog" data-prefix="../">
+
+<main>
+  <section class="a-hero">
+    <div class="wrap-w">
+      <div class="crumbs"><a href="../blog.html">Field Notes</a> / Research</div>
+      <span class="eyebrow"><span class="dot"></span> Research · 12 min read</span>
+      <h1 class="h1" style="margin-top:16px;">The case against the<br/><em>quarterly</em> checkup.</h1>
+      <div class="a-meta">
+        <div class="ava-sm">SH</div>
+        <div class="b">
+          <div class="name">Dr. Sofia Holm</div>
+          <div class="sub">Co-founder &amp; CEO · May 04, 2026</div>
+        </div>
+      </div>
+      <div class="a-cover">
+        <span class="tag">Fig. 1 — Quarterly vs continuous · 12 patients · 90d</span>
+        <span class="label">QTR.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="body">
+    <div class="wrap-w">
+      <div class="layout">
+        <nav class="toc">
+          <div>CONTENTS</div>
+          <a href="#open">01 / The problem we keep avoiding</a>
+          <a href="#data">02 / What three months hides</a>
+          <a href="#continuous">03 / Continuous, consented, calm</a>
+          <a href="#changes">04 / What changes for clinicians</a>
+          <a href="#end">05 / The smaller exam</a>
+        </nav>
+
+        <article class="content">
+          <p id="open">For the better part of a century, the cadence of human health has been quarterly. Bloods at 0, 90, 180, 270. Cardio at the annual. Sleep, never measured at all. We didn't choose this rhythm. We inherited it from a world in which the only instrument capable of reading a body sat inside a clinic — and a body had to be carried there to be read.</p>
+
+          <p>That world ended sometime around 2018, when a meaningful share of our patients started showing up to their appointments wearing two instruments more accurate than the ones we owned. We just hadn't admitted it yet.</p>
+
+          <h2 id="data">What three months hides.</h2>
+          <p>Consider what you'd see in three months of a healthy patient's data if you could see it minute by minute, instead of by snapshot:</p>
+
+          <ul>
+            <li>A four-week stretch where resting heart rate climbed 8bpm and never returned — invisible at quarterly, screaming at continuous.</li>
+            <li>Two consecutive weeks of HRV collapse coinciding with a known stressful project. Recovered fully by week six.</li>
+            <li>A single week of sleep efficiency below 70%, the same week glucose response patterns shifted noticeably.</li>
+            <li>A consistent 6-month upward drift in zone-2 endurance — which would have appeared at the annual as "unchanged."</li>
+          </ul>
+
+          <p>Every one of these signals is invisible to quarterly. Every one is trivial to read continuously.</p>
+
+          <blockquote>Three months is not a measurement cadence. It is a calendar artifact from when we had no choice.</blockquote>
+
+          <figure>
+            <div class="img">— FIG. 2 · RESTING HR DRIFT · 12 PATIENTS · CONTINUOUS VS QUARTERLY —</div>
+            <figcaption>The four signals invisible to the quarterly model. Internal study, n=42, 2025.</figcaption>
+          </figure>
+
+          <h2 id="continuous">Continuous, consented, calm.</h2>
+          <p>The objection to continuous data is almost never about the data. It's about three other things: consent, noise, and time. A patient who hasn't opted in is not your patient. Data without a clinical rule attached is just noise. And clinicians don't have ten more hours a week to read more charts.</p>
+
+          <p>This is the part where BiotrackOS exists, but it's also where any responsible continuous system has to exist. Granular consent that can be revoked in two taps. Rules and thresholds — written by your team, in your language — that surface only the signal you've decided is worth surfacing. And a dashboard quiet enough that nothing on it is a notification.</p>
+
+          <div class="pull">"The right cadence is the one your rules want to fire at — not the one a calendar allows."</div>
+
+          <h2 id="changes">What changes for clinicians.</h2>
+          <p>The clinics we work with don't see more patients per week — they see the same patients, better. The visit becomes a conversation about what the 90 days <em>showed</em>, not a fishing trip through PDFs. Plans get adjusted in week three, not month three. And the patients themselves — who already had this data on three different apps — finally feel like their clinician is in the same dataset they are.</p>
+
+          <h2 id="end">The smaller exam.</h2>
+          <p>The quarterly checkup will not disappear. It shouldn't. There is no replacement for being in a room with a person who can read your face. But the role of that visit has to change, because the rest of the dataset has stopped waiting.</p>
+
+          <p>What we're really arguing for is a smaller exam — one with less reconciliation and more reading. A version of medicine that finally catches up to the instruments people are already wearing on their wrists.</p>
+        </article>
+
+        <aside class="share">
+          <div>SHARE</div>
+          <a href="#" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;">Twitter ↗</a>
+          <a href="#" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;">LinkedIn ↗</a>
+          <a href="#" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;">Copy link</a>
+          <div style="margin-top:32px;">REPORT</div>
+          <a href="#" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;">Download PDF ↓</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="related">
+    <div class="wrap-w">
+      <span class="eyebrow"><span class="dot"></span> Keep reading</span>
+      <div class="related-grid">
+        <a href="#">
+          <span class="meta">Clinical · 8 min</span>
+          <h4>HRV is not a vibe. Reading it like a clinician.</h4>
+          <span class="meta" style="margin-top:auto;">Eva Kaur · Apr 28</span>
+        </a>
+        <a href="#">
+          <span class="meta">Engineering · 15 min</span>
+          <h4>Why our FHIR pipeline runs at the edge.</h4>
+          <span class="meta" style="margin-top:auto;">Tomás Macedo · Apr 22</span>
+        </a>
+        <a href="#">
+          <span class="meta">Clinical · 9 min</span>
+          <h4>How Continuum runs a 2,000-patient panel without burning out.</h4>
+          <span class="meta" style="margin-top:auto;">Daria Kowalski, MD · Apr 01</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="../assets/shared.js"></script>
+</body>
+</html>

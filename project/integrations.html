@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Integrations — BiotrackOS</title>
+<link rel="stylesheet" href="assets/shared.css" />
+<style>
+  .i-hero { padding: 72px 0 48px; border-bottom: 1px solid var(--line); }
+  .i-hero h1 em { color: var(--ink-2); font-style: italic; }
+  .i-hero .g { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: end; }
+
+  .cat-nav { display: flex; gap: 8px; flex-wrap: wrap; padding: 28px 0; border-bottom: 1px solid var(--line); position: sticky; top: 72px; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); z-index: 4; }
+  .cat-nav a { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+  .cat-nav a:hover { border-color: var(--ink); color: var(--ink); }
+
+  .section { padding: 80px 0; border-bottom: 1px solid var(--line); }
+  .section .head { display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; margin-bottom: 32px; }
+  .section h2 { font-family: var(--font-display); font-weight: 400; font-size: 52px; line-height: 1.02; letter-spacing: -0.01em; margin: 12px 0 0; }
+  .section .desc { color: var(--muted); max-width: 42ch; font-size: 14px; }
+
+  .feat {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 0;
+    background: var(--ink); color: var(--bg);
+    border-radius: 24px; overflow: hidden; position: relative;
+    margin-bottom: 24px;
+  }
+  .feat::before { content:""; position:absolute; inset:0; background: radial-gradient(ellipse at top right, rgba(47,191,163,.16), transparent 60%); }
+  .feat > * { position: relative; }
+  .feat .body { padding: 40px; display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+  .feat h3 { font-family: var(--font-display); font-weight: 400; font-size: 40px; line-height: 1.05; letter-spacing: -0.01em; margin: 0; }
+  .feat p { color: #C9C5B6; margin: 0; max-width: 42ch; }
+  .feat .stats { display: flex; gap: 32px; margin-top: 4px; }
+  .feat .stats .v { font-family: var(--font-display); font-size: 36px; line-height: 1; color: var(--lime); }
+  .feat .stats .l { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #807C6F; margin-top: 6px; }
+  .feat .art {
+    background: linear-gradient(135deg, #1F2A48, #2A4A6E 60%, #2FBFA3);
+    position: relative; overflow: hidden;
+    display: grid; place-items: center;
+  }
+  .feat .art::after {
+    content:""; position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(to right, transparent 0, transparent 15px, rgba(255,255,255,0.06) 15px, rgba(255,255,255,0.06) 16px),
+      repeating-linear-gradient(to bottom, transparent 0, transparent 15px, rgba(255,255,255,0.06) 15px, rgba(255,255,255,0.06) 16px);
+  }
+  .feat .art-mark {
+    font-family: var(--font-display); font-size: 96px; color: rgba(255,255,255,0.95); position: relative; z-index: 1;
+  }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  }
+  .tile {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+    padding: 22px; display: flex; flex-direction: column; gap: 12px;
+    min-height: 180px; position: relative;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .tile:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .tile .logo {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: grid; place-items: center;
+    font-family: var(--font-display); font-size: 20px;
+    background: var(--bg-2); color: var(--ink);
+  }
+  .tile h4 { font-size: 15px; font-weight: 500; margin: 0; }
+  .tile p { font-size: 12px; color: var(--muted); margin: 0; }
+  .tile .status {
+    font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal);
+    position: absolute; top: 18px; right: 18px;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .tile .status .d { width: 6px; height: 6px; border-radius: 50%; background: var(--teal-bright); animation: livePulse 2.4s ease-in-out infinite; }
+  .tile.beta .status .d, .tile.soon .status .d { animation: liveBlink 3.2s ease-in-out infinite; }
+  .tile.beta .status { color: #9A7B1A; }
+  .tile.beta .status .d { background: #C9A23A; }
+  .tile.soon .status { color: var(--muted); }
+  .tile.soon .status .d { background: var(--muted-2); }
+
+  /* Become a partner band */
+  .partner-cta {
+    margin: 0 0 0; background: var(--bg-2); border-top: 1px solid var(--line); padding: 96px 0;
+  }
+  .partner-cta .panel {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 24px;
+    padding: 48px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center;
+  }
+  .partner-cta h2 { font-family: var(--font-display); font-weight: 400; font-size: 48px; line-height: 1.05; letter-spacing: -0.01em; margin: 12px 0 16px; }
+  .partner-cta p { color: var(--ink-2); margin: 0; }
+  .partner-cta .why { display:grid; gap: 14px; margin-top: 24px; }
+  .partner-cta .why .row { display: grid; grid-template-columns: 28px 1fr; gap: 12px; font-size: 14px; }
+  .partner-cta .why .row .n { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--muted); padding-top: 2px; }
+
+  @media (max-width:1100px){ .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width:900px) { .i-hero .g, .feat, .partner-cta .panel { grid-template-columns: 1fr; gap: 24px; } }
+</style>
+</head>
+<body data-page="integrations" data-prefix="">
+
+<main>
+  <section class="i-hero">
+    <div class="wrap-w">
+      <div class="g">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Integrations</span>
+          <h1 class="h1">One record across<br/>devices, labs, genes,<br/><em>and prescriptions.</em></h1>
+        </div>
+        <p class="lede">BiotrackOS ingests, deduplicates, and time-aligns data from 6 categories of source — and we add new ones every quarter. If your service isn't here, <a href="marketplace.html#join">apply to join the marketplace</a>.</p>
+      </div>
+      <nav class="cat-nav">
+        <a href="#wearables">Wearables &amp; devices</a>
+        <a href="#labs">Labs &amp; bloods</a>
+        <a href="#genomics">Genomics</a>
+        <a href="#epigenetics">Epigenetics</a>
+        <a href="#medications">Medications &amp; Rx</a>
+        <a href="#ehr">Clinical &amp; EHR</a>
+        <a href="marketplace.html" style="background:var(--ink);color:var(--bg);border-color:var(--ink);">Marketplace →</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- WEARABLES -->
+  <section class="section" id="wearables">
+    <div class="wrap-w">
+      <div class="head">
+        <div><span class="eyebrow"><span class="dot"></span> Category 01</span><h2>Wearables &amp; devices.</h2></div>
+        <p class="desc">Every wearable and consumer device your people already own. Heart rate, HRV, sleep, training load, glucose, weight, blood oxygen — deduplicated across overlapping sources.</p>
+      </div>
+      <div class="grid">
+        <div class="tile"><div class="logo"></div><h4>Apple Health</h4><p>HealthKit · live</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile"><div class="logo">♛</div><h4>Whoop</h4><p>Strain, recovery, sleep</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile"><div class="logo">G</div><h4>Garmin Connect</h4><p>Training, fēnix, Forerunner</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile"><div class="logo">○</div><h4>Oura</h4><p>Ring · sleep, HRV, temp</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile"><div class="logo">W</div><h4>Withings</h4><p>Scale, BP, sleep mat</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile"><div class="logo">P</div><h4>Polar</h4><p>Vantage, Pacer Pro, H10</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile"><div class="logo">S</div><h4>Samsung Health</h4><p>Galaxy Watch · Fit</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile"><div class="logo">R</div><h4>Reebok Smart Ring</h4><p>HR, HRV, recovery</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile beta"><div class="logo">D</div><h4>Dexcom</h4><p>CGM · G7</p><span class="status"><span class="d"></span>Beta</span></div>
+        <div class="tile beta"><div class="logo">L</div><h4>Levels / Lingo</h4><p>CGM streams</p><span class="status"><span class="d"></span>Beta</span></div>
+        <div class="tile"><div class="logo">F</div><h4>Fitbit</h4><p>Charge, Sense, Versa</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile soon"><div class="logo">8</div><h4>Eight Sleep</h4><p>Pod · sleep tracking</p><span class="status"><span class="d"></span>Q3</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LABS -->
+  <section class="section" id="labs">
+    <div class="wrap-w">
+      <div class="head">
+        <div><span class="eyebrow"><span class="dot"></span> Category 02</span><h2>Labs &amp; blood panels.</h2></div>
+        <p class="desc">Comprehensive blood biomarker panels ingested directly into the person's record. Annual or quarterly cadence; auto-trended against wearable signals.</p>
+      </div>
+
+      <div class="feat">
+        <div class="body">
+          <span class="eyebrow" style="color:#807C6F;"><span class="dot"></span> Featured · lab partner</span>
+          <h3>KP Pharma.<br/>Our blood-panel<br/>launch partner.</h3>
+          <p>Order, draw, and result flow lands directly in the person's BiotrackOS record — no manual upload, no PDFs. Trended automatically against the rest of the record.</p>
+          <div style="margin-top:8px;"><a class="btn btn-accent btn-sm" href="marketplace.html">See on marketplace <span class="arrow">→</span></a></div>
+        </div>
+        <div class="art"><span class="art-mark">KP Pharma</span></div>
+      </div>
+
+      <div class="grid">
+        <div class="tile"><div class="logo">KP</div><h4>KP Pharma</h4><p>Blood panels · launch partner</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile soon"><div class="logo">+</div><h4>Your lab?</h4><p><a href="marketplace.html#join">Request to join →</a></p><span class="status"><span class="d"></span>Open</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GENOMICS -->
+  <section class="section" id="genomics">
+    <div class="wrap-w">
+      <div class="head">
+        <div><span class="eyebrow"><span class="dot"></span> Category 03</span><h2>Genomics &amp; DNA.</h2></div>
+        <p class="desc">Whole-genome and microarray data, securely imported once and referenced throughout the record — pharmacogenomic interactions, risk variants, traits.</p>
+      </div>
+      <div class="grid">
+        <div class="tile"><div class="logo">M</div><h4>Muhdo</h4><p>DNA insights · launch partner</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile soon"><div class="logo">+</div><h4>Your service?</h4><p><a href="marketplace.html#join">Request to join →</a></p><span class="status"><span class="d"></span>Open</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EPIGENETICS -->
+  <section class="section" id="epigenetics">
+    <div class="wrap-w">
+      <div class="head">
+        <div><span class="eyebrow"><span class="dot"></span> Category 04</span><h2>Epigenetic age &amp; methylation.</h2></div>
+        <p class="desc">Biological-age tests, methylation panels, and glycan biomarkers — re-tested at intervals, charted alongside the rest of the record so protocols actually have a number to move.</p>
+      </div>
+      <div class="grid">
+        <div class="tile"><div class="logo">M</div><h4>Muhdo</h4><p>Epigenetic age · launch partner</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile"><div class="logo">M</div><h4>Muhdo</h4><p>Methylation panel</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile soon"><div class="logo">+</div><h4>Your service?</h4><p><a href="marketplace.html#join">Request to join →</a></p><span class="status"><span class="d"></span>Open</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDICATIONS -->
+  <section class="section" id="medications">
+    <div class="wrap-w">
+      <div class="head">
+        <div><span class="eyebrow"><span class="dot"></span> Category 05</span><h2>Medications &amp; Rx.</h2></div>
+        <p class="desc">Prescription, refill, and adherence data from pharmacy partners and e-prescribing networks — charted on the same timeline as biometrics, so changes have context.</p>
+      </div>
+      <div class="grid">
+        <div class="tile"><div class="logo">DP</div><h4>DataPharm</h4><p>Prescription data · launch partner</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile soon"><div class="logo">+</div><h4>Your pharmacy?</h4><p><a href="marketplace.html#join">Request to join →</a></p><span class="status"><span class="d"></span>Open</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EHR -->
+  <section class="section" id="ehr">
+    <div class="wrap-w">
+      <div class="head">
+        <div><span class="eyebrow"><span class="dot"></span> Category 06</span><h2>Clinical &amp; EHR.</h2></div>
+        <p class="desc">Bidirectional pipelines into the EHRs your team already runs. We close the loop you've been holding shut with spreadsheets.</p>
+      </div>
+      <div class="grid">
+        <div class="tile"><div class="logo">C</div><h4>CityEHR</h4><p>EHR · launch partner</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile"><div class="logo">F</div><h4>FHIR direct</h4><p>R4 export / webhook</p><span class="status"><span class="d"></span>Live</span></div>
+        <div class="tile soon"><div class="logo">+</div><h4>Your EHR?</h4><p><a href="marketplace.html#join">Request to join →</a></p><span class="status"><span class="d"></span>Open</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="partner-cta">
+    <div class="wrap-w">
+      <div class="panel">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Become a partner</span>
+          <h2>Run a lab, DNA service,<br/>or pharmacy?<br/><em style="color:var(--ink-2);font-style:italic;">Join the marketplace.</em></h2>
+          <p>BiotrackOS is open to qualified data partners across labs, genomics, epigenetics, and pharmacy. Apply once, integrate once, reach every clinic on the platform.</p>
+          <div class="why">
+            <div class="row"><span class="n">01</span><span>Single integration — built and maintained by our engineering team.</span></div>
+            <div class="row"><span class="n">02</span><span>Featured placement in the BiotrackOS marketplace, with consent-gated discovery.</span></div>
+            <div class="row"><span class="n">03</span><span>Co-marketing across our growing customer network.</span></div>
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-primary btn-lg" href="marketplace.html#join">Apply to join <span class="arrow">→</span></a>
+          <div style="margin-top:12px;"><a class="btn btn-ghost btn-sm" href="marketplace.html">Browse the marketplace</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="assets/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Security disclosure — BiotrackOS</title>
+<link rel="stylesheet" href="assets/shared.css" />
+<style>
+  .legal { padding: 80px 0 96px; }
+  .legal .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  .legal h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(44px,5vw,72px); line-height: 1; letter-spacing: -0.015em; margin: 24px 0 0; }
+  .legal h1 em { color: var(--ink-2); font-style: italic; }
+  .legal .meta { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; }
+  .legal h2 { font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 48px 0 12px; }
+  .legal h3 { font-size: 16px; font-weight: 600; margin: 28px 0 8px; }
+  .legal p, .legal li { font-size: 15px; line-height: 1.65; color: var(--ink-2); }
+  .legal ul { padding-left: 20px; }
+  .legal table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+  .legal th, .legal td { padding: 12px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .legal th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  
+</style>
+</head>
+<body data-page="security-disclosure" data-prefix="">
+<main>
+<section class="legal"><div class="wrap">
+<span class="eyebrow"><span class="dot"></span> Trust</span>
+<h1>Responsible <em>disclosure.</em></h1>
+<div class="meta"><span>Version 2.0</span><span>Updated 12 April 2026</span></div>
+
+<p style="margin-top:24px;">We take security seriously. If you've found a vulnerability in any BiotrackOS product or service, we want to hear about it — and we'll work with you to confirm, fix, and credit the report.</p>
+
+<h2>How to report</h2>
+<p>Email <strong>security@biotrackos.com</strong> with a description, reproduction steps, and your contact details. PGP key fingerprint: <code style="font-family:var(--font-mono);font-size:13px;">A4F2 0E11 7C92 88BD 4DEC 4DA8 9C0F E7B1 6B33 22CA</code> · <a href="#">download key</a>.</p>
+
+<h2>What we promise</h2>
+<ul>
+<li>Acknowledge receipt within <strong>2 business days</strong>.</li>
+<li>Provide an initial triage within <strong>5 business days</strong>.</li>
+<li>Maintain regular communication while we work the issue.</li>
+<li>Credit you in our hall of fame and our public changelog (unless you'd rather stay anonymous).</li>
+<li>Not pursue legal action against good-faith researchers.</li>
+</ul>
+
+<h2>Safe harbour</h2>
+<p>We consider security research conducted under this policy to be authorised. We will not initiate legal action against you or ask law enforcement to investigate, provided you:</p>
+<ul>
+<li>Make a good-faith effort to avoid privacy violations, destruction of data, and interruption of the service.</li>
+<li>Do not access more data than necessary to demonstrate the vulnerability.</li>
+<li>Give us reasonable time to investigate and address before public disclosure (typically 90 days).</li>
+<li>Do not violate any other law.</li>
+</ul>
+
+<h2>Scope</h2>
+<table>
+<thead><tr><th>In scope</th><th>Out of scope</th></tr></thead>
+<tbody>
+<tr><td>app.biotrackos.com</td><td>Third-party services (Stripe, Datadog)</td></tr>
+<tr><td>api.biotrackos.com</td><td>Social engineering of staff</td></tr>
+<tr><td>iOS / Android consumer apps</td><td>Physical attacks on offices</td></tr>
+<tr><td>biotrackos.com marketing site</td><td>DoS / brute-force at scale</td></tr>
+<tr><td>FHIR &amp; partner APIs</td><td>Spam or social abuse reports</td></tr>
+</tbody></table>
+
+<h2>Bounty</h2>
+<p>We pay bounties for qualifying issues, based on severity (CVSS 3.1) and impact.</p>
+<table>
+<thead><tr><th>Severity</th><th>Bounty (EUR)</th></tr></thead>
+<tbody>
+<tr><td>Critical</td><td>€5,000 – €25,000</td></tr>
+<tr><td>High</td><td>€1,500 – €5,000</td></tr>
+<tr><td>Medium</td><td>€500 – €1,500</td></tr>
+<tr><td>Low</td><td>€100 – €500</td></tr>
+</tbody></table>
+
+<h2>Hall of fame</h2>
+<p>Our gratitude to: <strong>Sara K.</strong> · <strong>F. Lindqvist</strong> · <strong>devnull@</strong> · <strong>R. Maillard</strong> · <strong>Tomas H.</strong> · and 14 researchers who preferred to remain anonymous.</p>
+</div></section></main>
+<script src="assets/shared.js"></script>
+</body>
+</html>

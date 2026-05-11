@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BiotrackOS — The operating system for connected health</title>
+<meta name="description" content="One record across wearables, labs, genomics, and medications — for longevity clinics, performance teams, insurers, and the people they care for." />
+<link rel="stylesheet" href="assets/shared.css" />
+<style>
+  /* ============= HOME ============= */
+  .hero {
+    position: relative;
+    padding: 64px 0 0;
+    overflow: hidden;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 6px 6px 14px;
+    border: 1px solid var(--line); border-radius: 999px;
+    background: var(--surface);
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-2);
+    width: max-content;
+  }
+  .hero-tag .pill {
+    background: var(--mint); color: var(--teal);
+    padding: 4px 10px; border-radius: 999px; font-weight: 500;
+  }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(64px, 9.4vw, 152px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    margin: 22px 0 0;
+    text-wrap: balance;
+  }
+  .hero-headline em { font-style: italic; color: var(--ink-2); }
+  .hero-meta {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px;
+    margin-top: 40px; padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .hero-meta .lede { margin: 0; max-width: 48ch; }
+  .hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+  /* Hero stage — composite product preview */
+  .hero-stage {
+    margin-top: 64px;
+    position: relative;
+    padding: 32px;
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg-2) 100%);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    overflow: hidden;
+  }
+  .stage-grid {
+    display: grid;
+    grid-template-columns: 1.45fr 0.95fr;
+    gap: 32px;
+    min-height: 560px;
+  }
+  .stage-dash {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stage-dash::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(to right, rgba(11,17,48,0.04) 1px, transparent 1px) 0 0 / 48px 48px,
+      linear-gradient(to bottom, rgba(11,17,48,0.04) 1px, transparent 1px) 0 0 / 48px 48px;
+    pointer-events: none;
+  }
+  .stage-dash > * { position: relative; }
+  .sd-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 18px;
+  }
+  .sd-title {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .sd-title .avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--mint); color: var(--teal);
+    display: grid; place-items: center; font-weight: 600; font-size: 12px;
+    font-family: var(--font-mono);
+  }
+  .sd-title h4 { margin: 0; font-size: 16px; font-weight: 600; }
+  .sd-title p  { margin: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .sd-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .sd-metric {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; padding: 14px;
+  }
+  .sd-metric .lab {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .sd-metric .val {
+    font-family: var(--font-display); font-size: 36px; line-height: 1;
+    letter-spacing: -0.02em; margin-top: 6px;
+  }
+  .sd-metric .delta {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--teal); margin-top: 6px;
+  }
+  .sd-metric .delta.down { color: #C46A6A; }
+  .sd-metric .unit { color: var(--muted); margin-left: 4px; font-size: 12px; font-family: var(--font-sans); }
+
+  .sd-chart {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; padding: 18px; margin-top: 16px;
+    min-height: 200px;
+    position: relative;
+  }
+  .sd-chart-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .sd-chart-head .left h5 { margin: 0; font-size: 14px; font-weight: 600; }
+  .sd-chart-head .left p { margin: 2px 0 0; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);}
+  .sd-chart-head .seg {
+    display: inline-flex; gap: 2px; background: var(--bg-2);
+    border: 1px solid var(--line); border-radius: 8px; padding: 2px;
+  }
+  .sd-chart-head .seg span {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+    padding: 4px 8px; border-radius: 6px; color: var(--muted);
+  }
+  .sd-chart-head .seg span.on { background: var(--ink); color: var(--bg); }
+
+  .sd-rows { display: grid; gap: 6px; margin-top: 14px; }
+  .sd-row {
+    display: grid; grid-template-columns: 22px 1fr auto 70px auto; gap: 12px;
+    align-items: center; padding: 10px 8px; border-radius: 8px;
+    background: var(--surface); border: 1px solid var(--line);
+  }
+  .sd-row .ic {
+    width: 22px; height: 22px; border-radius: 6px; background: var(--mint);
+    display: grid; place-items: center; color: var(--teal);
+  }
+  .sd-row .name { font-size: 13px; font-weight: 500; }
+  .sd-row .src  { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .sd-row .val  { font-family: var(--font-display); font-size: 18px; }
+  .sd-row .badge {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--teal);
+    background: var(--mint-soft); padding: 3px 8px; border-radius: 999px;
+  }
+
+  /* Phone column */
+  .stage-phone-col {
+    background: var(--ink);
+    border-radius: var(--r-lg);
+    padding: 28px;
+    color: var(--bg);
+    position: relative;
+    display: flex; flex-direction: column; justify-content: space-between;
+    overflow: hidden;
+  }
+  .stage-phone-col::before {
+    content: ""; position: absolute; inset: -1px;
+    background:
+      radial-gradient(ellipse at top right, rgba(47,191,163,0.18), transparent 60%),
+      radial-gradient(ellipse at bottom left, rgba(209,242,74,0.10), transparent 50%);
+    pointer-events: none;
+  }
+  .stage-phone-col > * { position: relative; }
+  .phc-eyebrow {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #807C6F;
+  }
+  .phc-eyebrow .dot {
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background: var(--teal-bright); margin-right: 8px; vertical-align: middle;
+    box-shadow: 0 0 0 4px rgba(47,191,163,0.18);
+  }
+  .phc h3 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: 36px; line-height: 1.0; letter-spacing: -0.01em; margin: 16px 0 12px;
+  }
+  .phc p { color: #C9C5B6; font-size: 14px; max-width: 32ch; margin: 0; }
+  .phc-phone {
+    align-self: center;
+    margin-top: 24px;
+    transform: translateY(8px);
+  }
+
+  /* SVG chart line draw */
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .svg-line { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 2.4s ease forwards .4s; }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:.5} }
+  .svg-dot { transform-origin: center; animation: pulse 2.2s ease-in-out infinite 1.5s; }
+
+  /* Trust ticker */
+  .trust {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 28px 0;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .trust-row {
+    display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: center;
+  }
+  .trust-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .trust-track {
+    overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .logo-row { display: flex; align-items: center; gap: 56px; opacity: .85; }
+  .logo-name {
+    font-family: var(--font-display); font-size: 24px; letter-spacing: -0.01em;
+    color: var(--ink-2);
+  }
+  .logo-name.mono { font-family: var(--font-sans); font-weight: 500; letter-spacing: 0.04em; font-size: 18px; }
+
+  /* Section heading row */
+  .sec-head {
+    display: grid; grid-template-columns: 0.7fr 1fr; gap: 64px; align-items: end;
+    margin-bottom: 56px;
+  }
+  .sec-head.center { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+  .sec-head .lede { margin: 0; }
+
+  /* Two products split */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .split .panel {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 24px; padding: 36px; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; min-height: 580px;
+  }
+  .split .panel.dark { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .split .panel.dark .small,
+  .split .panel.dark .lede { color: #C9C5B6; }
+  .split .panel.dark .eyebrow { color: #807C6F; }
+  .split .panel .visual { margin-top: auto; padding-top: 24px; }
+  .split h3 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: 40px; line-height: 1.02; letter-spacing: -0.01em; margin: 12px 0 12px;
+  }
+  .panel-list { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 8px; }
+  .panel-list li {
+    display: grid; grid-template-columns: 18px 1fr; gap: 12px;
+    font-size: 14px; padding: 8px 0; border-top: 1px dashed var(--line);
+  }
+  .split .panel.dark .panel-list li { border-color: #2A2F4A; }
+  .panel-list li::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal-bright); margin-top: 8px;
+  }
+
+  /* Markets card grid */
+  .markets-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .market-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+    padding: 24px; min-height: 220px; display: flex; flex-direction: column;
+    justify-content: space-between; transition: transform .25s ease, background .2s;
+  }
+  .market-card:hover { transform: translateY(-3px); }
+  .market-card .num {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+    color: var(--muted);
+  }
+  .market-card h4 {
+    font-family: var(--font-display); font-weight: 400; font-size: 28px;
+    line-height: 1; letter-spacing: -0.01em; margin: 16px 0 0;
+  }
+  .market-card p { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+  .market-card .go {
+    margin-top: 16px; font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink);
+  }
+
+  /* How it works steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .step {
+    border-top: 1px solid var(--ink);
+    padding-top: 18px;
+  }
+  .step .n {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+    color: var(--muted); margin-bottom: 24px;
+  }
+  .step h4 {
+    font-family: var(--font-display); font-weight: 400; font-size: 32px;
+    line-height: 1.05; letter-spacing: -0.01em; margin: 0 0 12px;
+  }
+  .step p { color: var(--ink-2); margin: 0; max-width: 36ch; }
+
+  /* Quote / proof */
+  .proof {
+    background: var(--ink); color: var(--bg);
+    border-radius: 28px; padding: 80px; position: relative; overflow: hidden;
+  }
+  .proof::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(47,191,163,.18), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 0% 100%, rgba(209,242,74,.10), transparent 60%);
+    pointer-events: none;
+  }
+  .proof > * { position: relative; }
+  .proof blockquote {
+    font-family: var(--font-display);
+    font-weight: 400; font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.05; letter-spacing: -0.01em;
+    margin: 0; text-wrap: balance;
+    max-width: 22ch;
+  }
+  .proof .who {
+    margin-top: 32px;
+    display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center;
+  }
+  .proof .who .av {
+    width: 48px; height: 48px; border-radius: 50%; background: var(--mint);
+    color: var(--teal); display: grid; place-items: center;
+    font-family: var(--font-mono); font-weight: 600;
+  }
+  .proof .who .name { color: var(--bg); font-weight: 500; }
+  .proof .who .role { color: #807C6F; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .proof .who .out { color: #C9C5B6; }
+
+  /* Stats strip */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 56px 0;
+  }
+  .stat-card .num {
+    font-family: var(--font-display); font-size: clamp(56px, 6vw, 96px);
+    line-height: 1; letter-spacing: -0.02em;
+  }
+  .stat-card .num em { font-style: italic; color: var(--teal); }
+  .stat-card p { color: var(--muted); margin: 12px 0 0; max-width: 22ch; font-size: 14px; }
+
+  @media (max-width: 1080px) {
+    .stage-grid { grid-template-columns: 1fr; }
+    .sd-metrics { grid-template-columns: repeat(2, 1fr); }
+    .hero-meta { grid-template-columns: 1fr; gap: 24px; }
+    .markets-row { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: 1fr; }
+    .split { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .sec-head { grid-template-columns: 1fr; gap: 24px; }
+    .proof { padding: 48px 28px; }
+  }
+</style>
+</head>
+<body data-page="home" data-prefix="">
+
+<main>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="wrap-w">
+      <div class="hero-inner">
+        <div class="reveal reveal-1">
+          <span class="hero-tag">
+            <span class="pill">Now live in 14 countries</span>
+            <span>Join the waitlist →</span>
+          </span>
+          <h1 class="hero-headline">
+            The operating system<br/>
+            for <em>connected</em><br/>
+            health.
+          </h1>
+        </div>
+
+        <div class="hero-meta reveal reveal-2">
+          <p class="lede">
+            One record across wearables, lab panels, genomics, epigenetics, and medications — built for clinics &amp; longevity labs, sports teams &amp; gyms, insurers, corporate wellness, research &amp; pharma — and the people they care for.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-start;">
+            <div class="hero-actions">
+              <a class="btn btn-primary btn-lg" href="contact.html">Book a demo <span class="arrow">→</span></a>
+              <a class="btn btn-ghost btn-lg" href="product.html">See the platform</a>
+            </div>
+            <div class="small" style="display:flex;gap:14px;align-items:center;color:var(--muted);font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;">
+              <span>HIPAA · SOC 2</span><span style="opacity:.4">/</span><span>Wearables · labs · genomics · Rx</span><span style="opacity:.4">/</span><span>Open API</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Composite stage -->
+        <div class="hero-stage reveal reveal-3">
+          <div class="stage-grid">
+
+            <!-- Dashboard mock -->
+            <div class="stage-dash">
+              <div class="sd-head">
+                <div class="sd-title">
+                  <div class="avatar">MA</div>
+                  <div>
+                    <h4>Maria Alvarez · Cohort 04</h4>
+                    <p>Longevity panel · last sync 8s ago</p>
+                  </div>
+                </div>
+                <span class="chip"><span class="dot"></span> Live</span>
+              </div>
+
+              <div class="sd-metrics">
+                <div class="sd-metric">
+                  <div class="lab">VO₂ MAX</div>
+                  <div class="val">48.6<span class="unit">ml/kg</span></div>
+                  <div class="delta">↑ 1.4% · 30d</div>
+                </div>
+                <div class="sd-metric">
+                  <div class="lab">RESTING HR</div>
+                  <div class="val">57<span class="unit">bpm</span></div>
+                  <div class="delta">↓ 3 bpm · 14d</div>
+                </div>
+                <div class="sd-metric">
+                  <div class="lab">HRV</div>
+                  <div class="val">62<span class="unit">ms</span></div>
+                  <div class="delta">↑ 8 ms · 7d</div>
+                </div>
+                <div class="sd-metric">
+                  <div class="lab">SLEEP EFF.</div>
+                  <div class="val">88<span class="unit">%</span></div>
+                  <div class="delta down">↓ 2% · 7d</div>
+                </div>
+              </div>
+
+              <div class="sd-chart">
+                <div class="sd-chart-head">
+                  <div class="left">
+                    <h5>VO₂ max — 30 day trend</h5>
+                    <p>Apple Watch · Whoop · Garmin merged</p>
+                  </div>
+                  <div class="seg">
+                    <span>1D</span><span>7D</span><span class="on">30D</span><span>90D</span>
+                  </div>
+                </div>
+                <svg viewBox="0 0 600 140" width="100%" height="140" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="lg1" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0" stop-color="#2FBFA3" stop-opacity=".25"/>
+                      <stop offset="1" stop-color="#2FBFA3" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <!-- Gridlines -->
+                  <g stroke="#E5E1D6" stroke-dasharray="2 4">
+                    <line x1="0" y1="30"  x2="600" y2="30"/>
+                    <line x1="0" y1="70"  x2="600" y2="70"/>
+                    <line x1="0" y1="110" x2="600" y2="110"/>
+                  </g>
+                  <!-- Area -->
+                  <path d="M0,108 L40,98 L80,104 L120,90 L160,82 L200,86 L240,72 L280,76 L320,60 L360,68 L400,52 L440,46 L480,42 L520,30 L560,28 L600,24 L600,140 L0,140 Z" fill="url(#lg1)"/>
+                  <!-- Line -->
+                  <path class="svg-line" d="M0,108 L40,98 L80,104 L120,90 L160,82 L200,86 L240,72 L280,76 L320,60 L360,68 L400,52 L440,46 L480,42 L520,30 L560,28 L600,24"
+                        fill="none" stroke="#1F8A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g class="svg-dot" style="transform-origin:600px 24px;">
+                    <circle cx="600" cy="24" r="5" fill="#1F8A7A" stroke="#FFFFFF" stroke-width="2"/>
+                  </g>
+                  <text x="586" y="14" text-anchor="end" font-family="Geist Mono" font-size="10" fill="#6B6859">48.7</text>
+                </svg>
+              </div>
+
+              <div class="sd-rows">
+                <div class="sd-row">
+                  <div class="ic">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M3 12h4l3-8 4 16 3-8h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div>
+                    <div class="name">Stress index trending up</div>
+                    <div class="src">Garmin Fēnix · 1h ago</div>
+                  </div>
+                  <div></div>
+                  <div class="val">46<span class="unit" style="font-family:var(--font-sans);font-size:11px;color:var(--muted);"> /100</span></div>
+                  <div class="badge">Flag</div>
+                </div>
+                <div class="sd-row">
+                  <div class="ic" style="background:var(--sky);color:#2A6FDB;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-7 11-7 11Z" stroke="currentColor" stroke-width="2"/></svg>
+                  </div>
+                  <div>
+                    <div class="name">HRV recovering after sauna</div>
+                    <div class="src">Whoop · 7:14 today</div>
+                  </div>
+                  <div></div>
+                  <div class="val">+8<span class="unit" style="font-family:var(--font-sans);font-size:11px;color:var(--muted);"> ms</span></div>
+                  <div class="badge">Note</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phone column -->
+            <div class="stage-phone-col">
+              <div class="phc">
+                <div class="phc-eyebrow"><span class="dot"></span> Connected · live data</div>
+                <h3>And the same data in your patient's hands.</h3>
+                <p>Every signal a clinician sees, the consumer sees too — annotated, contextualised, and tied to what to do next.</p>
+              </div>
+              <div class="phc-phone">
+                <div class="phone">
+                  <div class="phone-notch"></div>
+                  <div class="phone-screen">
+                    <img src="assets/img/app-vo2.png" alt="BiotrackOS consumer app — VO2 max detail" loading="lazy" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TRUST ===================== -->
+  <section class="trust" style="margin-top:80px;">
+    <div class="wrap-w">
+      <div class="trust-row">
+        <div class="trust-label">A universe of connected sources — and growing</div>
+        <div class="trust-track">
+          <div class="ticker-track">
+            <span class="logo-name">Apple Health</span>
+            <span class="logo-name mono">WHOOP</span>
+            <span class="logo-name">Garmin</span>
+            <span class="logo-name mono">Oura</span>
+            <span class="logo-name">Withings</span>
+            <span class="logo-name mono">POLAR</span>
+            <span class="logo-name">Samsung Health</span>
+            <span class="logo-name mono">Reebok</span>
+            <span class="logo-name">Dexcom</span>
+            <span class="logo-name mono">EIGHT SLEEP</span>
+            <!-- duplicate -->
+            <span class="logo-name">Apple Health</span>
+            <span class="logo-name mono">WHOOP</span>
+            <span class="logo-name">Garmin</span>
+            <span class="logo-name mono">Oura</span>
+            <span class="logo-name">Withings</span>
+            <span class="logo-name mono">POLAR</span>
+            <span class="logo-name">Samsung Health</span>
+            <span class="logo-name mono">Reebok</span>
+            <span class="logo-name">Dexcom</span>
+            <span class="logo-name mono">EIGHT SLEEP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TWO PRODUCTS ===================== -->
+  <section class="section">
+    <div class="wrap-w">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Two products · one record</span>
+          <h2 class="h1" style="margin-top:16px;">Built for both sides<br/>of the screen.</h2>
+        </div>
+        <p class="lede">
+          The consumer app gives people a calm, sense-making view of their body. The team workspace turns the same stream into population-scale signal — without re-entering a single number.
+        </p>
+      </div>
+
+      <div class="split">
+        <!-- CONSUMER PANEL -->
+        <div class="panel">
+          <span class="eyebrow"><span class="dot"></span> Consumer</span>
+          <h3>The app your people<br/>actually open.</h3>
+          <p class="small" style="max-width:46ch;">
+            One screen for every signal. Auto-captured from the watches, rings, labs, and scales they already use — then translated by AI into language built for humans, not charts.
+          </p>
+          <ul class="panel-list">
+            <li>Single timeline across every connected source</li>
+            <li>Daily journal — sleep, mood, training, nutrition</li>
+            <li>Plain-language trend explanations</li>
+            <li>Consent they own — share or revoke in one tap</li>
+          </ul>
+          <div class="visual" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:end;">
+            <div class="phone" style="width:100%;">
+              <div class="phone-notch"></div>
+              <div class="phone-screen"><img src="assets/img/app-health.png" alt="Consumer dashboard"/></div>
+            </div>
+            <div class="phone" style="width:100%;transform:translateY(20px);">
+              <div class="phone-notch"></div>
+              <div class="phone-screen"><img src="assets/img/app-weight.png" alt="Weight tracking"/></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLINIC PANEL -->
+        <div class="panel dark">
+          <span class="eyebrow" style="color:#807C6F;"><span class="dot"></span> Team workspace</span>
+          <h3 style="color:var(--bg);">The dashboard your<br/>team runs on.</h3>
+          <p class="small">
+            Roster, segment, and follow up. Cohort trends, individual deep dives, and alerts that mean act now — built for clinicians, coaches, researchers, and care teams.
+          </p>
+          <ul class="panel-list">
+            <li>Cohort views &amp; population trends</li>
+            <li>Longitudinal record per person</li>
+            <li>Alerts on threshold &amp; trend changes</li>
+            <li>White-label app, portal &amp; reports</li>
+          </ul>
+          <div class="visual">
+            <!-- Mini cohort dashboard -->
+            <div style="background:#0F1738;border:1px solid #2A2F4A;border-radius:14px;padding:18px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+                <div>
+                  <div class="phc-eyebrow"><span class="dot"></span> Cohort 04 · Longevity panel</div>
+                  <h5 style="margin:6px 0 0;font-size:14px;color:var(--bg);">214 patients · 12 flagged today</h5>
+                </div>
+                <div class="chip" style="background:transparent;border-color:#2A2F4A;color:#C9C5B6;">
+                  <span class="dot" style="background:var(--lime);"></span> Auto-sync
+                </div>
+              </div>
+              <!-- Heatmap -->
+              <div style="display:grid;grid-template-columns:repeat(14,1fr);gap:4px;">
+                <!-- generated cells -->
+                <script>
+                  // Placeholder — server-rendered fallback below
+                </script>
+                <!-- 84 cells, varied intensity -->
+                <!-- Row 1 -->
+                ${''}
+              </div>
+              <div id="heatmap" style="display:grid;grid-template-columns:repeat(14,1fr);gap:4px;margin-top:0;"></div>
+              <div style="display:flex;justify-content:space-between;margin-top:14px;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#807C6F;">
+                <span>Apr 5</span><span>recovery score</span><span>May 4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS ===================== -->
+  <section>
+    <div class="wrap-w">
+      <div class="stats">
+        <div class="stat-card">
+          <div class="num">5<em>+</em></div>
+          <p>Data categories unified — wearables, labs, genomics, epigenetics, medications.</p>
+        </div>
+        <div class="stat-card">
+          <div class="num">1.4B</div>
+          <p>Signals unified across our customers' cohorts.</p>
+        </div>
+        <div class="stat-card">
+          <div class="num">93<em>%</em></div>
+          <p>Of customers report fewer manual data-entry steps in week one.</p>
+        </div>
+        <div class="stat-card">
+          <div class="num">11<em>×</em></div>
+          <p>More longitudinal signal per person than any single source alone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MARKETS ===================== -->
+  <section class="section">
+    <div class="wrap-w">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Markets</span>
+          <h2 class="h1" style="margin-top:16px;">One platform.<br/>Seven disciplines.</h2>
+        </div>
+        <p class="lede">Wherever continuous human data has to become a decision — clinical, performance, financial, public, or personal — BiotrackOS sits underneath it.</p>
+      </div>
+
+      <div class="markets-row">
+        <a class="market-card" href="markets.html#longevity">
+          <div>
+            <div class="num">01 / Clinical</div>
+            <h4>Clinics &amp; longevity labs</h4>
+          </div>
+          <p>Replace eight dashboards with one record for every person under care.</p>
+          <div class="go">Read →</div>
+        </a>
+        <a class="market-card" href="markets.html#performance" style="background:var(--mint-soft);">
+          <div>
+            <div class="num">02 / Performance</div>
+            <h4>Sports teams &amp; gyms</h4>
+          </div>
+          <p>Coach-side cohort views with athlete-side notifications, in lockstep.</p>
+          <div class="go">Read →</div>
+        </a>
+        <a class="market-card" href="markets.html#insurer">
+          <div>
+            <div class="num">03 / Insurance</div>
+            <h4>Insurers</h4>
+          </div>
+          <p>Consented streams that power risk, wellness, and rewards programs.</p>
+          <div class="go">Read →</div>
+        </a>
+        <a class="market-card" href="markets.html#wellness" style="background:#0B1130;color:var(--bg);border-color:#0B1130;">
+          <div>
+            <div class="num" style="color:#807C6F;">04 / Wellness</div>
+            <h4 style="color:var(--bg);">Corporate</h4>
+          </div>
+          <p style="color:#C9C5B6;">A privacy-first window into workforce health at the team level.</p>
+          <div class="go" style="color:var(--bg);">Read →</div>
+        </a>
+        <a class="market-card" href="markets.html#research">
+          <div>
+            <div class="num">05 / Research</div>
+            <h4>Research &amp; pharma</h4>
+          </div>
+          <p>Real-world signal for protocols, trials, and post-market follow-up.</p>
+          <div class="go">Read →</div>
+        </a>
+        <a class="market-card" href="markets.html#consumer">
+          <div>
+            <div class="num">06 / Consumer</div>
+            <h4>Direct</h4>
+          </div>
+          <p>For people who want their body's data in one quiet place.</p>
+          <div class="go">Read →</div>
+        </a>
+        <a class="market-card" href="markets.html#public" style="background:var(--mint-soft);">
+          <div>
+            <div class="num">07 / Public</div>
+            <h4>Public health &amp; events</h4>
+          </div>
+          <p>Population programs and large-scale events — from Dubai 30x30 to citywide fitness initiatives.</p>
+          <div class="go">Read →</div>
+        </a>
+        <a class="market-card" href="contact.html" style="background:transparent;border-style:dashed;">
+          <div>
+            <div class="num">+ / Other</div>
+            <h4>Don't see yours?</h4>
+          </div>
+          <p>Get in touch — the platform is intentionally horizontal.</p>
+          <div class="go">Talk to us →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section class="section" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap-w">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> How it works</span>
+          <h2 class="h1" style="margin-top:16px;">From a watch tap<br/>to an informed decision.</h2>
+        </div>
+        <p class="lede">Three steps. No data warehouse to build. No CSV pipeline to maintain. No retraining anyone on a new app.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="n">STEP 01</div>
+          <h4>Connect every source.</h4>
+          <p>One consent flow links wearables, lab panels, genomic reports, epigenetic tests, and medication histories — historical and live.</p>
+        </div>
+        <div class="step">
+          <div class="n">STEP 02</div>
+          <h4>Reconcile into one record.</h4>
+          <p>We dedupe, time-align, and merge conflicting readings across devices, then expose a single longitudinal record per person.</p>
+        </div>
+        <div class="step">
+          <div class="n">STEP 03</div>
+          <h4>Act on signal — not noise.</h4>
+          <p>Cohort views, individual flags, and consumer notifications fire from the same rules engine. Same truth, every surface.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROOF / QUOTE ===================== -->
+  <section class="section">
+    <div class="wrap-w">
+      <div class="proof">
+        <span class="eyebrow" style="color:#807C6F;"><span class="dot"></span> Case study · Continuum Longevity</span>
+        <blockquote style="margin-top:24px;">
+          "We retired five dashboards in a weekend. Our clinicians stopped reconciling data and started reading it."
+        </blockquote>
+        <div class="who">
+          <div class="av">DK</div>
+          <div>
+            <div class="name">Dr. Daria Kowalski</div>
+            <div class="role">Medical Director · Continuum Longevity</div>
+          </div>
+          <a class="btn btn-accent" href="customers/continuum.html">Read the study <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Heatmap cells for the clinic panel
+  (function () {
+    const el = document.getElementById('heatmap');
+    if (!el) return;
+    const cells = 14 * 6;
+    const palette = ['#1B2748', '#23345C', '#2A4A6E', '#2F6F84', '#2FBFA3', '#D1F24A'];
+    let html = '';
+    for (let i = 0; i < cells; i++) {
+      // Bias toward greens for "recovery"
+      const r = Math.random();
+      let c;
+      if (r < 0.08) c = palette[5];
+      else if (r < 0.28) c = palette[4];
+      else if (r < 0.52) c = palette[3];
+      else if (r < 0.75) c = palette[2];
+      else c = palette[1];
+      html += `<span style="aspect-ratio:1/1;border-radius:3px;background:${c};opacity:${0.55 + Math.random()*0.45}"></span>`;
+    }
+    el.innerHTML = html;
+  })();
+</script>
+
+<script src="assets/shared.js"></script>
+</body>
+</html>

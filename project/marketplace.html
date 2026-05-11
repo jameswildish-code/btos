@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Marketplace — BiotrackOS</title>
+<link rel="stylesheet" href="assets/shared.css" />
+<style>
+  .m-hero { padding: 72px 0 56px; border-bottom: 1px solid var(--line); }
+  .m-hero h1 em { color: var(--ink-2); font-style: italic; }
+  .m-hero .g { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: end; }
+  .stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .stats-strip .v { font-family: var(--font-display); font-size: 48px; line-height: 1; }
+  .stats-strip .l { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+  /* Tabs */
+  .mp-tabs { padding: 64px 0 0; }
+  .mp-tabs .tabs { display: inline-flex; padding: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; gap: 4px; }
+  .mp-tabs .tabs button { padding: 12px 22px; border-radius: 999px; border: 0; background: transparent; font: inherit; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); cursor: pointer; }
+  .mp-tabs .tabs button.on { background: var(--ink); color: var(--bg); }
+  .mp-tabs .tabs button .ct { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: rgba(255,255,255,0.15); font-size: 10px; }
+  .mp-tabs .tabs button:not(.on) .ct { background: var(--bg-2); color: var(--muted); }
+  .tab-lede { margin-top: 24px; max-width: 60ch; font-size: 15px; color: var(--ink-2); }
+
+  /* Browser */
+  .browse { padding: 32px 0 96px; }
+  .browse-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 24px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .filters button { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); cursor: pointer; }
+  .filters button.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .search { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; min-width: 260px; }
+  .search input { flex: 1; border: 0; background: transparent; font: inherit; font-size: 14px; outline: none; color: var(--ink); }
+
+  .partners { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; }
+  .partner { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px; transition: border-color .15s ease, transform .15s ease; min-height: 240px; text-decoration: none; color: inherit; }
+  .partner:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .partner .head { display: flex; gap: 14px; align-items: center; }
+  .partner .logo { width: 56px; height: 56px; border-radius: 14px; background: var(--bg-2); display: grid; place-items: center; font-family: var(--font-display); font-size: 24px; color: var(--ink); flex-shrink: 0; }
+  .partner .pname { font-size: 17px; font-weight: 500; margin: 0; line-height: 1.2; }
+  .partner .pcat { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 4px 0 0; }
+  .partner p.desc { margin: 0; font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+  .partner .footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
+
+  .panel { display: none; }
+  .panel.on { display: block; }
+
+  /* Submit CTA strip */
+  .submit-strip { margin-top: 48px; padding: 40px; border: 1px dashed var(--line); border-radius: 20px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+  .submit-strip h4 { font-family: var(--font-display); font-weight: 400; font-size: 28px; margin: 0; }
+  .submit-strip p { margin: 4px 0 0; color: var(--ink-2); font-size: 14px; }
+
+  /* CTA */
+  .cta-strip { background: var(--ink); color: var(--bg); border-radius: 24px; padding: 56px; display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; align-items: center; margin-top: 32px; }
+  .cta-strip h3 { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1.02; margin: 0; }
+  .cta-strip .actions { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+
+  @media (max-width: 1000px) {
+    .m-hero .g, .stats-strip, .partners, .cta-strip, .submit-strip { grid-template-columns: 1fr; gap: 24px; }
+    .partners { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body data-page="product" data-prefix="">
+<main>
+  <section class="m-hero">
+    <div class="wrap-w">
+      <span class="eyebrow"><span class="dot"></span> Marketplace</span>
+      <div class="g">
+        <h1 class="h1">Partners, add-ons,<br/><em>and programmes.</em></h1>
+        <p class="lede">The commerce layer of BiotrackOS. Connect a data partner, switch on a feature, or roll out a clinician-authored programme — all in one place, all metered through your contract.</p>
+      </div>
+      <div class="stats-strip">
+        <div><div class="v">3</div><div class="l">Marketplace tiers</div></div>
+        <div><div class="v">21</div><div class="l">Live this quarter</div></div>
+        <div><div class="v">9</div><div class="l">Add-ons</div></div>
+        <div><div class="v">6</div><div class="l">Clinician programmes</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mp-tabs">
+    <div class="wrap-w">
+      <div class="tabs" role="tablist">
+        <button class="on" data-tab="partners">Partners <span class="ct">6</span></button>
+        <button data-tab="addons">Add-ons <span class="ct">9</span></button>
+        <button data-tab="programmes">Programmes <span class="ct">6</span></button>
+      </div>
+      <p class="tab-lede" id="tab-lede">Third-party data sources — labs, genomics, epigenetics, prescriptions, and EHRs — reconciled into the same canonical record as wearable signal.</p>
+    </div>
+  </section>
+
+  <section class="browse">
+    <div class="wrap-w">
+
+      <!-- Partners panel -->
+      <div class="panel on" id="panel-partners">
+        <div class="browse-head">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> Data partners</span>
+            <h2 class="h2" style="margin-top:12px;">Plug in a source.<br/>It joins the record.</h2>
+          </div>
+          <label class="search">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <input placeholder="Search partners" />
+          </label>
+        </div>
+        <div class="filters">
+          <button class="on">All</button><button>Labs</button><button>Genomics</button><button>Epigenetics</button><button>Rx</button><button>EHR</button>
+        </div>
+        <div class="partners">
+          <a class="partner" href="#" data-tags="labs · uk">
+  <div class="head"><div class="logo" style="background:#D6E8DC;color:#1F8A7A;">KP</div>
+    <div><h5 class="pname">KP Pharma</h5><div class="pcat">Labs · UK</div></div></div>
+  <p class="desc">Blood panel processing for UK clinics. Venous &amp; finger-prick.</p>
+  <div class="footer">
+    <span class="chip" style="background:var(--mint-soft);color:var(--teal);border-color:var(--mint);"><span class="dot"></span> Live</span>
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">UK</span>
+  </div></a>
+<a class="partner" href="#" data-tags="genomics · uk">
+  <div class="head"><div class="logo" style="background:#E2EBF7;color:#3B5A86;">MD</div>
+    <div><h5 class="pname">Muhdo</h5><div class="pcat">Genomics · UK</div></div></div>
+  <p class="desc">SNP arrays for performance, longevity &amp; nutrition.</p>
+  <div class="footer">
+    <span class="chip" style="background:var(--mint-soft);color:var(--teal);border-color:var(--mint);"><span class="dot"></span> Live</span>
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">UK · EU</span>
+  </div></a>
+<a class="partner" href="#" data-tags="epigenetics · uk">
+  <div class="head"><div class="logo" style="background:#F4E4C5;color:#8A6A2E;">MD</div>
+    <div><h5 class="pname">Muhdo</h5><div class="pcat">Epigenetics · UK</div></div></div>
+  <p class="desc">Biological age &amp; methylation reports.</p>
+  <div class="footer">
+    <span class="chip" style="background:var(--mint-soft);color:var(--teal);border-color:var(--mint);"><span class="dot"></span> Live</span>
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">UK · EU</span>
+  </div></a>
+<a class="partner" href="#" data-tags="rx · uk">
+  <div class="head"><div class="logo" style="background:#D6E8DC;color:#1F8A7A;">DP</div>
+    <div><h5 class="pname">DataPharm</h5><div class="pcat">Rx · UK</div></div></div>
+  <p class="desc">Prescription history &amp; dispense data via integrated pharmacies.</p>
+  <div class="footer">
+    <span class="chip" style="background:var(--mint-soft);color:var(--teal);border-color:var(--mint);"><span class="dot"></span> Live</span>
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">UK</span>
+  </div></a>
+<a class="partner" href="#" data-tags="ehr · nhs">
+  <div class="head"><div class="logo" style="background:#F1E4E0;color:#8A4A3E;">CE</div>
+    <div><h5 class="pname">CityEHR</h5><div class="pcat">EHR · NHS</div></div></div>
+  <p class="desc">Open-source clinical record. NHS Digital interop.</p>
+  <div class="footer">
+    <span class="chip" style=""><span class="dot"></span> Beta</span>
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">UK</span>
+  </div></a>
+<a class="partner" href="#" data-tags="ehr · global">
+  <div class="head"><div class="logo" style="background:#D6E8DC;color:#1F8A7A;">FH</div>
+    <div><h5 class="pname">FHIR direct</h5><div class="pcat">EHR · global</div></div></div>
+  <p class="desc">HL7 FHIR R5 read/write for any compliant EHR.</p>
+  <div class="footer">
+    <span class="chip" style="background:var(--mint-soft);color:var(--teal);border-color:var(--mint);"><span class="dot"></span> Live</span>
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Global</span>
+  </div></a>
+        </div>
+        <div class="submit-strip">
+          <div>
+            <h4>Your service? — Become a partner.</h4>
+            <p>Labs, genomics, epigenetics, pharmacy, or EHR. We onboard new partners in 3–6 weeks.</p>
+          </div>
+          <a href="contact.html" class="btn btn-primary">Apply <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- Add-ons panel -->
+      <div class="panel" id="panel-addons">
+        <div class="browse-head">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> Add-ons</span>
+            <h2 class="h2" style="margin-top:12px;">Switch on a feature.<br/>Bill it as a line item.</h2>
+          </div>
+          <label class="search">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <input placeholder="Search add-ons" />
+          </label>
+        </div>
+        <div class="filters">
+          <button class="on">All markets</button><button>Clinical</button><button>Longevity</button><button>Sports</button><button>Insurance</button><button>Corporate</button><button>Research</button><button>Consumer</button>
+        </div>
+        <div class="partners">
+          <a class="partner addon" href="#" data-tags="clinical · longevity · sports">
+  <div class="head"><div class="logo" style="background:var(--mint-soft);color:var(--teal);">💬</div>
+    <div><h5 class="pname">Chat &amp; messaging</h5><div class="pcat">Team ↔ patient</div></div></div>
+  <p class="desc">Encrypted in-app chat, audit-logged, with file attachments and quick replies.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">clinical · longevity · sports</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€2/seat/mo</span>
+  </div></a>
+<a class="partner addon" href="#" data-tags="clinical · insurance · longevity">
+  <div class="head"><div class="logo" style="background:var(--mint-soft);color:var(--teal);">❤︎</div>
+    <div><h5 class="pname">CV risk calculators</h5><div class="pcat">Risk · clinical</div></div></div>
+  <p class="desc">ASCVD, QRISK3, SCORE2 — auto-computed from labs &amp; vitals, refreshed on every new draw.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">clinical · insurance · longevity</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€280/mo</span>
+  </div></a>
+<a class="partner addon" href="#" data-tags="longevity · clinical">
+  <div class="head"><div class="logo" style="background:var(--mint-soft);color:var(--teal);">◓</div>
+    <div><h5 class="pname">Metabolic risk pack</h5><div class="pcat">Risk · longevity</div></div></div>
+  <p class="desc">HOMA-IR, FIB-4, metabolic syndrome — surfaced as protocol triggers.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">longevity · clinical</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€180/mo</span>
+  </div></a>
+<a class="partner addon" href="#" data-tags="clinical · longevity · consumer">
+  <div class="head"><div class="logo" style="background:var(--mint-soft);color:var(--teal);">🗓</div>
+    <div><h5 class="pname">Smart scheduling</h5><div class="pcat">Workflow</div></div></div>
+  <p class="desc">Two-way calendar sync, reminders, no-show predictions.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">clinical · longevity · consumer</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€2/seat/mo</span>
+  </div></a>
+<a class="partner addon" href="#" data-tags="insurance · clinical">
+  <div class="head"><div class="logo" style="background:var(--mint-soft);color:var(--teal);">§</div>
+    <div><h5 class="pname">Insurance claims</h5><div class="pcat">Workflow · insurance</div></div></div>
+  <p class="desc">Eligibility check, claim build, e-submission. US + select EU markets.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">insurance · clinical</span>
+    <span style="font-family:var(--font-display);font-size:18px;">Custom</span>
+  </div></a>
+<a class="partner addon" href="#" data-tags="clinical · longevity · corporate">
+  <div class="head"><div class="logo" style="background:var(--mint-soft);color:var(--teal);">◐</div>
+    <div><h5 class="pname">White-label patient app</h5><div class="pcat">Brand</div></div></div>
+  <p class="desc">Your logo, colors, copy — same engine. iOS + Android binaries.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">clinical · longevity · corporate</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€1,400/mo</span>
+  </div></a>
+<a class="partner addon" href="#" data-tags="performance · sports">
+  <div class="head"><div class="logo" style="background:var(--mint-soft);color:var(--teal);">↻</div>
+    <div><h5 class="pname">HRV coaching engine</h5><div class="pcat">Performance</div></div></div>
+  <p class="desc">Auto-build training loads from HRV trend. Coach overrides anytime.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">performance · sports</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€120/mo</span>
+  </div></a>
+<a class="partner addon" href="#" data-tags="insurance · corporate · public">
+  <div class="head"><div class="logo" style="background:var(--mint-soft);color:var(--teal);">◑</div>
+    <div><h5 class="pname">Aggregate dashboards</h5><div class="pcat">Insurance &amp; corporate</div></div></div>
+  <p class="desc">Cohort-only views, no individual data. SOC 2 + GDPR-safe.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">insurance · corporate · public</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€340/mo</span>
+  </div></a>
+<a class="partner addon" href="#" data-tags="research · clinical">
+  <div class="head"><div class="logo" style="background:var(--mint-soft);color:var(--teal);">☷</div>
+    <div><h5 class="pname">Consent &amp; eCRF</h5><div class="pcat">Research</div></div></div>
+  <p class="desc">IRB-grade consent flow + electronic case report forms.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">research · clinical</span>
+    <span style="font-family:var(--font-display);font-size:18px;">Custom</span>
+  </div></a>
+        </div>
+        <div class="submit-strip">
+          <div>
+            <h4>Need something we don’t list? — Pitch an add-on.</h4>
+            <p>We build the most-requested features as first-party add-ons. Tell us what you’d switch on tomorrow.</p>
+          </div>
+          <a href="contact.html" class="btn btn-primary">Pitch <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- Programmes panel -->
+      <div class="panel" id="panel-programmes">
+        <div class="browse-head">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> Clinician programmes</span>
+            <h2 class="h2" style="margin-top:12px;">Care plans, written<br/>by people who care for people.</h2>
+          </div>
+          <label class="search">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <input placeholder="Search programmes" />
+          </label>
+        </div>
+        <div class="filters">
+          <button class="on">All</button><button>Longevity</button><button>Clinical</button><button>Sports</button><button>Performance</button>
+        </div>
+        <p style="margin-top:24px;max-width:60ch;font-size:14px;color:var(--ink-2);">Programmes are clinician- and coach-authored care plans — a defined cohort, a set of protocols, a duration, and a price. Authors keep 70% of fees; BiotrackOS handles the platform, billing, and compliance.</p>
+        <div class="partners">
+          <a class="partner programme" href="#" data-tags="longevity · clinical">
+  <div class="head">
+    <div class="logo" style="background:#D6E8DC;color:#1F8A7A;font-family:var(--font-display);font-size:14px;">DA</div>
+    <div><h5 class="pname">Metabolic Reset · 12 weeks</h5><div class="pcat">by Dr. A. Vance · Continuum Longevity · longevity</div></div>
+  </div>
+  <p class="desc">For pre-diabetic patients: CGM + diet + protocol + biweekly coach call. 312 enrolled across 14 clinics.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint-deep);">★ 4.9</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€340 / participant</span>
+  </div></a>
+<a class="partner programme" href="#" data-tags="clinical">
+  <div class="head">
+    <div class="logo" style="background:#F1E4E0;color:#8A4A3E;font-family:var(--font-display);font-size:14px;">DM</div>
+    <div><h5 class="pname">Post-op Cardiac Rehab · 8 weeks</h5><div class="pcat">by Dr. M. Hjort · King’s College · clinical</div></div>
+  </div>
+  <p class="desc">HRV-paced exercise progression, daily check-ins, escalation rules. NHS-aligned.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint-deep);">★ 4.8</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€780 / participant</span>
+  </div></a>
+<a class="partner programme" href="#" data-tags="sports · performance">
+  <div class="head">
+    <div class="logo" style="background:#E2EBF7;color:#3B5A86;font-family:var(--font-display);font-size:14px;">CR</div>
+    <div><h5 class="pname">Marathon Build · 16 weeks</h5><div class="pcat">by Coach R. Maillard · Apex Performance · sports</div></div>
+  </div>
+  <p class="desc">Periodised plan from wearable signal. Auto-deload when HRV trends low.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint-deep);">★ 4.9</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€220 / participant</span>
+  </div></a>
+<a class="partner programme" href="#" data-tags="longevity · clinical">
+  <div class="head">
+    <div class="logo" style="background:#F4E4C5;color:#8A6A2E;font-family:var(--font-display);font-size:14px;">DS</div>
+    <div><h5 class="pname">Perimenopause Protocol · 24 weeks</h5><div class="pcat">by Dr. S. Lindqvist · Nordic Health · longevity</div></div>
+  </div>
+  <p class="desc">Symptom tracker + bloods cadence + HRT decision support. Clinician-supervised.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint-deep);">★ 4.7</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€520 / participant</span>
+  </div></a>
+<a class="partner programme" href="#" data-tags="sports · performance">
+  <div class="head">
+    <div class="logo" style="background:#D6E8DC;color:#1F8A7A;font-family:var(--font-display);font-size:14px;">SL</div>
+    <div><h5 class="pname">Apex Sleep · 6 weeks</h5><div class="pcat">by Sleep Lab · BiotrackOS Research · performance</div></div>
+  </div>
+  <p class="desc">In-season sleep load management for elite athletes. Multi-team study heritage.</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint-deep);">★ 4.8</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€280 / participant</span>
+  </div></a>
+<a class="partner programme" href="#" data-tags="longevity">
+  <div class="head">
+    <div class="logo" style="background:#F1E9F4;color:#6E3E8A;font-family:var(--font-display);font-size:14px;">DF</div>
+    <div><h5 class="pname">Longevity Foundations · 12 weeks</h5><div class="pcat">by Dr. F. Park · Onboarding for new longevity-clinic members. Baseline panel + wearable + 4 protocols.</div></div>
+  </div>
+  <p class="desc">longevity</p>
+  <div class="footer">
+    <span class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint-deep);">★ 4.9</span>
+    <span style="font-family:var(--font-display);font-size:18px;">€420 / participant</span>
+  </div></a>
+        </div>
+        <div class="submit-strip">
+          <div>
+            <h4>You’re a clinician with a programme to share? — Submit it.</h4>
+            <p>If you have a repeatable plan with outcomes, we’ll publish it. 70/30 split, IP stays yours.</p>
+          </div>
+          <a href="contact.html" class="btn btn-primary">Submit a programme <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="cta-strip">
+        <h3>Already a customer?<br/>Switch any of these on today.</h3>
+        <div class="actions">
+          <a class="btn btn-accent" href="contact.html">Talk to your CSM <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" style="border-color:#2A2F4A;color:#C9C5B6;" href="pricing.html">See pricing</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function(){
+    const ledes = {
+      partners: 'Third-party data sources — labs, genomics, epigenetics, prescriptions, and EHRs — reconciled into the same canonical record as wearable signal.',
+      addons: 'First-party features you switch on by market: chat, risk calculators, scheduling, claims, white-labeling. Billed as line items on your contract.',
+      programmes: 'Clinician- and coach-authored care plans you can publish for your members — or subscribe to from authors elsewhere on the network.'
+    };
+    const tabs = document.querySelectorAll('.mp-tabs .tabs button');
+    const panels = { partners: document.getElementById('panel-partners'), addons: document.getElementById('panel-addons'), programmes: document.getElementById('panel-programmes') };
+    const lede = document.getElementById('tab-lede');
+    tabs.forEach(btn => btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const t = btn.dataset.tab;
+      Object.entries(panels).forEach(([k,p]) => p.classList.toggle('on', k===t));
+      lede.textContent = ledes[t];
+      // Deep-link
+      history.replaceState(null, '', '#' + t);
+    }));
+    // Hash deep-link
+    const h = location.hash.replace('#','');
+    if (h && tabs.length) {
+      const t = [...tabs].find(b => b.dataset.tab === h);
+      if (t) t.click();
+    }
+    // Filter buttons
+    document.querySelectorAll('.filters').forEach(group => {
+      group.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+        group.querySelectorAll('button').forEach(x => x.classList.remove('on'));
+        b.classList.add('on');
+      }));
+    });
+  })();
+</script>
+<script src="assets/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Protocols — BiotrackOS</title>
+<link rel="stylesheet" href="../assets/shared.css" />
+<style>
+  .f-hero { padding: 64px 0 24px; }
+  .crumbs { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .crumbs a { color: var(--muted); }
+  .crumbs a:hover { color: var(--ink); }
+  .f-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: end; }
+  .f-grid h1 { margin-top: 12px; }
+
+  .f-stage { margin: 56px 0; background: var(--bg-2); border: 1px solid var(--line); border-radius: 24px; padding: 36px; }
+
+  /* Side-by-side example rules */
+  .rule-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .rule-card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+  .rule-card .tag { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: 999px; background: var(--mint-soft); color: var(--teal); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .rule-card .tag.lifestyle { background: #FBF1E2; color: #8A6A2E; }
+  .rule-card h4 { font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 14px 0 4px; }
+  .rule-stmt { margin: 18px 0; padding: 18px; background: var(--bg-2); border-radius: 12px; font-family: var(--font-mono); font-size: 13px; line-height: 1.6; }
+  .rule-stmt .kw { color: var(--teal); font-weight: 600; }
+  .rule-stmt .val { color: var(--ink); font-weight: 600; }
+  .rule-stmt .mute { color: var(--muted); }
+  .rule-out { display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: 14px; border: 1px dashed var(--line); border-radius: 12px; margin-top: 12px; align-items: center; }
+  .rule-out .icon { width: 44px; height: 44px; border-radius: 12px; background: var(--mint); color: var(--teal); display: grid; place-items: center; font-family: var(--font-display); font-size: 18px; }
+  .rule-out.lifestyle .icon { background: #F4E4C5; color: #8A6A2E; }
+  .rule-out strong { font-size: 14px; }
+  .rule-out .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .rule-out .qty { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--muted); }
+  .rule-meta { display: flex; gap: 12px; margin-top: 16px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); flex-wrap: wrap; }
+  .rule-meta span { padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; }
+
+  /* Sub-feature blocks */
+  .sub { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; padding: 72px 0; border-top: 1px solid var(--line); align-items: center; }
+  .sub.flip { grid-template-columns: 1.1fr 1fr; direction: rtl; }
+  .sub.flip > * { direction: ltr; }
+  .sub h2 { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1.02; letter-spacing: -0.01em; margin: 16px 0; }
+  .sub p { color: var(--ink-2); max-width: 44ch; }
+  .sub-bullets { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
+  .sub-bullets li { display: grid; grid-template-columns: 14px 1fr; gap: 12px; padding: 10px 0; border-top: 1px dashed var(--line); font-size: 14px; }
+  .sub-bullets li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--teal-bright); margin-top: 8px; }
+
+  .mock { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: 0 30px 60px -30px rgba(11,17,48,0.18); }
+
+  /* Catalog mock */
+  .cat-row { display: grid; grid-template-columns: 44px 1fr 80px 90px; gap: 14px; padding: 14px 0; border-top: 1px dashed var(--line); align-items: center; }
+  .cat-row:first-child { border-top: none; }
+  .cat-row .ic { width: 44px; height: 44px; border-radius: 10px; background: var(--mint-soft); display: grid; place-items: center; font-family: var(--font-display); font-size: 16px; color: var(--teal); }
+  .cat-row strong { font-size: 14px; }
+  .cat-row .sub { font-size: 11px; color: var(--muted); margin-top: 2px; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .cat-row .src { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .cat-row .price { font-family: var(--font-display); font-size: 18px; text-align: right; }
+
+  /* Approval mock */
+  .approve { display: grid; gap: 10px; }
+  .approve-row { display: grid; grid-template-columns: 1fr auto; gap: 14px; padding: 14px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; align-items: center; }
+  .approve-row .who { font-size: 13px; }
+  .approve-row .who .sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .approve-row .actions { display: flex; gap: 6px; }
+
+  .related { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .related a { border: 1px solid var(--line); border-radius: 16px; padding: 24px; background: var(--surface); display: flex; flex-direction: column; }
+  .related a .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--muted); }
+  .related a h5 { font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.05; margin: 14px 0 8px; }
+  .related a p { color: var(--muted); font-size: 13px; margin: 0; }
+
+  .cta-strip { background: var(--ink); color: var(--bg); border-radius: 24px; padding: 56px; display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; align-items: center; }
+  .cta-strip h3 { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1.02; margin: 0; }
+  .cta-strip .actions { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+
+  @media (max-width: 1000px) {
+    .f-grid, .sub, .sub.flip, .cta-strip, .related, .rule-pair { grid-template-columns: 1fr; gap: 28px; }
+    .sub.flip { direction: ltr; }
+    .cta-strip { padding: 32px; }
+    .cta-strip .actions { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body data-page="product" data-prefix="../">
+
+<main>
+  <section class="f-hero">
+    <div class="wrap-w">
+      <div class="crumbs"><a href="../product.html">Product</a> / Protocols</div>
+      <div class="f-grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Feature · F.05</span>
+          <h1 class="h1">Turn results<br/>into <em>recommendations.</em></h1>
+        </div>
+        <p class="lede">
+          A protocol is a rule your team writes once and the platform fires forever. When a biomarker falls out of range or a trend shifts, BiotrackOS recommends the exact product, dose, or plan you defined — automatically, auditably, with a clinician in the loop.
+        </p>
+      </div>
+
+      <!-- Two side-by-side example rules -->
+      <div class="f-stage">
+        <div class="rule-pair">
+          <!-- Biomarker → Supplement -->
+          <div class="rule-card">
+            <span class="tag"><span class="dot" style="background:var(--teal);"></span> Biomarker → Supplement</span>
+            <h4>Low vitamin D</h4>
+            <div class="rule-stmt">
+              <span class="kw">When</span> <span class="val">vitamin D (25-OH)</span> <span class="mute">from any lab panel</span> <span class="kw">is</span> <span class="val">&lt; 30 ng/mL</span><br/>
+              <span class="kw">recommend</span> <span class="val">Vitamin D3 4,000 IU</span> <span class="kw">for</span> <span class="val">90 days</span><br/>
+              <span class="kw">then</span> <span class="val">retest</span> <span class="mute">via partner lab</span>
+            </div>
+            <div class="rule-out">
+              <div class="icon">D₃</div>
+              <div>
+                <strong>Vitamin D3 · 4,000 IU</strong>
+                <div class="sub">Daily · 90-day course · KP Pharma</div>
+              </div>
+              <div class="qty">€14.20</div>
+            </div>
+            <div class="rule-meta">
+              <span>Auto-recommend</span><span>Clinician sign-off</span><span>Re-test at day 90</span>
+            </div>
+          </div>
+
+          <!-- Trend → Lifestyle plan -->
+          <div class="rule-card">
+            <span class="tag lifestyle"><span class="dot" style="background:#C89A4A;"></span> Trend → Lifestyle plan</span>
+            <h4>Sleep &amp; recovery slipping</h4>
+            <div class="rule-stmt">
+              <span class="kw">When</span> <span class="val">HRV</span> <span class="kw">is</span> <span class="val">↓ 12 ms</span> <span class="kw">over</span> <span class="val">14 days</span> <span class="kw">and</span><br/>
+              <span class="val">sleep efficiency</span> <span class="kw">is</span> <span class="val">&lt; 78%</span> <span class="kw">for</span> <span class="val">4 of 7 nights</span><br/>
+              <span class="kw">recommend</span> <span class="val">Recovery Reset</span> <span class="mute">— Magnesium glycinate + cold protocol + sleep coach</span>
+            </div>
+            <div class="rule-out lifestyle">
+              <div class="icon">↻</div>
+              <div>
+                <strong>Recovery Reset · 21-day plan</strong>
+                <div class="sub">Mag glycinate 400mg · cold protocol · 1 coach call</div>
+              </div>
+              <div class="qty">€42</div>
+            </div>
+            <div class="rule-meta">
+              <span>Patient-facing</span><span>Coach-routed</span><span>Auto-check at 21d</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sub features -->
+  <section>
+    <div class="wrap-w">
+
+      <div class="sub" id="rules">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 01</span>
+          <h2>A rule editor<br/>your clinicians can read.</h2>
+          <p>Write protocols in plain language — <em>when</em> a signal, <em>then</em> a recommendation. No code, no spreadsheets, no waiting on engineering. Every rule is versioned, peer-reviewable, and rolls back in one click.</p>
+          <ul class="sub-bullets">
+            <li>If/then editor with biomarker, wearable trend &amp; time conditions</li>
+            <li>Combine signals (AND / OR) across any source</li>
+            <li>Versioned with author, reviewer, and effective date</li>
+            <li>Test against historical cohorts before going live</li>
+          </ul>
+        </div>
+        <div class="mock">
+          <div style="display:flex;justify-content:space-between;margin-bottom:14px;">
+            <span class="eyebrow"><span class="dot"></span> Protocol editor</span>
+            <span class="chip">Draft · v3</span>
+          </div>
+          <div style="display:grid;gap:8px;font-family:var(--font-mono);font-size:13px;line-height:1.7;">
+            <div style="padding:10px 14px;background:var(--bg-2);border-left:3px solid var(--teal-bright);border-radius:6px;">
+              <span style="color:var(--teal);font-weight:600;">WHEN</span> <span class="chip" style="padding:2px 8px;font-size:11px;">ApoB</span> <span style="color:var(--muted);">from any panel</span> <span style="color:var(--teal);font-weight:600;">≥</span> <span class="chip" style="padding:2px 8px;font-size:11px;">110 mg/dL</span>
+            </div>
+            <div style="padding:10px 14px;background:var(--bg-2);border-left:3px solid var(--teal-bright);border-radius:6px;">
+              <span style="color:var(--teal);font-weight:600;">AND</span> <span class="chip" style="padding:2px 8px;font-size:11px;">LDL-C</span> <span style="color:var(--teal);font-weight:600;">≥</span> <span class="chip" style="padding:2px 8px;font-size:11px;">130 mg/dL</span>
+            </div>
+            <div style="padding:10px 14px;background:var(--mint-soft);border-left:3px solid var(--teal);border-radius:6px;">
+              <span style="color:var(--teal);font-weight:600;">THEN</span> <span style="color:var(--ink);font-weight:600;">recommend</span> <span class="chip" style="padding:2px 8px;font-size:11px;background:var(--bg);">Lipid Workup · in-clinic</span>
+            </div>
+            <div style="padding:10px 14px;background:var(--mint-soft);border-left:3px solid var(--teal);border-radius:6px;">
+              <span style="color:var(--teal);font-weight:600;">AND</span> <span style="color:var(--ink);font-weight:600;">route to</span> <span class="chip" style="padding:2px 8px;font-size:11px;background:var(--bg);">Dr. Kowalski</span> <span style="color:var(--muted);">· cardio rota</span>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">
+            <span>Would fire on 7 of 214 patients</span>
+            <span style="color:var(--teal-bright);">↻ Run again</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub flip" id="catalog">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 02</span>
+          <h2>Your catalog,<br/>your dispensary.</h2>
+          <p>Recommend from BiotrackOS's curated catalog, from a partner lab's stock, or from products you formulate in-house. The platform handles the catalog, the protocol stays clean, and the margin is yours.</p>
+          <ul class="sub-bullets">
+            <li>Curated catalog of vetted supplements &amp; lifestyle plans</li>
+            <li>Bring-your-own products with SKU, stock &amp; dosing rules</li>
+            <li>Stripe-native billing or pass-through to partner pharmacy</li>
+            <li>Stock-aware — never recommends something out of stock</li>
+          </ul>
+        </div>
+        <div class="mock" style="padding:0;overflow:hidden;">
+          <div style="padding:18px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <span class="eyebrow">Product catalog</span>
+              <div style="font-family:var(--font-display);font-size:20px;margin-top:4px;">Continuum Longevity</div>
+            </div>
+            <span class="chip"><span class="dot"></span> 42 active</span>
+          </div>
+          <div style="padding:0 22px 18px;">
+            <div class="cat-row">
+              <div class="ic">D₃</div>
+              <div><strong>Vitamin D3 4,000 IU</strong><div class="sub">Curated · KP Pharma</div></div>
+              <div class="src">In stock</div>
+              <div class="price">€14.20</div>
+            </div>
+            <div class="cat-row">
+              <div class="ic" style="background:#F4E4C5;color:#8A6A2E;">Mg</div>
+              <div><strong>Magnesium glycinate 400mg</strong><div class="sub">Curated · KP Pharma</div></div>
+              <div class="src">In stock</div>
+              <div class="price">€18.00</div>
+            </div>
+            <div class="cat-row">
+              <div class="ic" style="background:#E2EBF7;color:#3B5A86;">O₃</div>
+              <div><strong>Omega-3 · house formulation</strong><div class="sub">In-house · 1,200mg EPA/DHA</div></div>
+              <div class="src">Stock · 82</div>
+              <div class="price">€34.00</div>
+            </div>
+            <div class="cat-row">
+              <div class="ic" style="background:var(--bg-2);color:var(--ink);">↻</div>
+              <div><strong>Recovery Reset · 21-day plan</strong><div class="sub">In-house · bundle</div></div>
+              <div class="src">—</div>
+              <div class="price">€42</div>
+            </div>
+            <div class="cat-row">
+              <div class="ic" style="background:#FBEDED;color:#C46A6A;">+</div>
+              <div><strong>Add product</strong><div class="sub">SKU · dosing · stock</div></div>
+              <div class="src">—</div>
+              <div class="price" style="font-size:14px;color:var(--muted);">New →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub" id="approval">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 03</span>
+          <h2>Clinician in the loop —<br/>or fully automated.</h2>
+          <p>Per protocol, decide who approves. Some recommendations route to a clinician inbox for a one-tap sign-off; others (supplements, lifestyle plans) push straight to the patient. Every decision is logged.</p>
+          <ul class="sub-bullets">
+            <li>Configurable sign-off per protocol — none, any clinician, or specific role</li>
+            <li>One-tap approve / amend / reject with reason</li>
+            <li>Auto-approve thresholds (e.g. supplements only)</li>
+            <li>Full audit trail with patient consent &amp; clinician identity</li>
+          </ul>
+        </div>
+        <div class="mock">
+          <div style="display:flex;justify-content:space-between;margin-bottom:14px;">
+            <span class="eyebrow"><span class="dot"></span> Pending sign-off · 8</span>
+            <span class="chip">Dr. Kowalski</span>
+          </div>
+          <div class="approve">
+            <div class="approve-row">
+              <div class="who">
+                <strong>Maria Alvarez · vitamin D 22 ng/mL</strong>
+                <div class="sub">Protocol · LOW_VITD · Vitamin D3 4,000 IU · 90 days</div>
+              </div>
+              <div class="actions">
+                <span class="chip" style="background:var(--mint-soft);color:var(--teal);border-color:var(--mint);">Approve</span>
+                <span class="chip">Amend</span>
+              </div>
+            </div>
+            <div class="approve-row">
+              <div class="who">
+                <strong>Sam Whitford · HRV ↓ 14d · sleep 73%</strong>
+                <div class="sub">Protocol · RECOVERY_RESET · auto-sent to patient</div>
+              </div>
+              <div class="actions">
+                <span class="chip" style="background:var(--mint-soft);color:var(--teal);border-color:var(--mint);">Auto · sent</span>
+              </div>
+            </div>
+            <div class="approve-row">
+              <div class="who">
+                <strong>Liam Park · ApoB 118 · LDL 142</strong>
+                <div class="sub">Protocol · LIPID_REVIEW · in-clinic workup</div>
+              </div>
+              <div class="actions">
+                <span class="chip" style="background:#FBEDED;color:#C46A6A;border-color:#F4CFCB;">Review</span>
+                <span class="chip">Amend</span>
+              </div>
+            </div>
+            <div class="approve-row">
+              <div class="who">
+                <strong>Hana Nakamura · ferritin 19 ng/mL</strong>
+                <div class="sub">Protocol · LOW_FERRITIN · iron bisglycinate 28 mg</div>
+              </div>
+              <div class="actions">
+                <span class="chip" style="background:var(--mint-soft);color:var(--teal);border-color:var(--mint);">Approve</span>
+                <span class="chip">Amend</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub flip" id="patient">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Sub-feature 04</span>
+          <h2>How it lands<br/>with the person.</h2>
+          <p>The patient sees one card in their app — what changed, why it changed, what their clinician suggests. They accept, ask a question, or decline. The platform tracks adherence and retests on schedule.</p>
+          <ul class="sub-bullets">
+            <li>Explanation card in the consumer app with the underlying signal</li>
+            <li>Accept, ask, or decline — all logged back to the team</li>
+            <li>Auto-reminders, refills, &amp; re-tests scheduled by the protocol</li>
+            <li>Adherence tracked so the rule can self-tune</li>
+          </ul>
+        </div>
+        <div class="mock" style="max-width:340px;margin:0 auto;background:#0E1014;color:var(--bg);border-radius:32px;padding:18px;">
+          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#807C6F;text-align:center;margin-bottom:14px;">14:08 · BiotrackOS</div>
+          <div style="background:#1A1D24;border-radius:20px;padding:20px;">
+            <div style="display:inline-flex;align-items:center;gap:8px;padding:4px 10px;border-radius:999px;background:rgba(125,207,182,0.15);color:#7DCFB6;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;">
+              <span style="width:6px;height:6px;border-radius:50%;background:#7DCFB6;"></span> New recommendation
+            </div>
+            <h4 style="font-family:var(--font-display);font-weight:400;font-size:24px;line-height:1.15;margin:12px 0 8px;">Vitamin D — let's get it back up.</h4>
+            <p style="color:#C9C5B6;font-size:13px;line-height:1.5;margin:0 0 14px;">Your latest panel showed 22 ng/mL. Dr. Kowalski suggests Vitamin D3 4,000 IU daily for 90 days, then a retest.</p>
+            <div style="display:grid;grid-template-columns:44px 1fr;gap:12px;padding:12px;background:#0E1014;border-radius:12px;align-items:center;">
+              <div style="width:44px;height:44px;border-radius:10px;background:rgba(125,207,182,0.15);color:#7DCFB6;display:grid;place-items:center;font-family:var(--font-display);">D₃</div>
+              <div>
+                <strong style="font-size:13px;">Vitamin D3 · 4,000 IU</strong>
+                <div style="font-size:11px;color:#807C6F;margin-top:2px;font-family:var(--font-mono);letter-spacing:.08em;text-transform:uppercase;">Daily · 90 days · €14.20</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;">
+              <div style="padding:12px;background:#7DCFB6;color:#0E1014;border-radius:10px;text-align:center;font-weight:600;font-size:13px;">Accept</div>
+              <div style="padding:12px;background:transparent;border:1px solid #2A2F4A;color:var(--bg);border-radius:10px;text-align:center;font-size:13px;">Ask Dr. Kowalski</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="section">
+    <div class="wrap-w">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Keep reading</span>
+          <h2 class="h2" style="margin-top:16px;">Related capabilities</h2>
+        </div>
+      </div>
+      <div class="related">
+        <a href="clinic-dashboard.html">
+          <span class="num">F.01</span>
+          <h5>Team workspace</h5>
+          <p>Where protocols are written, reviewed, and signed off across the care team.</p>
+        </a>
+        <a href="consumer-app.html">
+          <span class="num">F.02</span>
+          <h5>Consumer app</h5>
+          <p>Where the recommendation lands, gets accepted, and turns into a habit.</p>
+        </a>
+        <a href="../marketplace.html">
+          <span class="num">MKT</span>
+          <h5>Partner marketplace</h5>
+          <p>Stock from KP Pharma, Muhdo, DataPharm — or bring your own dispensary.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="padding-top:0;">
+    <div class="wrap-w">
+      <div class="cta-strip">
+        <h3>Write your first protocol<br/>this week.</h3>
+        <div class="actions">
+          <a class="btn btn-accent" href="../contact.html">Book a walkthrough <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" style="border-color:#2A2F4A;color:#C9C5B6;" href="../pricing.html">See pricing</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="../assets/shared.js"></script>
+</body>
+</html>

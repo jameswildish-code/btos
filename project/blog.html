@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Field Notes — BiotrackOS</title>
+<link rel="stylesheet" href="assets/shared.css" />
+<style>
+  .b-hero { padding: 72px 0 56px; border-bottom: 1px solid var(--line); }
+  .b-hero .g { display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: end; }
+  .filters { display: flex; gap: 8px; margin-top: 32px; flex-wrap: wrap; }
+  .filters button {
+    padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-2); cursor: pointer;
+  }
+  .filters button.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  .featured { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  .feat-card {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 0;
+    border: 1px solid var(--line); border-radius: 24px; overflow: hidden; background: var(--surface);
+  }
+  .feat-card .art {
+    aspect-ratio: 4/3; background: linear-gradient(135deg, #1F2A48 0%, #2A4A6E 60%, #2FBFA3 100%);
+    position: relative; overflow: hidden;
+  }
+  .feat-card .art::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(to right, transparent 0, transparent 11px, rgba(255,255,255,0.04) 11px, rgba(255,255,255,0.04) 12px),
+      repeating-linear-gradient(to bottom, transparent 0, transparent 11px, rgba(255,255,255,0.04) 11px, rgba(255,255,255,0.04) 12px);
+  }
+  .feat-card .art .glyph {
+    position: absolute; inset: 32px; display: grid; place-items: end start; color: rgba(255,255,255,0.85);
+    font-family: var(--font-display); font-size: 96px; line-height: 0.9; letter-spacing: -0.02em;
+  }
+  .feat-card .body { padding: 40px; display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+  .feat-card h2 { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1.05; letter-spacing: -0.01em; margin: 0; }
+  .feat-card .meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; }
+
+  .grid-posts { padding: 96px 0; }
+  .grid-posts .row-head { display:flex; justify-content:space-between; align-items: baseline; }
+  .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+  .post {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+    padding: 24px; display: flex; flex-direction: column; gap: 14px; min-height: 340px;
+  }
+  .post .art {
+    aspect-ratio: 16/10; border-radius: 12px; position: relative; overflow: hidden;
+  }
+  .post .art .label { position: absolute; left: 14px; bottom: 12px; font-family: var(--font-display); font-size: 32px; line-height: 1; color: rgba(255,255,255,0.92); }
+  .post .meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; display:flex; gap: 12px; }
+  .post h3 { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+  .post .footer { margin-top: auto; display:flex; justify-content:space-between; align-items: center; color: var(--muted); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;}
+
+  .art-a { background: linear-gradient(135deg,#1F2A48 0%, #2A4A6E 100%); }
+  .art-b { background: linear-gradient(135deg,#2FBFA3 0%, #1A8E78 100%); }
+  .art-c { background: linear-gradient(135deg,#E7E2D2 0%, #A39D8A 100%); }
+  .art-d { background: linear-gradient(135deg,#D1F24A 0%, #8DAE2C 100%); }
+  .art-e { background: linear-gradient(135deg,#F4CFCB 0%, #C46A6A 100%); }
+  .art-f { background: linear-gradient(135deg,#BFD8EF 0%, #2A6FDB 100%); }
+  .art-grid {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(to right, transparent 0, transparent 11px, rgba(255,255,255,0.06) 11px, rgba(255,255,255,0.06) 12px),
+      repeating-linear-gradient(to bottom, transparent 0, transparent 11px, rgba(255,255,255,0.06) 11px, rgba(255,255,255,0.06) 12px);
+  }
+
+  .newsletter {
+    margin: 0 0 96px;
+    background: var(--ink); color: var(--bg);
+    border-radius: 28px; padding: 56px; position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: center;
+  }
+  .newsletter::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at left, rgba(47,191,163,.15), transparent 60%);
+  }
+  .newsletter > * { position: relative; }
+  .newsletter h2 { font-family: var(--font-display); font-weight: 400; font-size: 40px; line-height: 1.05; letter-spacing: -0.01em; margin: 0; }
+  .newsletter form { display: flex; gap: 8px; }
+  .newsletter input {
+    flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+    color: var(--bg); padding: 14px 18px; border-radius: 999px; font: inherit; font-size: 14px;
+  }
+  .newsletter input::placeholder { color: #807C6F; }
+
+  @media (max-width:1000px) {
+    .feat-card, .post-grid, .b-hero .g, .newsletter { grid-template-columns: 1fr; }
+    .feat-card { gap: 0; }
+  }
+</style>
+</head>
+<body data-page="blog" data-prefix="">
+
+<main>
+  <section class="b-hero">
+    <div class="wrap-w">
+      <div class="g">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Field Notes</span>
+          <h1 class="h1">Notes from a small<br/>group of people<br/><em>obsessed with signal.</em></h1>
+        </div>
+        <p class="lede">Clinical studies, product changelogs, opinions from our research team, and the occasional rant about CSV pipelines.</p>
+      </div>
+      <div class="filters">
+        <button class="on">All</button>
+        <button>Research</button>
+        <button>Clinical</button>
+        <button>Engineering</button>
+        <button>Product</button>
+        <button>Opinion</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="wrap-w">
+      <a class="feat-card" href="blog/the-case-against-the-quarterly.html">
+        <div class="art">
+          <div class="art-grid"></div>
+          <div class="glyph">04 / 26</div>
+        </div>
+        <div class="body">
+          <span class="meta">Featured · Research · 12 min read</span>
+          <h2>The case against<br/>the quarterly checkup.</h2>
+          <p style="color:var(--muted);margin:0;max-width:42ch;">Why three months between data points is the worst frequency we could have settled on — and what continuous, consented streams actually let a clinician see.</p>
+          <div class="meta" style="display:flex;gap:16px;color:var(--muted);">
+            <span>Dr. Sofia Holm</span><span>· May 04, 2026</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="grid-posts">
+    <div class="wrap-w">
+      <div class="row-head">
+        <span class="eyebrow"><span class="dot"></span> Latest</span>
+        <a href="#" style="font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;">View archive →</a>
+      </div>
+
+      <div class="post-grid">
+        <a class="post" href="blog/the-case-against-the-quarterly.html">
+          <div class="art art-a"><div class="art-grid"></div><div class="label">VO₂</div></div>
+          <div class="meta"><span>Research</span><span>12 min</span></div>
+          <h3>The case against the quarterly checkup.</h3>
+          <div class="footer"><span>Sofia Holm</span><span>May 04</span></div>
+        </a>
+
+        <a class="post" href="#">
+          <div class="art art-b"><div class="art-grid"></div><div class="label">HRV</div></div>
+          <div class="meta"><span>Clinical</span><span>8 min</span></div>
+          <h3>HRV is not a vibe. Reading it like a clinician.</h3>
+          <div class="footer"><span>Eva Kaur</span><span>Apr 28</span></div>
+        </a>
+
+        <a class="post" href="#">
+          <div class="art art-c"><div class="art-grid"></div><div class="label">FHIR</div></div>
+          <div class="meta"><span>Engineering</span><span>15 min</span></div>
+          <h3>Why our FHIR pipeline runs at the edge.</h3>
+          <div class="footer"><span>Tomás Macedo</span><span>Apr 22</span></div>
+        </a>
+
+        <a class="post" href="#">
+          <div class="art art-d"><div class="art-grid"></div><div class="label">ZONE 2</div></div>
+          <div class="meta"><span>Opinion</span><span>6 min</span></div>
+          <h3>Zone 2 is a calendar problem, not a heart-rate one.</h3>
+          <div class="footer"><span>James Rønne</span><span>Apr 14</span></div>
+        </a>
+
+        <a class="post" href="#">
+          <div class="art art-e"><div class="art-grid"></div><div class="label">SLEEP</div></div>
+          <div class="meta"><span>Product</span><span>4 min</span></div>
+          <h3>The week we stopped showing sleep scores.</h3>
+          <div class="footer"><span>Mateo Pereira</span><span>Apr 08</span></div>
+        </a>
+
+        <a class="post" href="#">
+          <div class="art art-f"><div class="art-grid"></div><div class="label">COHORT</div></div>
+          <div class="meta"><span>Clinical</span><span>9 min</span></div>
+          <h3>How Continuum runs a 2,000-patient panel without burning out.</h3>
+          <div class="footer"><span>Daria Kowalski, MD</span><span>Apr 01</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap-w">
+    <div class="newsletter">
+      <div>
+        <span class="eyebrow" style="color:#807C6F;"><span class="dot"></span> Newsletter</span>
+        <h2 style="margin-top:12px;">A quiet email,<br/>once a month.</h2>
+        <p style="color:#C9C5B6;margin:12px 0 0;max-width:40ch;">New research, product changes, and the occasional thing we changed our minds about. No tracking pixels.</p>
+      </div>
+      <form>
+        <input type="email" placeholder="you@youraddress.com" />
+        <button class="btn btn-accent" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<script>
+  document.querySelectorAll('.filters button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.filters button').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+    });
+  });
+</script>
+<script src="assets/shared.js"></script>
+</body>
+</html>
