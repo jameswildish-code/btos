@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { getBlogPosts } from "@/lib/sanity";
-import NewsletterForm from "@/components/NewsletterForm";
-import BlogPosts from "@/components/BlogPosts";
+import BlogContent from "@/components/BlogContent";
 
 export const revalidate = 60;
+export const metadata = { title: "Field Notes — BiotrackOS" };
 
 const STATIC_POSTS = [
   { _id: "1", slug: { current: "the-case-against-the-quarterly" }, title: "The case against the quarterly checkup.", category: "Research", publishedAt: "2026-05-04", author: { name: "Dr. Sofia Holm" }, readTime: 12, art: "art-a", label: "VO₂" },
@@ -14,16 +13,12 @@ const STATIC_POSTS = [
   { _id: "6", slug: { current: "continuum-2000-patient-panel" }, title: "How Continuum runs a 2,000-patient panel without burning out.", category: "Clinical", publishedAt: "2026-04-01", author: { name: "Daria Kowalski, MD" }, readTime: 9, art: "art-f", label: "COHORT" },
 ];
 
-
 export default async function BlogPage() {
-  let sanityPosts: typeof STATIC_POSTS = [];
+  let posts = STATIC_POSTS;
   try {
     const data = await getBlogPosts();
-    if (data?.length) sanityPosts = data;
-  } catch {
-    // Sanity not yet configured — use static posts
-  }
-  const posts = sanityPosts.length ? sanityPosts : STATIC_POSTS;
+    if (data?.length) posts = data;
+  } catch { /* Sanity not configured */ }
 
   return (
     <>
@@ -66,51 +61,7 @@ export default async function BlogPage() {
         .nl-form input::placeholder { color:#807C6F; }
         @media (max-width:1000px) { .feat-card,.post-grid,.b-hero .g,.newsletter-band { grid-template-columns:1fr; } }
       `}</style>
-
-      <section className="b-hero">
-        <div className="wrap-w">
-          <div className="g">
-            <div>
-              <span className="eyebrow"><span className="dot"></span> Field Notes</span>
-              <h1 className="h1">Notes from a small<br/>group of people<br/><em>obsessed with signal.</em></h1>
-            </div>
-            <p className="lede">Clinical studies, product changelogs, opinions from our research team, and the occasional rant about CSV pipelines.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="featured">
-        <div className="wrap-w">
-          <Link className="feat-card" href={`/blog/${posts[0]?.slug?.current ?? "the-case-against-the-quarterly"}`}>
-            <div className="feat-art">
-              <div className="art-grid"></div>
-              <div className="glyph">04 / 26</div>
-            </div>
-            <div className="feat-body">
-              <span className="feat-meta">Featured · {posts[0]?.category} · {posts[0]?.readTime} min read</span>
-              <h2>{posts[0]?.title}</h2>
-              <div className="feat-meta" style={{ display: "flex", gap: 16, color: "var(--muted)" }}>
-                <span>{posts[0]?.author?.name}</span>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </section>
-
-      <BlogPosts posts={posts} />
-
-      <div className="wrap-w">
-        <div className="newsletter-band">
-          <div>
-            <span className="eyebrow" style={{ color: "#807C6F" }}><span className="dot"></span> Newsletter</span>
-            <h2 style={{ marginTop: 12 }}>A quiet email,<br/>once a month.</h2>
-            <p style={{ color: "#C9C5B6", margin: "12px 0 0", maxWidth: "40ch" }}>
-              New research, product changes, and the occasional thing we changed our minds about. No tracking pixels.
-            </p>
-          </div>
-          <NewsletterForm />
-        </div>
-      </div>
+      <BlogContent posts={posts} />
     </>
   );
 }
