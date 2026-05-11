@@ -1,7 +1,7 @@
 import { getBlogPosts } from "@/lib/sanity";
 import BlogContent from "@/components/BlogContent";
 
-export const revalidate = 60;
+export const revalidate = 0;
 export const metadata = { title: "Field Notes — BiotrackOS" };
 
 const STATIC_POSTS = [
