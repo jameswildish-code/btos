@@ -1,3 +1,4 @@
+export const revalidate = 60;
 import Link from "next/link";
 import { getBlogPost } from "@/lib/sanity";
 import { PortableText } from "@portabletext/react";

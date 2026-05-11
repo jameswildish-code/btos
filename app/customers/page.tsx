@@ -1,3 +1,4 @@
+export const revalidate = 60;
 import Link from "next/link";
 import { getCaseStudies } from "@/lib/sanity";
 

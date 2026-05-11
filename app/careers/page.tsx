@@ -1,3 +1,4 @@
+export const revalidate = 60;
 import Link from "next/link";
 import { getOpenRoles } from "@/lib/sanity";
 

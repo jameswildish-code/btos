@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getBlogPosts } from "@/lib/sanity";
 import NewsletterForm from "@/components/NewsletterForm";
 
+export const revalidate = 60;
+
 const STATIC_POSTS = [
   { _id: "1", slug: { current: "the-case-against-the-quarterly" }, title: "The case against the quarterly checkup.", category: "Research", publishedAt: "2026-05-04", author: { name: "Dr. Sofia Holm" }, readTime: 12, art: "art-a", label: "VO₂" },
   { _id: "2", slug: { current: "hrv-not-a-vibe" }, title: "HRV is not a vibe. Reading it like a clinician.", category: "Clinical", publishedAt: "2026-04-28", author: { name: "Eva Kaur" }, readTime: 8, art: "art-b", label: "HRV" },
