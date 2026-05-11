@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getBlogPosts } from "@/lib/sanity";
 import NewsletterForm from "@/components/NewsletterForm";
+import BlogPosts from "@/components/BlogPosts";
 
 export const revalidate = 60;
 
@@ -13,9 +14,6 @@ const STATIC_POSTS = [
   { _id: "6", slug: { current: "continuum-2000-patient-panel" }, title: "How Continuum runs a 2,000-patient panel without burning out.", category: "Clinical", publishedAt: "2026-04-01", author: { name: "Daria Kowalski, MD" }, readTime: 9, art: "art-f", label: "COHORT" },
 ];
 
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
-}
 
 export default async function BlogPage() {
   let sanityPosts: typeof STATIC_POSTS = [];
@@ -78,68 +76,28 @@ export default async function BlogPage() {
             </div>
             <p className="lede">Clinical studies, product changelogs, opinions from our research team, and the occasional rant about CSV pipelines.</p>
           </div>
-          <div className="filters">
-            {["All", "Research", "Clinical", "Engineering", "Product", "Opinion"].map((f) => (
-              <button key={f} className={f === "All" ? "on" : ""}>{f}</button>
-            ))}
-          </div>
         </div>
       </section>
 
       <section className="featured">
         <div className="wrap-w">
-          <Link className="feat-card" href="/blog/the-case-against-the-quarterly">
+          <Link className="feat-card" href={`/blog/${posts[0]?.slug?.current ?? "the-case-against-the-quarterly"}`}>
             <div className="feat-art">
               <div className="art-grid"></div>
               <div className="glyph">04 / 26</div>
             </div>
             <div className="feat-body">
-              <span className="feat-meta">Featured · Research · 12 min read</span>
-              <h2>The case against<br/>the quarterly checkup.</h2>
-              <p style={{ color: "var(--muted)", margin: 0, maxWidth: "42ch" }}>
-                Why three months between data points is the worst frequency we could have settled on — and what continuous, consented streams actually let a clinician see.
-              </p>
+              <span className="feat-meta">Featured · {posts[0]?.category} · {posts[0]?.readTime} min read</span>
+              <h2>{posts[0]?.title}</h2>
               <div className="feat-meta" style={{ display: "flex", gap: 16, color: "var(--muted)" }}>
-                <span>Dr. Sofia Holm</span><span>· May 04, 2026</span>
+                <span>{posts[0]?.author?.name}</span>
               </div>
             </div>
           </Link>
         </div>
       </section>
 
-      <section className="grid-posts">
-        <div className="wrap-w">
-          <div className="row-head">
-            <span className="eyebrow"><span className="dot"></span> Latest</span>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase" }}>View archive →</span>
-          </div>
-          <div className="post-grid">
-            {posts.map((post, i) => {
-              const arts = ["art-a", "art-b", "art-c", "art-d", "art-e", "art-f"];
-              const labels = ["VO₂", "HRV", "FHIR", "ZONE 2", "SLEEP", "COHORT"];
-              const art = (post as typeof STATIC_POSTS[0]).art ?? arts[i % arts.length];
-              const label = (post as typeof STATIC_POSTS[0]).label ?? labels[i % labels.length];
-              return (
-                <Link key={post._id} className="post" href={`/blog/${post.slug.current}`}>
-                  <div className={`art ${art}`}>
-                    <div className="art-grid"></div>
-                    <div className="label">{label}</div>
-                  </div>
-                  <div className="post-meta">
-                    <span>{post.category}</span>
-                    <span>{post.readTime} min</span>
-                  </div>
-                  <h3>{post.title}</h3>
-                  <div className="post-footer">
-                    <span>{post.author?.name}</span>
-                    <span>{formatDate(post.publishedAt)}</span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <BlogPosts posts={posts} />
 
       <div className="wrap-w">
         <div className="newsletter-band">
