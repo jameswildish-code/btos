@@ -1,5 +1,6 @@
 # CODING AGENTS: READ THIS FIRST
 
+
 This is a **handoff bundle** from Claude Design (claude.ai/design).
 
 A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
@@ -23,3 +24,4 @@ The design medium is **HTML/CSS/JS** — these are prototypes, not production co
 - `README.md` — this file
 - `chats/` — conversation transcripts (read these!)
 - `project/` — the `BiotrackOS Website` project files (HTML prototypes, assets, components)
+
