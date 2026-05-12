@@ -5,13 +5,18 @@ export default function WaitlistForm() {
   const [state, setState] = useState<"idle" | "ok" | "error">("idle");
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !/.+@.+\..+/.test(email)) {
       setState("error");
       setTimeout(() => setState("idle"), 1200);
       return;
     }
+    await fetch("/api/waitlist", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
     setState("ok");
   };
 
