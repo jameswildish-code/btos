@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "cdn.sanity.io" },
     ],
   },
+  async redirects() {
+    return [
+      { source: "/", destination: "/public-release", permanent: false },
+    ];
+  },
 };
 
 export default nextConfig;
