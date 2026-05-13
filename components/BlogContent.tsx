@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import NewsletterForm from "@/components/NewsletterForm";
 
@@ -18,10 +19,17 @@ type Post = {
   readTime?: number;
   art?: string;
   label?: string;
+  coverImage?: string;
 };
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
+}
+
+function coverDate(iso: string) {
+  if (!iso) return "— / —";
+  const d = new Date(iso);
+  return `${String(d.getMonth() + 1).padStart(2, "0")} / ${String(d.getFullYear()).slice(2)}`;
 }
 
 export default function BlogContent({ posts }: { posts: Post[] }) {
@@ -53,8 +61,12 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
           <div className="wrap-w">
             <Link className="feat-card" href={`/blog/${featured.slug.current}`}>
               <div className="feat-art">
-                <div className="art-grid"></div>
-                <div className="glyph">04 / 26</div>
+                {featured.coverImage ? (
+                  <Image src={featured.coverImage} alt={featured.title} fill style={{ objectFit: "cover" }} />
+                ) : (
+                  <div className="art-grid"></div>
+                )}
+                <div className="glyph">{coverDate(featured.publishedAt)}</div>
               </div>
               <div className="feat-body">
                 <span className="feat-meta">Featured · {featured.category} · {featured.readTime} min read</span>
@@ -81,9 +93,13 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
               const label = post.label ?? LABELS[i % LABELS.length];
               return (
                 <Link key={post._id} className="post" href={`/blog/${post.slug.current}`}>
-                  <div className={`art ${art}`}>
-                    <div className="art-grid"></div>
-                    <div className="label">{label}</div>
+                  <div className={`art ${art}`} style={{ position: "relative" }}>
+                    {post.coverImage ? (
+                      <Image src={post.coverImage} alt={post.title} fill style={{ objectFit: "cover", borderRadius: 12 }} />
+                    ) : (
+                      <div className="art-grid"></div>
+                    )}
+                    <div className="label" style={{ position: "relative", zIndex: 1 }}>{label}</div>
                   </div>
                   <div className="post-meta">
                     <span>{post.category}</span>

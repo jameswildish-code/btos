@@ -24,8 +24,9 @@ export async function getBlogPosts() {
   if (!client) return null;
   return client.fetch(
     `*[_type == "blogPost"] | order(publishedAt desc) {
-      _id, title, slug, excerpt, publishedAt, category,
+      _id, title, slug, excerpt, publishedAt, category, label,
       "author": author->{ name, role },
+      "coverImage": coverImage.asset->url,
       "readTime": round(length(pt::text(body)) / 5 / 180)
     }`
   );

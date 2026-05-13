@@ -22,6 +22,18 @@ export default defineType({
       to: [{ type: "person" }],
     }),
     defineField({
+      name: "coverImage",
+      title: "Cover Image",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "label",
+      title: "Card Label",
+      type: "string",
+      description: "Short label shown on the card artwork (e.g. VO₂, HRV, SLEEP)",
+    }),
+    defineField({
       name: "body",
       title: "Body",
       type: "array",
