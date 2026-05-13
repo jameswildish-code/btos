@@ -68,12 +68,23 @@ export async function getRelatedPosts(slug: string, category: string) {
 }
 
 // Customer story queries
+export async function getFeaturedCaseStudy() {
+  if (!client) return null;
+  return client.fetch(
+    `*[_type == "caseStudy" && featured == true][0] {
+      _id, title, slug, client, industry, location, summary, metrics,
+      "coverImage": coverImage.asset->url
+    }`
+  );
+}
+
 export async function getCaseStudies() {
   if (!client) return null;
   return client.fetch(
     `*[_type == "caseStudy"] | order(_createdAt desc) {
-      _id, title, slug, client, industry, summary, metrics,
-      "logo": logo.asset->url
+      _id, title, slug, client, industry, location, summary, metrics,
+      "logo": logo.asset->url,
+      "coverImage": coverImage.asset->url
     }`
   );
 }
@@ -82,9 +93,10 @@ export async function getCaseStudy(slug: string) {
   if (!client) return null;
   return client.fetch(
     `*[_type == "caseStudy" && slug.current == $slug][0] {
-      _id, title, slug, client, industry, summary, metrics, body,
+      _id, title, slug, client, industry, location, summary, metrics, body,
       quote, quoteName, quoteRole,
-      "logo": logo.asset->url
+      "logo": logo.asset->url,
+      "coverImage": coverImage.asset->url
     }`,
     { slug }
   );
