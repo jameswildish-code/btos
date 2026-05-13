@@ -1,13 +1,13 @@
 export const revalidate = 0;
-import Link from "next/link";
 import type { Metadata } from "next";
-import { getPartners, getAddons, getProgrammes } from "@/lib/sanity";
+import { getPartnerCategories, getPartners, getAddons, getProgrammes } from "@/lib/sanity";
 import MarketplaceContent from "@/components/MarketplaceContent";
 
 export const metadata: Metadata = { title: "Marketplace — BiotrackOS" };
 
 export default async function MarketplacePage() {
-  const [partners, addons, programmes] = await Promise.all([
+  const [partnerCategories, partners, addons, programmes] = await Promise.all([
+    getPartnerCategories(),
     getPartners(),
     getAddons(),
     getProgrammes(),
@@ -16,22 +16,35 @@ export default async function MarketplacePage() {
   return (
     <>
       <style>{`
-        .m-hero { padding:72px 0 56px; border-bottom:1px solid var(--line); }
-        .m-hero .g { display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:end; }
-        .stats-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:32px; margin-top:56px; padding-top:28px; border-top:1px solid var(--line); }
+        .m-hero { padding:72px 0 0; border-bottom:1px solid var(--line); }
+        .m-hero .g { display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:end; padding-bottom:56px; }
+        .stats-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:32px; padding:28px 0; border-top:1px solid var(--line); }
         .stats-strip .v { font-family:var(--font-display); font-size:48px; line-height:1; }
         .stats-strip .l { font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:8px; }
         .mp-tabs-bar { padding:48px 0 0; }
         .tabs { display:inline-flex; padding:6px; background:var(--surface); border:1px solid var(--line); border-radius:999px; gap:4px; }
         .tabs button { padding:12px 22px; border-radius:999px; border:0; background:transparent; font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2); cursor:pointer; }
         .tabs button.on { background:var(--ink); color:var(--bg); }
-        .tab-lede { margin:16px 0 32px; max-width:60ch; font-size:15px; color:var(--ink-2); }
-        .filters { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
-        .filters button { padding:8px 14px; border-radius:999px; border:1px solid var(--line); background:var(--surface); font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-2); cursor:pointer; }
-        .filters button.on { background:var(--ink); color:var(--bg); border-color:var(--ink); }
-        .partners-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px; }
-        .pcard { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:24px; display:flex; flex-direction:column; gap:14px; min-height:240px; text-decoration:none; color:inherit; transition:border-color .15s, transform .15s; }
+        .tab-lede { margin:16px 0 40px; max-width:60ch; font-size:15px; color:var(--ink-2); }
+        .partner-cat-section { padding:56px 0; border-bottom:1px solid var(--line); }
+        .partner-cat-section:last-of-type { border-bottom:none; }
+        .partner-cat-head { display:flex; justify-content:space-between; align-items:end; gap:32px; flex-wrap:wrap; margin-bottom:32px; }
+        .partner-cat-title { font-family:var(--font-display); font-weight:400; font-size:44px; line-height:1.05; letter-spacing:-0.01em; margin:10px 0 0; }
+        .partner-cat-desc { color:var(--muted); max-width:44ch; font-size:14px; }
+        .partner-empty { padding:24px 0 8px; color:var(--muted); font-size:14px; }
+        .feat-banner { display:grid; grid-template-columns:1.2fr 1fr; gap:0; background:var(--ink); color:var(--bg); border-radius:24px; overflow:hidden; position:relative; margin-bottom:24px; }
+        .feat-banner::before { content:""; position:absolute; inset:0; background:radial-gradient(ellipse at top right,rgba(47,191,163,.16),transparent 60%); }
+        .feat-banner > * { position:relative; }
+        .feat-banner .body { padding:40px; display:flex; flex-direction:column; gap:16px; justify-content:center; }
+        .feat-banner h3 { font-family:var(--font-display); font-weight:400; font-size:40px; line-height:1.05; letter-spacing:-0.01em; margin:0; white-space:pre-line; }
+        .feat-banner p { color:#C9C5B6; margin:0; max-width:42ch; }
+        .feat-banner .art { background:linear-gradient(135deg,#1F2A48,#2A4A6E 60%,#2FBFA3); position:relative; overflow:hidden; display:grid; place-items:center; min-height:260px; }
+        .feat-banner .art::after { content:""; position:absolute; inset:0; background:repeating-linear-gradient(to right,transparent 0,transparent 15px,rgba(255,255,255,0.06) 15px,rgba(255,255,255,0.06) 16px),repeating-linear-gradient(to bottom,transparent 0,transparent 15px,rgba(255,255,255,0.06) 15px,rgba(255,255,255,0.06) 16px); }
+        .feat-banner .art-mark { font-family:var(--font-display); font-size:64px; color:rgba(255,255,255,0.95); position:relative; z-index:1; text-align:center; padding:0 24px; line-height:1.1; }
+        .partners-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:16px; }
+        .pcard { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:24px; display:flex; flex-direction:column; gap:14px; min-height:220px; color:inherit; transition:border-color .15s, transform .15s; }
         .pcard:hover { border-color:var(--ink); transform:translateY(-2px); }
+        .pcard.pcard-join { border-style:dashed; }
         .pcard .phead { display:flex; gap:14px; align-items:center; }
         .pcard .plogo { width:56px; height:56px; border-radius:14px; background:var(--bg-2); display:grid; place-items:center; font-family:var(--font-display); font-size:24px; color:var(--ink); flex-shrink:0; position:relative; }
         .pcard .pname { font-size:17px; font-weight:500; margin:0; line-height:1.2; }
@@ -52,20 +65,23 @@ export default async function MarketplacePage() {
         .prog-card h4 { font-size:16px; font-weight:600; margin:0; }
         .prog-card .auth { font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; color:var(--muted); }
         .prog-card .pfoot { margin-top:auto; display:flex; justify-content:space-between; padding-top:12px; border-top:1px solid var(--line); font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
-        .submit-strip { padding:40px; border:1px dashed var(--line); border-radius:20px; display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center; margin-bottom:48px; }
+        .submit-strip { padding:40px; border:1px dashed var(--line); border-radius:20px; display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center; margin-top:48px; margin-bottom:48px; }
         .submit-strip h4 { font-family:var(--font-display); font-weight:400; font-size:28px; margin:0; }
         .submit-strip p { margin:4px 0 0; color:var(--ink-2); font-size:14px; }
-        @media (max-width:1000px) { .m-hero .g,.stats-strip,.partners-grid,.addons-grid,.prog-grid { grid-template-columns:1fr; gap:24px; } .submit-strip { grid-template-columns:1fr; } }
+        @media (max-width:1000px) { .m-hero .g,.stats-strip,.partners-grid,.addons-grid,.prog-grid { grid-template-columns:1fr; gap:24px; } .feat-banner { grid-template-columns:1fr; } .feat-banner .art { min-height:180px; } .submit-strip { grid-template-columns:1fr; } }
       `}</style>
 
       <section className="m-hero">
         <div className="wrap-w">
-          <span className="eyebrow"><span className="dot"></span> Marketplace</span>
           <div className="g">
-            <h1 className="h1">Partners, add-ons,<br/><em>and programmes.</em></h1>
+            <div>
+              <span className="eyebrow"><span className="dot"></span> Marketplace</span>
+              <h1 className="h1">Partners, add-ons,<br/><em>and programmes.</em></h1>
+            </div>
             <p className="lede">The commerce layer of BiotrackOS. Connect a data partner, switch on a feature, or roll out a clinician-authored programme — all in one place.</p>
           </div>
           <MarketplaceContent
+            partnerCategories={partnerCategories ?? []}
             partners={partners ?? []}
             addons={addons ?? []}
             programmes={programmes ?? []}

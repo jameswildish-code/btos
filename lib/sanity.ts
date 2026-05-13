@@ -146,12 +146,24 @@ export async function getIntegrations() {
 }
 
 // Marketplace queries
+export async function getPartnerCategories() {
+  if (!client) return null;
+  return client.fetch(
+    `*[_type == "partnerCategory"] | order(order asc) {
+      _id, title, slug, description
+    }`
+  );
+}
+
 export async function getPartners() {
   if (!client) return null;
   return client.fetch(
-    `*[_type == "partner"] | order(name asc) {
-      _id, name, category, status, description, url,
-      "logo": logo.asset->url
+    `*[_type == "partner"] | order(order asc) {
+      _id, name, status, description, url,
+      featured, featuredTitle, featuredDescription,
+      logoText,
+      "logo": logo.asset->url,
+      "category": category->{ _id, title, slug }
     }`
   );
 }

@@ -8,6 +8,7 @@ import programme from "./programme";
 import person from "./person";
 import integrationCategory from "./integrationCategory";
 import integration from "./integration";
+import partnerCategory from "./partnerCategory";
 
 export const schemaTypes = [
   blogPost,
@@ -20,4 +21,5 @@ export const schemaTypes = [
   person,
   integrationCategory,
   integration,
+  partnerCategory,
 ];

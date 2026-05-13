@@ -75,24 +75,34 @@ const integrations = [
   { _id: "int-emis",     _type: "integration", name: "EMIS Web",         tagline: "NHS primary care · GP connect",            status: "soon", logoText: "E",  order: 3, category: ref("cat-ehr") },
 ];
 
-// Marketplace seed data
+// Partner categories (same structure as integration categories)
+const partnerCategories = [
+  { _id: "pcat-wearables",   _type: "partnerCategory", title: "Wearables & devices",         slug: { _type: "slug", current: "wearables" },  order: 1, description: "Every wearable and consumer device your people already own — deduplicated across overlapping sources." },
+  { _id: "pcat-labs",        _type: "partnerCategory", title: "Labs & blood panels",          slug: { _type: "slug", current: "labs" },        order: 2, description: "Comprehensive blood biomarker panels ingested directly into the person's record." },
+  { _id: "pcat-genomics",    _type: "partnerCategory", title: "Genomics & DNA",               slug: { _type: "slug", current: "genomics" },    order: 3, description: "Whole-genome and microarray data, securely imported once and referenced throughout the record." },
+  { _id: "pcat-epigenetics", _type: "partnerCategory", title: "Epigenetics",                  slug: { _type: "slug", current: "epigenetics" }, order: 4, description: "Biological-age tests, methylation panels, and glycan biomarkers — re-tested at intervals." },
+  { _id: "pcat-medications", _type: "partnerCategory", title: "Medications & Rx",             slug: { _type: "slug", current: "medications" }, order: 5, description: "Prescription, refill, and adherence data from pharmacy partners and e-prescribing networks." },
+  { _id: "pcat-ehr",         _type: "partnerCategory", title: "Clinical / EHR",               slug: { _type: "slug", current: "ehr" },         order: 6, description: "Bidirectional pipelines into the EHRs your team already runs." },
+];
+
+// Marketplace seed data — partners now reference partnerCategory documents
 const partners = [
-  { _id: "mp-apple",    _type: "partner", name: "Apple Health",     category: "Wearables & devices", status: "Live",         description: "Activity, heart rate, sleep, ECG and 70+ HealthKit metrics from iPhone and Apple Watch." },
-  { _id: "mp-whoop",    _type: "partner", name: "WHOOP",            category: "Wearables & devices", status: "Live",         description: "HRV, strain, recovery, and sleep from WHOOP 4.0 and 5.0." },
-  { _id: "mp-garmin",   _type: "partner", name: "Garmin",           category: "Wearables & devices", status: "Live",         description: "Activity, VO₂ max, training load, and GPS-based sport modes." },
-  { _id: "mp-oura",     _type: "partner", name: "Oura",             category: "Wearables & devices", status: "Live",         description: "Readiness, sleep stages, HRV, and temperature deviation from the Oura Ring." },
-  { _id: "mp-withings", _type: "partner", name: "Withings",         category: "Wearables & devices", status: "Live",         description: "Weight, body composition, blood pressure, and SpO₂." },
-  { _id: "mp-samsung",  _type: "partner", name: "Samsung Health",   category: "Wearables & devices", status: "Live",         description: "Galaxy Watch activity, sleep, and heart metrics." },
-  { _id: "mp-kp",       _type: "partner", name: "KP Pharma",        category: "Labs & blood panels",  status: "Live",         description: "Full blood panel, hormones, and metabolic markers. UK launch partner." },
-  { _id: "mp-medilab",  _type: "partner", name: "MediLab",          category: "Labs & blood panels",  status: "Beta",         description: "Private lab network across London and the South East. 200+ biomarkers." },
-  { _id: "mp-muhdo-g",  _type: "partner", name: "Muhdo",            category: "Genomics & DNA",       status: "Live",         description: "Whole genome sequencing and SNP-based health insights." },
-  { _id: "mp-23andme",  _type: "partner", name: "23andMe",          category: "Genomics & DNA",       status: "Beta",         description: "SNP health and ancestry reports linked to your BiotrackOS record." },
-  { _id: "mp-muhdo-e",  _type: "partner", name: "Muhdo",            category: "Epigenetics",          status: "Live",         description: "Biological age, methylation, and epigenetic health markers." },
-  { _id: "mp-trudiag",  _type: "partner", name: "TruDiagnostic",    category: "Epigenetics",          status: "Coming soon",  description: "TruAge biological age testing — quantified methylation clock." },
-  { _id: "mp-datapharm",_type: "partner", name: "DataPharm",        category: "Medications & Rx",     status: "Live",         description: "Prescription history, adherence tracking, and supplement logging." },
-  { _id: "mp-pharmsw",  _type: "partner", name: "PharmSwitch",      category: "Medications & Rx",     status: "Beta",         description: "e-Prescribing, refill management, and controlled-drug audit trails." },
-  { _id: "mp-cityehr",  _type: "partner", name: "CityEHR",          category: "Clinical / EHR",       status: "Live",         description: "NHS-compatible EHR integration. FHIR R4 native, bidirectional." },
-  { _id: "mp-emis",     _type: "partner", name: "EMIS Web",         category: "Clinical / EHR",       status: "Coming soon",  description: "NHS primary care integration via GP Connect. In development." },
+  { _id: "mp-apple",    _type: "partner", name: "Apple Health",   logoText: "AH", order: 1, status: "Live",        category: ref("pcat-wearables"),   description: "Activity, heart rate, sleep, ECG and 70+ HealthKit metrics from iPhone and Apple Watch." },
+  { _id: "mp-whoop",    _type: "partner", name: "WHOOP",          logoText: "W",  order: 2, status: "Live",        category: ref("pcat-wearables"),   description: "HRV, strain, recovery, and sleep from WHOOP 4.0 and 5.0." },
+  { _id: "mp-garmin",   _type: "partner", name: "Garmin",         logoText: "G",  order: 3, status: "Live",        category: ref("pcat-wearables"),   description: "Activity, VO₂ max, training load, and GPS-based sport modes." },
+  { _id: "mp-oura",     _type: "partner", name: "Oura",           logoText: "O",  order: 4, status: "Live",        category: ref("pcat-wearables"),   description: "Readiness, sleep stages, HRV, and temperature deviation from the Oura Ring." },
+  { _id: "mp-withings", _type: "partner", name: "Withings",       logoText: "W",  order: 5, status: "Live",        category: ref("pcat-wearables"),   description: "Weight, body composition, blood pressure, and SpO₂." },
+  { _id: "mp-samsung",  _type: "partner", name: "Samsung Health", logoText: "S",  order: 6, status: "Live",        category: ref("pcat-wearables"),   description: "Galaxy Watch activity, sleep, and heart metrics." },
+  { _id: "mp-kp",       _type: "partner", name: "KP Pharma",      logoText: "KP", order: 1, status: "Live",        category: ref("pcat-labs"),        description: "Full blood panel, hormones, and metabolic markers. UK launch partner.", featured: true, featuredTitle: "KP Pharma.\nOur blood-panel\nlaunch partner.", featuredDescription: "Order, draw, and result flow lands directly in the person's BiotrackOS record — no manual upload, no PDFs." },
+  { _id: "mp-medilab",  _type: "partner", name: "MediLab",        logoText: "ML", order: 2, status: "Beta",        category: ref("pcat-labs"),        description: "Private lab network across London and the South East. 200+ biomarkers." },
+  { _id: "mp-muhdo-g",  _type: "partner", name: "Muhdo",          logoText: "M",  order: 1, status: "Live",        category: ref("pcat-genomics"),    description: "Whole genome sequencing and SNP-based health insights." },
+  { _id: "mp-23andme",  _type: "partner", name: "23andMe",        logoText: "23", order: 2, status: "Beta",        category: ref("pcat-genomics"),    description: "SNP health and ancestry reports linked to your BiotrackOS record." },
+  { _id: "mp-muhdo-e",  _type: "partner", name: "Muhdo",          logoText: "M",  order: 1, status: "Live",        category: ref("pcat-epigenetics"), description: "Biological age, methylation, and epigenetic health markers." },
+  { _id: "mp-trudiag",  _type: "partner", name: "TruDiagnostic",  logoText: "TD", order: 2, status: "Coming soon", category: ref("pcat-epigenetics"), description: "TruAge biological age testing — quantified methylation clock." },
+  { _id: "mp-datapharm",_type: "partner", name: "DataPharm",      logoText: "DP", order: 1, status: "Live",        category: ref("pcat-medications"), description: "Prescription history, adherence tracking, and supplement logging." },
+  { _id: "mp-pharmsw",  _type: "partner", name: "PharmSwitch",    logoText: "PS", order: 2, status: "Beta",        category: ref("pcat-medications"), description: "e-Prescribing, refill management, and controlled-drug audit trails." },
+  { _id: "mp-cityehr",  _type: "partner", name: "CityEHR",        logoText: "C",  order: 1, status: "Live",        category: ref("pcat-ehr"),         description: "NHS-compatible EHR integration. FHIR R4 native, bidirectional." },
+  { _id: "mp-emis",     _type: "partner", name: "EMIS Web",       logoText: "E",  order: 2, status: "Coming soon", category: ref("pcat-ehr"),         description: "NHS primary care integration via GP Connect. In development." },
 ];
 
 const addons = [
@@ -116,7 +126,7 @@ const programmes = [
 ];
 
 async function seed() {
-  const all = [...categories, ...integrations, ...partners, ...addons, ...programmes];
+  const all = [...categories, ...integrations, ...partnerCategories, ...partners, ...addons, ...programmes];
   const mutations = all.map(doc => ({ createOrReplace: doc }));
 
   console.log(`Seeding ${mutations.length} documents...`);

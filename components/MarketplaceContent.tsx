@@ -3,15 +3,27 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 8;
 
-type Partner = {
+export type PartnerCategory = {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  description?: string;
+};
+
+export type Partner = {
   _id: string;
   name: string;
-  category: string;
-  status: string;
+  status?: string;
   description?: string;
+  url?: string;
+  logoText?: string;
   logo?: string;
+  featured?: boolean;
+  featuredTitle?: string;
+  featuredDescription?: string;
+  category?: { _id: string; title: string; slug: { current: string } };
 };
 
 type Addon = {
@@ -40,7 +52,7 @@ function initials(name: string) {
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
-const statusDot: Record<string, string> = {
+const statusDotColor: Record<string, string> = {
   Live: "var(--teal-bright)",
   Beta: "var(--amber)",
   "Coming soon": "var(--muted)",
@@ -57,70 +69,114 @@ function EmptyState({ message, cta }: { message: string; cta?: React.ReactNode }
   );
 }
 
-function PartnersTab({ partners }: { partners: Partner[] }) {
-  const cats = ["All", ...Array.from(new Set(partners.map((p) => p.category).filter(Boolean)))];
-  const [filter, setFilter] = useState("All");
+function PartnerCard({ partner }: { partner: Partner }) {
+  return (
+    <div className="pcard">
+      <div className="phead">
+        <div className="plogo" style={partner.logo ? { padding: 0, overflow: "hidden", position: "relative" } : {}}>
+          {partner.logo
+            ? <Image src={partner.logo} alt={partner.name} fill style={{ objectFit: "contain" }} />
+            : (partner.logoText ?? initials(partner.name))}
+        </div>
+        <div>
+          <div className="pname">{partner.name}</div>
+          {partner.category && <div className="pcat">{partner.category.title}</div>}
+        </div>
+      </div>
+      {partner.description && <p className="pdesc">{partner.description}</p>}
+      <div className="pfoot">
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--muted)" }}>
+          <span className="status-dot" style={{ background: statusDotColor[partner.status ?? ""] ?? "var(--muted)" }}></span>
+          {partner.status}
+        </span>
+        {partner.url
+          ? <a href={partner.url} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", textDecoration: "none", color: "inherit" }}>View →</a>
+          : <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase" }}>View →</span>}
+      </div>
+    </div>
+  );
+}
+
+function PartnerCategorySection({
+  category,
+  partners,
+  index,
+}: {
+  category: PartnerCategory;
+  partners: Partner[];
+  index: number;
+}) {
   const [visible, setVisible] = useState(PAGE_SIZE);
-
-  const filtered = filter === "All" ? partners : partners.filter((p) => p.category === filter);
-  const shown = filtered.slice(0, visible);
-
-  const handleFilter = (cat: string) => {
-    setFilter(cat);
-    setVisible(PAGE_SIZE);
-  };
+  const featured = partners.find((p) => p.featured);
+  const num = String(index + 1).padStart(2, "0");
+  const shown = partners.slice(0, visible);
+  const hasMore = visible < partners.length;
 
   return (
-    <>
-      <p className="tab-lede">Data partners — the sources BiotrackOS connects and normalises for your team and your members.</p>
+    <div className="partner-cat-section" id={`partners-${category.slug.current}`}>
+      <div className="partner-cat-head">
+        <div>
+          <span className="eyebrow"><span className="dot"></span> Category {num}</span>
+          <h3 className="partner-cat-title">{category.title}.</h3>
+        </div>
+        {category.description && <p className="partner-cat-desc">{category.description}</p>}
+      </div>
+
+      {featured && (
+        <div className="feat-banner">
+          <div className="body">
+            <span className="eyebrow" style={{ color: "#807C6F" }}>
+              <span className="dot"></span> Featured · {category.title.toLowerCase()}
+            </span>
+            <h3>{featured.featuredTitle ?? featured.name}</h3>
+            {featured.featuredDescription && <p>{featured.featuredDescription}</p>}
+            <div style={{ marginTop: "8px" }}>
+              {featured.url
+                ? <a className="btn btn-accent btn-sm" href={featured.url} target="_blank" rel="noopener noreferrer">View partner <span className="arrow">→</span></a>
+                : <Link className="btn btn-accent btn-sm" href="/contact">Get in touch <span className="arrow">→</span></Link>
+              }
+            </div>
+          </div>
+          <div className="art">
+            {featured.logo
+              ? <Image src={featured.logo} alt={featured.name} fill style={{ objectFit: "contain", padding: "32px" }} />
+              : <span className="art-mark">{featured.name}</span>
+            }
+          </div>
+        </div>
+      )}
 
       {partners.length === 0 ? (
-        <EmptyState
-          message="Add Marketplace Partners in Sanity Studio to populate this section."
-          cta={<Link className="btn btn-ghost" href="/contact">Become a partner →</Link>}
-        />
+        <div className="partner-empty">
+          <p>No partners in this category yet. <Link href="/contact">Apply to be our launch partner →</Link></p>
+        </div>
       ) : (
         <>
-          <div className="filters">
-            {cats.map((c) => (
-              <button key={c} className={filter === c ? "on" : ""} onClick={() => handleFilter(c)}>{c}</button>
-            ))}
-          </div>
-
-          {shown.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "48px 0", color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13 }}>
-              No partners in this category yet.
-            </div>
-          ) : (
-            <div className="partners-grid">
-              {shown.map((p) => (
-                <div key={p._id} className="pcard">
-                  <div className="phead">
-                    <div className="plogo" style={p.logo ? { padding: 0, overflow: "hidden", position: "relative" } : {}}>
-                      {p.logo
-                        ? <Image src={p.logo} alt={p.name} fill style={{ objectFit: "contain" }} />
-                        : initials(p.name)}
-                    </div>
-                    <div>
-                      <div className="pname">{p.name}</div>
-                      <div className="pcat">{p.category}</div>
-                    </div>
-                  </div>
-                  {p.description && <p className="pdesc">{p.description}</p>}
-                  <div className="pfoot">
-                    <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--muted)" }}>
-                      <span className="status-dot" style={{ background: statusDot[p.status] ?? "var(--muted)" }}></span>
-                      {p.status}
-                    </span>
-                    <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase" }}>View →</span>
+          <div className="partners-grid">
+            {shown.map((p) => <PartnerCard key={p._id} partner={p} />)}
+            {!hasMore && (
+              <div className="pcard pcard-join">
+                <div className="phead">
+                  <div className="plogo" style={{ background: "var(--bg-2)", fontSize: 28, color: "var(--muted)" }}>+</div>
+                  <div>
+                    <div className="pname">Your service?</div>
+                    <div className="pcat">{category.title}</div>
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
+                <p className="pdesc">Interested in joining this category? Apply to become a marketplace partner.</p>
+                <div className="pfoot">
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--muted)" }}>
+                    <span className="status-dot" style={{ background: "var(--muted)" }}></span>
+                    Open
+                  </span>
+                  <Link className="btn btn-accent btn-sm" href="/contact">Request to join →</Link>
+                </div>
+              </div>
+            )}
+          </div>
 
-          {visible < filtered.length && (
-            <div style={{ textAlign: "center", marginBottom: 24 }}>
+          {hasMore && (
+            <div style={{ textAlign: "center", marginTop: 16, marginBottom: 8 }}>
               <button
                 onClick={() => setVisible((v) => v + PAGE_SIZE)}
                 style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", background: "none", border: "1px solid var(--line)", borderRadius: 999, padding: "12px 28px", cursor: "pointer", color: "var(--ink-2)" }}
@@ -131,7 +187,38 @@ function PartnersTab({ partners }: { partners: Partner[] }) {
           )}
         </>
       )}
+    </div>
+  );
+}
 
+function PartnersTab({ categories, partners }: { categories: PartnerCategory[]; partners: Partner[] }) {
+  const byCategory = partners.reduce<Record<string, Partner[]>>((acc, p) => {
+    const id = p.category?._id ?? "";
+    if (!acc[id]) acc[id] = [];
+    acc[id].push(p);
+    return acc;
+  }, {});
+
+  if (categories.length === 0) {
+    return (
+      <EmptyState
+        message="Add Partner Categories and Partners in Sanity Studio to populate this section."
+        cta={<Link className="btn btn-ghost" href="/contact">Become a partner →</Link>}
+      />
+    );
+  }
+
+  return (
+    <>
+      <p className="tab-lede">Data partners — the sources BiotrackOS connects and normalises for your team and your members.</p>
+      {categories.map((cat, idx) => (
+        <PartnerCategorySection
+          key={cat._id}
+          category={cat}
+          partners={byCategory[cat._id] ?? []}
+          index={idx}
+        />
+      ))}
       <div className="submit-strip">
         <div>
           <h4>Become a data partner.</h4>
@@ -150,7 +237,6 @@ function AddonsTab({ addons }: { addons: Addon[] }) {
   return (
     <>
       <p className="tab-lede">First-party features you can add to any plan. Tagged by market — filter to see what&apos;s relevant for your team.</p>
-
       {addons.length === 0 ? (
         <EmptyState
           message="Add Marketplace Add-ons in Sanity Studio to populate this section."
@@ -174,20 +260,15 @@ function AddonsTab({ addons }: { addons: Addon[] }) {
               </div>
             ))}
           </div>
-
           {visible < addons.length && (
             <div style={{ textAlign: "center", marginBottom: 24 }}>
-              <button
-                onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", background: "none", border: "1px solid var(--line)", borderRadius: 999, padding: "12px 28px", cursor: "pointer", color: "var(--ink-2)" }}
-              >
+              <button onClick={() => setVisible((v) => v + PAGE_SIZE)} style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", background: "none", border: "1px solid var(--line)", borderRadius: 999, padding: "12px 28px", cursor: "pointer", color: "var(--ink-2)" }}>
                 Load more
               </button>
             </div>
           )}
         </>
       )}
-
       <div className="submit-strip">
         <div>
           <h4>Have an add-on idea?</h4>
@@ -206,7 +287,6 @@ function ProgrammesTab({ programmes }: { programmes: Programme[] }) {
   return (
     <>
       <p className="tab-lede">Clinician-authored care programmes — defined protocols, enrolled members, and a 70/30 revenue share with the programme author.</p>
-
       {programmes.length === 0 ? (
         <EmptyState
           message="Add Marketplace Programmes in Sanity Studio to populate this section."
@@ -230,20 +310,15 @@ function ProgrammesTab({ programmes }: { programmes: Programme[] }) {
               </div>
             ))}
           </div>
-
           {visible < programmes.length && (
             <div style={{ textAlign: "center", marginBottom: 24 }}>
-              <button
-                onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", background: "none", border: "1px solid var(--line)", borderRadius: 999, padding: "12px 28px", cursor: "pointer", color: "var(--ink-2)" }}
-              >
+              <button onClick={() => setVisible((v) => v + PAGE_SIZE)} style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", background: "none", border: "1px solid var(--line)", borderRadius: 999, padding: "12px 28px", cursor: "pointer", color: "var(--ink-2)" }}>
                 Load more
               </button>
             </div>
           )}
         </>
       )}
-
       <div className="submit-strip">
         <div>
           <h4>Submit a programme.</h4>
@@ -256,10 +331,12 @@ function ProgrammesTab({ programmes }: { programmes: Programme[] }) {
 }
 
 export default function MarketplaceContent({
+  partnerCategories,
   partners,
   addons,
   programmes,
 }: {
+  partnerCategories: PartnerCategory[];
   partners: Partner[];
   addons: Addon[];
   programmes: Programme[];
@@ -267,10 +344,10 @@ export default function MarketplaceContent({
   const [tab, setTab] = useState<"partners" | "addons" | "programmes">("partners");
 
   const stats = [
-    { v: "3",                              l: "Marketplace tiers" },
+    { v: "3",                      l: "Marketplace tiers" },
     { v: String(partners.filter((p) => p.status === "Live").length || partners.length), l: "Live this quarter" },
-    { v: String(addons.length),            l: "Add-ons available" },
-    { v: String(programmes.length),        l: "Clinician programmes" },
+    { v: String(addons.length),    l: "Add-ons available" },
+    { v: String(programmes.length),l: "Clinician programmes" },
   ];
 
   return (
@@ -291,7 +368,7 @@ export default function MarketplaceContent({
             </div>
           </div>
 
-          {tab === "partners"   && <PartnersTab   partners={partners} />}
+          {tab === "partners"   && <PartnersTab   categories={partnerCategories} partners={partners} />}
           {tab === "addons"     && <AddonsTab     addons={addons} />}
           {tab === "programmes" && <ProgrammesTab programmes={programmes} />}
         </div>
