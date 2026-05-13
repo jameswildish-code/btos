@@ -1,7 +1,7 @@
 export const revalidate = 0;
 import Link from "next/link";
 import Image from "next/image";
-import { getBlogPost, getRelatedPosts } from "@/lib/sanity";
+import { getBlogPost, getRelatedPosts, urlFor } from "@/lib/sanity";
 import ShareCol from "@/components/ShareCol";
 import { PortableText } from "@portabletext/react";
 
@@ -42,6 +42,17 @@ const ptComponents = {
     h3: ({ children, value }: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
       const text = value?.children?.map((c: { text: string }) => c.text).join("") ?? "";
       return <h3 id={slugify(text)}>{children}</h3>;
+    },
+  },
+  types: {
+    image: ({ value }: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
+      const url = urlFor(value)?.width(1200).url();
+      if (!url) return null;
+      return (
+        <div style={{ margin: "32px 0", borderRadius: 12, overflow: "hidden", position: "relative", aspectRatio: "16/9" }}>
+          <Image src={url} alt={value.alt ?? ""} fill style={{ objectFit: "cover" }} />
+        </div>
+      );
     },
   },
 };

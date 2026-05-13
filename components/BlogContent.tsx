@@ -107,7 +107,8 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
                   </div>
                   <div className="post-meta">
                     <span>{post.category}</span>
-                    <span>{post.readTime} min</span>
+                    <span>·</span>
+                    <span>{post.readTime} MIN READ</span>
                   </div>
                   <h3>{post.title}</h3>
                   {post.excerpt && <p className="post-excerpt">{post.excerpt}</p>}
