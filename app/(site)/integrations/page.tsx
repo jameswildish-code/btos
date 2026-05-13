@@ -1,90 +1,10 @@
 export const revalidate = 0;
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import { getIntegrationCategories, getIntegrations } from "@/lib/sanity";
+import IntegrationsContent, { type Category, type Integration } from "@/components/IntegrationsContent";
 
 export const metadata: Metadata = { title: "Integrations — BiotrackOS" };
-
-type Category = {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  description?: string;
-};
-
-type Integration = {
-  _id: string;
-  name: string;
-  tagline?: string;
-  status?: "live" | "beta" | "soon";
-  statusLabel?: string;
-  featured?: boolean;
-  featuredTitle?: string;
-  featuredDescription?: string;
-  marketplaceSlug?: string;
-  logoText?: string;
-  logoImage?: string;
-  category?: { _id: string };
-};
-
-// Static fallback — used until you populate Sanity Studio
-const STATIC_CATEGORIES: Category[] = [
-  { _id: "wearables", title: "Wearables & devices", slug: { current: "wearables" }, description: "Every wearable and consumer device your people already own. Heart rate, HRV, sleep, training load, glucose, weight, blood oxygen — deduplicated across overlapping sources." },
-  { _id: "labs", title: "Labs & blood panels", slug: { current: "labs" }, description: "Comprehensive blood biomarker panels ingested directly into the person's record. Annual or quarterly cadence; auto-trended against wearable signals." },
-  { _id: "genomics", title: "Genomics & DNA", slug: { current: "genomics" }, description: "Whole-genome and microarray data, securely imported once and referenced throughout the record — pharmacogenomic interactions, risk variants, traits." },
-  { _id: "epigenetics", title: "Epigenetic age & methylation", slug: { current: "epigenetics" }, description: "Biological-age tests, methylation panels, and glycan biomarkers — re-tested at intervals, charted alongside the rest of the record so protocols actually have a number to move." },
-  { _id: "medications", title: "Medications & Rx", slug: { current: "medications" }, description: "Prescription, refill, and adherence data from pharmacy partners and e-prescribing networks — charted on the same timeline as biometrics, so changes have context." },
-  { _id: "ehr", title: "Clinical & EHR", slug: { current: "ehr" }, description: "Bidirectional pipelines into the EHRs your team already runs. We close the loop you've been holding shut with spreadsheets." },
-];
-
-const STATIC_INTEGRATIONS: Integration[] = [
-  { _id: "s-ah", name: "Apple Health", tagline: "HealthKit · live", status: "live", logoText: "", category: { _id: "wearables" } },
-  { _id: "s-wh", name: "Whoop", tagline: "Strain, recovery, sleep", status: "live", logoText: "♛", category: { _id: "wearables" } },
-  { _id: "s-gc", name: "Garmin Connect", tagline: "Training, fēnix, Forerunner", status: "live", logoText: "G", category: { _id: "wearables" } },
-  { _id: "s-ou", name: "Oura", tagline: "Ring · sleep, HRV, temp", status: "live", logoText: "○", category: { _id: "wearables" } },
-  { _id: "s-wi", name: "Withings", tagline: "Scale, BP, sleep mat", status: "live", logoText: "W", category: { _id: "wearables" } },
-  { _id: "s-po", name: "Polar", tagline: "Vantage, Pacer Pro, H10", status: "live", logoText: "P", category: { _id: "wearables" } },
-  { _id: "s-sh", name: "Samsung Health", tagline: "Galaxy Watch · Fit", status: "live", logoText: "S", category: { _id: "wearables" } },
-  { _id: "s-rs", name: "Reebok Smart Ring", tagline: "HR, HRV, recovery", status: "live", logoText: "R", category: { _id: "wearables" } },
-  { _id: "s-dx", name: "Dexcom", tagline: "CGM · G7", status: "beta", logoText: "D", category: { _id: "wearables" } },
-  { _id: "s-ll", name: "Levels / Lingo", tagline: "CGM streams", status: "beta", logoText: "L", category: { _id: "wearables" } },
-  { _id: "s-fb", name: "Fitbit", tagline: "Charge, Sense, Versa", status: "live", logoText: "F", category: { _id: "wearables" } },
-  { _id: "s-es", name: "Eight Sleep", tagline: "Pod · sleep tracking", status: "soon", statusLabel: "Q3", logoText: "8", category: { _id: "wearables" } },
-  { _id: "s-kp", name: "KP Pharma", tagline: "Blood panels · launch partner", status: "live", logoText: "KP", featured: true, featuredTitle: "KP Pharma.\nOur blood-panel\nlaunch partner.", featuredDescription: "Order, draw, and result flow lands directly in the person's BiotrackOS record — no manual upload, no PDFs. Trended automatically against the rest of the record.", marketplaceSlug: "", category: { _id: "labs" } },
-  { _id: "s-mu-g", name: "Muhdo", tagline: "DNA insights · launch partner", status: "live", logoText: "M", category: { _id: "genomics" } },
-  { _id: "s-mu-e1", name: "Muhdo", tagline: "Epigenetic age · launch partner", status: "live", logoText: "M", category: { _id: "epigenetics" } },
-  { _id: "s-mu-e2", name: "Muhdo", tagline: "Methylation panel", status: "live", logoText: "M", category: { _id: "epigenetics" } },
-  { _id: "s-dp", name: "DataPharm", tagline: "Prescription data · launch partner", status: "live", logoText: "DP", category: { _id: "medications" } },
-  { _id: "s-ce", name: "CityEHR", tagline: "EHR · launch partner", status: "live", logoText: "C", category: { _id: "ehr" } },
-  { _id: "s-fh", name: "FHIR direct", tagline: "R4 export / webhook", status: "live", logoText: "F", category: { _id: "ehr" } },
-];
-
-function StatusBadge({ status, statusLabel }: { status?: string; statusLabel?: string }) {
-  const label = statusLabel ?? (status === "live" ? "Live" : status === "beta" ? "Beta" : "Soon");
-  return (
-    <span className={`status${status === "beta" ? " beta" : status === "soon" ? " soon" : ""}`}>
-      <span className="d" />
-      {label}
-    </span>
-  );
-}
-
-function IntegrationTile({ integration }: { integration: Integration }) {
-  const statusClass = integration.status === "beta" ? " beta" : integration.status === "soon" ? " soon" : "";
-  return (
-    <div className={`tile${statusClass}`}>
-      <div className="logo" style={integration.logoImage ? { padding: 0, overflow: "hidden" } : {}}>
-        {integration.logoImage
-          ? <Image src={integration.logoImage} alt={integration.name} fill style={{ objectFit: "contain" }} />
-          : integration.logoText ?? ""}
-      </div>
-      <h4>{integration.name}</h4>
-      {integration.tagline && <p>{integration.tagline}</p>}
-      <StatusBadge status={integration.status} statusLabel={integration.statusLabel} />
-    </div>
-  );
-}
 
 export default async function IntegrationsPage() {
   const [categoryData, integrationData] = await Promise.all([
@@ -92,15 +12,8 @@ export default async function IntegrationsPage() {
     getIntegrations(),
   ]);
 
-  const categories: Category[] = categoryData?.length ? categoryData : STATIC_CATEGORIES;
-  const integrations: Integration[] = integrationData?.length ? integrationData : STATIC_INTEGRATIONS;
-
-  const byCategory = integrations.reduce<Record<string, Integration[]>>((acc, i) => {
-    const catId = i.category?._id ?? "";
-    if (!acc[catId]) acc[catId] = [];
-    acc[catId].push(i);
-    return acc;
-  }, {});
+  const categories: Category[] = categoryData ?? [];
+  const integrations: Integration[] = integrationData ?? [];
 
   return (
     <>
@@ -123,11 +36,11 @@ export default async function IntegrationsPage() {
         .feat-banner p { color: #C9C5B6; margin: 0; max-width: 42ch; }
         .feat-banner .art { background: linear-gradient(135deg, #1F2A48, #2A4A6E 60%, #2FBFA3); position: relative; overflow: hidden; display: grid; place-items: center; min-height: 280px; }
         .feat-banner .art::after { content:""; position:absolute; inset:0; background: repeating-linear-gradient(to right, transparent 0, transparent 15px, rgba(255,255,255,0.06) 15px, rgba(255,255,255,0.06) 16px), repeating-linear-gradient(to bottom, transparent 0, transparent 15px, rgba(255,255,255,0.06) 15px, rgba(255,255,255,0.06) 16px); }
-        .feat-banner .art-mark { font-family: var(--font-display); font-size: 72px; color: rgba(255,255,255,0.95); position: relative; z-index: 1; text-align: center; padding: 0 24px; line-height: 1.1; }
+        .feat-banner .art-mark { font-family: var(--font-display); font-size: 64px; color: rgba(255,255,255,0.95); position: relative; z-index: 1; text-align: center; padding: 0 24px; line-height: 1.1; }
         .int-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
         .tile { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 12px; min-height: 180px; position: relative; transition: border-color .15s ease, transform .15s ease; }
         .tile:hover { border-color: var(--ink); transform: translateY(-2px); }
-        .tile .logo { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-family: var(--font-display); font-size: 20px; background: var(--bg-2); color: var(--ink); position: relative; flex-shrink: 0; }
+        .tile .logo { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-family: var(--font-display); font-size: 18px; background: var(--bg-2); color: var(--ink); flex-shrink: 0; }
         .tile h4 { font-size: 15px; font-weight: 500; margin: 0; }
         .tile p { font-size: 12px; color: var(--muted); margin: 0; }
         .status { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); position: absolute; top: 18px; right: 18px; display: inline-flex; align-items: center; gap: 6px; }
@@ -136,6 +49,10 @@ export default async function IntegrationsPage() {
         .tile.beta .status .d { background: #C9A23A; animation: liveBlink 3.2s ease-in-out infinite; }
         .tile.soon .status { color: var(--muted); }
         .tile.soon .status .d { background: var(--muted-2); animation: liveBlink 3.2s ease-in-out infinite; }
+        .int-empty { text-align: center; padding: 56px 0; }
+        .int-empty-icon { font-family: var(--font-display); font-size: 48px; color: var(--line); margin-bottom: 16px; }
+        .int-empty h4 { font-size: 18px; font-weight: 500; margin: 0 0 8px; }
+        .int-empty p { font-size: 14px; color: var(--muted); }
         .partner-cta { margin: 0; background: var(--bg-2); border-top: 1px solid var(--line); padding: 96px 0; }
         .partner-cta .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 48px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; }
         .partner-cta h2 { font-family: var(--font-display); font-weight: 400; font-size: 48px; line-height: 1.05; letter-spacing: -0.01em; margin: 12px 0 16px; }
@@ -154,71 +71,20 @@ export default async function IntegrationsPage() {
               <span className="eyebrow"><span className="dot"></span> Integrations</span>
               <h1 className="h1">One record across<br/>devices, labs, genes,<br/><em>and prescriptions.</em></h1>
             </div>
-            <p className="lede">BiotrackOS ingests, deduplicates, and time-aligns data from {categories.length} categories of source — and we add new ones every quarter. If your service isn&apos;t here, <Link href="/marketplace#join">apply to join the marketplace</Link>.</p>
+            <p className="lede">BiotrackOS ingests, deduplicates, and time-aligns data from {categories.length > 0 ? categories.length : "multiple"} categories of source — and we add new ones every quarter. If your service isn&apos;t here, <Link href="/marketplace#join">apply to join the marketplace</Link>.</p>
           </div>
-          <nav className="cat-nav">
-            {categories.map((cat) => (
-              <a key={cat._id} href={`#${cat.slug.current}`}>{cat.title}</a>
-            ))}
-            <Link href="/marketplace" style={{ background: "var(--ink)", color: "var(--bg)", borderColor: "var(--ink)" }}>Marketplace →</Link>
-          </nav>
+          {categories.length > 0 && (
+            <nav className="cat-nav">
+              {categories.map((cat) => (
+                <a key={cat._id} href={`#${cat.slug.current}`}>{cat.title}</a>
+              ))}
+              <Link href="/marketplace" style={{ background: "var(--ink)", color: "var(--bg)", borderColor: "var(--ink)" }}>Marketplace →</Link>
+            </nav>
+          )}
         </div>
       </section>
 
-      {categories.map((cat, idx) => {
-        const catIntegrations = byCategory[cat._id] ?? [];
-        const featured = catIntegrations.find((i) => i.featured);
-        const num = String(idx + 1).padStart(2, "0");
-        return (
-          <section key={cat._id} className="int-section" id={cat.slug.current}>
-            <div className="wrap-w">
-              <div className="head">
-                <div>
-                  <span className="eyebrow"><span className="dot"></span> Category {num}</span>
-                  <h2>{cat.title}.</h2>
-                </div>
-                {cat.description && <p className="desc">{cat.description}</p>}
-              </div>
-
-              {featured && (
-                <div className="feat-banner">
-                  <div className="body">
-                    <span className="eyebrow" style={{ color: "#807C6F" }}><span className="dot"></span> Featured · {cat.title.toLowerCase()}</span>
-                    <h3>{featured.featuredTitle ?? featured.name}</h3>
-                    {featured.featuredDescription && <p>{featured.featuredDescription}</p>}
-                    <div style={{ marginTop: "8px" }}>
-                      <Link
-                        className="btn btn-accent btn-sm"
-                        href={featured.marketplaceSlug ? `/marketplace/${featured.marketplaceSlug}` : "/marketplace"}
-                      >
-                        See on marketplace <span className="arrow">→</span>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="art">
-                    {featured.logoImage
-                      ? <Image src={featured.logoImage} alt={featured.name} fill style={{ objectFit: "contain", padding: "32px" }} />
-                      : <span className="art-mark">{featured.name}</span>
-                    }
-                  </div>
-                </div>
-              )}
-
-              <div className="int-grid">
-                {catIntegrations.map((integration) => (
-                  <IntegrationTile key={integration._id} integration={integration} />
-                ))}
-                <div className="tile soon">
-                  <div className="logo">+</div>
-                  <h4>Your service?</h4>
-                  <p><Link href="/marketplace#join">Request to join →</Link></p>
-                  <span className="status"><span className="d" />Open</span>
-                </div>
-              </div>
-            </div>
-          </section>
-        );
-      })}
+      <IntegrationsContent categories={categories} integrations={integrations} />
 
       <section className="partner-cta">
         <div className="wrap-w">
