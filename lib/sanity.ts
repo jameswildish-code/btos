@@ -39,6 +39,7 @@ export async function getBlogPost(slug: string) {
       _id, title, slug, excerpt, publishedAt, category, label, body,
       "author": author->{ name, role, image },
       "coverImage": coverImage.asset->url,
+      "reportUrl": report.asset->url,
       "readTime": round(length(pt::text(body)) / 5 / 180)
     }`,
     { slug }

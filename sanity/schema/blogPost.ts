@@ -39,6 +39,12 @@ export default defineType({
       type: "array",
       of: [{ type: "block" }, { type: "image", options: { hotspot: true } }],
     }),
+    defineField({
+      name: "report",
+      title: "Downloadable Report (PDF)",
+      type: "file",
+      options: { accept: ".pdf" },
+    }),
   ],
   preview: {
     select: { title: "title", subtitle: "publishedAt" },

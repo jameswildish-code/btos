@@ -2,6 +2,7 @@ export const revalidate = 0;
 import Link from "next/link";
 import Image from "next/image";
 import { getBlogPost, getRelatedPosts } from "@/lib/sanity";
+import ShareCol from "@/components/ShareCol";
 import { PortableText } from "@portabletext/react";
 
 type Block = { _type: string; style?: string; children?: { text: string }[]; [k: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -138,12 +139,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 )}
               </div>
 
-              <div className="share-col">
-                <div>Share</div>
-                <a href="#" style={{ color: "var(--muted)" }}>Twitter / X</a>
-                <a href="#" style={{ color: "var(--muted)" }}>LinkedIn</a>
-                <a href="#" style={{ color: "var(--muted)" }}>Copy link</a>
-              </div>
+              <ShareCol reportUrl={post.reportUrl} />
             </div>
           );
         })()}
