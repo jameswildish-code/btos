@@ -1,7 +1,10 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
+
+type FeaturedPost = { title: string; excerpt?: string; slug: { current: string }; coverImage?: string; label?: string };
 
 const Logo = () => (
   <svg viewBox="0 0 32 32" width="26" height="26">
@@ -90,7 +93,30 @@ const activeMap: Record<string, string> = {
   "/markets": "product",
 };
 
-export default function Nav() {
+function ArticlePromo({ promo, featuredPost }: { promo: MegaPromo; featuredPost?: FeaturedPost | null }) {
+  const post = featuredPost;
+  const href = post ? `/blog/${post.slug.current}` : promo.href;
+  const title = post?.title ?? promo.title;
+  const body = post?.excerpt ?? promo.body;
+  return (
+    <Link className="mega-promo mega-promo-art" href={href}>
+      <div className="mega-promo-art-img" style={{ position: "relative" }}>
+        {post?.coverImage
+          ? <Image src={post.coverImage} alt={title} fill style={{ objectFit: "cover", borderRadius: 10 }} />
+          : <span className="glyph">{post?.label ?? "QTR."}</span>
+        }
+      </div>
+      <div>
+        <span className="eyebrow"><span className="dot" style={{ animation: "none" }}></span> {promo.eyebrow}</span>
+        <h5>{title}</h5>
+        <p>{body}</p>
+        <span className="mega-promo-cta-link">{promo.cta} <span className="arrow">→</span></span>
+      </div>
+    </Link>
+  );
+}
+
+export default function Nav({ featuredPost }: { featuredPost?: FeaturedPost | null }) {
   const pathname = usePathname();
   const activeTop = activeMap[pathname] ?? "";
   const [openId, setOpenId] = useState<string | null>(null);
@@ -351,17 +377,7 @@ export default function Nav() {
                       </div>
                     </div>
                   ) : (
-                    <Link className="mega-promo mega-promo-art" href={group.promo.href}>
-                      <div className="mega-promo-art-img">
-                        <span className="glyph">QTR.</span>
-                      </div>
-                      <div>
-                        <span className="eyebrow"><span className="dot" style={{ animation: "none" }}></span> {group.promo.eyebrow}</span>
-                        <h5>{group.promo.title}</h5>
-                        <p>{group.promo.body}</p>
-                        <span className="mega-promo-cta-link">{group.promo.cta} <span className="arrow">→</span></span>
-                      </div>
-                    </Link>
+                    <ArticlePromo promo={group.promo} featuredPost={featuredPost} />
                   )
                 )}
               </div>

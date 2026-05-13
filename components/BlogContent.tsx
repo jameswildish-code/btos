@@ -73,6 +73,7 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
               <div className="feat-body">
                 <span className="feat-meta">Featured · {featured.category} · {featured.readTime} min read</span>
                 <h2>{featured.title}</h2>
+                {featured.excerpt && <p style={{ fontSize: 15, color: "var(--muted)", margin: 0, lineHeight: 1.6 }}>{featured.excerpt}</p>}
                 <div className="feat-meta" style={{ display: "flex", gap: 16, color: "var(--muted)" }}>
                   {featured.author?.name && <span>{featured.author.name}</span>}
                   <span>· {formatDate(featured.publishedAt)}</span>

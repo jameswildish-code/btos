@@ -20,6 +20,16 @@ export const urlFor = (source: Parameters<ReturnType<typeof imageUrlBuilder>["im
   builder?.image(source);
 
 // Blog queries
+export async function getFeaturedPost() {
+  if (!client) return null;
+  return client.fetch(
+    `*[_type == "blogPost"] | order(publishedAt desc)[0] {
+      title, slug, excerpt, label,
+      "coverImage": coverImage.asset->url
+    }`
+  );
+}
+
 export async function getBlogPosts() {
   if (!client) return null;
   return client.fetch(

@@ -7,7 +7,7 @@ export default defineType({
   fields: [
     defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
     defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title" }, validation: (r) => r.required() }),
-    defineField({ name: "excerpt", title: "Excerpt", type: "text", rows: 3 }),
+    defineField({ name: "excerpt", title: "Excerpt", type: "text", rows: 3, validation: (r) => r.max(160) }),
     defineField({ name: "publishedAt", title: "Published at", type: "datetime" }),
     defineField({
       name: "category",
