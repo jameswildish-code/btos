@@ -122,6 +122,29 @@ export async function getPressItems() {
   );
 }
 
+// Integration queries
+export async function getIntegrationCategories() {
+  if (!client) return null;
+  return client.fetch(
+    `*[_type == "integrationCategory"] | order(order asc) {
+      _id, title, slug, description
+    }`
+  );
+}
+
+export async function getIntegrations() {
+  if (!client) return null;
+  return client.fetch(
+    `*[_type == "integration"] | order(order asc) {
+      _id, name, tagline, status, statusLabel,
+      featured, featuredTitle, featuredDescription, marketplaceSlug,
+      logoText,
+      "logoImage": logoImage.asset->url,
+      "category": category->{ _id, title, slug }
+    }`
+  );
+}
+
 // Marketplace queries
 export async function getPartners() {
   if (!client) return null;
