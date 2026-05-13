@@ -81,7 +81,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <span className="eyebrow"><span className="dot"></span> Case study · {story.industry}{story.location ? ` · ${story.location}` : ""}</span>
           </div>
           <h1 className="h1" style={{ marginTop: 0, maxWidth: "22ch" }}>{story.title}</h1>
-          {story.summary && <p className="lede" style={{ marginTop: 20, maxWidth: "60ch" }}>{story.summary}</p>}
 
           <div className="cs-cover">
             {story.coverImage
@@ -94,8 +93,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       {story.metrics?.length > 0 && (
         <div className="wrap-w">
-          <div className="cs-metrics">
-            {story.metrics.map((m: { value: string; label: string }) => (
+          <div className="cs-metrics" style={{ gridTemplateColumns: `repeat(${Math.min(story.metrics.length, 4)}, 1fr)` }}>
+            {story.metrics.slice(0, 4).map((m: { value: string; label: string }) => (
               <div key={m.label} className="cs-metric">
                 <div className="v">{m.value}</div>
                 <div className="l">{m.label}</div>

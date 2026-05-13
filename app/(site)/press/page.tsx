@@ -2,25 +2,17 @@ export const revalidate = 0;
 import Link from "next/link";
 import { getPressItems } from "@/lib/sanity";
 
-const STATIC_PRESS = [
-  { _id: "1", title: "The quiet infrastructure play transforming preventive health", publication: "TechCrunch", publishedAt: "2026-04-18", url: "#", excerpt: "BiotrackOS is building the plumbing layer that connects wearables, labs, and clinics — and a growing list of healthcare providers are taking notice." },
-  { _id: "2", title: "BiotrackOS raises €12M to build health data OS for clinics", publication: "Sifted", publishedAt: "2026-03-28", url: "#", excerpt: "The London-based startup secured its Series A to expand its clinical data platform across European longevity and sports medicine markets." },
-  { _id: "3", title: "How wearables are finally making it into the clinic — and what's changed", publication: "Wired UK", publishedAt: "2026-03-12", url: "#", excerpt: "For years, fitness trackers gathered dust in clinical settings. A new wave of platforms is building the data layer that finally makes them useful to doctors." },
-  { _id: "4", title: "Dubai 30x30 picks BiotrackOS to power its population health initiative", publication: "Arabian Business", publishedAt: "2026-02-20", url: "#", excerpt: "The city-wide fitness programme will use BiotrackOS to aggregate anonymised activity data across hundreds of thousands of residents." },
-  { _id: "5", title: "The infrastructure moment in digital health", publication: "a16z Future", publishedAt: "2026-01-14", url: "#", excerpt: "Why the most interesting companies in health tech in 2026 aren't building apps — they're building the pipes the apps run on." },
-];
+const LATEST_COUNT = 4;
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
 }
 
+type PressItem = { _id: string; title: string; publication: string; publishedAt: string; url?: string; excerpt?: string };
+
 export default async function PressPage() {
-  let items: typeof STATIC_PRESS = [];
-  try {
-    const data = await getPressItems();
-    if (data?.length) items = data;
-  } catch { /* use static */ }
-  if (!items.length) items = STATIC_PRESS;
+  const data = await getPressItems();
+  const items: PressItem[] = (data ?? []).slice(0, LATEST_COUNT);
 
   return (
     <>
@@ -69,21 +61,28 @@ export default async function PressPage() {
 
       <section className="press-list">
         <div className="wrap-w">
-          <span className="eyebrow"><span className="dot"></span> Coverage</span>
-          <div style={{ marginTop: 32 }}>
-            {items.map((item) => (
-              <a key={item._id} href={item.url ?? "#"} target="_blank" rel="noopener noreferrer" className="press-item" style={{ display: "grid", textDecoration: "none", color: "inherit" }}>
-                <div>
-                  <div className="pub">{item.publication}</div>
-                  <div className="date">{formatDate(item.publishedAt)}</div>
-                </div>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.excerpt}</p>
-                </div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", paddingTop: 4 }}>Read →</div>
-              </a>
-            ))}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+            <span className="eyebrow"><span className="dot"></span> Latest coverage</span>
+            <Link href="/press/all" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-2)", textDecoration: "none" }}>View all →</Link>
+          </div>
+          <div style={{ marginTop: 8 }}>
+            {items.length === 0 ? (
+              <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13, marginTop: 32 }}>No press items yet — add some in Sanity Studio.</p>
+            ) : (
+              items.map((item) => (
+                <a key={item._id} href={item.url ?? "#"} target="_blank" rel="noopener noreferrer" className="press-item" style={{ display: "grid", textDecoration: "none", color: "inherit" }}>
+                  <div>
+                    <div className="pub">{item.publication}</div>
+                    <div className="date">{formatDate(item.publishedAt)}</div>
+                  </div>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.excerpt}</p>
+                  </div>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", paddingTop: 4 }}>Read →</div>
+                </a>
+              ))
+            )}
           </div>
         </div>
       </section>
