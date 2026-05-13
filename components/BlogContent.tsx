@@ -5,7 +5,6 @@ import { useState } from "react";
 import NewsletterForm from "@/components/NewsletterForm";
 
 const ARTS = ["art-a", "art-b", "art-c", "art-d", "art-e", "art-f"];
-const LABELS = ["VO₂", "HRV", "FHIR", "ZONE 2", "SLEEP", "COHORT"];
 const CATS = ["All", "Research", "Clinical", "Engineering", "Product", "Opinion"];
 
 type Post = {
@@ -87,19 +86,21 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
             <span className="eyebrow"><span className="dot"></span> {active === "All" ? "Latest" : active}</span>
             <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase" }}>{filtered.length} posts</span>
           </div>
+          {filtered.length === 0 && (
+            <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13, marginTop: 32 }}>No posts yet — add some in Sanity Studio.</p>
+          )}
           <div className="post-grid">
             {filtered.map((post, i) => {
               const art = post.art ?? ARTS[i % ARTS.length];
-              const label = post.label ?? LABELS[i % LABELS.length];
               return (
                 <Link key={post._id} className="post" href={`/blog/${post.slug.current}`}>
-                  <div className={`art ${art}`} style={{ position: "relative" }}>
+                  <div className={`art ${art}`}>
                     {post.coverImage ? (
                       <Image src={post.coverImage} alt={post.title} fill style={{ objectFit: "cover", borderRadius: 12 }} />
                     ) : (
                       <div className="art-grid"></div>
                     )}
-                    <div className="label" style={{ position: "relative", zIndex: 1 }}>{label}</div>
+                    {post.label && <div className="label">{post.label}</div>}
                   </div>
                   <div className="post-meta">
                     <span>{post.category}</span>

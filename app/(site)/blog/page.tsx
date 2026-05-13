@@ -4,21 +4,8 @@ import BlogContent from "@/components/BlogContent";
 export const revalidate = 0;
 export const metadata = { title: "Field Notes — BiotrackOS" };
 
-const STATIC_POSTS = [
-  { _id: "1", slug: { current: "the-case-against-the-quarterly" }, title: "The case against the quarterly checkup.", category: "Research", publishedAt: "2026-05-04", author: { name: "Dr. Sofia Holm" }, readTime: 12, art: "art-a", label: "VO₂" },
-  { _id: "2", slug: { current: "hrv-not-a-vibe" }, title: "HRV is not a vibe. Reading it like a clinician.", category: "Clinical", publishedAt: "2026-04-28", author: { name: "Eva Kaur" }, readTime: 8, art: "art-b", label: "HRV" },
-  { _id: "3", slug: { current: "fhir-at-the-edge" }, title: "Why our FHIR pipeline runs at the edge.", category: "Engineering", publishedAt: "2026-04-22", author: { name: "Tomás Macedo" }, readTime: 15, art: "art-c", label: "FHIR" },
-  { _id: "4", slug: { current: "zone-2-calendar-problem" }, title: "Zone 2 is a calendar problem, not a heart-rate one.", category: "Opinion", publishedAt: "2026-04-14", author: { name: "James Rønne" }, readTime: 6, art: "art-d", label: "ZONE 2" },
-  { _id: "5", slug: { current: "stopped-showing-sleep-scores" }, title: "The week we stopped showing sleep scores.", category: "Product", publishedAt: "2026-04-08", author: { name: "Mateo Pereira" }, readTime: 4, art: "art-e", label: "SLEEP" },
-  { _id: "6", slug: { current: "continuum-2000-patient-panel" }, title: "How Continuum runs a 2,000-patient panel without burning out.", category: "Clinical", publishedAt: "2026-04-01", author: { name: "Daria Kowalski, MD" }, readTime: 9, art: "art-f", label: "COHORT" },
-];
-
 export default async function BlogPage() {
-  let posts = STATIC_POSTS;
-  try {
-    const data = await getBlogPosts();
-    if (data?.length) posts = data;
-  } catch { /* Sanity not configured */ }
+  const posts = await getBlogPosts() ?? [];
 
   return (
     <>
