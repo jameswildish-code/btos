@@ -323,7 +323,7 @@ export default function Nav({ featuredPost }: { featuredPost?: FeaturedPost | nu
           </nav>
 
           <div className="nav-cta">
-            <Link className="btn btn-ghost btn-sm" href="/contact">Sign in</Link>
+            <Link className="btn btn-ghost btn-sm" href="/login">Sign in</Link>
             <Link className="btn btn-primary btn-sm" href="/contact">Get started <span className="arrow">→</span></Link>
             <button
               className={`nav-burger${drawerOpen ? " is-open" : ""}`}
@@ -468,7 +468,7 @@ export default function Nav({ featuredPost }: { featuredPost?: FeaturedPost | nu
         </nav>
 
         <div className="m-foot">
-          <Link className="btn btn-ghost m-signin" href="/contact" onClick={closeDrawer}>Sign in</Link>
+          <Link className="btn btn-ghost m-signin" href="/login" onClick={closeDrawer}>Sign in</Link>
         </div>
       </aside>
     </>
