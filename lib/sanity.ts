@@ -186,3 +186,13 @@ export async function getProgrammes() {
     }`
   );
 }
+
+// Clinical evidence queries
+export async function getClinicalStudies() {
+  if (!client) return null;
+  return client.fetch(
+    `*[_type == "clinicalStudy"] | order(order asc) {
+      _id, phase, title, journal, authors, sampleSize, pdfUrl, studyStatus, description
+    }`
+  );
+}

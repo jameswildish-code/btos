@@ -125,8 +125,22 @@ const programmes = [
   { _id: "pr-peri",       _type: "programme", name: "Perimenopause hormone support",    author: "Dr. Aisha Okonkwo",    specialty: "Women's health",            duration: "12 weeks", price: "€299" },
 ];
 
+const clinicalStudies = [
+  // Published
+  { _id: "cs-1", _type: "clinicalStudy", phase: "published", order: 1, journal: "npj Digital Medicine · 2025", title: "Cross-device agreement of resting heart rate across five consumer wearables: a 14,000-participant longitudinal study.", authors: "Lindqvist A, Hjort M, et al.", sampleSize: "n = 14,228" },
+  { _id: "cs-2", _type: "clinicalStudy", phase: "published", order: 2, journal: "The Lancet Digital Health · 2024", title: "Continuous biomarker monitoring vs. quarterly venous draws in a longevity-clinic cohort: a non-inferiority trial.", authors: "Continuum Longevity / BiotrackOS", sampleSize: "n = 412 · 12 mo" },
+  { _id: "cs-3", _type: "clinicalStudy", phase: "published", order: 3, journal: "JMIR mHealth · 2024", title: "Adherence patterns in remote cardiac rehabilitation: real-world signal from a continuous-monitoring platform.", authors: "King's College Hospital + BiotrackOS", sampleSize: "n = 1,108" },
+  { _id: "cs-4", _type: "clinicalStudy", phase: "published", order: 4, journal: "Sleep · 2025", title: "Multi-source sleep stage agreement: Oura vs. Whoop vs. Apple Watch in a free-living cohort.", authors: "BiotrackOS Research", sampleSize: "n = 3,402" },
+  { _id: "cs-5", _type: "clinicalStudy", phase: "published", order: 5, journal: "Nature Medicine (correspondence) · 2025", title: "A standard schema for combining wearable, lab, and genomic data in primary care.", authors: "Hjort M, Vance R, et al.", sampleSize: "—" },
+  // In progress
+  { _id: "cs-6", _type: "clinicalStudy", phase: "in_progress", order: 1, title: "Continuum-2", studyStatus: "Enrolled · 1,204 / 1,500", description: "Five-year longitudinal study of biological age trajectories in a longevity-clinic cohort. Co-investigators: Continuum Longevity, BiotrackOS, TruDiagnostic." },
+  { _id: "cs-7", _type: "clinicalStudy", phase: "in_progress", order: 2, title: "Apex Sleep", studyStatus: "Enrolled · 318 / 400", description: "Multi-team study of in-season sleep load in elite football academies. With three Premier League partners." },
+  { _id: "cs-8", _type: "clinicalStudy", phase: "in_progress", order: 3, title: "VITAL-DK", studyStatus: "Recruiting", description: "Cardiovascular event prediction from continuous wearable signal in a Danish national cohort." },
+  { _id: "cs-9", _type: "clinicalStudy", phase: "in_progress", order: 4, title: "ConsentLab", studyStatus: "Recruiting", description: "Comparing read/comprehension rates of patient-data consents across UI patterns." },
+];
+
 async function seed() {
-  const all = [...categories, ...integrations, ...partnerCategories, ...partners, ...addons, ...programmes];
+  const all = [...categories, ...integrations, ...partnerCategories, ...partners, ...addons, ...programmes, ...clinicalStudies];
   const mutations = all.map(doc => ({ createOrReplace: doc }));
 
   console.log(`Seeding ${mutations.length} documents...`);

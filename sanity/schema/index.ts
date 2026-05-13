@@ -9,6 +9,7 @@ import person from "./person";
 import integrationCategory from "./integrationCategory";
 import integration from "./integration";
 import partnerCategory from "./partnerCategory";
+import clinicalStudy from "./clinicalStudy";
 
 export const schemaTypes = [
   blogPost,
@@ -22,4 +23,5 @@ export const schemaTypes = [
   integrationCategory,
   integration,
   partnerCategory,
+  clinicalStudy,
 ];
