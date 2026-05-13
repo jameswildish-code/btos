@@ -72,8 +72,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             {" / "}
             <span>{story.client}</span>
           </div>
-          <span className="eyebrow"><span className="dot"></span> Case study · {story.industry}{story.location ? ` · ${story.location}` : ""}</span>
-          <h1 className="h1" style={{ marginTop: 16, maxWidth: "22ch" }}>{story.title}</h1>
+          <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 16 }}>
+            {story.logo && (
+              <div style={{ width: 64, height: 32, position: "relative", flexShrink: 0 }}>
+                <Image src={story.logo} alt={story.client} fill style={{ objectFit: "contain", objectPosition: "left" }} />
+              </div>
+            )}
+            <span className="eyebrow"><span className="dot"></span> Case study · {story.industry}{story.location ? ` · ${story.location}` : ""}</span>
+          </div>
+          <h1 className="h1" style={{ marginTop: 0, maxWidth: "22ch" }}>{story.title}</h1>
           {story.summary && <p className="lede" style={{ marginTop: 20, maxWidth: "60ch" }}>{story.summary}</p>}
 
           <div className="cs-cover">

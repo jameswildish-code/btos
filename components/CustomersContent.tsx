@@ -48,9 +48,16 @@ export default function CustomersContent({ customers }: { customers: Customer[] 
                   }
                 </div>
                 <div className="c-card-body">
-                  <div className="c-card-meta">
-                    <span>{c.industry}</span>
-                    {c.location && <><span>·</span><span>{c.location}</span></>}
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
+                    <div className="c-card-meta">
+                      <span>{c.industry}</span>
+                      {c.location && <><span>·</span><span>{c.location}</span></>}
+                    </div>
+                    {c.logo && (
+                      <div style={{ flexShrink: 0, width: 48, height: 24, position: "relative" }}>
+                        <Image src={c.logo} alt={c.client} fill style={{ objectFit: "contain", objectPosition: "right" }} />
+                      </div>
+                    )}
                   </div>
                   <h3 className="c-card-title">{c.title}</h3>
                   {c.summary && <p className="c-card-summary">{c.summary}</p>}
