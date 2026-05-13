@@ -36,11 +36,23 @@ export async function getBlogPost(slug: string) {
   if (!client) return null;
   return client.fetch(
     `*[_type == "blogPost" && slug.current == $slug][0] {
-      _id, title, slug, excerpt, publishedAt, category, body,
+      _id, title, slug, excerpt, publishedAt, category, label, body,
       "author": author->{ name, role, image },
+      "coverImage": coverImage.asset->url,
       "readTime": round(length(pt::text(body)) / 5 / 180)
     }`,
     { slug }
+  );
+}
+
+export async function getRelatedPosts(slug: string, category: string) {
+  if (!client) return [];
+  return client.fetch(
+    `*[_type == "blogPost" && category == $category && slug.current != $slug] | order(publishedAt desc)[0...3] {
+      _id, title, slug, category, publishedAt,
+      "author": author->{ name }
+    }`,
+    { slug, category }
   );
 }
 

@@ -25,11 +25,6 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
 }
 
-function coverDate(iso: string) {
-  if (!iso) return "— / —";
-  const d = new Date(iso);
-  return `${String(d.getMonth() + 1).padStart(2, "0")} / ${String(d.getFullYear()).slice(2)}`;
-}
 
 export default function BlogContent({ posts }: { posts: Post[] }) {
   const [active, setActive] = useState("All");
@@ -65,7 +60,7 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
                 ) : (
                   <div className="art-grid"></div>
                 )}
-                <div className="glyph">{coverDate(featured.publishedAt)}</div>
+                {featured.label && <div className="glyph">{featured.label}</div>}
               </div>
               <div className="feat-body">
                 <span className="feat-meta">Featured · {featured.category} · {featured.readTime} min read</span>
