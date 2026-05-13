@@ -2,21 +2,20 @@ export const revalidate = 0;
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getClinicalStudies } from "@/lib/sanity";
-import ClinicalEvidenceContent from "@/components/ClinicalEvidenceContent";
+import ClinicalEvidenceContent, { type Study } from "@/components/ClinicalEvidenceContent";
 
-export const metadata: Metadata = { title: "Clinical evidence — BiotrackOS" };
+export const metadata: Metadata = { title: "All clinical studies — BiotrackOS" };
 
-export default async function ClinicalEvidencePage() {
+export default async function ClinicalEvidenceAllPage() {
   const data = await getClinicalStudies();
-  const studies = data ?? [];
+  const studies: Study[] = data ?? [];
+  const publishedCount = studies.filter((s) => s.phase === "published").length;
+  const inProgressCount = studies.filter((s) => s.phase === "in_progress").length;
 
   return (
     <>
       <style>{`
         .ev-page { padding: 80px 0 96px; }
-        .ev-page h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(56px,6vw,96px); line-height: 0.95; letter-spacing: -0.02em; margin: 24px 0 0; max-width: 16ch; }
-        .ev-page h1 em { color: var(--ink-2); font-style: italic; }
-        .ev-page .lede { font-size: 19px; line-height: 1.5; color: var(--ink-2); margin: 28px 0 0; max-width: 56ch; }
         .ev-page h2 { font-family: var(--font-display); font-weight: 400; font-size: 36px; line-height: 1.05; margin: 64px 0 16px; letter-spacing: -0.01em; }
         .ev-page p, .ev-page li { font-size: 15px; line-height: 1.65; color: var(--ink-2); }
         .study-row { display: grid; grid-template-columns: 220px 1fr 200px 100px; gap: 32px; align-items: start; padding: 24px 0; border-bottom: 1px solid var(--line); }
@@ -37,19 +36,19 @@ export default async function ClinicalEvidencePage() {
 
       <section className="ev-page">
         <div className="wrap">
-          <span className="eyebrow"><span className="dot"></span> Clinical evidence</span>
-          <h1>Published &amp; <em>ongoing studies.</em></h1>
-          <p className="lede">BiotrackOS is built on data that&apos;s reviewed, audited, and replicable. These are the studies our platform supports — by providing the longitudinal record, the dedup engine, or the consent infrastructure.</p>
-
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 64 }}>
-            <h2 style={{ margin: 0 }}>Published</h2>
-            <Link href="/clinical-evidence/all" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-2)", textDecoration: "none" }}>View all →</Link>
+          <div style={{ marginBottom: 32 }}>
+            <Link href="/clinical-evidence" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--muted)", textDecoration: "none" }}>← Clinical evidence</Link>
           </div>
+          <span className="eyebrow"><span className="dot"></span> All studies</span>
+          <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(56px,6vw,96px)", lineHeight: 0.95, letterSpacing: "-0.02em", margin: "24px 0 0", maxWidth: "16ch" }}>
+            {publishedCount} published.<br/><em style={{ color: "var(--ink-2)", fontStyle: "italic" }}>{inProgressCount} in progress.</em>
+          </h1>
 
+          <h2 style={{ marginTop: 64 }}>Published</h2>
           <ClinicalEvidenceContent studies={studies} />
 
           <h2>For researchers</h2>
-          <p>BiotrackOS supports IRB-approved studies with consent flow, eCRF integration, and FHIR export. Aggregated, de-identified datasets are available under DUA. Email <strong>research@biotrackos.com</strong>.</p>
+          <p style={{ fontSize: 15, lineHeight: 1.65, color: "var(--ink-2)" }}>BiotrackOS supports IRB-approved studies with consent flow, eCRF integration, and FHIR export. Aggregated, de-identified datasets are available under DUA. Email <strong>research@biotrackos.com</strong>.</p>
         </div>
       </section>
     </>
