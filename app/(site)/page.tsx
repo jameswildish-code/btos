@@ -103,15 +103,17 @@ export default async function Home() {
         .step h4 { font-family:var(--font-display); font-weight:400; font-size:32px; line-height:1.05; letter-spacing:-.01em; margin:0 0 12px; }
         .step p { color:var(--ink-2); margin:0; max-width:36ch; }
 
-        /* Proof / quote */
-        .proof { background:var(--ink); color:var(--bg); border-radius:28px; padding:80px; position:relative; overflow:hidden; }
-        .proof::before { content:""; position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 80% 20%,rgba(47,191,163,.18),transparent 60%),radial-gradient(ellipse 60% 50% at 0% 100%,rgba(209,242,74,.10),transparent 60%); pointer-events:none; }
-        .proof > * { position:relative; }
-        .proof blockquote { font-family:var(--font-display); font-weight:400; font-size:clamp(36px,4vw,56px); line-height:1.05; letter-spacing:-.01em; margin:0; text-wrap:balance; max-width:22ch; }
-        .proof .who { margin-top:32px; display:grid; grid-template-columns:auto 1fr auto; gap:18px; align-items:center; }
-        .proof .who .av { width:48px; height:48px; border-radius:50%; background:var(--mint); color:var(--teal); display:grid; place-items:center; font-family:var(--font-mono); font-weight:600; }
-        .proof .who .name { color:var(--bg); font-weight:500; }
-        .proof .who .role { color:#807C6F; font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; }
+        /* Featured case study */
+        .c-feature { background:var(--ink); color:var(--bg); border-radius:28px; overflow:hidden; display:grid; grid-template-columns:1.1fr 1fr; position:relative; text-decoration:none; }
+        .c-feature::before { content:""; position:absolute; inset:0; background:radial-gradient(ellipse at top right,rgba(47,191,163,.18),transparent 60%); pointer-events:none; z-index:1; }
+        .c-feat-body { padding:56px; position:relative; z-index:2; display:flex; flex-direction:column; justify-content:center; gap:20px; }
+        .c-feat-img { position:relative; min-height:380px; background:linear-gradient(135deg,#1F2A48,#2A4A6E 60%,#2FBFA3); overflow:hidden; }
+        .c-feat-img-grid { position:absolute; inset:0; background:repeating-linear-gradient(to right,transparent 0,transparent 19px,rgba(255,255,255,.05) 19px,rgba(255,255,255,.05) 20px),repeating-linear-gradient(to bottom,transparent 0,transparent 19px,rgba(255,255,255,.05) 19px,rgba(255,255,255,.05) 20px); }
+        .c-feature h2 { font-family:var(--font-display); font-weight:400; font-size:clamp(32px,3.5vw,52px); line-height:1.05; letter-spacing:-.01em; margin:0; color:var(--bg); }
+        .c-feature p { color:#C9C5B6; font-size:15px; line-height:1.6; margin:0; max-width:48ch; }
+        .c-feat-stats { display:flex; gap:32px; flex-wrap:wrap; }
+        .c-feat-stats .num { font-family:var(--font-display); font-size:40px; line-height:1; color:var(--lime); }
+        .c-feat-stats .lab { font-family:var(--font-mono); font-size:10px; letter-spacing:.12em; color:#C9C5B6; text-transform:uppercase; margin-top:4px; }
 
         /* Stats */
         .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:56px 0; }
@@ -129,14 +131,14 @@ export default async function Home() {
           .steps { grid-template-columns:1fr; }
           .split { grid-template-columns:1fr; }
           .stats { grid-template-columns:1fr 1fr; gap:32px; }
-          .proof { padding:48px 28px; }
+          .c-feature { grid-template-columns:1fr; }
+          .c-feat-img { min-height:220px; }
+          .c-feat-body { padding:32px; }
         }
         @media (max-width:640px) {
           .markets-row { grid-template-columns:1fr; }
           .stats { grid-template-columns:1fr; }
           .trust-row { grid-template-columns:1fr; }
-          .proof .who { grid-template-columns:auto 1fr; }
-          .proof .who > :last-child { grid-column:1/-1; }
         }
       `}</style>
 
@@ -441,25 +443,33 @@ export default async function Home() {
       </section>
 
       {/* ===================== PROOF ===================== */}
-      {featuredStory?.quote && (
+      {featuredStory && (
         <section className="section">
           <div className="wrap-w">
-            <div className="proof">
-              <span className="eyebrow" style={{ color: "#807C6F" }}><span className="dot" style={{ background: "var(--teal-bright)" }}></span> Case study · {featuredStory.client}</span>
-              <blockquote style={{ marginTop: 24 }}>
-                &ldquo;{featuredStory.quote}&rdquo;
-              </blockquote>
-              <div className="who">
-                <div className="av">
-                  {featuredStory.quoteName?.split(" ").map((n: string) => n[0]).join("").slice(0, 2)}
-                </div>
-                <div>
-                  <div className="name">{featuredStory.quoteName}</div>
-                  <div className="role">{featuredStory.quoteRole}</div>
-                </div>
-                <Link className="btn btn-accent" href={`/customers/${featuredStory.slug?.current}`}>Read the study <span className="arrow">→</span></Link>
+            <Link className="c-feature" href={`/customers/${featuredStory.slug?.current}`}>
+              <div className="c-feat-body">
+                <span className="eyebrow" style={{ color: "#807C6F" }}><span className="dot"></span> Featured · {featuredStory.industry}</span>
+                <h2>{featuredStory.title}</h2>
+                {featuredStory.summary && <p>{featuredStory.summary}</p>}
+                {featuredStory.metrics?.length > 0 && (
+                  <div className="c-feat-stats">
+                    {featuredStory.metrics.map((m: { value: string; label: string }) => (
+                      <div key={m.label}>
+                        <div className="num">{m.value}</div>
+                        <div className="lab">{m.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <span className="btn btn-accent" style={{ alignSelf: "flex-start" }}>Read the case study <span className="arrow">→</span></span>
               </div>
-            </div>
+              <div className="c-feat-img">
+                {featuredStory.coverImage
+                  ? <Image src={featuredStory.coverImage} alt={featuredStory.client} fill style={{ objectFit: "cover" }} />
+                  : <div className="c-feat-img-grid" />
+                }
+              </div>
+            </Link>
           </div>
         </section>
       )}
