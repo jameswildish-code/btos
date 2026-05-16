@@ -55,8 +55,8 @@ export default function MarketsPage() {
             <a className="m-tab" href="#insurer">Insurance</a>
             <a className="m-tab" href="#wellness">Wellness</a>
             <a className="m-tab" href="#research">Research</a>
-            <a className="m-tab" href="#consumer">Individual</a>
             <a className="m-tab" href="#public">Public health</a>
+            <a className="m-tab" href="#consumer">Individual</a>
           </div>
         </div>
       </section>
@@ -65,20 +65,20 @@ export default function MarketsPage() {
         <div className="wrap-w">
           <div className="g">
             <div>
-              <div className="num">01 / Clinical · clinics &amp; longevity labs</div>
-              <h2>For the practices<br/>betting on <em>40 years<br/>of follow-up.</em></h2>
-              <p>Longevity is a sport played on a decade-long timeline. BiotrackOS gives clinics the continuous record they need between annual physicals — without adding yet another app to their care journey.</p>
+              <div className="num">Clinical · clinics &amp; longevity labs</div>
+              <h2>For clinics building care<br/>around <em>continuous data.</em></h2>
+              <p>Annual check-ins leave gaps that matter. BiotrackOS gives clinics the continuous record they need between visits — connecting every wearable, device, and lab result into one view per member, without asking them to use yet another app.</p>
               <ul className="uses">
-                <li>Roster &amp; segment members by program, protocol, or panel</li>
-                <li>Population insights across VO₂, HRV, sleep, body composition</li>
-                <li>Threshold &amp; trend alerts routed to the on-call clinician</li>
+                <li>Manage and monitor members by program, protocol, or panel</li>
+                <li>Population insights across VO₂, HRV, sleep, and body composition</li>
+                <li>Threshold &amp; trend alerts routed to the right clinician</li>
                 <li>White-label personal app — your brand, your members</li>
               </ul>
-              <Link className="btn btn-primary" style={{marginTop:"32px"}} href="/contact">Read: Continuum Longevity <span className="arrow">→</span></Link>
+              <Link className="btn btn-primary" style={{marginTop:"32px"}} href="/contact">Book a demo <span className="arrow">→</span></Link>
             </div>
             <div className="visual">
               <span className="eyebrow"><span className="dot"></span> Longevity panel · cohort heatmap</span>
-              <h5 style={{margin:"8px 0 18px",fontSize:"18px"}}>214 patients · last 60 days</h5>
+              <h5 style={{margin:"8px 0 18px",fontSize:"18px"}}>214 members · last 60 days</h5>
               <div style={{display:"grid",gridTemplateColumns:"repeat(24,1fr)",gap:"2px"}}>
                 {Array.from({length:384}).map((_,i) => {
                   const palette = ['#EDEAE0','#D6E8DC','#A8D6BF','#6FBFA0','#1F8A7A'];
@@ -88,7 +88,7 @@ export default function MarketsPage() {
                 })}
               </div>
               <div style={{display:"flex",justifyContent:"space-between",marginTop:"14px",fontFamily:"var(--font-mono)",fontSize:"10px",letterSpacing:".12em",textTransform:"uppercase",color:"var(--muted)"}}>
-                <span>Patient</span><span>Recovery score · 60d</span><span>Now</span>
+                <span>Member</span><span>Recovery score · 60d</span><span>Now</span>
               </div>
             </div>
           </div>
@@ -99,14 +99,14 @@ export default function MarketsPage() {
         <div className="wrap-w">
           <div className="g">
             <div>
-              <div className="num">02 / Performance · sports teams &amp; gyms</div>
-              <h2>For sports &amp; gyms<br/>where every <em>watt counts.</em></h2>
-              <p>One coach-side view of the squad. One athlete-side view of themselves. Same numbers — different surfaces, in lockstep, in real time.</p>
+              <div className="num">Performance · sports teams &amp; gyms</div>
+              <h2>For teams, clubs,<br/>and gyms where <em>data wins.</em></h2>
+              <p>From elite athlete readiness to gym member health — one record per person, coach-side and member-side, built on the same data. Monitor individuals, track team recovery, and run competitions across clubs.</p>
               <ul className="uses">
-                <li>Team dashboards across training load, HRV, sleep</li>
-                <li>Per-athlete training response &amp; readiness</li>
-                <li>Custom rules per program (zone 2, VO₂max blocks, taper weeks)</li>
-                <li>Integrations with Garmin, Polar, Whoop, Apple Watch</li>
+                <li>Team dashboards across training load, HRV, sleep, and readiness</li>
+                <li>Individual monitoring — flag members who need attention before they do</li>
+                <li>Cross-club competitions — most active, best recovery, most improved</li>
+                <li>Custom program rules — zone 2 blocks, taper weeks, strength cycles</li>
               </ul>
             </div>
             <div className="visual">
@@ -143,13 +143,14 @@ export default function MarketsPage() {
         <div className="wrap-w">
           <div className="g">
             <div>
-              <div className="num">03 / Insurance · risk &amp; rewards</div>
-              <h2>For underwriters who<br/>want <em>signal, not surveys.</em></h2>
-              <p>Consented, continuous biometric streams that power risk modelling, wellness incentives, and rewards programs. Consent-governed, audit-ready, and built for compliance from day one.</p>
+              <div className="num">Insurance · risk &amp; rewards</div>
+              <h2>For insurers building<br/>products around <em>real signal.</em></h2>
+              <p>Consented, continuous health data — powering underwriting models, wellness rewards, and member engagement programmes. Real behavioral signal from every connected wearable and device, without asking members to fill in forms.</p>
               <ul className="uses">
-                <li>Member-facing personal app, white-labeled</li>
-                <li>Aggregate population dashboards (no PII required)</li>
-                <li>Rules-based engagement &amp; rewards triggers</li>
+                <li>White-labeled member app — your brand, your engagement programme</li>
+                <li>Consented population dashboards for risk modelling and underwriting</li>
+                <li>Rules-based wellness rewards — trigger incentives from real behavioral data</li>
+                <li>Early risk signals — identify at-risk members before claims occur</li>
                 <li>FHIR &amp; HL7 v2 exports to your existing platform</li>
               </ul>
             </div>
@@ -174,35 +175,36 @@ export default function MarketsPage() {
         </div>
       </section>
 
-      <section className="m-section" id="wellness" style={{background:"var(--ink)",color:"var(--bg)",borderColor:"var(--ink)"}}>
+      <section className="m-section" id="wellness">
         <div className="wrap-w">
           <div className="g">
             <div>
-              <div className="num" style={{color:"#807C6F"}}>04 / Wellness · corporate</div>
-              <h2 style={{color:"var(--bg)"}}>For HR teams who want<br/><em style={{color:"var(--mint)"}}>a window, not a watchtower.</em></h2>
-              <p style={{color:"#C9C5B6"}}>Privacy-first team views — never individual. Track engagement, recovery trends, and program adoption at the cohort level. Your people own their data; you own the program.</p>
-              <ul className="uses" style={{marginTop:"24px"}}>
-                <li>Anonymised, k-anonymous team dashboards</li>
-                <li>SSO &amp; SCIM provisioning</li>
-                <li>Incentive &amp; challenge frameworks</li>
-                <li>Stipend &amp; partner gear procurement</li>
+              <div className="num">Wellness · corporate</div>
+              <h2>For HR teams who want<br/><em>a window, not a watchtower.</em></h2>
+              <p>Aggregate insight into workforce health — never individual data. Track engagement, recovery trends, and programme adoption at the cohort level. Your people own their record; you own the programme.</p>
+              <ul className="uses">
+                <li>Aggregate team dashboards — trends, engagement, and programme adoption</li>
+                <li>Individual data never visible to the employer — privacy by design</li>
+                <li>Wellness challenges, group competitions, and incentive frameworks</li>
+                <li>Wearable stipend and partner gear programmes</li>
+                <li>SSO and HR system integrations</li>
               </ul>
             </div>
-            <div className="visual" style={{background:"#0F1738",borderColor:"#2A2F4A",color:"var(--bg)"}}>
-              <span className="eyebrow" style={{color:"#807C6F"}}><span className="dot"></span> Engineering team · 142 employees</span>
+            <div className="visual">
+              <span className="eyebrow"><span className="dot"></span> Engineering team · 142 employees</span>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"14px",marginTop:"18px"}}>
-                <div style={{background:"#1B2748",border:"1px solid #2A2F4A",borderRadius:"12px",padding:"16px"}}>
-                  <div className="eyebrow" style={{color:"#807C6F"}}>PARTICIPATION</div>
-                  <div style={{fontFamily:"var(--font-display)",fontSize:"40px",lineHeight:"1",marginTop:"4px",color:"var(--bg)"}}>68<span style={{color:"var(--muted-2)",fontSize:"20px"}}>%</span></div>
-                  <div className="mono" style={{fontSize:"11px",color:"var(--lime)",marginTop:"6px"}}>↑ 12 pts QoQ</div>
+                <div style={{background:"var(--bg-2)",border:"1px solid var(--line)",borderRadius:"12px",padding:"16px"}}>
+                  <div className="eyebrow">Participation</div>
+                  <div style={{fontFamily:"var(--font-display)",fontSize:"40px",lineHeight:"1",marginTop:"4px"}}>68<span style={{color:"var(--muted)",fontSize:"20px"}}>%</span></div>
+                  <div className="mono" style={{fontSize:"11px",color:"var(--teal)",marginTop:"6px"}}>↑ 12 pts QoQ</div>
                 </div>
-                <div style={{background:"#1B2748",border:"1px solid #2A2F4A",borderRadius:"12px",padding:"16px"}}>
-                  <div className="eyebrow" style={{color:"#807C6F"}}>AVG SLEEP · WEEK</div>
-                  <div style={{fontFamily:"var(--font-display)",fontSize:"40px",lineHeight:"1",marginTop:"4px",color:"var(--bg)"}}>7.1<span style={{color:"var(--muted-2)",fontSize:"20px"}}>h</span></div>
-                  <div className="mono" style={{fontSize:"11px",color:"var(--mint)",marginTop:"6px"}}>↑ 0.4h</div>
+                <div style={{background:"var(--bg-2)",border:"1px solid var(--line)",borderRadius:"12px",padding:"16px"}}>
+                  <div className="eyebrow">Avg sleep · week</div>
+                  <div style={{fontFamily:"var(--font-display)",fontSize:"40px",lineHeight:"1",marginTop:"4px"}}>7.1<span style={{color:"var(--muted)",fontSize:"20px"}}>h</span></div>
+                  <div className="mono" style={{fontSize:"11px",color:"var(--teal)",marginTop:"6px"}}>↑ 0.4h</div>
                 </div>
               </div>
-              <div style={{marginTop:"18px",fontFamily:"var(--font-mono)",fontSize:"11px",color:"#807C6F",letterSpacing:".12em",textTransform:"uppercase"}}>Individual data never shared with employer. Always.</div>
+              <div style={{marginTop:"18px",fontFamily:"var(--font-mono)",fontSize:"11px",color:"var(--muted)",letterSpacing:".12em",textTransform:"uppercase"}}>Individual data never shared with employer.</div>
             </div>
           </div>
         </div>
@@ -212,7 +214,7 @@ export default function MarketsPage() {
         <div className="wrap-w">
           <div className="g">
             <div>
-              <div className="num">05 / Research &amp; pharma</div>
+              <div className="num">Research &amp; pharma</div>
               <h2>For protocols, trials,<br/>and <em>post-market</em><br/>follow-up.</h2>
               <p>BiotrackOS gives study teams a continuous, consented data stream from the same wearables and labs participants already trust — with audit trails, withdrawal flows, and FHIR export built in.</p>
               <ul className="uses">
@@ -238,43 +240,23 @@ export default function MarketsPage() {
         </div>
       </section>
 
-      <section className="m-section" id="consumer" style={{borderBottom:"none"}}>
-        <div className="wrap-w">
-          <div className="g">
-            <div>
-              <div className="num">06 / Individual · direct</div>
-              <h2>For people who want<br/>their complete health<br/><em>record in one place.</em></h2>
-              <p>Free to start. Pro and Premium add deeper analytics, partner gear discounts, and direct sharing with a clinic or coach if you have one. No ads. Ever.</p>
-              <ul className="uses">
-                <li>Free forever — every connected source, full timeline</li>
-                <li>Pro — VO₂max coaching, trend analysis, weekly digests</li>
-                <li>Premium — annual blood panel integration &amp; concierge</li>
-              </ul>
-              <Link className="btn btn-primary" style={{marginTop:"24px"}} href="/pricing">See personal pricing <span className="arrow">→</span></Link>
-            </div>
-            <div className="visual" style={{display:"flex",justifyContent:"center",alignItems:"center",background:"var(--bg-2)"}}>
-              <div className="phone"><div className="phone-notch"></div><div className="phone-screen"><Image src="/img/app-health.png" alt="App" width={260} height={560} style={{width:"100%",height:"auto"}}/></div></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="m-section" id="public">
         <div className="wrap-w">
           <div className="g">
             <div>
-              <span className="eyebrow"><span className="dot"></span> 07 / Public health &amp; events</span>
-              <h2 style={{marginTop:"12px"}}>Population programs<br/>and large-scale events.</h2>
-              <p className="lede" style={{marginTop:"18px"}}>From Dubai 30x30 to citywide step challenges and national fitness initiatives — BiotrackOS gives organisers one consented data layer across every wearable in the program, with a privacy boundary built in.</p>
+              <div className="num">Public health &amp; events</div>
+              <h2>For population programmes<br/>and <em>large-scale events.</em></h2>
+              <p>From national fitness initiatives and citywide step challenges to mass-participation events and health awareness campaigns — BiotrackOS gives organisers one consented data layer across every wearable in the programme, with a privacy boundary built in.</p>
               <ul className="uses">
-                <li>Open enrolment across every supported wearable</li>
+                <li>Open enrolment across every supported wearable and device</li>
                 <li>Aggregate dashboards for organisers; individual data stays private</li>
-                <li>Leaderboards, cohorts, and challenge frameworks out of the box</li>
-                <li>Multi-language personal app, white-labelable for the event</li>
+                <li>Leaderboards, group challenges, and cohort competitions out of the box</li>
+                <li>White-labeled personal app — your brand, your programme</li>
+                <li>Population-level signal for public health agencies and programme owners</li>
               </ul>
             </div>
             <div className="visual">
-              <span className="eyebrow"><span className="dot"></span> City fitness program · 184,200 enrolled</span>
+              <span className="eyebrow"><span className="dot"></span> City fitness programme · 184,200 enrolled</span>
               <h5 style={{margin:"8px 0 18px",fontSize:"18px"}}>Daily active participants · 30 days</h5>
               <svg viewBox="0 0 600 200" width="100%" height="200">
                 <polyline fill="none" stroke="var(--teal)" strokeWidth="2" points="0,160 40,150 80,140 120,130 160,120 200,115 240,108 280,98 320,90 360,82 400,72 440,62 480,55 520,48 560,40 600,32"/>
@@ -283,6 +265,28 @@ export default function MarketsPage() {
               <div style={{display:"flex",justifyContent:"space-between",marginTop:"10px",fontFamily:"var(--font-mono)",fontSize:"11px",color:"var(--muted)",letterSpacing:".12em",textTransform:"uppercase"}}>
                 <span>Day 1 · 42k</span><span>Day 30 · 184k</span>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="m-section" id="consumer" style={{borderBottom:"none"}}>
+        <div className="wrap-w">
+          <div className="g">
+            <div>
+              <div className="num">Individual · direct</div>
+              <h2>For people who want<br/>their complete health<br/><em>record in one place.</em></h2>
+              <p>For anyone who wants their complete health record — wearables, devices, lab results, genomics, medications, and self-reported data — in one personal app. Start free, go deeper when you&apos;re ready.</p>
+              <ul className="uses">
+                <li>One record across every connected wearable, device, and app</li>
+                <li>Lab results, genomics, and medications alongside daily signals</li>
+                <li>Insights in plain language, not raw charts</li>
+                <li>Share with a clinic, coach, or care provider, anytime</li>
+              </ul>
+              <Link className="btn btn-primary" style={{marginTop:"24px"}} href="/app">See the personal app <span className="arrow">→</span></Link>
+            </div>
+            <div className="visual" style={{display:"flex",justifyContent:"center",alignItems:"center",background:"var(--bg-2)"}}>
+              <div className="phone"><div className="phone-notch"></div><div className="phone-screen"><Image src="/img/app-health.png" alt="App" width={260} height={560} style={{width:"100%",height:"auto"}}/></div></div>
             </div>
           </div>
         </div>
