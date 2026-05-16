@@ -347,11 +347,11 @@ export default async function Home() {
               <span className="eyebrow"><span className="dot"></span> Professional</span>
               <h3>The view that turns data into decisions. Built on the same record.</h3>
               <p className="small">
-                Monitor individuals and entire cohorts from the same record. Act on signals that matter — without adding tools, pipelines, or steps to existing workflows.
+                Monitor individuals and entire populations from the same record. Act on signals that matter — without adding tools, pipelines, or steps to existing workflows.
               </p>
               <ul className="panel-list">
                 <li>Individual monitoring &amp; remote follow-up</li>
-                <li>Cohort views &amp; population-wide trends</li>
+                <li>Population views, cohort filtering &amp; trends</li>
                 <li>Threshold &amp; trend alerts, auto-flagged</li>
                 <li>White-label ready — your brand, your portal</li>
               </ul>
