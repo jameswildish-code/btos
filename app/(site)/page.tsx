@@ -20,6 +20,7 @@ export default function Home() {
         .hero-stage { margin-top:64px; position:relative; padding:32px; background:linear-gradient(180deg,var(--surface) 0%,var(--bg-2) 100%); border:1px solid var(--line); border-radius:28px; overflow:hidden; }
         .stage-grid { display:grid; grid-template-columns:1.45fr 0.95fr; gap:32px; min-height:560px; }
         .stage-dash { background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-lg); padding:24px; position:relative; overflow:hidden; }
+        .sd-label { font-family:var(--font-mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:18px; display:flex; align-items:center; }
         .stage-dash::before { content:""; position:absolute; inset:0; background:linear-gradient(to right,rgba(11,17,48,.04) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(to bottom,rgba(11,17,48,.04) 1px,transparent 1px) 0 0/48px 48px; pointer-events:none; }
         .stage-dash > * { position:relative; }
         .sd-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
@@ -140,7 +141,7 @@ export default function Home() {
           <div className="reveal reveal-1">
             <span className="hero-tag">
               <span className="pill">Early access</span>
-              <span className="hero-tag-text">First cohorts deployed · now open · Reserve your place →</span>
+              <span className="hero-tag-text">Already live with early partners · now open · Reserve your place →</span>
             </span>
             <h1 className="hero-headline">
               The operating system<br/>
@@ -171,6 +172,7 @@ export default function Home() {
             <div className="stage-grid">
               {/* Dashboard mock */}
               <div className="stage-dash">
+                <div className="sd-label"><span className="dot" style={{ marginRight: 8 }}></span>Professional view · individual &amp; cohort insight</div>
                 <div className="sd-head">
                   <div className="sd-title">
                     <div className="avatar">MA</div>
@@ -276,7 +278,7 @@ export default function Home() {
       <section className="trust" style={{ marginTop: 80 }}>
         <div className="wrap-w">
           <div className="trust-row">
-            <div className="trust-label">Wearables, labs, apps, and devices — all connected.</div>
+            <div className="trust-label">Every health data source, connected.</div>
             <div className="trust-track">
               <div className="ticker-track">
                 {["Apple Health", "WHOOP", "Garmin", "Oura", "Withings", "POLAR", "Samsung Health", "Reebok", "Dexcom", "EIGHT SLEEP",
@@ -299,7 +301,7 @@ export default function Home() {
               <h2 className="h1" style={{ marginTop: 16 }}>One record.<br/>Two powerful views.</h2>
             </div>
             <p className="lede">
-              The personal app gives every member a calm, private view of their own data. The professional workspace handles individual monitoring and population-wide insight from the same record — no data entry, no reconciliation.
+              The personal app gives every member a clean, personal view of their own data. The professional workspace handles individual monitoring and population-wide insight from the same record — no data entry, no reconciliation.
             </p>
           </div>
 
@@ -309,7 +311,7 @@ export default function Home() {
               <span className="eyebrow"><span className="dot"></span> Personal</span>
               <h3>Built for the person<br/>behind the data.</h3>
               <p className="small" style={{ maxWidth: "46ch" }}>
-                From wearables and lab results to genomics and self-reported notes — one timeline, in plain language, and connected to what it means for them.
+                From wearables and lab results to genomics, medications, and self-reported notes — one timeline, in plain language.
               </p>
               <ul className="panel-list">
                 <li>One timeline across every connected source</li>
@@ -356,10 +358,10 @@ export default function Home() {
         <div className="wrap-w">
           <div className="stats">
             {[
-              { num: "5+",   em: "+",  label: "Data categories unified — wearables, labs, genomics, epigenetics, medications." },
-              { num: "1.4B", em: "B",  label: "Signals unified across our customers' cohorts." },
-              { num: "93%",  em: "%",  label: "Of customers report fewer manual data-entry steps in week one." },
-              { num: "11×",  em: "×",  label: "More longitudinal signal per person than any single source alone." },
+              { num: "7+",   em: "+",  label: "Data categories — wearables, devices, apps, genomics, medications, clinical, and self-reported." },
+              { num: "1",    em: "1",  label: "Longitudinal record per person, across every connected source. No duplicates." },
+              { num: "30",   em: "30", label: "Days or fewer from onboarding to live member data. No implementation project required." },
+              { num: "100%", em: "%",  label: "Consent-controlled. Every data point shared entirely on member terms." },
             ].map((s) => (
               <div key={s.label} className="stat-card">
                 <div className="num">{s.num.replace(s.em, "")}<em>{s.em}</em></div>
@@ -376,23 +378,23 @@ export default function Home() {
           <div className="sec-head">
             <div>
               <span className="eyebrow"><span className="dot"></span> Markets</span>
-              <h2 className="h1" style={{ marginTop: 16 }}>One platform.<br/>Seven disciplines.</h2>
+              <h2 className="h1" style={{ marginTop: 16 }}>One platform.<br/>Every market.</h2>
             </div>
-            <p className="lede">Wherever continuous human data has to become a decision — clinical, performance, financial, public, or personal — BiotrackOS sits underneath it.</p>
+            <p className="lede">Wherever health data has to become a decision — in a clinic, on a pitch, at an insurer, or in a research lab — BiotrackOS is the infrastructure beneath it.</p>
           </div>
 
           <div className="markets-row">
             {[
-              { num: "01 / Clinical",    title: "Clinics & longevity labs", desc: "Replace eight dashboards with one record for every person under care.", href: "/markets#longevity" },
-              { num: "02 / Performance", title: "Sports teams & gyms",      desc: "Coach-side cohort views with athlete-side notifications, in lockstep.",href: "/markets#performance", bg: "var(--mint-soft)" },
-              { num: "03 / Insurance",   title: "Insurers",                 desc: "Consented streams that power risk, wellness, and rewards programs.",   href: "/markets#insurer" },
-              { num: "04 / Wellness",    title: "Corporate",                desc: "A privacy-first window into workforce health at the team level.",      href: "/markets#wellness", dark: true },
-              { num: "05 / Research",    title: "Research & pharma",        desc: "Real-world signal for protocols, trials, and post-market follow-up.", href: "/markets#research" },
-              { num: "06 / Consumer",    title: "Direct",                   desc: "For people who want their body's data in one quiet place.",           href: "/markets#consumer" },
-              { num: "07 / Public",      title: "Public health & events",   desc: "Population programs and large-scale events — from Dubai 30x30 to citywide fitness initiatives.", href: "/markets#public", bg: "var(--mint-soft)" },
+              { key: "clinical",    title: "Clinics & longevity labs", desc: "One record for every person in your care — wearables, labs, genomics, and clinical data, unified.", href: "/markets#longevity" },
+              { key: "performance", title: "Sports teams & gyms",      desc: "Cohort dashboards for coaches, personal records for athletes — from the same live data stream.", href: "/markets#performance", bg: "var(--mint-soft)" },
+              { key: "insurance",   title: "Insurers",                 desc: "Consented, continuous data streams that power underwriting, wellness, and rewards.", href: "/markets#insurer" },
+              { key: "wellness",    title: "Corporate wellness",       desc: "A privacy-first view of workforce health — aggregate insight, individually protected.", href: "/markets#wellness", dark: true },
+              { key: "research",    title: "Research & pharma",        desc: "Real-world longitudinal signal for trials, protocols, and post-market surveillance.", href: "/markets#research" },
+              { key: "consumer",    title: "Direct to individual",     desc: "For people who want their complete health record in one place, on their terms.", href: "/markets#consumer" },
+              { key: "public",      title: "Public health & events",   desc: "Population monitoring and mass-event health management, built for scale.", href: "/markets#public", bg: "var(--mint-soft)" },
             ].map((card) => (
               <Link
-                key={card.num}
+                key={card.key}
                 className="market-card"
                 href={card.href}
                 style={{
@@ -402,7 +404,6 @@ export default function Home() {
                 }}
               >
                 <div>
-                  <div className="num" style={card.dark ? { color: "#807C6F" } : {}}>{card.num}</div>
                   <h4 style={card.dark ? { color: "var(--bg)" } : {}}>{card.title}</h4>
                 </div>
                 <p style={card.dark ? { color: "#C9C5B6" } : {}}>{card.desc}</p>
@@ -411,11 +412,10 @@ export default function Home() {
             ))}
             <Link className="market-card" href="/contact" style={{ background: "transparent", borderStyle: "dashed" }}>
               <div>
-                <div className="num">+ / Other</div>
-                <h4>Don&apos;t see yours?</h4>
+                <h4>Your use case</h4>
               </div>
-              <p>Get in touch — the platform is intentionally horizontal.</p>
-              <div className="go">Talk to us →</div>
+              <p>BiotrackOS is built to work across any context where health data matters. If you don&apos;t see your market above, we&apos;d love to hear from you.</p>
+              <div className="go">Let&apos;s talk →</div>
             </Link>
           </div>
         </div>
