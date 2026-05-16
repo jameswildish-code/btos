@@ -140,16 +140,16 @@ export default function ProductPage() {
           <div className="grid">
             <div>
               <span className="eyebrow"><span className="dot"></span> Product</span>
-              <h1 className="h1">One platform.<br/>Two surfaces.<br/><em>One source of truth.</em></h1>
+              <h1 className="h1">One record.<br/>Two powerful views.<br/><em>One source of truth.</em></h1>
             </div>
             <p className="lede">
-              BiotrackOS is the operating system for connected health — one record across wearables, labs, genomics, epigenetics, and medications. A consumer app for the people who generate the data, and a team workspace for the people who interpret it. Everything else is built on the same record.
+              BiotrackOS connects wearables, devices, apps, lab results, genomics, medications, and clinical records into one longitudinal record per person. A personal app for the people who generate the data. A professional workspace for the people who act on it.
             </p>
           </div>
           <div className="meta">
-            <div><div className="lab">Compliance</div><div className="v">HIPAA · SOC 2 Type II · ISO 27001 · GDPR</div></div>
-            <div><div className="lab">Integrations</div><div className="v">Wearables, labs, genomics, epigenetics, Rx + open REST &amp; FHIR APIs</div></div>
-            <div><div className="lab">Deployment</div><div className="v">Cloud · single-tenant for enterprise · EU residency</div></div>
+            <div><div className="lab">Built for</div><div className="v">Compliance · Consent-first · Encrypted end-to-end</div></div>
+            <div><div className="lab">Integrations</div><div className="v">From wearables and devices to lab results, genomics, medications, and clinical records</div></div>
+            <div><div className="lab">Deployment</div><div className="v">Cloud · single-tenant for enterprise · EU data residency</div></div>
           </div>
         </div>
       </section>
@@ -158,22 +158,22 @@ export default function ProductPage() {
         <div className="wrap-w">
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"end",gap:"24px",flexWrap:"wrap",marginBottom:"8px"}}>
             <div>
-              <span className="eyebrow"><span className="dot"></span> The two surfaces</span>
+              <span className="eyebrow"><span className="dot"></span> Personal &amp; Professional</span>
               <h2 className="h1" style={{marginTop:"16px"}}>See it from<br/>both sides.</h2>
             </div>
             <div className="tabs" role="tablist">
-              <button className={`tab${activeTab === "clinic" ? " on" : ""}`} onClick={() => setActiveTab("clinic")}>Clinic dashboard</button>
-              <button className={`tab${activeTab === "consumer" ? " on" : ""}`} onClick={() => setActiveTab("consumer")}>Consumer app</button>
+              <button className={`tab${activeTab === "clinic" ? " on" : ""}`} onClick={() => setActiveTab("clinic")}>Professional</button>
+              <button className={`tab${activeTab === "consumer" ? " on" : ""}`} onClick={() => setActiveTab("consumer")}>Personal</button>
             </div>
           </div>
 
           {activeTab === "clinic" && (
             <div className="panel-stage">
               <div>
-                <span className="eyebrow"><span className="dot"></span> For clinics &amp; cohorts</span>
-                <h3>Run your team<br/>on one screen.</h3>
+                <span className="eyebrow"><span className="dot"></span> Professional</span>
+                <h3>The view that turns<br/>data into decisions.</h3>
                 <p className="lede" style={{fontSize:"16px"}}>
-                  Roster people, segment cohorts, see longitudinal records, and act on threshold alerts — all from the same workspace your team already lives in.
+                  Monitor individuals and entire cohorts from the same record — without adding tools, pipelines, or steps to your existing workflow.
                 </p>
                 <div className="feat">
                   <div className="row">
@@ -181,8 +181,8 @@ export default function ProductPage() {
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2"/></svg>
                     </div>
                     <div>
-                      <h5>Cohort dashboards with population insights</h5>
-                      <p>Heatmap any metric across any segment. Spot trends before they become flags.</p>
+                      <h5>Cohort dashboards &amp; population-wide trends</h5>
+                      <p>Heatmap any metric across any segment. Spot what's changing before it becomes a flag.</p>
                     </div>
                   </div>
                   <div className="row">
@@ -190,8 +190,8 @@ export default function ProductPage() {
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2v6m0 8v6M2 12h6m8 0h6" stroke="currentColor" strokeWidth="2"/></svg>
                     </div>
                     <div>
-                      <h5>Individual client management</h5>
-                      <p>Longitudinal record, notes, attachments, and shared consent — one view per patient.</p>
+                      <h5>Individual monitoring &amp; remote follow-up</h5>
+                      <p>Full longitudinal record, notes, and shared consent — one clear view per person.</p>
                     </div>
                   </div>
                   <div className="row">
@@ -199,8 +199,8 @@ export default function ProductPage() {
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 12h4l3-8 4 16 3-8h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                     </div>
                     <div>
-                      <h5>Alerting on threshold &amp; trend</h5>
-                      <p>Set rules once. Route to the right clinician, in-app or by message.</p>
+                      <h5>Threshold &amp; trend alerts, auto-flagged</h5>
+                      <p>Set rules once. Route to the right person, in-app or by message.</p>
                     </div>
                   </div>
                   <div className="row">
@@ -208,12 +208,12 @@ export default function ProductPage() {
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                     </div>
                     <div>
-                      <h5>FHIR &amp; REST APIs</h5>
-                      <p>Pipe normalised streams into your EHR, data warehouse, or wellness platform.</p>
+                      <h5>Works with what you already use</h5>
+                      <p>FHIR &amp; REST APIs connect BiotrackOS to your EHR, data warehouse, or wellness platform.</p>
                     </div>
                   </div>
                 </div>
-                <Link className="btn btn-primary" style={{marginTop:"32px"}} href="/features/clinic-dashboard">Explore the clinic dashboard <span className="arrow">→</span></Link>
+                <Link className="btn btn-primary" style={{marginTop:"32px"}} href="/features/clinic-dashboard">Explore the professional workspace <span className="arrow">→</span></Link>
               </div>
               <div className="visual">
                 <div className="browser" style={{width:"100%",maxWidth:"560px"}}>
@@ -267,10 +267,10 @@ export default function ProductPage() {
           {activeTab === "consumer" && (
             <div className="panel-stage">
               <div>
-                <span className="eyebrow"><span className="dot"></span> For consumers</span>
-                <h3>Every signal,<br/>auto-captured.</h3>
+                <span className="eyebrow"><span className="dot"></span> Personal</span>
+                <h3>Their data, explained.<br/>In their hands.</h3>
                 <p className="lede" style={{fontSize:"16px"}}>
-                  One app that talks to every device they already own — and quietly explains what their body is telling them, in plain English.
+                  From wearables, devices, and apps to lab results, genomics, medications, and clinical records — unified into one clear, personal health experience.
                 </p>
                 <div className="feat">
                   <div className="row">
@@ -278,8 +278,8 @@ export default function ProductPage() {
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 8h16M4 16h16M8 4v16M16 4v16" stroke="currentColor" strokeWidth="2"/></svg>
                     </div>
                     <div>
-                      <h5>One screen, every metric</h5>
-                      <p>Steps, weight, VO₂, HRV, sleep, mood — merged across devices, no duplicates.</p>
+                      <h5>One timeline across every connected source</h5>
+                      <p>Wearables, labs, journals — merged into one record, no duplicates, always current.</p>
                     </div>
                   </div>
                   <div className="row">
@@ -287,8 +287,8 @@ export default function ProductPage() {
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 12h4l3-8 4 16 3-8h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                     </div>
                     <div>
-                      <h5>Plain-language trends</h5>
-                      <p>&quot;VO₂ trending up 1.4%&quot; — with context, not just a chart.</p>
+                      <h5>Insights explained in plain language</h5>
+                      <p>What changed, why it matters, and what to watch — without the raw charts.</p>
                     </div>
                   </div>
                   <div className="row">
@@ -296,8 +296,8 @@ export default function ProductPage() {
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="2"/><path d="M3 10h18" stroke="currentColor" strokeWidth="2"/></svg>
                     </div>
                     <div>
-                      <h5>Health journal timeline</h5>
-                      <p>Every signal in one chronological log — runs, sleeps, moods, notes.</p>
+                      <h5>Auto-synced data &amp; manual journals</h5>
+                      <p>Sleep, mood, activity, and biomarkers — logged automatically or added by hand.</p>
                     </div>
                   </div>
                   <div className="row">
@@ -305,12 +305,12 @@ export default function ProductPage() {
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-7 11-7 11Z" stroke="currentColor" strokeWidth="2"/></svg>
                     </div>
                     <div>
-                      <h5>Consent-first sharing</h5>
-                      <p>Send the same data to a clinic, coach, or insurer. Revoke any time.</p>
+                      <h5>Consent they own — share or revoke anytime</h5>
+                      <p>Share data with a clinic, coach, or insurer on their terms. Full control, always.</p>
                     </div>
                   </div>
                 </div>
-                <Link className="btn btn-primary" style={{marginTop:"32px"}} href="/features/consumer-app">Explore the consumer app <span className="arrow">→</span></Link>
+                <Link className="btn btn-primary" style={{marginTop:"32px"}} href="/features/consumer-app">Explore the personal app <span className="arrow">→</span></Link>
               </div>
               <div className="visual" style={{gap:"24px",display:"flex",justifyContent:"center"}}>
                 <div className="phone" style={{transform:"translateY(-12px)"}}>
@@ -332,52 +332,45 @@ export default function ProductPage() {
           <div className="sec-head">
             <div>
               <span className="eyebrow"><span className="dot"></span> Capabilities</span>
-              <h2 className="h1" style={{marginTop:"16px"}}>Everything between<br/>the wearable and the decision.</h2>
+              <h2 className="h1" style={{marginTop:"16px"}}>Everything between<br/>the signal and the decision.</h2>
             </div>
-            <p className="lede">Each capability is built on the same merged record. Pick the ones you need — the rest stay quiet.</p>
+            <p className="lede">Each capability is built on the same unified record. Use what you need — the rest stays out of the way.</p>
           </div>
 
           <div className="feat-grid">
             <Link className="feat-card" href="/features/clinic-dashboard">
-              <div className="num">F.01</div>
-              <h4>Clinic dashboard</h4>
-              <p>Cohort views, individual longitudinal records, population insights, and rules-based alerts.</p>
+              <h4>Professional workspace</h4>
+              <p>Individual monitoring, cohort dashboards, population-wide trends, and rules-based alerts — all from one record.</p>
               <div className="go">Read →</div>
             </Link>
             <Link className="feat-card" href="/features/consumer-app">
-              <div className="num">F.02</div>
-              <h4>Consumer app</h4>
-              <p>iOS &amp; Android. One screen for every signal from every device.</p>
+              <h4>Personal app</h4>
+              <p>iOS &amp; Android. One timeline for every signal from every connected source — explained in plain language.</p>
               <div className="go">Read →</div>
             </Link>
             <Link className="feat-card dark" href="/integrations">
-              <div className="num">F.03</div>
               <h4>Integration layer</h4>
-              <p>Wearables, labs, genomics, epigenetics, and Rx reconciled into one canonical, time-aligned record.</p>
+              <p>From wearables and devices to lab results, genomics, medications, and clinical records — reconciled into one canonical, time-aligned record.</p>
               <div className="go">Read →</div>
             </Link>
             <Link className="feat-card" href="/features/clinic-dashboard#alerts">
-              <div className="num">F.04</div>
               <h4>Rules &amp; alerts engine</h4>
-              <p>Set thresholds and trend rules. Route to the right clinician, automatically.</p>
+              <p>Set threshold and trend rules once. Route to the right person automatically — in-app or by message.</p>
               <div className="go">Read →</div>
             </Link>
             <Link className="feat-card" href="/features/protocols">
-              <div className="num">F.05</div>
               <h4>Protocols</h4>
               <p>Biomarker- and trend-driven recommendations. Your catalog, your sign-off, fully auditable.</p>
               <div className="go">Read →</div>
             </Link>
             <Link className="feat-card" href="/features/clinic-dashboard#reports">
-              <div className="num">F.06</div>
               <h4>Reports &amp; exports</h4>
-              <p>Branded PDFs, FHIR bundles, and CSVs — generated on the same record.</p>
+              <p>Branded PDFs, FHIR bundles, and CSVs — generated on demand from the same record.</p>
               <div className="go">Read →</div>
             </Link>
             <Link className="feat-card" href="/features/consumer-app#consent">
-              <div className="num">F.06</div>
               <h4>Consent &amp; sharing</h4>
-              <p>Granular, time-bounded sharing between a person and their care providers.</p>
+              <p>Granular, revocable sharing between a person and their care providers, coaches, or insurers.</p>
               <div className="go">Read →</div>
             </Link>
           </div>
@@ -388,7 +381,7 @@ export default function ProductPage() {
         <div className="wrap-w">
           <div className="arch">
             <span className="eyebrow" style={{color:"#807C6F"}}><span className="dot"></span> Under the hood</span>
-            <h2 className="h1" style={{color:"var(--bg)",marginTop:"16px"}}>The architecture<br/><em style={{color:"var(--mint)"}}>at a glance.</em></h2>
+            <h2 className="h1" style={{color:"var(--bg)",marginTop:"16px"}}>How it fits<br/><em style={{color:"var(--mint)"}}>together.</em></h2>
             <div className="arch-grid">
               <div className="arch-row">
                 <div className="lab">01 / Sources</div>
@@ -439,8 +432,8 @@ export default function ProductPage() {
               <div className="arch-row">
                 <div className="lab">03 / Surface</div>
                 <div className="nodes">
-                  <span className="node lime">Consumer app</span>
-                  <span className="node lime">Team workspace</span>
+                  <span className="node lime">Personal app</span>
+                  <span className="node lime">Professional workspace</span>
                   <span className="node lime">FHIR / REST API</span>
                   <span className="node lime">Webhooks</span>
                   <span className="node lime">PDF reports</span>
