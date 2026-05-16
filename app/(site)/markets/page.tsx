@@ -147,7 +147,7 @@ export default function MarketsPage() {
               <h2>For underwriters who<br/>want <em>signal, not surveys.</em></h2>
               <p>Consented, continuous biometric streams that power risk modelling, wellness incentives, and rewards programs. Consent-governed, audit-ready, and built for compliance from day one.</p>
               <ul className="uses">
-                <li>Member-facing consumer app, white-labeled</li>
+                <li>Member-facing personal app, white-labeled</li>
                 <li>Aggregate population dashboards (no PII required)</li>
                 <li>Rules-based engagement &amp; rewards triggers</li>
                 <li>FHIR &amp; HL7 v2 exports to your existing platform</li>
@@ -243,7 +243,7 @@ export default function MarketsPage() {
           <div className="g">
             <div>
               <div className="num">06 / Individual · direct</div>
-              <h2>For people who want<br/>their body&apos;s data<br/><em>in one quiet place.</em></h2>
+              <h2>For people who want<br/>their complete health<br/><em>record in one place.</em></h2>
               <p>Free to start. Pro and Premium add deeper analytics, partner gear discounts, and direct sharing with a clinic or coach if you have one. No ads. Ever.</p>
               <ul className="uses">
                 <li>Free forever — every connected source, full timeline</li>
@@ -270,7 +270,7 @@ export default function MarketsPage() {
                 <li>Open enrolment across every supported wearable</li>
                 <li>Aggregate dashboards for organisers; individual data stays private</li>
                 <li>Leaderboards, cohorts, and challenge frameworks out of the box</li>
-                <li>Multi-language consumer app, white-labelable for the event</li>
+                <li>Multi-language personal app, white-labelable for the event</li>
               </ul>
             </div>
             <div className="visual">
