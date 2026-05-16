@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "BiotrackOS App — Every signal in one place" };
+export const metadata: Metadata = { title: "Personal health app — BiotrackOS" };
 
 const SOURCES = [
   "Apple Health","WHOOP","Garmin","Oura Ring","Withings","POLAR","Samsung Health","Reebok",
@@ -61,9 +61,9 @@ export default function AppPage() {
         <div className="wrap-w">
           <div className="g">
             <div className="reveal reveal-1">
-              <span className="eyebrow"><span className="dot"></span> The BiotrackOS app</span>
-              <h1>Every signal.<br/><em>One quiet</em><br/>place.</h1>
-              <p className="lede" style={{ marginTop: 0, maxWidth: "40ch" }}>Auto-captured from the watches, rings, labs, and scales you already use — then translated into language built for humans.</p>
+              <span className="eyebrow"><span className="dot"></span> Personal app</span>
+              <h1>Every signal.<br/><em>One clear</em><br/>record.</h1>
+              <p className="lede" style={{ marginTop: 0, maxWidth: "40ch" }}>From wearables, devices, and apps to lab results, genomics, medications, and clinical records — unified into one clear, personal health record.</p>
               <div className="stores">
                 <a href="#" className="store">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -103,8 +103,8 @@ export default function AppPage() {
       {[
         {
           eyebrow: "One record",
-          h: "All your data. No duplicates.",
-          p: "We fetch from every device you connect, deduplicate overlapping readings, and present a single clean timeline. No more three different step counts from three different apps.",
+          h: "One timeline. No duplicates.",
+          p: "Every connected source maps to a single longitudinal record — structured, consistent, and always up to date. One timeline, not three conflicting step counts.",
           phone: "/img/app-health.png",
           alt: "One record",
           reverse: false,
@@ -112,15 +112,15 @@ export default function AppPage() {
         {
           eyebrow: "Trends that move",
           h: "From noise to signal.",
-          p: "Our AI layer reads your data the way a clinician would — looking for patterns across weeks, not just today's numbers. Plain language, not dashboards.",
+          p: "BiotrackOS looks for patterns across weeks, not just today's numbers — and explains what changed in plain language, not raw charts.",
           phone: "/img/app-vo2.png",
           alt: "Trends",
           reverse: true,
         },
         {
           eyebrow: "Health journal",
-          h: "The log your future self will thank you for.",
-          p: "Add notes, mood, nutrition, and context alongside your biometrics. When you share data with a care team, they see the full picture.",
+          h: "Auto-synced data and manual journals.",
+          p: "Sleep, mood, activity, and biomarkers — logged automatically or added by hand. When you share data with a care team, they see the complete picture.",
           phone: "/img/app-journal.png",
           alt: "Journal",
           reverse: false,
@@ -185,12 +185,12 @@ export default function AppPage() {
       <div className="wrap-w">
         <div className="clinic-cross">
           <div>
-            <span className="eyebrow" style={{ color: "#807C6F" }}><span className="dot"></span> For clinics &amp; teams</span>
+            <span className="eyebrow" style={{ color: "#807C6F" }}><span className="dot"></span> For professionals</span>
             <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(28px,3.5vw,44px)", lineHeight: 1.05, margin: "16px 0 16px", color: "var(--bg)" }}>
-              Running a clinic, lab, or performance team?
+              Running a clinic, lab, or performance facility?
             </h3>
             <p style={{ color: "#C9C5B6", maxWidth: "42ch" }}>
-              The platform version gives you a full team workspace — cohort dashboards, protocols, and population-level analytics — built on the same data your members already have in the app.
+              The professional workspace gives you cohort dashboards, individual monitoring, and population-wide analytics — all built on the same record your members carry in the app.
             </p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start" }}>
