@@ -147,8 +147,8 @@ export default async function Home() {
         <div className="wrap-w">
           <div className="reveal reveal-1">
             <span className="hero-tag">
-              <span className="pill">Early access</span>
-              <span className="hero-tag-text">Already live with early partners · now open · Reserve your place →</span>
+              <span className="pill">Live with early partners</span>
+              <span className="hero-tag-text">Early access now open · Join the waitlist →</span>
             </span>
             <h1 className="hero-headline">
               The operating system<br/>
@@ -159,7 +159,7 @@ export default async function Home() {
 
           <div className="hero-meta reveal reveal-2">
             <p className="lede">
-              Every signal the body generates. One record. Always current.
+              Every signal the body generates. One record. Always up to date.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start" }}>
               <div className="hero-actions">
@@ -167,9 +167,9 @@ export default async function Home() {
                 <Link className="btn btn-ghost btn-lg" href="/product">How it works</Link>
               </div>
               <div className="small" style={{ display: "flex", gap: 14, alignItems: "center", color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase" }}>
-                <span>Built for compliance</span><span style={{ opacity: 0.4 }}>/</span>
-                <span>Consent-first</span><span style={{ opacity: 0.4 }}>/</span>
-                <span>Encrypted end-to-end</span>
+                <span>Compliant</span><span style={{ opacity: 0.4 }}>·</span>
+                <span>Consent-first</span><span style={{ opacity: 0.4 }}>·</span>
+                <span>End-to-end encrypted</span>
               </div>
             </div>
           </div>
@@ -265,7 +265,7 @@ export default async function Home() {
                 <div className="phc">
                   <div className="phc-eyebrow"><span className="dot"></span> Connected · always syncing</div>
                   <h3>Their data, explained. In their hands.</h3>
-                  <p>From wearables, devices, and apps to lab results, genomics, medications, and clinical records — unified into one clear, personal health experience.</p>
+                  <p>From wearables, devices, and apps to lab results, genomics, medications, and clinical records — unified into one clear, personal health record.</p>
                 </div>
                 <div style={{ alignSelf: "center", marginTop: 24, transform: "translateY(8px)" }}>
                   <div className="phone" style={{ margin: "0 auto" }}>
@@ -345,7 +345,7 @@ export default async function Home() {
             {/* Team workspace panel */}
             <div className="panel dark">
               <span className="eyebrow"><span className="dot"></span> Professional</span>
-              <h3>The view that turns<br/>data into decisions.</h3>
+              <h3>The view that turns data into decisions. Built on the same record.</h3>
               <p className="small">
                 Monitor individuals and entire cohorts from the same record. Act on signals that matter — without adding tools, pipelines, or steps to existing workflows.
               </p>
@@ -365,10 +365,10 @@ export default async function Home() {
         <div className="wrap-w">
           <div className="stats">
             {[
-              { num: "7+",   em: "+",  label: "Connected data sources — wearables, devices, apps, lab results, genomics, medications, clinical records, and self-reported data." },
+              { num: "7+",   em: "+",  label: "Connected data source types — and growing." },
               { num: "1",    em: "",   label: "Longitudinal record per person, across every connected source. No duplicates." },
-              { num: "30",   em: "",   label: "Days or fewer from onboarding to live member data." },
-              { num: "100%", em: "%",  label: "Consent-first by design. Every data flow is governed, auditable, and transparent." },
+              { num: "<30",  em: "",   label: "Days from contract to live member data." },
+              { num: "100%", em: "%",  label: "Consent-first. Every data flow is governed, auditable, and transparent." },
             ].map((s) => (
               <div key={s.label} className="stat-card">
                 <div className="num">{s.num.replace(s.em, "")}<em>{s.em}</em></div>
@@ -392,8 +392,8 @@ export default async function Home() {
 
           <div className="markets-row">
             {[
-              { key: "clinical",    title: "Clinics & longevity labs", desc: "One unified record for every person in your care — connecting wearable, clinical, genomic, and patient-generated health data.", href: "/markets#longevity" },
-              { key: "performance", title: "Sports teams & gyms",      desc: "From athlete performance records to team health dashboards and cross-club benchmarks — for gyms, clubs, and performance facilities.", href: "/markets#performance" },
+              { key: "clinical",    title: "Clinics & longevity labs", desc: "One unified record for every person in your care — wearable, clinical, genomic, and patient-generated data, connected.", href: "/markets#longevity" },
+              { key: "performance", title: "Sports teams & gyms",      desc: "Performance records, team health dashboards, and cross-club benchmarks — for gyms, clubs, and performance facilities.", href: "/markets#performance" },
               { key: "insurance",   title: "Insurers",                 desc: "Consented, continuous health data — powering underwriting, wellness programmes, and rewards with real signal, not surveys.", href: "/markets#insurer" },
               { key: "wellness",    title: "Corporate wellness",       desc: "A privacy-first view of workforce health — aggregate insight, individually protected.", href: "/markets#wellness" },
               { key: "research",    title: "Research & pharma",        desc: "Real-world longitudinal signal for trials, protocols, and post-market surveillance.", href: "/markets#research" },
@@ -410,7 +410,7 @@ export default async function Home() {
               <div>
                 <h4>Your use case</h4>
               </div>
-              <p>BiotrackOS works across any context where health data matters. If you don&apos;t see your market above, reach out — we&apos;d be happy to discuss your use case.</p>
+              <p>BiotrackOS adapts to any context where health data drives decisions. Don&apos;t see your market? Let&apos;s talk.</p>
               <div className="go">Get in touch →</div>
             </Link>
           </div>
@@ -429,9 +429,9 @@ export default async function Home() {
           </div>
           <div className="steps">
             {[
-              { h: "Connect every source.", p: "One secure consent flow connects wearables, devices, apps, labs, genomics, medications, and clinical records — including historical data." },
+              { h: "Connect every source.", p: "One secure consent flow connects wearables, devices, apps, labs, genomics, medications, and clinical records. Historical data included." },
               { h: "Build one unified record.", p: "Every connected source maps to a single longitudinal record per person — structured, consistent, and always up to date." },
-              { h: "Act on what matters.", p: "Population dashboards, individual monitoring, and member alerts — all from the same record. One source of truth, across every surface." },
+              { h: "Act on what matters.", p: "Population dashboards, individual monitoring, and member alerts — all from the same record. One source of truth, wherever you need it." },
             ].map((s) => (
               <div key={s.h} className="step">
                 <h4>{s.h}</h4>
