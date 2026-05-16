@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import HeatmapClient from "@/components/HeatmapClient";
+import { getFeaturedCaseStudy } from "@/lib/sanity";
 
-export default function Home() {
+export default async function Home() {
+  const featuredStory = await getFeaturedCaseStudy();
   return (
     <>
       <style>{`
@@ -360,14 +362,13 @@ export default function Home() {
         <div className="wrap-w">
           <div className="stats">
             {[
-              { num: "7+",   em: "+",  sub: "Connected data sources", label: "Wearables, devices, apps, lab results, genomics, medications, clinical records, and self-reported data — unified into one record." },
-              { num: "1",    em: "1",  label: "Longitudinal record per person, across every connected source. No duplicates." },
-              { num: "30",   em: "30", label: "Days or fewer from onboarding to live member data." },
+              { num: "7+",   em: "+",  label: "Connected data sources — wearables, devices, apps, lab results, genomics, medications, clinical records, and self-reported data." },
+              { num: "1",    em: "",   label: "Longitudinal record per person, across every connected source. No duplicates." },
+              { num: "30",   em: "",   label: "Days or fewer from onboarding to live member data." },
               { num: "100%", em: "%",  label: "Consent-first by design. Every data flow is governed, auditable, and transparent." },
             ].map((s) => (
               <div key={s.label} className="stat-card">
                 <div className="num">{s.num.replace(s.em, "")}<em>{s.em}</em></div>
-                {s.sub && <div className="stat-sub">{s.sub}</div>}
                 <p>{s.label}</p>
               </div>
             ))}
@@ -439,24 +440,28 @@ export default function Home() {
       </section>
 
       {/* ===================== PROOF ===================== */}
-      <section className="section">
-        <div className="wrap-w">
-          <div className="proof">
-            <span className="eyebrow" style={{ color: "#807C6F" }}><span className="dot" style={{ background: "var(--teal-bright)" }}></span> Case study · Continuum Longevity</span>
-            <blockquote style={{ marginTop: 24 }}>
-              &ldquo;We retired five dashboards in a weekend. Our clinicians stopped reconciling data and started reading it.&rdquo;
-            </blockquote>
-            <div className="who">
-              <div className="av">DK</div>
-              <div>
-                <div className="name">Dr. Daria Kowalski</div>
-                <div className="role">Medical Director · Continuum Longevity</div>
+      {featuredStory?.quote && (
+        <section className="section">
+          <div className="wrap-w">
+            <div className="proof">
+              <span className="eyebrow" style={{ color: "#807C6F" }}><span className="dot" style={{ background: "var(--teal-bright)" }}></span> Case study · {featuredStory.client}</span>
+              <blockquote style={{ marginTop: 24 }}>
+                &ldquo;{featuredStory.quote}&rdquo;
+              </blockquote>
+              <div className="who">
+                <div className="av">
+                  {featuredStory.quoteName?.split(" ").map((n: string) => n[0]).join("").slice(0, 2)}
+                </div>
+                <div>
+                  <div className="name">{featuredStory.quoteName}</div>
+                  <div className="role">{featuredStory.quoteRole}</div>
+                </div>
+                <Link className="btn btn-accent" href={`/customers/${featuredStory.slug?.current}`}>Read the study <span className="arrow">→</span></Link>
               </div>
-              <Link className="btn btn-accent" href="/customers/continuum">Read the study <span className="arrow">→</span></Link>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 }

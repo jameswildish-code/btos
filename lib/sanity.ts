@@ -73,6 +73,7 @@ export async function getFeaturedCaseStudy() {
   return client.fetch(
     `*[_type == "caseStudy" && featured == true][0] {
       _id, title, slug, client, industry, location, summary, metrics,
+      quote, quoteName, quoteRole,
       "coverImage": coverImage.asset->url
     }`
   );
