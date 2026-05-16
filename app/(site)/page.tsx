@@ -8,10 +8,12 @@ export default function Home() {
       <style>{`
         /* HERO */
         .hero { position:relative; padding:64px 0 0; overflow:hidden; }
-        .hero-tag { display:inline-flex; align-items:center; gap:10px; padding:6px 6px 6px 14px; border:1px solid var(--line); border-radius:999px; background:var(--surface); font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-2); width:max-content; }
+        .hero-tag { display:inline-flex; align-items:center; gap:10px; padding:6px 6px 6px 14px; border:1px solid var(--line); border-radius:999px; background:var(--surface); font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-2); width:max-content; max-width:100%; flex-wrap:nowrap; overflow:hidden; }
         .hero-tag .pill { background:var(--mint); color:var(--teal); padding:4px 10px; border-radius:999px; font-weight:500; }
         .hero-headline { font-family:var(--font-display); font-weight:400; font-size:clamp(64px,9.4vw,152px); line-height:.92; letter-spacing:-.025em; margin:22px 0 0; text-wrap:balance; }
         .hero-headline em { font-style:italic; color:var(--ink-2); }
+        .hero-tag-text { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        @media (max-width:600px) { .hero-tag { font-size:10px; padding:5px 5px 5px 12px; gap:8px; } .hero-tag .pill { flex-shrink:0; } }
         .hero-meta { display:grid; grid-template-columns:1.4fr 1fr; gap:56px; margin-top:40px; padding-top:32px; border-top:1px solid var(--line); }
         .hero-meta .lede { margin:0; max-width:48ch; }
         .hero-actions { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
@@ -138,7 +140,7 @@ export default function Home() {
           <div className="reveal reveal-1">
             <span className="hero-tag">
               <span className="pill">Early access</span>
-              <span>First cohorts deployed · now open · Reserve your place →</span>
+              <span className="hero-tag-text">First cohorts deployed · now open · Reserve your place →</span>
             </span>
             <h1 className="hero-headline">
               The operating system<br/>
@@ -149,7 +151,7 @@ export default function Home() {
 
           <div className="hero-meta reveal reveal-2">
             <p className="lede">
-              Every signal your body generates. One record. Always current.
+              Every signal the body generates. One record. Always current.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start" }}>
               <div className="hero-actions">
@@ -158,8 +160,8 @@ export default function Home() {
               </div>
               <div className="small" style={{ display: "flex", gap: 14, alignItems: "center", color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase" }}>
                 <span>Built for compliance</span><span style={{ opacity: 0.4 }}>/</span>
-                <span>Consent-first · Encrypted end-to-end</span><span style={{ opacity: 0.4 }}>/</span>
-                <span>Works with what you already use</span>
+                <span>Consent-first</span><span style={{ opacity: 0.4 }}>/</span>
+                <span>Encrypted end-to-end</span>
               </div>
             </div>
           </div>
@@ -253,8 +255,8 @@ export default function Home() {
               <div className="stage-phone-col">
                 <div className="phc">
                   <div className="phc-eyebrow"><span className="dot"></span> Connected · always syncing</div>
-                  <h3>The same record, in every pocket.</h3>
-                  <p>Every signal your organisation sees, the individual sees too — explained in plain language, and tied to what to do next.</p>
+                  <h3>Their data, explained. In their hands.</h3>
+                  <p>Every member sees what matters to them — wearable data, lab results, and personal notes — in one place, in plain language.</p>
                 </div>
                 <div style={{ alignSelf: "center", marginTop: 24, transform: "translateY(8px)" }}>
                   <div className="phone" style={{ margin: "0 auto" }}>
@@ -274,7 +276,7 @@ export default function Home() {
       <section className="trust" style={{ marginTop: 80 }}>
         <div className="wrap-w">
           <div className="trust-row">
-            <div className="trust-label">Connected to the tools your people already use</div>
+            <div className="trust-label">Wearables, labs, apps, and devices — all connected.</div>
             <div className="trust-track">
               <div className="ticker-track">
                 {["Apple Health", "WHOOP", "Garmin", "Oura", "Withings", "POLAR", "Samsung Health", "Reebok", "Dexcom", "EIGHT SLEEP",
@@ -293,11 +295,11 @@ export default function Home() {
         <div className="wrap-w">
           <div className="sec-head">
             <div>
-              <span className="eyebrow"><span className="dot"></span> Personal &amp; Workspace</span>
+              <span className="eyebrow"><span className="dot"></span> Personal &amp; Professional</span>
               <h2 className="h1" style={{ marginTop: 16 }}>One record.<br/>Two powerful views.</h2>
             </div>
             <p className="lede">
-              The personal app gives the people you care for a calm, private view of their own data. The workspace turns the same record into population-scale insight — no data entry, no reconciliation.
+              The personal app gives every member a calm, private view of their own data. The professional workspace handles individual monitoring and population-wide insight from the same record — no data entry, no reconciliation.
             </p>
           </div>
 
@@ -305,9 +307,9 @@ export default function Home() {
             {/* Consumer panel */}
             <div className="panel">
               <span className="eyebrow"><span className="dot"></span> Personal</span>
-              <h3>The app they&apos;ll<br/>actually use.</h3>
+              <h3>Built for the person<br/>behind the data.</h3>
               <p className="small" style={{ maxWidth: "46ch" }}>
-                Every signal they generate — wearables, labs, genomics, and self-reported — in one place, explained in plain language, and connected to what it means for them.
+                From wearables and lab results to genomics and self-reported notes — one timeline, in plain language, and connected to what it means for them.
               </p>
               <ul className="panel-list">
                 <li>One timeline across every connected source</li>
@@ -333,34 +335,17 @@ export default function Home() {
 
             {/* Team workspace panel */}
             <div className="panel dark">
-              <span className="eyebrow"><span className="dot"></span> Workspace</span>
+              <span className="eyebrow"><span className="dot"></span> Professional</span>
               <h3>The view that turns<br/>data into decisions.</h3>
               <p className="small">
-                Roster every member, track every metric, and act on the signals that matter — without building a data pipeline or retraining anyone on a new tool.
+                Monitor individuals and entire cohorts from the same record. Act on signals that matter — without adding tools, pipelines, or steps to existing workflows.
               </p>
               <ul className="panel-list">
-                <li>Cohort views &amp; population trends</li>
-                <li>Longitudinal record per person</li>
+                <li>Individual monitoring &amp; remote follow-up</li>
+                <li>Cohort views &amp; population-wide trends</li>
                 <li>Threshold &amp; trend alerts, auto-flagged</li>
                 <li>White-label ready — your brand, your portal</li>
               </ul>
-              <div className="visual">
-                <div style={{ background: "#0F1738", border: "1px solid #2A2F4A", borderRadius: 14, padding: 18 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-                    <div>
-                      <div className="phc-eyebrow"><span className="dot"></span> Cohort 04 · Longevity panel</div>
-                      <h5 style={{ margin: "6px 0 0", fontSize: 14, color: "var(--bg)" }}>214 members · 12 flagged today</h5>
-                    </div>
-                    <div className="chip" style={{ background: "transparent", borderColor: "#2A2F4A", color: "#C9C5B6" }}>
-                      <span className="dot" style={{ background: "var(--lime)" }}></span> Auto-sync
-                    </div>
-                  </div>
-                  <HeatmapClient />
-                  <div style={{ display: "flex", justifyContent: "space-between", marginTop: 14, fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "#807C6F" }}>
-                    <span>Apr 5</span><span>recovery score</span><span>May 4</span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
