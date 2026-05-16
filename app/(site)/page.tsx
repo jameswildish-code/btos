@@ -149,7 +149,7 @@ export default function Home() {
 
           <div className="hero-meta reveal reveal-2">
             <p className="lede">
-              One longitudinal record across wearables, labs, genomics, medications, clinical notes, and lifestyle — for the teams who care for people, and the people they care for.
+              Every signal your body generates. One record. Always current.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start" }}>
               <div className="hero-actions">
