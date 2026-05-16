@@ -149,16 +149,16 @@ export default function Home() {
 
           <div className="hero-meta reveal reveal-2">
             <p className="lede">
-              One record across wearables, lab panels, genomics, epigenetics, and medications — built for clinics &amp; longevity labs, sports teams &amp; gyms, insurers, corporate wellness, research &amp; pharma — and the people they care for.
+              One longitudinal record across wearables, labs, genomics, medications, clinical notes, and lifestyle — for the teams who care for people, and the people they care for.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start" }}>
               <div className="hero-actions">
                 <Link className="btn btn-primary btn-lg" href="/contact">Book a demo <span className="arrow">→</span></Link>
-                <Link className="btn btn-ghost btn-lg" href="/product">See the platform</Link>
+                <Link className="btn btn-ghost btn-lg" href="/product">How it works</Link>
               </div>
               <div className="small" style={{ display: "flex", gap: 14, alignItems: "center", color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase" }}>
-                <span>HIPAA · SOC 2</span><span style={{ opacity: 0.4 }}>/</span>
-                <span>Wearables · labs · genomics · Rx</span><span style={{ opacity: 0.4 }}>/</span>
+                <span>Built for compliance</span><span style={{ opacity: 0.4 }}>/</span>
+                <span>Consent-first · Encrypted end-to-end</span><span style={{ opacity: 0.4 }}>/</span>
                 <span>Open API</span>
               </div>
             </div>
