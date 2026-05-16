@@ -47,16 +47,16 @@ export default function MarketsPage() {
               <span className="eyebrow"><span className="dot"></span> Markets</span>
               <h1 className="h1">Wherever continuous<br/>human data has to<br/><em>become a decision.</em></h1>
             </div>
-            <p className="lede">Seven disciplines, one platform. Each market gets the same merged record — surfaced through the workflows that already exist on their side of the screen.</p>
+            <p className="lede">One platform. Every market. The same unified record — surfaced through the workflows that already exist on their side of the screen.</p>
           </div>
           <div className="m-tabs">
-            <a className="m-tab on" href="#longevity">01 / Clinical</a>
-            <a className="m-tab" href="#performance">02 / Performance</a>
-            <a className="m-tab" href="#insurer">03 / Insurance</a>
-            <a className="m-tab" href="#wellness">04 / Wellness</a>
-            <a className="m-tab" href="#research">05 / Research</a>
-            <a className="m-tab" href="#consumer">06 / Consumer</a>
-            <a className="m-tab" href="#public">07 / Public</a>
+            <a className="m-tab on" href="#longevity">Clinical</a>
+            <a className="m-tab" href="#performance">Performance</a>
+            <a className="m-tab" href="#insurer">Insurance</a>
+            <a className="m-tab" href="#wellness">Wellness</a>
+            <a className="m-tab" href="#research">Research</a>
+            <a className="m-tab" href="#consumer">Individual</a>
+            <a className="m-tab" href="#public">Public health</a>
           </div>
         </div>
       </section>
@@ -67,12 +67,12 @@ export default function MarketsPage() {
             <div>
               <div className="num">01 / Clinical · clinics &amp; longevity labs</div>
               <h2>For the practices<br/>betting on <em>40 years<br/>of follow-up.</em></h2>
-              <p>Longevity is a sport played on a decade-long timeline. BiotrackOS gives clinics the continuous record they need between annual physicals — without their patients quitting yet another app.</p>
+              <p>Longevity is a sport played on a decade-long timeline. BiotrackOS gives clinics the continuous record they need between annual physicals — without adding yet another app to their care journey.</p>
               <ul className="uses">
-                <li>Roster &amp; segment patients by program, age, or panel</li>
+                <li>Roster &amp; segment members by program, protocol, or panel</li>
                 <li>Population insights across VO₂, HRV, sleep, body composition</li>
                 <li>Threshold &amp; trend alerts routed to the on-call clinician</li>
-                <li>White-label consumer app — your brand, your patients</li>
+                <li>White-label personal app — your brand, your members</li>
               </ul>
               <Link className="btn btn-primary" style={{marginTop:"32px"}} href="/contact">Read: Continuum Longevity <span className="arrow">→</span></Link>
             </div>
@@ -145,7 +145,7 @@ export default function MarketsPage() {
             <div>
               <div className="num">03 / Insurance · risk &amp; rewards</div>
               <h2>For underwriters who<br/>want <em>signal, not surveys.</em></h2>
-              <p>Consented, continuous biometric streams that power risk modelling, wellness incentives, and rewards programs. Privacy-first, audit-ready, and HIPAA-compliant from day one.</p>
+              <p>Consented, continuous biometric streams that power risk modelling, wellness incentives, and rewards programs. Consent-governed, audit-ready, and built for compliance from day one.</p>
               <ul className="uses">
                 <li>Member-facing consumer app, white-labeled</li>
                 <li>Aggregate population dashboards (no PII required)</li>
@@ -242,7 +242,7 @@ export default function MarketsPage() {
         <div className="wrap-w">
           <div className="g">
             <div>
-              <div className="num">06 / Consumer · direct</div>
+              <div className="num">06 / Individual · direct</div>
               <h2>For people who want<br/>their body&apos;s data<br/><em>in one quiet place.</em></h2>
               <p>Free to start. Pro and Premium add deeper analytics, partner gear discounts, and direct sharing with a clinic or coach if you have one. No ads. Ever.</p>
               <ul className="uses">
@@ -250,7 +250,7 @@ export default function MarketsPage() {
                 <li>Pro — VO₂max coaching, trend analysis, weekly digests</li>
                 <li>Premium — annual blood panel integration &amp; concierge</li>
               </ul>
-              <Link className="btn btn-primary" style={{marginTop:"24px"}} href="/pricing">See consumer pricing <span className="arrow">→</span></Link>
+              <Link className="btn btn-primary" style={{marginTop:"24px"}} href="/pricing">See personal pricing <span className="arrow">→</span></Link>
             </div>
             <div className="visual" style={{display:"flex",justifyContent:"center",alignItems:"center",background:"var(--bg-2)"}}>
               <div className="phone"><div className="phone-notch"></div><div className="phone-screen"><Image src="/img/app-health.png" alt="App" width={260} height={560} style={{width:"100%",height:"auto"}}/></div></div>
