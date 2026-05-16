@@ -137,8 +137,8 @@ export default function Home() {
         <div className="wrap-w">
           <div className="reveal reveal-1">
             <span className="hero-tag">
-              <span className="pill">Now live in 14 countries</span>
-              <span>Join the waitlist →</span>
+              <span className="pill">Early access</span>
+              <span>First cohorts deployed · now open · Reserve your place →</span>
             </span>
             <h1 className="hero-headline">
               The operating system<br/>
@@ -159,7 +159,7 @@ export default function Home() {
               <div className="small" style={{ display: "flex", gap: 14, alignItems: "center", color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase" }}>
                 <span>Built for compliance</span><span style={{ opacity: 0.4 }}>/</span>
                 <span>Consent-first · Encrypted end-to-end</span><span style={{ opacity: 0.4 }}>/</span>
-                <span>Open API</span>
+                <span>Works with what you already use</span>
               </div>
             </div>
           </div>
@@ -177,7 +177,7 @@ export default function Home() {
                       <p>Longevity panel · last sync 8s ago</p>
                     </div>
                   </div>
-                  <span className="chip"><span className="dot"></span> Live</span>
+                  <span className="chip"><span className="dot"></span> Syncing</span>
                 </div>
 
                 <div className="sd-metrics">
@@ -252,9 +252,9 @@ export default function Home() {
               {/* Phone column */}
               <div className="stage-phone-col">
                 <div className="phc">
-                  <div className="phc-eyebrow"><span className="dot"></span> Connected · live data</div>
-                  <h3>And the same data in your patient&apos;s hands.</h3>
-                  <p>Every signal a clinician sees, the consumer sees too — annotated, contextualised, and tied to what to do next.</p>
+                  <div className="phc-eyebrow"><span className="dot"></span> Connected · always syncing</div>
+                  <h3>The same record, in every pocket.</h3>
+                  <p>Every signal your organisation sees, the individual sees too — explained in plain language, and tied to what to do next.</p>
                 </div>
                 <div style={{ alignSelf: "center", marginTop: 24, transform: "translateY(8px)" }}>
                   <div className="phone" style={{ margin: "0 auto" }}>
@@ -274,7 +274,7 @@ export default function Home() {
       <section className="trust" style={{ marginTop: 80 }}>
         <div className="wrap-w">
           <div className="trust-row">
-            <div className="trust-label">A universe of connected sources — and growing</div>
+            <div className="trust-label">Connected to the tools your people already use</div>
             <div className="trust-track">
               <div className="ticker-track">
                 {["Apple Health", "WHOOP", "Garmin", "Oura", "Withings", "POLAR", "Samsung Health", "Reebok", "Dexcom", "EIGHT SLEEP",
@@ -293,27 +293,27 @@ export default function Home() {
         <div className="wrap-w">
           <div className="sec-head">
             <div>
-              <span className="eyebrow"><span className="dot"></span> Two products · one record</span>
-              <h2 className="h1" style={{ marginTop: 16 }}>Built for both sides<br/>of the screen.</h2>
+              <span className="eyebrow"><span className="dot"></span> Personal &amp; Workspace</span>
+              <h2 className="h1" style={{ marginTop: 16 }}>One record.<br/>Two powerful views.</h2>
             </div>
             <p className="lede">
-              The consumer app gives people a calm, sense-making view of their body. The team workspace turns the same stream into population-scale signal — without re-entering a single number.
+              The personal app gives the people you care for a calm, private view of their own data. The workspace turns the same record into population-scale insight — no data entry, no reconciliation.
             </p>
           </div>
 
           <div className="split">
             {/* Consumer panel */}
             <div className="panel">
-              <span className="eyebrow"><span className="dot"></span> Consumer</span>
-              <h3>The app your people<br/>actually open.</h3>
+              <span className="eyebrow"><span className="dot"></span> Personal</span>
+              <h3>The app they&apos;ll<br/>actually use.</h3>
               <p className="small" style={{ maxWidth: "46ch" }}>
-                One screen for every signal. Auto-captured from the watches, rings, labs, and scales they already use — then translated by AI into language built for humans, not charts.
+                Every signal they generate — wearables, labs, genomics, and self-reported — in one place, explained in plain language, and connected to what it means for them.
               </p>
               <ul className="panel-list">
-                <li>Single timeline across every connected source</li>
-                <li>Daily journal — sleep, mood, training, nutrition</li>
-                <li>Plain-language trend explanations</li>
-                <li>Consent they own — share or revoke in one tap</li>
+                <li>One timeline across every connected source</li>
+                <li>Journal — sleep, mood, training, nutrition</li>
+                <li>Plain-language explanations, not raw charts</li>
+                <li>Consent they own — share or revoke anytime</li>
               </ul>
               <div className="visual" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, alignItems: "end" }}>
                 <div className="phone" style={{ width: "100%" }}>
@@ -333,16 +333,16 @@ export default function Home() {
 
             {/* Team workspace panel */}
             <div className="panel dark">
-              <span className="eyebrow"><span className="dot"></span> Team workspace</span>
-              <h3>The dashboard your<br/>team runs on.</h3>
+              <span className="eyebrow"><span className="dot"></span> Workspace</span>
+              <h3>The view that turns<br/>data into decisions.</h3>
               <p className="small">
-                Roster, segment, and follow up. Cohort trends, individual deep dives, and alerts that mean act now — built for clinicians, coaches, researchers, and care teams.
+                Roster every member, track every metric, and act on the signals that matter — without building a data pipeline or retraining anyone on a new tool.
               </p>
               <ul className="panel-list">
                 <li>Cohort views &amp; population trends</li>
                 <li>Longitudinal record per person</li>
-                <li>Alerts on threshold &amp; trend changes</li>
-                <li>White-label app, portal &amp; reports</li>
+                <li>Threshold &amp; trend alerts, auto-flagged</li>
+                <li>White-label ready — your brand, your portal</li>
               </ul>
               <div className="visual">
                 <div style={{ background: "#0F1738", border: "1px solid #2A2F4A", borderRadius: 14, padding: 18 }}>
