@@ -114,7 +114,9 @@ export default function Home() {
         .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:56px 0; }
         .stat-card .num { font-family:var(--font-display); font-size:clamp(56px,6vw,96px); line-height:1; letter-spacing:-.02em; }
         .stat-card .num em { font-style:normal; color:var(--teal); }
-        .stat-card p { color:var(--muted); margin:12px 0 0; max-width:22ch; font-size:14px; }
+        .stat-sub { font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-2); margin:12px 0 4px; font-weight:500; }
+        .stat-card p { color:var(--muted); margin:4px 0 0; max-width:22ch; font-size:14px; }
+        .stat-card p:first-of-type { margin-top:12px; }
 
         @media (max-width:1080px) {
           .stage-grid { grid-template-columns:1fr; }
@@ -258,7 +260,7 @@ export default function Home() {
                 <div className="phc">
                   <div className="phc-eyebrow"><span className="dot"></span> Connected · always syncing</div>
                   <h3>Their data, explained. In their hands.</h3>
-                  <p>From wearables and devices to lab results, genomics, medications, and clinical records — all in one place, in plain language.</p>
+                  <p>From wearables, devices, and apps to lab results, genomics, medications, and clinical records — unified into one clear, personal health experience.</p>
                 </div>
                 <div style={{ alignSelf: "center", marginTop: 24, transform: "translateY(8px)" }}>
                   <div className="phone" style={{ margin: "0 auto" }}>
@@ -311,12 +313,12 @@ export default function Home() {
               <span className="eyebrow"><span className="dot"></span> Personal</span>
               <h3>Built for the person<br/>behind the data.</h3>
               <p className="small" style={{ maxWidth: "46ch" }}>
-                From wearables and devices to lab results, genomics, medications, and clinical records — all in one place, in plain language.
+                Connected into one longitudinal health record across wearables, devices, apps, lab results, genomics, medications, clinical records, and self-reported data.
               </p>
               <ul className="panel-list">
                 <li>One timeline across every connected source</li>
-                <li>Auto-synced data and manual journal — health markers, sleep, mood, and activity</li>
-                <li>Insights explained in plain language — so every member understands their data</li>
+                <li>Auto-synced data and manual journals for sleep, mood, activity, and biomarkers</li>
+                <li>Insights explained in plain language</li>
                 <li>Consent they own — share or revoke anytime</li>
               </ul>
               <div className="visual" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, alignItems: "end" }}>
@@ -358,13 +360,14 @@ export default function Home() {
         <div className="wrap-w">
           <div className="stats">
             {[
-              { num: "7+",   em: "+",  label: "From wearables and devices to lab results, genomics, medications, clinical, and self-reported — all in one record." },
+              { num: "7+",   em: "+",  sub: "Connected data sources", label: "Wearables, devices, apps, lab results, genomics, medications, clinical records, and self-reported data — unified into one record." },
               { num: "1",    em: "1",  label: "Longitudinal record per person, across every connected source. No duplicates." },
               { num: "30",   em: "30", label: "Days or fewer from onboarding to live member data." },
               { num: "100%", em: "%",  label: "Consent-first by design. Every data flow is governed, auditable, and transparent." },
             ].map((s) => (
               <div key={s.label} className="stat-card">
                 <div className="num">{s.num.replace(s.em, "")}<em>{s.em}</em></div>
+                {s.sub && <div className="stat-sub">{s.sub}</div>}
                 <p>{s.label}</p>
               </div>
             ))}
@@ -385,7 +388,7 @@ export default function Home() {
 
           <div className="markets-row">
             {[
-              { key: "clinical",    title: "Clinics & longevity labs", desc: "From wearables and lab results to genomics and clinical records — one unified record for every person in your care.", href: "/markets#longevity" },
+              { key: "clinical",    title: "Clinics & longevity labs", desc: "One unified record for every person in your care — connecting wearable, clinical, genomic, and patient-generated health data.", href: "/markets#longevity" },
               { key: "performance", title: "Sports teams & gyms",      desc: "From athlete performance records to team health dashboards and cross-club benchmarks — for gyms, clubs, and performance facilities.", href: "/markets#performance" },
               { key: "insurance",   title: "Insurers",                 desc: "Consented, continuous health data — powering underwriting, wellness programmes, and rewards with real signal, not surveys.", href: "/markets#insurer" },
               { key: "wellness",    title: "Corporate wellness",       desc: "A privacy-first view of workforce health — aggregate insight, individually protected.", href: "/markets#wellness" },
@@ -422,7 +425,7 @@ export default function Home() {
           </div>
           <div className="steps">
             {[
-              { h: "Connect every source.", p: "From wearables and devices to lab results, genomics, medications, and clinical records — one consent flow connects everything, historical data included." },
+              { h: "Connect every source.", p: "One secure consent flow connects wearables, devices, apps, labs, genomics, medications, and clinical records — including historical data." },
               { h: "Build one unified record.", p: "Every connected source maps to a single longitudinal record per person — structured, consistent, and always up to date." },
               { h: "Act on what matters.", p: "Population dashboards, individual monitoring, and member alerts — all from the same record. One source of truth, across every surface." },
             ].map((s) => (
