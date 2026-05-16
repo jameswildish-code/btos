@@ -8,12 +8,12 @@ export default function Home() {
       <style>{`
         /* HERO */
         .hero { position:relative; padding:64px 0 0; overflow:hidden; }
-        .hero-tag { display:inline-flex; align-items:flex-start; gap:10px; padding:6px 6px 6px 14px; border:1px solid var(--line); border-radius:999px; background:var(--surface); font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-2); max-width:100%; }
-        .hero-tag .pill { background:var(--mint); color:var(--teal); padding:4px 10px; border-radius:999px; font-weight:500; flex-shrink:0; margin-top:1px; }
-        .hero-tag-text { line-height:1.5; }
+        .hero-tag { display:inline-flex; align-items:center; gap:10px; padding:6px 6px 6px 14px; border:1px solid var(--line); border-radius:999px; background:var(--surface); font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-2); max-width:100%; }
+        .hero-tag .pill { background:var(--mint); color:var(--teal); padding:4px 10px; border-radius:999px; font-weight:500; flex-shrink:0; }
+        .hero-tag-text { }
         .hero-headline { font-family:var(--font-display); font-weight:400; font-size:clamp(64px,9.4vw,152px); line-height:.92; letter-spacing:-.025em; margin:22px 0 0; text-wrap:balance; }
         .hero-headline em { font-style:italic; color:var(--ink-2); }
-        @media (max-width:640px) { .hero-tag { border-radius:16px; flex-wrap:wrap; padding:8px 10px 8px 14px; gap:8px; } .hero-tag-text { font-size:10px; } }
+        @media (max-width:640px) { .hero-tag { display:block; border-radius:14px; padding:10px 14px; } .hero-tag .pill { display:inline-block; vertical-align:middle; margin-right:8px; margin-bottom:2px; } .hero-tag-text { display:inline; vertical-align:middle; font-size:10px; } }
         .hero-meta { display:grid; grid-template-columns:1.4fr 1fr; gap:56px; margin-top:40px; padding-top:32px; border-top:1px solid var(--line); }
         .hero-meta .lede { margin:0; max-width:48ch; }
         .hero-actions { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
@@ -113,7 +113,7 @@ export default function Home() {
         /* Stats */
         .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:56px 0; }
         .stat-card .num { font-family:var(--font-display); font-size:clamp(56px,6vw,96px); line-height:1; letter-spacing:-.02em; }
-        .stat-card .num em { font-style:italic; color:var(--teal); }
+        .stat-card .num em { font-style:normal; color:var(--teal); }
         .stat-card p { color:var(--muted); margin:12px 0 0; max-width:22ch; font-size:14px; }
 
         @media (max-width:1080px) {
@@ -311,12 +311,12 @@ export default function Home() {
               <span className="eyebrow"><span className="dot"></span> Personal</span>
               <h3>Built for the person<br/>behind the data.</h3>
               <p className="small" style={{ maxWidth: "46ch" }}>
-                From wearables and lab results to genomics, medications, and self-reported notes — one timeline, in plain language.
+                From wearables and devices to lab results, genomics, medications, and clinical records — all in one place, in plain language.
               </p>
               <ul className="panel-list">
                 <li>One timeline across every connected source</li>
-                <li>Auto-synced data and manual journal — health markers, sleep, mood, and training</li>
-                <li>Insights explained in plain language — no jargon, no raw data to interpret</li>
+                <li>Auto-synced data and manual journal — health markers, sleep, mood, and activity</li>
+                <li>Insights explained in plain language — so every member understands their data</li>
                 <li>Consent they own — share or revoke anytime</li>
               </ul>
               <div className="visual" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, alignItems: "end" }}>
@@ -358,7 +358,7 @@ export default function Home() {
         <div className="wrap-w">
           <div className="stats">
             {[
-              { num: "7+",   em: "+",  label: "Data categories — wearables, devices, apps, genomics, medications, clinical, and self-reported." },
+              { num: "7+",   em: "+",  label: "From wearables and devices to lab results, genomics, medications, clinical, and self-reported — all in one record." },
               { num: "1",    em: "1",  label: "Longitudinal record per person, across every connected source. No duplicates." },
               { num: "30",   em: "30", label: "Days or fewer from onboarding to live member data." },
               { num: "100%", em: "%",  label: "Consent-first by design. Every data flow is governed, auditable, and transparent." },
@@ -380,7 +380,7 @@ export default function Home() {
               <span className="eyebrow"><span className="dot"></span> Markets</span>
               <h2 className="h1" style={{ marginTop: 16 }}>One platform.<br/>Every market.</h2>
             </div>
-            <p className="lede">Wherever health data has to become a decision — in a clinic, at a gym or performance facility, at an insurer, or in a research lab — BiotrackOS is the infrastructure beneath it.</p>
+            <p className="lede">Wherever health data has to become a decision — in a clinic, at a gym or performance facility, for a health insurer, or in a research lab — BiotrackOS is the infrastructure beneath it.</p>
           </div>
 
           <div className="markets-row">
@@ -390,8 +390,8 @@ export default function Home() {
               { key: "insurance",   title: "Insurers",                 desc: "Consented, continuous health data — powering underwriting, wellness programmes, and rewards with real signal, not surveys.", href: "/markets#insurer" },
               { key: "wellness",    title: "Corporate wellness",       desc: "A privacy-first view of workforce health — aggregate insight, individually protected.", href: "/markets#wellness" },
               { key: "research",    title: "Research & pharma",        desc: "Real-world longitudinal signal for trials, protocols, and post-market surveillance.", href: "/markets#research" },
-              { key: "consumer",    title: "Direct to individual",     desc: "For people who want their complete health record in one place, on their own terms.", href: "/markets#consumer" },
               { key: "public",      title: "Public health & events",   desc: "Population monitoring and mass-event health management, built for scale.", href: "/markets#public" },
+              { key: "consumer",    title: "Direct to individual",     desc: "For people who want their complete health record in one place, on their own terms.", href: "/markets#consumer" },
             ].map((card) => (
               <Link key={card.key} className="market-card" href={card.href}>
                 <div><h4>{card.title}</h4></div>
@@ -422,7 +422,7 @@ export default function Home() {
           </div>
           <div className="steps">
             {[
-              { h: "Connect every source.", p: "One consent flow connects everything — from wearables and devices to lab results, genomics, medications, and clinical records. Historical data included." },
+              { h: "Connect every source.", p: "From wearables and devices to lab results, genomics, medications, and clinical records — one consent flow connects everything, historical data included." },
               { h: "Build one unified record.", p: "Every connected source maps to a single longitudinal record per person — structured, consistent, and always up to date." },
               { h: "Act on what matters.", p: "Population dashboards, individual monitoring, and member alerts — all from the same record. One source of truth, across every surface." },
             ].map((s) => (
