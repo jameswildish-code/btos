@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const metadata = { title: "Clinic dashboard — BiotrackOS" };
+export const metadata = { title: "Professional workspace — BiotrackOS" };
 
 export default function ClinicDashboardPage() {
   return (
@@ -30,13 +30,13 @@ export default function ClinicDashboardPage() {
       <section className="f-hero">
         <div className="wrap-w">
           <div className="crumbs">
-            <Link href="/product">Product</Link> / Clinic dashboard
+            <Link href="/product">Product</Link> / Professional workspace
           </div>
           <div className="f-grid">
             <div>
               <span className="eyebrow"><span className="dot"></span> Feature</span>
-              <h1 className="h1" style={{ marginTop: 12 }}>The team workspace<br/><em>for cohort health.</em></h1>
-              <p className="lede" style={{ marginTop: 24 }}>Roster, segment, alert, and act — all from one unified view of every person in your care. No more dashboard-hopping between device vendors.</p>
+              <h1 className="h1" style={{ marginTop: 12 }}>The professional workspace<br/><em>for cohort health.</em></h1>
+              <p className="lede" style={{ marginTop: 24 }}>Monitor individuals and entire cohorts from the same record — without switching between tools, vendors, or workflows.</p>
               <div style={{ display: "flex", gap: 12, marginTop: 28 }}>
                 <Link className="btn btn-primary btn-lg" href="/contact">Book a demo <span className="arrow">→</span></Link>
                 <Link className="btn btn-ghost btn-lg" href="/product">See all features</Link>
@@ -45,7 +45,7 @@ export default function ClinicDashboardPage() {
             <div>
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {[
-                  { label: "Data categories unified", value: "5+" },
+                  { label: "Connected data sources", value: "7+" },
                   { label: "Avg. setup time", value: "< 1 day" },
                   { label: "Device vendors connected", value: "20+" },
                 ].map((s) => (
@@ -101,8 +101,8 @@ export default function ClinicDashboardPage() {
             <ul className="sub-bullets">
               <li>Heatmap view of recovery score across the cohort</li>
               <li>Filter by device, data source, or custom tag</li>
-              <li>One-click pivot from cohort to individual</li>
-              <li>Export cohort snapshots as PDF or CSV</li>
+              <li>One-click pivot from cohort view to individual record</li>
+              <li>Export cohort snapshots as PDF, CSV, or FHIR</li>
             </ul>
           </div>
           <div className="mock">
@@ -159,8 +159,8 @@ export default function ClinicDashboardPage() {
             <p>Define biomarker-driven protocols — vitamin D below threshold triggers a supplement recommendation, HRV trend decline triggers a recovery plan. Fires automatically, logs every decision.</p>
             <ul className="sub-bullets">
               <li>Rule-based trigger on any tracked metric</li>
-              <li>Clinician sign-off queue for controlled substances</li>
-              <li>Patient sees the recommendation in their app</li>
+              <li>Clinician sign-off queue before any recommendation fires</li>
+              <li>Member sees the recommendation in their personal app</li>
               <li>Full audit trail — who defined it, when it fired</li>
             </ul>
           </div>
@@ -181,12 +181,11 @@ export default function ClinicDashboardPage() {
           <span className="eyebrow"><span className="dot"></span> Related capabilities</span>
           <div className="rel-grid" style={{ marginTop: 32 }}>
             {[
-              { num: "F.02", h: "Consumer app", p: "The same data, in your members' hands.", href: "/features/consumer-app" },
-              { num: "F.04", h: "Protocols", p: "Biomarker-driven recommendations, automated.", href: "/features/protocols" },
-              { num: "F.05", h: "Integrations", p: "Wearables, labs, genomics, medications.", href: "/integrations" },
+              { h: "Personal app", p: "The same data, in your members' hands.", href: "/features/consumer-app" },
+              { h: "Protocols", p: "Biomarker-driven recommendations, automated.", href: "/features/protocols" },
+              { h: "Integrations", p: "From wearables and devices to lab results, genomics, medications, and clinical records.", href: "/integrations" },
             ].map((r) => (
               <Link key={r.h} href={r.href} className="rel-card">
-                <div className="num">{r.num}</div>
                 <h5>{r.h}</h5>
                 <p>{r.p}</p>
               </Link>
