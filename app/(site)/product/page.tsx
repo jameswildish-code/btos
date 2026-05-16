@@ -334,7 +334,7 @@ export default function ProductPage() {
               <span className="eyebrow"><span className="dot"></span> Capabilities</span>
               <h2 className="h1" style={{marginTop:"16px"}}>Everything between<br/>the signal and the decision.</h2>
             </div>
-            <p className="lede">Each capability is built on the same unified record. Use what you need — the rest stays out of the way.</p>
+            <p className="lede">Every capability runs on the same record. Activate what fits your workflow — nothing else changes.</p>
           </div>
 
           <div className="feat-grid">
@@ -348,9 +348,9 @@ export default function ProductPage() {
               <p>iOS &amp; Android. One timeline for every signal from every connected source — explained in plain language.</p>
               <div className="go">Read →</div>
             </Link>
-            <Link className="feat-card dark" href="/integrations">
+            <Link className="feat-card" href="/integrations">
               <h4>Integration layer</h4>
-              <p>From wearables and devices to lab results, genomics, medications, and clinical records — reconciled into one canonical, time-aligned record.</p>
+              <p>From wearables, devices, and apps to lab results, genomics, medications, and clinical records — structured into one record.</p>
               <div className="go">Read →</div>
             </Link>
             <Link className="feat-card" href="/features/clinic-dashboard#alerts">
@@ -365,12 +365,12 @@ export default function ProductPage() {
             </Link>
             <Link className="feat-card" href="/features/clinic-dashboard#reports">
               <h4>Reports &amp; exports</h4>
-              <p>Branded PDFs, FHIR bundles, and CSVs — generated on demand from the same record.</p>
+              <p>Branded PDFs, structured data exports, and FHIR bundles — all from the same record.</p>
               <div className="go">Read →</div>
             </Link>
             <Link className="feat-card" href="/features/consumer-app#consent">
               <h4>Consent &amp; sharing</h4>
-              <p>Granular, revocable sharing between a person and their care providers, coaches, or insurers.</p>
+              <p>Governed, auditable data sharing — between members and any downstream stakeholder. Full control over what&apos;s shared and when.</p>
               <div className="go">Read →</div>
             </Link>
           </div>
@@ -381,7 +381,7 @@ export default function ProductPage() {
         <div className="wrap-w">
           <div className="arch">
             <span className="eyebrow" style={{color:"#807C6F"}}><span className="dot"></span> Under the hood</span>
-            <h2 className="h1" style={{color:"var(--bg)",marginTop:"16px"}}>How it fits<br/><em style={{color:"var(--mint)"}}>together.</em></h2>
+            <h2 className="h1" style={{color:"var(--bg)",marginTop:"16px"}}>From data in,<br/><em style={{color:"var(--mint)"}}>to decision out.</em></h2>
             <div className="arch-grid">
               <div className="arch-row">
                 <div className="lab">01 / Sources</div>
@@ -395,36 +395,55 @@ export default function ProductPage() {
                     </div>
                   </div>
                   <div className="src-cat">
-                    <div className="cat-lab">Lab panels</div>
+                    <div className="cat-lab">Devices</div>
+                    <div className="cat-chips">
+                      <span className="node">CGM</span><span className="node">ECG patches</span><span className="node">Blood pressure</span><span className="node">Smart scales</span><span className="node">Spirometers</span>
+                    </div>
+                  </div>
+                  <div className="src-cat">
+                    <div className="cat-lab">Apps</div>
+                    <div className="cat-chips">
+                      <span className="node">Nutrition</span><span className="node">Mental health</span><span className="node">Sleep tracking</span><span className="node">Fitness platforms</span>
+                    </div>
+                  </div>
+                  <div className="src-cat">
+                    <div className="cat-lab">Lab results</div>
                     <div className="cat-chips">
                       <span className="node">Blood biomarkers</span><span className="node">Hormones</span><span className="node">Metabolic panels</span><span className="node">Partner labs</span>
                     </div>
                   </div>
                   <div className="src-cat">
-                    <div className="cat-lab">Genomics &amp; DNA</div>
+                    <div className="cat-lab">Genomics</div>
                     <div className="cat-chips">
-                      <span className="node">Whole genome</span><span className="node">SNP arrays</span><span className="node">Pharmacogenomics</span>
+                      <span className="node">Whole genome</span><span className="node">SNP arrays</span><span className="node">Pharmacogenomics</span><span className="node">Epigenetics</span>
                     </div>
                   </div>
                   <div className="src-cat">
-                    <div className="cat-lab">Epigenetics</div>
-                    <div className="cat-chips">
-                      <span className="node">Biological age</span><span className="node">Methylation</span><span className="node">Glycan markers</span>
-                    </div>
-                  </div>
-                  <div className="src-cat">
-                    <div className="cat-lab">Medications &amp; Rx</div>
+                    <div className="cat-lab">Medications</div>
                     <div className="cat-chips">
                       <span className="node">Prescription history</span><span className="node">Adherence</span><span className="node">Supplements</span>
+                    </div>
+                  </div>
+                  <div className="src-cat">
+                    <div className="cat-lab">Clinical records</div>
+                    <div className="cat-chips">
+                      <span className="node">EHR imports</span><span className="node">FHIR feeds</span><span className="node">Imaging</span><span className="node">Clinical notes</span>
+                    </div>
+                  </div>
+                  <div className="src-cat">
+                    <div className="cat-lab">Self-reported</div>
+                    <div className="cat-chips">
+                      <span className="node">Mood &amp; energy</span><span className="node">Sleep journal</span><span className="node">Symptoms</span><span className="node">Lifestyle notes</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="arch-row">
-                <div className="lab">02 / Reconcile</div>
+                <div className="lab">02 / Structure</div>
                 <div className="nodes">
-                  <span className="node teal">Time-align</span>
-                  <span className="node teal">Dedupe across devices</span>
+                  <span className="node teal">Normalise</span>
+                  <span className="node teal">Structure</span>
+                  <span className="node teal">Validate</span>
                   <span className="node teal">Canonical record</span>
                   <span className="node teal">Audit log</span>
                 </div>
