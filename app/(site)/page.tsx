@@ -265,7 +265,7 @@ export default async function Home() {
                 <div className="phc">
                   <div className="phc-eyebrow"><span className="dot"></span> Connected · always syncing</div>
                   <h3>Their data, explained. In their hands.</h3>
-                  <p>From wearables, devices, and apps to lab results, genomics, medications, and clinical records — unified into one clear, personal health record.</p>
+                  <p>From wearables and devices to lab results, genomics, medications, and clinical records — unified into one clear, personal health record.</p>
                 </div>
                 <div style={{ alignSelf: "center", marginTop: 24, transform: "translateY(8px)" }}>
                   <div className="phone" style={{ margin: "0 auto" }}>
@@ -318,7 +318,7 @@ export default async function Home() {
               <span className="eyebrow"><span className="dot"></span> Personal</span>
               <h3>Built for the person<br/>behind the data.</h3>
               <p className="small" style={{ maxWidth: "46ch" }}>
-                Connected into one longitudinal health record across wearables, devices, apps, lab results, genomics, medications, clinical records, and self-reported data.
+                From wearables and devices to lab results, genomics, medications, and clinical records — one longitudinal record, always connected.
               </p>
               <ul className="panel-list">
                 <li>One timeline across every connected source</li>
@@ -392,7 +392,7 @@ export default async function Home() {
 
           <div className="markets-row">
             {[
-              { key: "clinical",    title: "Clinics & longevity labs", desc: "One unified record for every person in your care — wearable, clinical, genomic, and patient-generated data, connected.", href: "/markets#longevity" },
+              { key: "clinical",    title: "Clinics & longevity labs", desc: "From wearables and devices to clinical records and genomics — every data point for every person in your care, unified.", href: "/markets#longevity" },
               { key: "performance", title: "Sports teams & gyms",      desc: "Performance records, team health dashboards, and cross-club benchmarks — for gyms, clubs, and performance facilities.", href: "/markets#performance" },
               { key: "insurance",   title: "Insurers",                 desc: "Consented, continuous health data — powering underwriting, wellness programmes, and rewards with real signal, not surveys.", href: "/markets#insurer" },
               { key: "wellness",    title: "Corporate wellness",       desc: "A privacy-first view of workforce health — aggregate insight, individually protected.", href: "/markets#wellness" },
@@ -429,7 +429,7 @@ export default async function Home() {
           </div>
           <div className="steps">
             {[
-              { h: "Connect every source.", p: "One secure consent flow connects wearables, devices, apps, labs, genomics, medications, and clinical records. Historical data included." },
+              { h: "Connect every source.", p: "One secure consent flow — connecting everything from wearables and devices to lab results, genomics, medications, and clinical records. Historical data included." },
               { h: "Build one unified record.", p: "Every connected source maps to a single longitudinal record per person — structured, consistent, and always up to date." },
               { h: "Act on what matters.", p: "Population dashboards, individual monitoring, and member alerts — all from the same record. One source of truth, wherever you need it." },
             ].map((s) => (
