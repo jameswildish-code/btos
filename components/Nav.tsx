@@ -7,9 +7,9 @@ import { useState, useRef, useEffect } from "react";
 type FeaturedPost = { title: string; excerpt?: string; slug: { current: string }; coverImage?: string; label?: string };
 
 const Logo = () => (
-  <svg viewBox="0 0 32 32" width="26" height="26">
-    <path d="M16 3.2 L27.4 9.6 L27.4 22.4 L16 28.8 L4.6 22.4 L4.6 9.6 Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
-    <path d="M7.5 16 L11.5 16 L13.4 12.2 L15.8 20.4 L18.2 13.6 L20.2 16 L24.5 16" fill="none" stroke="#0FE3D7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+  <svg viewBox="0 0 360 90" width="156" height="39" aria-label="BiotrackOS" role="img">
+    <text x="8" y="64" fontSize={64} fontFamily="'Instrument Serif', serif" fill="var(--ink)">{"b"}<tspan fontStyle="italic" fill="#0FA697">{"i"}<animate attributeName="opacity" values="1;0.5;1" dur="2.4s" repeatCount="indefinite"/></tspan>{"otrack"}</text>
+    <text x="262" y="24" fontFamily="'Geist Mono', monospace" fontSize={14} letterSpacing="2.5" fontWeight={500} fill="var(--ink-2)">{"OS"}</text>
   </svg>
 );
 
@@ -167,7 +167,7 @@ export default function Nav({ featuredPost }: { featuredPost?: FeaturedPost | nu
           position: sticky; top: 0; z-index: 50;
         }
         .nav-inner { display:flex; align-items:center; justify-content:space-between; height:72px; }
-        .brand { display:inline-flex; align-items:center; gap:10px; font-family:var(--font-sans); font-weight:600; letter-spacing:.02em; font-size:14px; color:var(--ink); }
+        .brand { display:inline-flex; align-items:center; }
         .nav-links { display:flex; gap:4px; align-items:center; font-size:14px; }
         .nav-links a, .mega-trigger { padding:8px 12px; border-radius:8px; color:var(--ink-2); position:relative; }
         .nav-links a:hover, .mega-trigger:hover, .mega-trigger.is-open { background:var(--bg-2); color:var(--ink); }
@@ -289,8 +289,7 @@ export default function Nav({ featuredPost }: { featuredPost?: FeaturedPost | nu
       <header className={`nav${openId ? " mega-open" : ""}`}>
         <div className="wrap-w nav-inner">
           <Link className="brand" href="/">
-            <span style={{ display: "inline-flex", color: "var(--ink)" }}><Logo /></span>
-            <span>BIOTRACK<span style={{ opacity: 0.45 }}>OS</span></span>
+            <Logo />
           </Link>
 
           <nav className="nav-links" onMouseLeave={closeMega}>
