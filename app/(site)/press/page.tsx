@@ -18,7 +18,6 @@ export default async function PressPage() {
     <>
       <style>{`
         .press-hero { padding:72px 0 56px; border-bottom:1px solid var(--line); }
-        .press-hero .g { display:grid; grid-template-columns:1.3fr 1fr; gap:64px; align-items:end; }
         .press-list { padding:80px 0; }
         .press-item { display:grid; grid-template-columns:160px 1fr auto; gap:32px; padding:32px 0; border-top:1px solid var(--line); align-items:start; }
         .press-item .pub { font-family:var(--font-display); font-size:22px; color:var(--ink-2); }
@@ -36,25 +35,10 @@ export default async function PressPage() {
 
       <section className="press-hero">
         <div className="wrap-w">
-          <div className="g">
-            <div>
-              <span className="eyebrow"><span className="dot"></span> Press</span>
-              <h1 className="h1" style={{ marginTop: 16 }}>BiotrackOS<br/>in the press.</h1>
-              <p className="lede" style={{ marginTop: 24 }}>For press enquiries, interview requests, or high-resolution brand assets, contact <a href="mailto:press@biotrackos.com" style={{ color: "var(--teal)" }}>press@biotrackos.com</a></p>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              {[
-                { label: "Founded", value: "2024" },
-                { label: "Headquarters", value: "London, UK" },
-                { label: "Team size", value: "38" },
-                { label: "Funding", value: "€16M" },
-              ].map((f) => (
-                <div key={f.label} style={{ display: "flex", justifyContent: "space-between", padding: "12px 0", borderBottom: "1px solid var(--line)" }}>
-                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--muted)" }}>{f.label}</span>
-                  <span style={{ fontFamily: "var(--font-display)", fontSize: 24, lineHeight: 1 }}>{f.value}</span>
-                </div>
-              ))}
-            </div>
+          <div>
+            <span className="eyebrow"><span className="dot"></span> Press</span>
+            <h1 className="h1" style={{ marginTop: 16 }}>Press &amp; media.</h1>
+            <p className="lede" style={{ marginTop: 24 }}>Media enquiries, interviews, and brand assets — <a href="mailto:press@biotrackos.com" style={{ color: "var(--teal)" }}>press@biotrackos.com</a></p>
           </div>
         </div>
       </section>
@@ -67,7 +51,7 @@ export default async function PressPage() {
           </div>
           <div style={{ marginTop: 8 }}>
             {items.length === 0 ? (
-              <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13, marginTop: 32 }}>No press items yet — add some in Sanity Studio.</p>
+              <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13, marginTop: 32 }}>No press items or articles yet.</p>
             ) : (
               items.map((item) => (
                 <a key={item._id} href={item.url ?? "#"} target="_blank" rel="noopener noreferrer" className="press-item" style={{ display: "grid", textDecoration: "none", color: "inherit" }}>
@@ -94,7 +78,7 @@ export default async function PressPage() {
             {[
               { label: "Logo pack", h: "Logo files", p: "SVG, PNG, dark/light variants. BiotrackOS wordmark with and without the mark.", cta: "Download →" },
               { label: "Brand guide", h: "Colour & type", p: "Our colour palette, typography rules, and usage guidelines for the brand mark.", cta: "Download →" },
-              { label: "Product shots", h: "Screen assets", p: "Hi-res product screenshots for editorial use. Includes dashboard, app, and marketplace.", cta: "Download →" },
+              { label: "Product shots", h: "Screen assets", p: "Hi-res product screenshots for editorial use. Includes workspace and app.", cta: "Download →" },
             ].map((a) => (
               <div key={a.h} className="asset-card">
                 <div className="label">{a.label}</div>

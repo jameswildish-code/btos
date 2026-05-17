@@ -24,7 +24,7 @@ export default function PressAllContent({ items }: { items: PressItem[] }) {
     <>
       <div>
         {items.length === 0 ? (
-          <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13, marginTop: 32 }}>No press items yet — add some in Sanity Studio.</p>
+          <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13, marginTop: 32 }}>No press items or articles yet.</p>
         ) : (
           shown.map((item) => (
             <a key={item._id} href={item.url ?? "#"} target="_blank" rel="noopener noreferrer" className="press-item" style={{ display: "grid", textDecoration: "none", color: "inherit" }}>
