@@ -18,9 +18,6 @@ export default async function MarketplacePage() {
       <style>{`
         .m-hero { padding:72px 0 0; border-bottom:1px solid var(--line); }
         .m-hero .g { display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:end; padding-bottom:56px; }
-        .stats-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:32px; padding:28px 0; border-top:1px solid var(--line); }
-        .stats-strip .v { font-family:var(--font-display); font-size:48px; line-height:1; }
-        .stats-strip .l { font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:8px; }
         .mp-tabs-bar { padding:48px 0 0; }
         .tabs { display:inline-flex; padding:6px; background:var(--surface); border:1px solid var(--line); border-radius:999px; gap:4px; }
         .tabs button { padding:12px 22px; border-radius:999px; border:0; background:transparent; font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2); cursor:pointer; }
@@ -78,7 +75,7 @@ export default async function MarketplacePage() {
               <span className="eyebrow"><span className="dot"></span> Marketplace</span>
               <h1 className="h1">Partners, add-ons,<br/><em>and programmes.</em></h1>
             </div>
-            <p className="lede">The commerce layer of BiotrackOS. Connect a data partner, switch on a feature, or roll out a clinician-authored programme — all in one place.</p>
+            <p className="lede">Connect a data partner, activate a feature, or deploy a clinician-authored programme — all from the same platform.</p>
           </div>
           <MarketplaceContent
             partnerCategories={partnerCategories ?? []}

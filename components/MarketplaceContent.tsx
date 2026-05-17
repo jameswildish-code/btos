@@ -60,10 +60,9 @@ const statusDotColor: Record<string, string> = {
 
 function EmptyState({ message, cta }: { message: string; cta?: React.ReactNode }) {
   return (
-    <div style={{ textAlign: "center", padding: "80px 0" }}>
-      <div style={{ fontFamily: "var(--font-display)", fontSize: 56, color: "var(--line)", marginBottom: 20 }}>∅</div>
-      <h4 style={{ fontSize: 20, fontWeight: 500, margin: "0 0 10px" }}>Nothing here yet</h4>
-      <p style={{ color: "var(--muted)", fontSize: 14, maxWidth: 360, margin: "0 auto 24px", lineHeight: 1.6 }}>{message}</p>
+    <div style={{ textAlign: "center", padding: "56px 0" }}>
+      <h4 style={{ fontSize: 18, fontWeight: 500, margin: "0 0 8px" }}>Live on the platform.</h4>
+      <p style={{ color: "var(--muted)", fontSize: 14, maxWidth: 400, margin: "0 auto 24px", lineHeight: 1.6 }}>{message}</p>
       {cta}
     </div>
   );
@@ -100,15 +99,12 @@ function PartnerCard({ partner }: { partner: Partner }) {
 function PartnerCategorySection({
   category,
   partners,
-  index,
 }: {
   category: PartnerCategory;
   partners: Partner[];
-  index: number;
 }) {
   const [visible, setVisible] = useState(PAGE_SIZE);
   const featured = partners.find((p) => p.featured);
-  const num = String(index + 1).padStart(2, "0");
   const shown = partners.slice(0, visible);
   const hasMore = visible < partners.length;
 
@@ -116,7 +112,6 @@ function PartnerCategorySection({
     <div className="partner-cat-section" id={`partners-${category.slug.current}`}>
       <div className="partner-cat-head">
         <div>
-          <span className="eyebrow"><span className="dot"></span> Category {num}</span>
           <h3 className="partner-cat-title">{category.title}.</h3>
         </div>
         {category.description && <p className="partner-cat-desc">{category.description}</p>}
@@ -148,7 +143,7 @@ function PartnerCategorySection({
 
       {partners.length === 0 ? (
         <div className="partner-empty">
-          <p>No partners in this category yet. <Link href="/contact">Apply to be our launch partner →</Link></p>
+          <p>This category is active. New partners are onboarded by application and reviewed before going live. <Link href="/contact">Apply →</Link></p>
         </div>
       ) : (
         <>
@@ -159,17 +154,17 @@ function PartnerCategorySection({
                 <div className="phead">
                   <div className="plogo" style={{ background: "var(--bg-2)", fontSize: 28, color: "var(--muted)" }}>+</div>
                   <div>
-                    <div className="pname">Your service?</div>
+                    <div className="pname">Connect your service.</div>
                     <div className="pcat">{category.title}</div>
                   </div>
                 </div>
-                <p className="pdesc">Interested in joining this category? Apply to become a marketplace partner.</p>
+                <p className="pdesc">Reach every BiotrackOS customer through a single integration.</p>
                 <div className="pfoot">
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--muted)" }}>
                     <span className="status-dot" style={{ background: "var(--muted)" }}></span>
                     Open
                   </span>
-                  <Link className="btn btn-accent btn-sm" href="/contact">Request to join →</Link>
+                  <Link className="btn btn-accent btn-sm" href="/contact">Apply →</Link>
                 </div>
               </div>
             )}
@@ -202,8 +197,8 @@ function PartnersTab({ categories, partners }: { categories: PartnerCategory[]; 
   if (categories.length === 0) {
     return (
       <EmptyState
-        message="Add Partner Categories and Partners in Sanity Studio to populate this section."
-        cta={<Link className="btn btn-ghost" href="/contact">Become a partner →</Link>}
+        message="Partner categories are active. New partners are onboarded by application and reviewed before going live."
+        cta={<Link className="btn btn-ghost" href="/contact">Apply →</Link>}
       />
     );
   }
@@ -211,12 +206,11 @@ function PartnersTab({ categories, partners }: { categories: PartnerCategory[]; 
   return (
     <>
       <p className="tab-lede">Data partners — the sources BiotrackOS connects and normalises for your team and your members.</p>
-      {categories.map((cat, idx) => (
+      {categories.map((cat) => (
         <PartnerCategorySection
           key={cat._id}
           category={cat}
           partners={byCategory[cat._id] ?? []}
-          index={idx}
         />
       ))}
       <div className="submit-strip">
@@ -239,8 +233,8 @@ function AddonsTab({ addons }: { addons: Addon[] }) {
       <p className="tab-lede">First-party features you can add to any plan. Tagged by market — filter to see what&apos;s relevant for your team.</p>
       {addons.length === 0 ? (
         <EmptyState
-          message="Add Marketplace Add-ons in Sanity Studio to populate this section."
-          cta={<Link className="btn btn-ghost" href="/contact">Pitch an add-on →</Link>}
+          message="First-party features are in development. Have an idea for a market-specific module? We want to hear from you."
+          cta={<Link className="btn btn-ghost" href="/contact">Pitch an idea →</Link>}
         />
       ) : (
         <>
@@ -289,7 +283,7 @@ function ProgrammesTab({ programmes }: { programmes: Programme[] }) {
       <p className="tab-lede">Clinician-authored care programmes — defined protocols, enrolled members, and a 70/30 revenue share with the programme author.</p>
       {programmes.length === 0 ? (
         <EmptyState
-          message="Add Marketplace Programmes in Sanity Studio to populate this section."
+          message="Clinician-authored programmes are open for submission. Authors earn 70% of programme revenue."
           cta={<Link className="btn btn-ghost" href="/contact">Submit a programme →</Link>}
         />
       ) : (
@@ -343,21 +337,8 @@ export default function MarketplaceContent({
 }) {
   const [tab, setTab] = useState<"partners" | "addons" | "programmes">("partners");
 
-  const stats = [
-    { v: "3",                      l: "Marketplace tiers" },
-    { v: String(partners.filter((p) => p.status === "Live").length || partners.length), l: "Live this quarter" },
-    { v: String(addons.length),    l: "Add-ons available" },
-    { v: String(programmes.length),l: "Clinician programmes" },
-  ];
-
   return (
     <>
-      <div className="stats-strip">
-        {stats.map((s) => (
-          <div key={s.l}><div className="v">{s.v}</div><div className="l">{s.l}</div></div>
-        ))}
-      </div>
-
       <section style={{ padding: "0 0 96px" }}>
         <div className="wrap-w">
           <div className="mp-tabs-bar">
