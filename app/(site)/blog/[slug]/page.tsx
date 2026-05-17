@@ -69,7 +69,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     );
   }
 
-  const related = await getRelatedPosts(slug, post.category);
+  const related = await getRelatedPosts(slug, post.category?._id ?? "");
 
   return (
     <>
@@ -108,7 +108,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <section className="a-hero">
         <div className="wrap">
           <div className="crumbs">
-            <Link href="/blog">Field notes</Link> / <span>{post.category}</span>
+            <Link href="/blog">Blog</Link> / <span>{post.category?.title}</span>
           </div>
           <h1 className="h1" style={{ maxWidth: "22ch" }}>{post.title}</h1>
           <div className="a-meta">
@@ -128,7 +128,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <Image src={post.coverImage} alt={post.title} fill style={{ objectFit: "cover" }} />
           )}
           {post.label && <div className="clabel">{post.label}</div>}
-          <div className="ctag">{post.category}{post.readTime ? ` · ${post.readTime} min read` : ""}</div>
+          <div className="ctag">{post.category?.title}{post.readTime ? ` · ${post.readTime} min read` : ""}</div>
         </div>
 
         {(() => {
@@ -161,9 +161,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="wrap-w">
             <span className="eyebrow"><span className="dot"></span> Related</span>
             <div className="related-grid">
-              {related.map((r: { _id: string; slug: { current: string }; category: string; title: string }) => (
+              {related.map((r: { _id: string; slug: { current: string }; category?: { title: string }; title: string }) => (
                 <Link key={r._id} href={`/blog/${r.slug.current}`}>
-                  <span className="rmeta">{r.category}</span>
+                  <span className="rmeta">{r.category?.title}</span>
                   <h4>{r.title}</h4>
                 </Link>
               ))}
