@@ -76,6 +76,7 @@ const NAV: NavEntry[] = [
       { eyebrow: "Legal", items: [
         { label: "Terms",             desc: "Service terms & SLA.",           href: "/terms" },
         { label: "Privacy",           desc: "GDPR, HIPAA, retention.",        href: "/privacy" },
+        { label: "Cookies",           desc: "Cookie policy & preferences.",   href: "/cookies" },
         { label: "Data processing",   desc: "DPA & subprocessor list.",       href: "/data-processing" },
         { label: "Security disclosure", desc: "security@biotrackos.com",      href: "/security-disclosure" },
       ]},
