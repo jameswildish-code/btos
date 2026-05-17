@@ -113,7 +113,6 @@ export default function ForgotPasswordPage() {
       <div className="auth-page">
         <header className="auth-chrome">
           <Link href="/" className="auth-brand"><Logo /></Link>
-          <Link href="/login" className="auth-back">← Back to sign in</Link>
         </header>
 
         <main className="auth-shell">
@@ -135,7 +134,7 @@ export default function ForgotPasswordPage() {
                 <h3>Check your inbox.</h3>
                 <p>If an account exists for <strong>{sentEmail}</strong>, we&apos;ve sent a reset link. It should arrive within a minute.</p>
                 <div className="sent-resend">
-                  Didn&apos;t get it?
+                  Not arrived?
                   <button onClick={() => setResent(true)} disabled={resent}>
                     {resent ? "Sent ✓" : "Resend"}
                   </button>
