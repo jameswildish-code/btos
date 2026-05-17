@@ -107,8 +107,8 @@ function CategorySection({
 
         {integrations.length === 0 ? (
           <div className="int-empty">
-            <h4>Actively onboarding.</h4>
-            <p>Integrations in this category are open. <Link href="/contact">Become a partner →</Link></p>
+            <h4>Live on the platform.</h4>
+            <p>This category is active. New integrations are onboarded by application and reviewed before launch. <Link href="/contact">Apply →</Link></p>
           </div>
         ) : (
           <>
@@ -119,9 +119,9 @@ function CategorySection({
               {!hasMore && (
                 <div className="tile soon">
                   <div className="logo">+</div>
-                  <h4>Your platform?</h4>
-                  <p>Get your service in front of BiotrackOS customers.</p>
-                  <Link href="/contact" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--teal)", marginTop: "auto" }}>Get listed →</Link>
+                  <h4>Connect your service.</h4>
+                  <p>Reach every BiotrackOS customer through a single integration.</p>
+                  <Link href="/contact" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--teal)", marginTop: "auto" }}>Apply →</Link>
                 </div>
               )}
             </div>
@@ -141,9 +141,9 @@ function CategorySection({
               <div className="int-grid" style={{ marginTop: 12 }}>
                 <div className="tile soon">
                   <div className="logo">+</div>
-                  <h4>Your platform?</h4>
-                  <p>Get your service in front of BiotrackOS customers.</p>
-                  <Link href="/contact" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--teal)", marginTop: "auto" }}>Get listed →</Link>
+                  <h4>Connect your service.</h4>
+                  <p>Reach every BiotrackOS customer through a single integration.</p>
+                  <Link href="/contact" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--teal)", marginTop: "auto" }}>Apply →</Link>
                 </div>
               </div>
             )}
