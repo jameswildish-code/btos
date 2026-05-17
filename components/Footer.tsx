@@ -93,6 +93,7 @@ export default function Footer() {
                 <li><Link href="/clinical-evidence">Clinical evidence</Link></li>
                 <li><Link href="/trust-security">Trust &amp; security</Link></li>
                 <li><Link href="/docs">Developer docs</Link></li>
+                <li><Link href="/status">Status</Link></li>
               </ul>
             </div>
           </div>
