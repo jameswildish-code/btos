@@ -103,7 +103,7 @@ export default function AboutPage() {
           <span className="eyebrow"><span className="dot"></span> Group</span>
           <h2 className="h1" style={{marginTop:"16px",maxWidth:"22ch"}}>Part of The Original Fit Factory.</h2>
           <p style={{marginTop:24,fontSize:19,lineHeight:1.55,color:"var(--ink-2)",maxWidth:"56ch"}}>BiotrackOS sits within The Original Fit Factory — a group with deep roots in health, fitness, and performance. That foundation shapes how we build: with domain knowledge, long-term thinking, and a genuine stake in getting health data right.</p>
-          <p style={{marginTop:32,fontSize:16,lineHeight:1.6,color:"var(--ink-2)",maxWidth:"56ch"}}>Our clinical direction is shaped by <strong>The One Health Collective</strong> — our clinician advisory network, bringing together practitioners across medicine, research, and performance. <span style={{fontFamily:"var(--font-mono)",fontSize:11,letterSpacing:".12em",textTransform:"uppercase",background:"var(--mint-soft)",color:"var(--teal)",padding:"2px 8px",borderRadius:999,marginLeft:4}}>Coming soon</span></p>
+          <p style={{marginTop:32,fontSize:16,lineHeight:1.6,color:"var(--ink-2)",maxWidth:"56ch"}}>Our clinical direction is shaped by <strong>One Health Collective</strong> — our clinician advisory network, bringing together practitioners across medicine, research, and performance. <span style={{fontFamily:"var(--font-mono)",fontSize:11,letterSpacing:".12em",textTransform:"uppercase",background:"var(--mint-soft)",color:"var(--teal)",padding:"2px 8px",borderRadius:999,marginLeft:4}}>Coming soon</span></p>
         </div>
       </section>
     </>

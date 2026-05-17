@@ -92,7 +92,7 @@ export default function Footer() {
                 <li><Link href="/customers">Customer stories</Link></li>
                 <li><Link href="/clinical-evidence">Research</Link></li>
                 <li style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span style={{ color: "#807C6F", opacity: 0.6 }}>The One Health Collective</span>
+                  <span style={{ color: "#807C6F", opacity: 0.6 }}>One Health Collective</span>
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: ".12em", textTransform: "uppercase", background: "rgba(47,191,163,.15)", color: "#2FBFA3", padding: "2px 6px", borderRadius: 999 }}>Soon</span>
                 </li>
                 <li><Link href="/trust-security">Trust &amp; security</Link></li>

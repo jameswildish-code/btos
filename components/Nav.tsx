@@ -55,7 +55,7 @@ const NAV: NavEntry[] = [
         { label: "Blog",                       desc: "Research, opinion, changelog.",              href: "/blog" },
         { label: "Customer stories",           desc: "How teams ship with BiotrackOS.",            href: "/customers" },
         { label: "Research",                   desc: "Studies, publications & evidence.",          href: "/clinical-evidence" },
-        { label: "The One Health Collective",  desc: "Our clinician advisory network.",            href: "#", soon: true },
+        { label: "One Health Collective",  desc: "Our clinician advisory network.",            href: "#", soon: true },
       ]},
       { eyebrow: "Trust", items: [
         { label: "Trust & security",  desc: "Compliance, consent & encryption.", href: "/trust-security" },
