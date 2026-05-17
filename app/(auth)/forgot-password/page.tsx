@@ -2,6 +2,13 @@
 import Link from "next/link";
 import { useState } from "react";
 
+const Logo = () => (
+  <svg viewBox="0 0 360 90" width="130" height="33" aria-label="BiotrackOS" role="img">
+    <text x="8" y="64" fontSize={64} fontFamily="'Instrument Serif', serif" fill="var(--ink)">{"b"}<tspan fontStyle="italic" fill="#0FA697">{"i"}<animate attributeName="opacity" values="1;0.5;1" dur="2.4s" repeatCount="indefinite"/></tspan>{"otrack"}</text>
+    <text x="262" y="24" fontFamily="'Geist Mono', monospace" fontSize={14} letterSpacing="2.5" fontWeight={500} fill="var(--ink-2)">{"OS"}</text>
+  </svg>
+);
+
 export default function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
   const [sentEmail, setSentEmail] = useState("");
@@ -23,27 +30,20 @@ export default function ForgotPasswordPage() {
   return (
     <>
       <style>{`
-        .auth-shell { flex: 1; display: grid; place-items: center; padding: 32px clamp(20px, 5vw, 48px); min-height: calc(100vh - 96px - 72px); }
+        * { box-sizing: border-box; }
+        .auth-page { min-height: 100vh; display: flex; flex-direction: column; }
+        .auth-shell { flex: 1; display: grid; place-items: center; padding: 32px clamp(20px, 5vw, 48px); }
         .auth-chrome {
           width: 100%; max-width: 1200px; margin: 0 auto;
           padding: 28px clamp(20px, 5vw, 48px);
           display: flex; justify-content: space-between; align-items: center;
         }
-        .auth-brand {
-          display: inline-flex; align-items: center; gap: 10px;
-          text-decoration: none; color: var(--ink);
-          font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.04em;
-          font-size: 13px; text-transform: uppercase;
+        .auth-brand { display: inline-flex; align-items: center; text-decoration: none; }
+        .auth-back {
+          font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+          text-transform: uppercase; color: var(--ink-2); text-decoration: none;
         }
-        .brand-mark { width: 28px; height: 28px; flex-shrink: 0; display: inline-flex; }
-        .brand-mark svg { width: 100%; height: 100%; display: block; }
-        .shield { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
-        .pulse-line { fill: none; stroke: var(--teal-bright); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
-        .auth-chrome .back {
-          font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-          color: var(--ink-2); text-decoration: underline; text-underline-offset: 4px;
-        }
-        .auth-chrome .back:hover { color: var(--ink); }
+        .auth-back:hover { color: var(--ink); }
         .auth-card { width: 100%; max-width: 440px; margin: 0 auto; }
         .auth-eyebrow {
           font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em;
@@ -100,62 +100,64 @@ export default function ForgotPasswordPage() {
           width: 100%; max-width: 1200px; margin: 0 auto;
           padding: 24px clamp(20px, 5vw, 48px) 32px;
           display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap;
-          font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em;
+          font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
           text-transform: uppercase; color: var(--muted);
         }
+        .auth-foot a { color: var(--muted); }
+        .auth-foot a:hover { color: var(--ink); }
+        .auth-foot-legal { display: flex; gap: 20px; }
+        @media (max-width: 560px) { .auth-back { display: none; } }
       `}</style>
 
-      <header className="auth-chrome">
-        <Link href="/" className="auth-brand">
-          <span className="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 32 32" width="28" height="28">
-              <path className="shield" d="M16 3 L27 6.4 L27 16 C27 22 22.5 26.4 16 29 C9.5 26.4 5 22 5 16 L5 6.4 Z"/>
-              <path className="pulse-line" d="M8.5 17 L12 17 L13.5 13 L15.5 21.5 L17.5 10.5 L19.5 17 L23.5 17"/>
-            </svg>
-          </span>
-          <span>Biotrack<span style={{ opacity: 0.45 }}>OS</span></span>
-        </Link>
-        <Link href="/login" className="back">← Back to sign in</Link>
-      </header>
+      <div className="auth-page">
+        <header className="auth-chrome">
+          <Link href="/" className="auth-brand"><Logo /></Link>
+          <Link href="/login" className="auth-back">← Back to sign in</Link>
+        </header>
 
-      <main className="auth-shell">
-        <div className="auth-card">
-          <div className="auth-eyebrow"><span className="dot"></span> Password reset</div>
-          <h1>Forgot your <em>password?</em></h1>
-          <p className="sub">No worries — we&apos;ll email you a secure link to set a new one. The link expires in 30 minutes.</p>
+        <main className="auth-shell">
+          <div className="auth-card">
+            <div className="auth-eyebrow"><span className="dot"></span> Password reset</div>
+            <h1>Forgot your <em>password?</em></h1>
+            <p className="sub">No worries — we&apos;ll email you a secure link to set a new one. The link expires in 30 minutes.</p>
 
-          {!sent ? (
-            <form id="forgot" className="auth-form" onSubmit={handleSubmit} noValidate>
-              <div className="field">
-                <label htmlFor="email">Work email</label>
-                <input type="email" id="email" name="email" placeholder="you@yourdomain.com" autoComplete="email" required />
+            {!sent ? (
+              <form id="forgot" className="auth-form" onSubmit={handleSubmit} noValidate>
+                <div className="field">
+                  <label htmlFor="email">Email</label>
+                  <input type="email" id="email" name="email" placeholder="you@yourdomain.com" autoComplete="email" required />
+                </div>
+                <button className="auth-submit" type="submit">Send reset link <span className="arrow">→</span></button>
+              </form>
+            ) : (
+              <div className="sent-state">
+                <div className="sent-ic">✓</div>
+                <h3>Check your inbox.</h3>
+                <p>If an account exists for <strong>{sentEmail}</strong>, we&apos;ve sent a reset link. It should arrive within a minute.</p>
+                <div className="sent-resend">
+                  Didn&apos;t get it?
+                  <button onClick={() => setResent(true)} disabled={resent}>
+                    {resent ? "Sent ✓" : "Resend"}
+                  </button>
+                </div>
               </div>
-              <button className="auth-submit" type="submit">Send reset link <span className="arrow">→</span></button>
-            </form>
-          ) : (
-            <div className="sent-state">
-              <div className="sent-ic">✓</div>
-              <h3>Check your inbox.</h3>
-              <p>If an account exists for <strong>{sentEmail}</strong>, we&apos;ve sent a reset link. It should arrive within a minute.</p>
-              <div className="sent-resend">
-                Didn&apos;t get it?
-                <button onClick={() => setResent(true)} disabled={resent}>
-                  {resent ? "Sent ✓" : "Resend"}
-                </button>
-              </div>
+            )}
+
+            <div className="back-link">
+              Remembered it? <Link href="/login">Sign in instead →</Link>
             </div>
-          )}
-
-          <div className="back-link">
-            Remembered it? <Link href="/login">Sign in instead →</Link>
           </div>
-        </div>
-      </main>
+        </main>
 
-      <footer className="auth-foot">
-        <span>© 2026 BiotrackOS</span>
-        <span>HIPAA · SOC 2 · ISO 27001</span>
-      </footer>
+        <footer className="auth-foot">
+          <span>© 2026 BiotrackOS</span>
+          <div className="auth-foot-legal">
+            <Link href="/terms">Terms</Link>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/data-processing">Data processing</Link>
+          </div>
+        </footer>
+      </div>
     </>
   );
 }
