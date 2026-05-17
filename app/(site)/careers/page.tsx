@@ -19,6 +19,7 @@ type Role = {
   department?: string;
   location?: string;
   type?: string;
+  externalUrl?: string;
 };
 
 export default async function CareersPage() {
@@ -68,7 +69,7 @@ export default async function CareersPage() {
           <div className="p-grid">
             {[
               { n: "01", h: "Real scope, real stakes.", p: "We hire for ownership, not headcount. Ship work that reaches people, not features for a roadmap slide." },
-              { n: "02", h: "Thoughtful velocity.", p: "We're building health infrastructure — it has to be right. But we also ship, iterate, and evolve." },
+              { n: "02", h: "Thoughtful velocity.", p: "We build with care and ship with conviction. That's the standard." },
               { n: "03", h: "Ownership, not tickets.", p: "You'll own the outcome of your work, not a list of tasks. That means more context, more responsibility, and more interesting problems." },
             ].map((p) => (
               <div key={p.n} className="p-card">
@@ -109,7 +110,7 @@ export default async function CareersPage() {
                         {role.type && <span className="role-tag">{role.type}</span>}
                       </div>
                     </div>
-                    <Link className="btn btn-ghost btn-sm" href="mailto:careers@biotrackos.com">Apply →</Link>
+                    {role.externalUrl && <a className="btn btn-ghost btn-sm" href={role.externalUrl} target="_blank" rel="noopener noreferrer">Apply →</a>}
                   </div>
                 ))}
               </div>

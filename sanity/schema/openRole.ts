@@ -20,18 +20,7 @@ export default defineType({
       type: "string",
       options: { list: ["Full-time", "Part-time", "Contract"] },
     }),
-    defineField({
-      name: "level",
-      title: "Level",
-      type: "string",
-      options: { list: ["Junior", "Mid", "Senior", "Lead", "Head", "Director"] },
-    }),
     defineField({ name: "isOpen", title: "Role is open", type: "boolean", initialValue: true }),
-    defineField({
-      name: "body",
-      title: "Job description",
-      type: "array",
-      of: [{ type: "block" }],
-    }),
+    defineField({ name: "externalUrl", title: "Link to full job details", type: "url" }),
   ],
 });

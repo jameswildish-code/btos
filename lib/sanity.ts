@@ -120,7 +120,7 @@ export async function getOpenRoles() {
   if (!client) return null;
   return client.fetch(
     `*[_type == "openRole" && isOpen == true] | order(_createdAt asc) {
-      _id, title, slug, department, location, type, level
+      _id, title, slug, department, location, type, externalUrl
     }`
   );
 }
