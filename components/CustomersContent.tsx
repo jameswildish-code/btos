@@ -34,9 +34,7 @@ export default function CustomersContent({ customers }: { customers: Customer[] 
 
         {customers.length === 0 && (
           <div style={{ padding: "56px 0", borderTop: "1px solid var(--line)" }}>
-            <p style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: 28, margin: "0 0 12px" }}>Case studies in production.</p>
-            <p style={{ color: "var(--muted)", fontSize: 15, lineHeight: 1.6, maxWidth: "48ch", margin: "0 0 24px" }}>We&apos;re working with our early customers to document what changed when they moved to BiotrackOS. Want to speak with someone already on the platform?</p>
-            <a href="/contact" style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--ink)", textDecoration: "underline", textUnderlineOffset: 4 }}>Get in touch →</a>
+            <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13 }}>No case studies yet.</p>
           </div>
         )}
 
