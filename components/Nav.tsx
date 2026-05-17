@@ -54,7 +54,7 @@ const NAV: NavEntry[] = [
       { eyebrow: "Learn", items: [
         { label: "Blog",              desc: "Research, opinion, changelog.",   href: "/blog" },
         { label: "Customer stories", desc: "How teams ship with BiotrackOS.", href: "/customers" },
-        { label: "Clinical evidence",desc: "Published & ongoing studies.",    href: "/clinical-evidence" },
+        { label: "Research",         desc: "Studies, publications & evidence.", href: "/clinical-evidence" },
       ]},
       { eyebrow: "Trust", items: [
         { label: "Trust & security",  desc: "Compliance, consent & encryption.", href: "/trust-security" },

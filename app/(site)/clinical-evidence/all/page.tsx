@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { getClinicalStudies } from "@/lib/sanity";
 import ClinicalEvidenceContent, { type Study } from "@/components/ClinicalEvidenceContent";
 
-export const metadata: Metadata = { title: "All clinical studies — BiotrackOS" };
+export const metadata: Metadata = { title: "All studies — BiotrackOS" };
 
 export default async function ClinicalEvidenceAllPage() {
   const data = await getClinicalStudies();
@@ -37,7 +37,7 @@ export default async function ClinicalEvidenceAllPage() {
       <section className="ev-page">
         <div className="wrap">
           <div style={{ marginBottom: 32 }}>
-            <Link href="/clinical-evidence" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--muted)", textDecoration: "none" }}>← Clinical evidence</Link>
+            <Link href="/clinical-evidence" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--muted)", textDecoration: "none" }}>← Research</Link>
           </div>
           <span className="eyebrow"><span className="dot"></span> All studies</span>
           <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "clamp(56px,6vw,96px)", lineHeight: 0.95, letterSpacing: "-0.02em", margin: "24px 0 0", maxWidth: "16ch" }}>
@@ -48,7 +48,7 @@ export default async function ClinicalEvidenceAllPage() {
           <ClinicalEvidenceContent studies={studies} />
 
           <h2>For researchers</h2>
-          <p style={{ fontSize: 15, lineHeight: 1.65, color: "var(--ink-2)" }}>BiotrackOS supports IRB-approved studies with consent flow, eCRF integration, and FHIR export. Aggregated, de-identified datasets are available under DUA. Email <strong>research@biotrackos.com</strong>.</p>
+          <p style={{ fontSize: 15, lineHeight: 1.65, color: "var(--ink-2)" }}>Want to collaborate? We partner with researchers and institutions to generate real-world evidence that matters. Get in touch at <strong>research@biotrackos.com</strong>.</p>
         </div>
       </section>
     </>
