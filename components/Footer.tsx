@@ -15,7 +15,10 @@ export default function Footer() {
         .footer-grid h5 { font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#807C6F; margin:0 0 16px; font-weight:500; }
         .footer-grid ul { list-style:none; padding:0; margin:0; display:grid; gap:10px; font-size:14px; }
         .footer-grid a:hover { color:var(--bg); }
-        .footer-bottom { margin-top:64px; padding-top:24px; border-top:1px solid #2A2F4A; font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#807C6F; }
+        .footer-bottom { margin-top:64px; padding-top:24px; border-top:1px solid #2A2F4A; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#807C6F; }
+        .footer-bottom a { color:#807C6F; }
+        .footer-bottom a:hover { color:var(--bg); }
+        .footer-legal { display:flex; gap:24px; }
         @media (max-width:960px) { .footer-grid { grid-template-columns:1fr 1fr; } }
         @media (max-width:600px) { .footer-grid { grid-template-columns:1fr; } .footer-cta-grid { grid-template-columns:1fr !important; } }
       `}</style>
@@ -41,7 +44,7 @@ export default function Footer() {
               <Logo />
             </Link>
             <p style={{ maxWidth: "32ch", fontSize: 14, color: "#807C6F", marginTop: 16 }}>
-              Every signal the body generates. One record. Always up to date.
+              Built for the people behind the data.
             </p>
           </div>
 
@@ -49,6 +52,7 @@ export default function Footer() {
             <h5>Product</h5>
             <ul>
               <li><Link href="/product">Product overview</Link></li>
+              <li><Link href="/pricing">Pricing</Link></li>
               <li><Link href="/features/clinic-dashboard">Professional workspace</Link></li>
               <li><Link href="/app">Personal app</Link></li>
               <li><Link href="/features/protocols">Protocols</Link></li>
@@ -89,9 +93,6 @@ export default function Footer() {
                 <li><Link href="/clinical-evidence">Clinical evidence</Link></li>
                 <li><Link href="/trust-security">Trust &amp; security</Link></li>
                 <li><Link href="/docs">Developer docs</Link></li>
-                <li><Link href="/terms">Terms</Link></li>
-                <li><Link href="/privacy">Privacy</Link></li>
-                <li><Link href="/data-processing">Data processing</Link></li>
               </ul>
             </div>
           </div>
@@ -99,6 +100,11 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <span>© 2026 BiotrackOS</span>
+          <div className="footer-legal">
+            <Link href="/terms">Terms</Link>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/data-processing">Data processing</Link>
+          </div>
         </div>
       </div>
     </footer>
