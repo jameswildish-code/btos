@@ -36,7 +36,6 @@ export default async function CareersPage() {
     <>
       <style>{`
         .car-hero { padding:72px 0 80px; border-bottom:1px solid var(--line); }
-        .car-hero .g { display:grid; grid-template-columns:1.3fr 1fr; gap:64px; align-items:end; }
         .principles { padding:80px 0; border-bottom:1px solid var(--line); }
         .p-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px; }
         .p-card { background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:28px; }
@@ -49,33 +48,17 @@ export default async function CareersPage() {
         .role-row h4 { font-size:16px; font-weight:500; margin:0 0 6px; }
         .role-tags { display:flex; gap:8px; flex-wrap:wrap; }
         .role-tag { font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); padding:3px 8px; border-radius:999px; background:var(--bg-2); border:1px solid var(--line); }
-        @media (max-width:900px) { .car-hero .g,.p-grid { grid-template-columns:1fr; } .role-row { grid-template-columns:1fr; gap:12px; } }
+        @media (max-width:900px) { .p-grid { grid-template-columns:1fr; } .role-row { grid-template-columns:1fr; gap:12px; } }
       `}</style>
 
       <section className="car-hero">
         <div className="wrap-w">
-          <div className="g">
-            <div>
-              <span className="eyebrow"><span className="dot"></span> Careers</span>
-              <h1 className="h1" style={{ marginTop: 16 }}>
-                {roles.length > 0 ? <>{roles.length} roles open.</> : <>We&apos;re hiring.</>}
-                <br/><em>We&apos;re building in the open.</em>
-              </h1>
-              <p className="lede" style={{ marginTop: 24 }}>We&apos;re a small, focused team building clinical-grade infrastructure for health data. Based in London and Copenhagen, with engineers and clinicians working remotely across Europe.</p>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              {[
-                { label: "London, UK", count: roles.filter(r => r.location?.includes("London")).length },
-                { label: "Copenhagen", count: roles.filter(r => r.location?.includes("Copenhagen")).length },
-                { label: "Remote (Europe)", count: roles.filter(r => r.location?.includes("Remote")).length },
-              ].map((l) => (
-                <div key={l.label} style={{ display: "flex", justifyContent: "space-between", padding: "16px 0", borderBottom: "1px solid var(--line)" }}>
-                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 12 }}>{l.label}</span>
-                  <span style={{ fontFamily: "var(--font-display)", fontSize: 28, lineHeight: 1 }}>{l.count}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <span className="eyebrow"><span className="dot"></span> Careers</span>
+          <h1 className="h1" style={{ marginTop: 16 }}>
+            {roles.length > 0 ? <>{roles.length} roles open.</> : <>We&apos;re hiring.</>}
+            <br/><em>Come build what matters.</em>
+          </h1>
+          <p className="lede" style={{ marginTop: 24, maxWidth: "52ch" }}>We&apos;re a global team of engineers, clinicians, and product thinkers building clinical-grade infrastructure for health data.</p>
         </div>
       </section>
 
@@ -84,7 +67,7 @@ export default async function CareersPage() {
           <span className="eyebrow"><span className="dot"></span> How we work</span>
           <div className="p-grid">
             {[
-              { n: "01", h: "Small team, real scope.", p: "We don't over-hire. Each person ships things that matter to clinicians and patients, not features for a roadmap slide." },
+              { n: "01", h: "Real scope, real stakes.", p: "We hire for ownership, not headcount. Each person ships things that matter to clinicians and patients, not features for a roadmap slide." },
               { n: "02", h: "Clinical rigour, startup pace.", p: "We're building health infrastructure — it has to be right. But we also ship, iterate, and change our minds when the data says to. Both things are true." },
               { n: "03", h: "Ownership, not tickets.", p: "You'll own the outcome of your work, not a list of tasks. That means more context, more responsibility, and more interesting problems." },
             ].map((p) => (
