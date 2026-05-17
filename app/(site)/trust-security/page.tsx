@@ -24,7 +24,7 @@ export default function TrustSecurityPage() {
         .ctrl .n { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); }
         .ctrl h4 { margin: 12px 0 8px; font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.1; }
         .ctrl p { margin: 0; color: var(--muted); font-size: 14px; }
-        .regions { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 40px; }
+        .regions { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-top: 40px; }
         .reg { padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
         .reg h5 { margin: 0 0 6px; font-family: var(--font-display); font-weight: 400; font-size: 20px; }
         .reg p { margin: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
@@ -40,13 +40,13 @@ export default function TrustSecurityPage() {
       <section className="ts-hero">
         <div className="wrap-w">
           <span className="eyebrow"><span className="dot"></span> Trust &amp; security</span>
-          <h1 className="h1" style={{marginTop:"16px",color:"var(--bg)"}}>A clinical-grade<br/>platform, audited<br/><em>down to the byte.</em></h1>
-          <p style={{marginTop:"24px"}}>BiotrackOS is built on the assumption that a person&apos;s health record is the most sensitive data they own. Everything below is what we do about that — not as a marketing claim, but as a continuously audited operating practice.</p>
+          <h1 className="h1" style={{marginTop:"16px",color:"var(--bg)"}}>Built for the most<br/>sensitive data you<br/><em>handle.</em></h1>
+          <p style={{marginTop:"24px"}}>BiotrackOS is built on the assumption that a person&apos;s health record is the most sensitive data they own. Everything below is what we do about that — not as a marketing claim, but as the foundation the platform is built on.</p>
           <div className="ts-badges">
-            <div className="ts-badge"><div className="b-mark">H</div><h4>HIPAA</h4><p>BAA available · 2024</p></div>
-            <div className="ts-badge"><div className="b-mark">S2</div><h4>SOC 2 Type II</h4><p>Renewed Mar 2026</p></div>
-            <div className="ts-badge"><div className="b-mark">27</div><h4>ISO 27001</h4><p>Certified 2025</p></div>
-            <div className="ts-badge"><div className="b-mark">GD</div><h4>GDPR · UK GDPR</h4><p>Lead authority: DK</p></div>
+            <div className="ts-badge"><div className="b-mark">H</div><h4>HIPAA</h4><p>BAA available on request</p></div>
+            <div className="ts-badge"><div className="b-mark">GD</div><h4>GDPR · UK GDPR</h4><p>Compliant · Global</p></div>
+            <div className="ts-badge" style={{opacity:.7}}><div className="b-mark">S2</div><h4>SOC 2 Type II</h4><p>In progress</p></div>
+            <div className="ts-badge" style={{opacity:.7}}><div className="b-mark">27</div><h4>ISO 27001</h4><p>In progress</p></div>
           </div>
         </div>
       </section>
@@ -56,12 +56,12 @@ export default function TrustSecurityPage() {
           <span className="eyebrow"><span className="dot"></span> Controls</span>
           <h2>How the platform<br/><em>actually defends data.</em></h2>
           <div className="controls">
-            <div className="ctrl"><div className="n">01 · Encryption</div><h4>AES-256 at rest, TLS 1.3 in transit.</h4><p>Per-tenant key envelopes; keys held in AWS KMS with rotation every 90 days. No data leaves an HTTPS boundary, ever.</p></div>
-            <div className="ctrl"><div className="n">02 · Access</div><h4>Least-privilege RBAC and SSO.</h4><p>SAML 2.0, OIDC, SCIM provisioning. Internal access is just-in-time, time-boxed, and logged to an immutable audit store.</p></div>
-            <div className="ctrl"><div className="n">03 · Tenancy</div><h4>Logical isolation, per-tenant keys.</h4><p>One shared infrastructure, but a query for tenant A can never see tenant B. Verified by quarterly penetration tests.</p></div>
-            <div className="ctrl"><div className="n">04 · Audit</div><h4>Every read is recorded.</h4><p>Every record touch — by a clinician, a patient, an API, or one of our engineers — is logged with actor, time, IP, and reason.</p></div>
+            <div className="ctrl"><div className="n">01 · Encryption</div><h4>AES-256 at rest, TLS 1.3 in transit.</h4><p>Per-tenant key envelopes managed via hardware security modules with regular rotation. No data leaves an HTTPS boundary, ever.</p></div>
+            <div className="ctrl"><div className="n">02 · Access</div><h4>Least-privilege RBAC and SSO.</h4><p>SAML 2.0, OIDC, and SCIM provisioning supported. Internal access is just-in-time, time-boxed, and logged to an immutable audit store.</p></div>
+            <div className="ctrl"><div className="n">03 · Tenancy</div><h4>Logical isolation, per-tenant keys.</h4><p>One shared infrastructure, but a query for one tenant can never reach another. Isolation is verified through regular security testing.</p></div>
+            <div className="ctrl"><div className="n">04 · Audit</div><h4>Every read is recorded.</h4><p>Every record access — by a user, an integration, or an internal operator — is logged with actor, time, IP, and reason.</p></div>
             <div className="ctrl"><div className="n">05 · Consent</div><h4>Per-source, revocable, atomic.</h4><p>A person can revoke a single integration without affecting the others. Revocation is propagated within 60 seconds.</p></div>
-            <div className="ctrl"><div className="n">06 · Resilience</div><h4>RPO 5 min · RTO 1 hour.</h4><p>Multi-AZ Postgres, point-in-time recovery, cross-region snapshots. Tested with a live failover drill every quarter.</p></div>
+            <div className="ctrl"><div className="n">06 · Resilience</div><h4>High availability, point-in-time recovery.</h4><p>Multi-region database with point-in-time recovery and cross-region backups. Recovery objectives tested regularly.</p></div>
           </div>
         </div>
       </section>
@@ -69,12 +69,14 @@ export default function TrustSecurityPage() {
       <section className="ts-sec" style={{background:"var(--bg-2)"}}>
         <div className="wrap-w">
           <span className="eyebrow"><span className="dot"></span> Data residency</span>
-          <h2>Three regions.<br/><em>You pick yours.</em></h2>
+          <h2>Global regions.<br/><em>You pick yours.</em></h2>
           <p className="lede" style={{marginTop:"18px",maxWidth:"60ch"}}>Tenant data, backups, and logs stay in the region you select at provisioning. We do not replicate health data across regions for any reason.</p>
           <div className="regions">
-            <div className="reg"><h5>European Union</h5><p>Frankfurt · Ireland · Stockholm</p></div>
-            <div className="reg"><h5>United Kingdom</h5><p>London</p></div>
-            <div className="reg"><h5>United States</h5><p>Virginia · Oregon</p></div>
+            <div className="reg"><h5>European Union</h5><p>GDPR · EU data residency</p></div>
+            <div className="reg"><h5>United Kingdom</h5><p>UK GDPR · ICO registered</p></div>
+            <div className="reg"><h5>United States</h5><p>HIPAA · CCPA</p></div>
+            <div className="reg"><h5>Middle East</h5><p>UAE PDPL · KSA PDPL</p></div>
+            <div className="reg"><h5>Asia Pacific</h5><p>Australian Privacy Act</p></div>
           </div>
         </div>
       </section>
@@ -87,11 +89,9 @@ export default function TrustSecurityPage() {
             <Link href="/security-disclosure"><span className="t">Responsible disclosure policy</span><span className="m">Public →</span></Link>
             <Link href="/data-processing"><span className="t">Data Processing Addendum (DPA)</span><span className="m">Public →</span></Link>
             <Link href="/privacy"><span className="t">Privacy policy</span><span className="m">Public →</span></Link>
-            <a href="#"><span className="t">SOC 2 Type II report</span><span className="m">NDA →</span></a>
-            <a href="#"><span className="t">ISO 27001 certificate</span><span className="m">Public →</span></a>
-            <a href="#"><span className="t">Subprocessor list</span><span className="m">Public →</span></a>
-            <a href="#"><span className="t">Penetration test summary · 2026</span><span className="m">NDA →</span></a>
-            <a href="#"><span className="t">Business continuity &amp; DR plan</span><span className="m">NDA →</span></a>
+            <Link href="/data-processing#subprocessors"><span className="t">Subprocessor list</span><span className="m">Public →</span></Link>
+            <a href="mailto:security@biotrackos.com"><span className="t">Business continuity &amp; DR plan</span><span className="m">On request →</span></a>
+            <a href="mailto:security@biotrackos.com"><span className="t">Security questionnaire</span><span className="m">On request →</span></a>
           </div>
         </div>
       </section>
