@@ -82,7 +82,7 @@ export default function ForgotPasswordPage() {
           font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
           color: var(--muted);
         }
-        .back-link a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; margin-left: 8px; }
+        .back-link a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
         .sent-state { padding: 24px; background: var(--mint-soft); border-radius: 16px; margin-top: 32px; }
         .sent-ic {
           width: 44px; height: 44px; border-radius: 12px; background: var(--surface);
@@ -94,8 +94,9 @@ export default function ForgotPasswordPage() {
         .sent-resend {
           margin-top: 18px; font-family: var(--font-mono); font-size: 10px;
           letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+          display: flex; align-items: center; gap: 8px;
         }
-        .sent-resend button { background: none; border: none; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; margin-left: 6px; font: inherit; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 0; }
+        .sent-resend button { background: none; border: none; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font: inherit; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 0; }
         .auth-foot {
           width: 100%; max-width: 1200px; margin: 0 auto;
           padding: 24px clamp(20px, 5vw, 48px) 32px;
@@ -119,7 +120,6 @@ export default function ForgotPasswordPage() {
           <div className="auth-card">
             <div className="auth-eyebrow"><span className="dot"></span> Password reset</div>
             <h1>Forgot your <em>password?</em></h1>
-            <p className="sub">No worries — we&apos;ll email you a secure link to set a new one. The link expires in 30 minutes.</p>
 
             {!sent ? (
               <form id="forgot" className="auth-form" onSubmit={handleSubmit} noValidate>
@@ -144,7 +144,7 @@ export default function ForgotPasswordPage() {
             )}
 
             <div className="back-link">
-              Remembered it? <Link href="/login">Sign in instead →</Link>
+              <Link href="/login">Return to sign in →</Link>
             </div>
           </div>
         </main>

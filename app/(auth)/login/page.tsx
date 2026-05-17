@@ -152,7 +152,6 @@ export default function LoginPage() {
           <div className="auth-card">
             <div className="auth-eyebrow"><span className="dot"></span> Sign in</div>
             <h1>Welcome back<em>.</em></h1>
-            <p className="sub">Sign in to your BiotrackOS workspace.</p>
 
             <form id="signin" className="auth-form" onSubmit={handleSubmit} noValidate>
               <div className="field">
