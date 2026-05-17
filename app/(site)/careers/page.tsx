@@ -2,17 +2,6 @@ export const revalidate = 0;
 import Link from "next/link";
 import { getOpenRoles } from "@/lib/sanity";
 
-const deptColors: Record<string, string> = {
-  Engineering: "var(--mint-soft)",
-  Design: "var(--sky)",
-  Clinical: "var(--rose)",
-  Sales: "var(--amber)",
-  Marketing: "var(--lime)",
-  Product: "var(--mint)",
-  People: "var(--mint-soft)",
-  Operations: "var(--bg-2)",
-};
-
 type Role = {
   _id: string;
   title: string;
@@ -98,8 +87,7 @@ export default async function CareersPage() {
           ) : (
             sortedDepts.map(([dept, deptRoles]) => (
               <div key={dept} className="dept-section">
-                <div className="dept-head" style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span style={{ width: 8, height: 8, borderRadius: "50%", background: deptColors[dept] ?? "var(--line)", display: "inline-block" }}></span>
+                <div className="dept-head">
                   {dept} — {deptRoles.length} open
                 </div>
                 {deptRoles.map((role) => (
