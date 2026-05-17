@@ -46,9 +46,9 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
           <div className="g">
             <div>
               <span className="eyebrow"><span className="dot"></span> Blog</span>
-              <h1 className="h1">On health data, AI, and what becomes<br/>possible when<br/><em>everything connects.</em></h1>
+              <h1 className="h1">On health data, AI, and the<br/><em>future of connected health.</em></h1>
             </div>
-            <p className="lede">Research, product, and perspectives from the team behind BiotrackOS.</p>
+            <p className="lede">Opinion, research, and analysis — from the BiotrackOS team and the wider field.</p>
           </div>
           <div className="filters">
             {CATS.map((c) => (
