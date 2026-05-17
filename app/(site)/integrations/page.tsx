@@ -53,12 +53,14 @@ export default async function IntegrationsPage() {
         .int-empty h4 { font-size: 18px; font-weight: 500; margin: 0 0 8px; }
         .int-empty p { font-size: 14px; color: var(--muted); }
         .partner-cta { margin: 0; background: var(--bg-2); border-top: 1px solid var(--line); padding: 96px 0; }
-        .partner-cta .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 48px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: center; }
-        .partner-cta h2 { font-family: var(--font-display); font-weight: 400; font-size: 48px; line-height: 1.05; letter-spacing: -0.01em; margin: 12px 0 16px; }
-        .partner-cta p { color: var(--ink-2); margin: 0; }
-        .partner-cta .why { display:grid; gap: 14px; margin-top: 24px; }
-        .partner-cta .why .row { display: grid; grid-template-columns: 28px 1fr; gap: 12px; font-size: 14px; }
-        .partner-cta .why .row .n { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--muted); padding-top: 2px; }
+        .partner-cta .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 48px; }
+        .partner-cta .panel-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+        .partner-cta h2 { font-family: var(--font-display); font-weight: 400; font-size: 48px; line-height: 1.05; letter-spacing: -0.01em; margin: 12px 0 12px; }
+        .partner-cta .panel-top p { color: var(--ink-2); margin: 0; max-width: 44ch; }
+        .partner-cta .panel-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding-top: 40px; }
+        .partner-cta .point h5 { font-size: 15px; font-weight: 600; margin: 0 0 8px; }
+        .partner-cta .point p { font-size: 14px; color: var(--ink-2); margin: 0; line-height: 1.6; }
+        @media (max-width:900px) { .partner-cta .panel-points { grid-template-columns: 1fr; } .partner-cta .panel-top { flex-direction: column; } }
         @media (max-width:1100px){ .int-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width:900px) { .i-hero .g, .feat-banner, .partner-cta .panel { grid-template-columns: 1fr; gap: 24px; } .feat-banner .art { min-height: 180px; } }
       `}</style>
@@ -88,18 +90,29 @@ export default async function IntegrationsPage() {
       <section className="partner-cta">
         <div className="wrap-w">
           <div className="panel">
-            <div>
-              <span className="eyebrow"><span className="dot"></span> Integrate your service</span>
-              <h2>Want your service<br/>on the platform?<br/><em style={{ color: "var(--ink-2)", fontStyle: "italic" }}>One integration. Every BiotrackOS customer.</em></h2>
-              <p>BiotrackOS is open to qualified integrations. If your service generates or holds health-relevant data, we want to hear from you.</p>
-              <div className="why">
-                <div className="row"><span className="n">01</span><span>Connect once. Your service becomes available to every customer on the platform.</span></div>
-                <div className="row"><span className="n">02</span><span>Consent-gated discovery — customers choose to connect your service, you reach them at the point of intent.</span></div>
-                <div className="row"><span className="n">03</span><span>Co-marketed across our customer network.</span></div>
+            <div className="panel-top">
+              <div>
+                <span className="eyebrow"><span className="dot"></span> Integrate your service</span>
+                <h2>One integration.<br/><em style={{ color: "var(--ink-2)" }}>Every customer we serve.</em></h2>
+                <p>Open to qualified integrations across every category. If your service generates or holds health-relevant data, we want to hear from you.</p>
+              </div>
+              <div style={{ flexShrink: 0 }}>
+                <Link className="btn btn-primary btn-lg" href="/contact">Apply <span className="arrow">→</span></Link>
               </div>
             </div>
-            <div>
-              <Link className="btn btn-primary btn-lg" href="/contact">Apply <span className="arrow">→</span></Link>
+            <div className="panel-points">
+              <div className="point">
+                <h5>Connect once.</h5>
+                <p>Your service becomes available to every clinic, team, and individual on the platform immediately.</p>
+              </div>
+              <div className="point">
+                <h5>Reach them at the right moment.</h5>
+                <p>Customers find and connect your service when they&apos;re ready — you reach them at the point of intent.</p>
+              </div>
+              <div className="point">
+                <h5>Co-marketed at launch.</h5>
+                <p>Featured and promoted across our growing customer network.</p>
+              </div>
             </div>
           </div>
         </div>

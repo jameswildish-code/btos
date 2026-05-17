@@ -56,15 +56,12 @@ function IntegrationTile({ integration }: { integration: Integration }) {
 function CategorySection({
   category,
   integrations,
-  index,
 }: {
   category: Category;
   integrations: Integration[];
-  index: number;
 }) {
   const [visible, setVisible] = useState(PAGE_SIZE);
   const featured = integrations.find((i) => i.featured);
-  const num = String(index + 1).padStart(2, "0");
   const shown = integrations.slice(0, visible);
   const hasMore = visible < integrations.length;
 
@@ -73,7 +70,6 @@ function CategorySection({
       <div className="wrap-w">
         <div className="head">
           <div>
-            <span className="eyebrow"><span className="dot"></span> Category {num}</span>
             <h2>{category.title}.</h2>
           </div>
           {category.description && <p className="desc">{category.description}</p>}
@@ -190,7 +186,6 @@ export default function IntegrationsContent({
           key={cat._id}
           category={cat}
           integrations={byCategory[cat._id] ?? []}
-          index={idx}
         />
       ))}
     </>
