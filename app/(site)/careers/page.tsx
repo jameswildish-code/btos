@@ -56,9 +56,9 @@ export default async function CareersPage() {
           <span className="eyebrow"><span className="dot"></span> Careers</span>
           <h1 className="h1" style={{ marginTop: 16 }}>
             {roles.length > 0 ? <>{roles.length} roles open.</> : <>We&apos;re hiring.</>}
-            <br/><em>Come build what matters.</em>
+            <br/><em>Join us. Build what&apos;s next.</em>
           </h1>
-          <p className="lede" style={{ marginTop: 24, maxWidth: "52ch" }}>We&apos;re a global team of engineers, clinicians, and product thinkers building clinical-grade infrastructure for health data.</p>
+          <p className="lede" style={{ marginTop: 24, maxWidth: "52ch" }}>We&apos;re a global team of engineers, product thinkers, and clinical advisors building the platform modern health runs on.</p>
         </div>
       </section>
 
@@ -67,8 +67,8 @@ export default async function CareersPage() {
           <span className="eyebrow"><span className="dot"></span> How we work</span>
           <div className="p-grid">
             {[
-              { n: "01", h: "Real scope, real stakes.", p: "We hire for ownership, not headcount. Each person ships things that matter to clinicians and patients, not features for a roadmap slide." },
-              { n: "02", h: "Clinical rigour, startup pace.", p: "We're building health infrastructure — it has to be right. But we also ship, iterate, and change our minds when the data says to. Both things are true." },
+              { n: "01", h: "Real scope, real stakes.", p: "We hire for ownership, not headcount. Ship work that reaches people, not features for a roadmap slide." },
+              { n: "02", h: "Thoughtful velocity.", p: "We're building health infrastructure — it has to be right. But we also ship, iterate, and evolve." },
               { n: "03", h: "Ownership, not tickets.", p: "You'll own the outcome of your work, not a list of tasks. That means more context, more responsibility, and more interesting problems." },
             ].map((p) => (
               <div key={p.n} className="p-card">
