@@ -11,7 +11,7 @@ const Logo = () => (
 
 export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<React.ReactNode | null>(null);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,7 +27,7 @@ export default function LoginPage() {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
-      setError("These credentials aren't recognised. Please check your details and try again.");
+      setError(<>Email or password is incorrect. Try again or <Link href="/forgot-password" style={{ color: "inherit", textDecoration: "underline", textUnderlineOffset: "3px" }}>reset your password</Link>.</>);
     }, 1200);
   }
 
