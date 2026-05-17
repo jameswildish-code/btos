@@ -1,11 +1,14 @@
-import { getBlogPosts } from "@/lib/sanity";
+import { getBlogPosts, getBlogCategories } from "@/lib/sanity";
 import BlogContent from "@/components/BlogContent";
 
 export const revalidate = 0;
 export const metadata = { title: "Blog — BiotrackOS" };
 
 export default async function BlogPage() {
-  const posts = await getBlogPosts() ?? [];
+  const [posts, categories] = await Promise.all([
+    getBlogPosts().then(r => r ?? []),
+    getBlogCategories(),
+  ]);
 
   return (
     <>
@@ -49,7 +52,7 @@ export default async function BlogPage() {
         .nl-form input::placeholder { color:#807C6F; }
         @media (max-width:1000px) { .feat-card,.post-grid,.b-hero .g,.newsletter-band { grid-template-columns:1fr; } }
       `}</style>
-      <BlogContent posts={posts} />
+      <BlogContent posts={posts} categories={categories} />
     </>
   );
 }

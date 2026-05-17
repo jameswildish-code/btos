@@ -1,4 +1,5 @@
 import blogPost from "./blogPost";
+import blogCategory from "./blogCategory";
 import caseStudy from "./caseStudy";
 import openRole from "./openRole";
 import pressItem from "./pressItem";
@@ -13,6 +14,7 @@ import clinicalStudy from "./clinicalStudy";
 
 export const schemaTypes = [
   blogPost,
+  blogCategory,
   caseStudy,
   openRole,
   pressItem,

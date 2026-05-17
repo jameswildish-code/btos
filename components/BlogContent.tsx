@@ -5,15 +5,20 @@ import { useState } from "react";
 import NewsletterForm from "@/components/NewsletterForm";
 
 const ARTS = ["art-a", "art-b", "art-c", "art-d", "art-e", "art-f"];
-const CATS = ["All", "AI", "Clinical", "Engineering & Technology", "Opinion", "Product", "Research"];
 const PAGE_SIZE = 6;
+
+type Category = {
+  _id: string;
+  title: string;
+  slug: { current: string };
+};
 
 type Post = {
   _id: string;
   slug: { current: string };
   title: string;
   excerpt?: string;
-  category: string;
+  category?: Category;
   publishedAt: string;
   author?: { name: string };
   readTime?: number;
@@ -26,12 +31,11 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
 }
 
-export default function BlogContent({ posts }: { posts: Post[] }) {
+export default function BlogContent({ posts, categories }: { posts: Post[]; categories: Category[] }) {
   const [active, setActive] = useState("All");
   const [visible, setVisible] = useState(PAGE_SIZE);
   const featured = posts[0];
-  const rest = posts.slice(1);
-  const filtered = active === "All" ? rest : posts.filter((p) => p.category === active);
+  const filtered = active === "All" ? posts.slice(1) : posts.filter((p) => p.category?.title === active);
   const shown = filtered.slice(0, visible);
 
   function handleFilter(cat: string) {
@@ -51,8 +55,9 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
             <p className="lede">Opinion, research, and analysis — from the BiotrackOS team and the wider field.</p>
           </div>
           <div className="filters">
-            {CATS.map((c) => (
-              <button key={c} className={active === c ? "on" : ""} onClick={() => handleFilter(c)}>{c}</button>
+            <button className={active === "All" ? "on" : ""} onClick={() => handleFilter("All")}>All</button>
+            {categories.map((c) => (
+              <button key={c._id} className={active === c.title ? "on" : ""} onClick={() => handleFilter(c.title)}>{c.title}</button>
             ))}
           </div>
         </div>
@@ -71,7 +76,7 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
                 {featured.label && <div className="glyph">{featured.label}</div>}
               </div>
               <div className="feat-body">
-                <span className="feat-meta">Featured · {featured.category} · {featured.readTime} min read</span>
+                <span className="feat-meta">Featured · {featured.category?.title} · {featured.readTime} min read</span>
                 <h2>{featured.title}</h2>
                 {featured.excerpt && <p style={{ fontSize: 15, color: "var(--muted)", margin: 0, lineHeight: 1.6 }}>{featured.excerpt}</p>}
                 <div className="feat-meta" style={{ display: "flex", gap: 16, color: "var(--muted)" }}>
@@ -109,7 +114,7 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
                     {post.label && <div className="label">{post.label}</div>}
                   </div>
                   <div className="post-meta">
-                    <span>{post.category}</span>
+                    <span>{post.category?.title}</span>
                     <span>·</span>
                     <span>{post.readTime} MIN READ</span>
                   </div>

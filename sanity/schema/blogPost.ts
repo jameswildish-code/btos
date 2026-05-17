@@ -12,8 +12,8 @@ export default defineType({
     defineField({
       name: "category",
       title: "Category",
-      type: "string",
-      options: { list: ["Research", "Product", "Engineering", "Opinion", "Clinical"] },
+      type: "reference",
+      to: [{ type: "blogCategory" }],
     }),
     defineField({
       name: "author",

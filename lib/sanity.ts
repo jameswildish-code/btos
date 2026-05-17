@@ -20,6 +20,15 @@ export const urlFor = (source: Parameters<ReturnType<typeof imageUrlBuilder>["im
   builder?.image(source);
 
 // Blog queries
+export async function getBlogCategories() {
+  if (!client) return [];
+  return client.fetch(
+    `*[_type == "blogCategory"] | order(title asc) {
+      _id, title, slug
+    }`
+  );
+}
+
 export async function getFeaturedPost() {
   if (!client) return null;
   return client.fetch(
@@ -34,7 +43,8 @@ export async function getBlogPosts() {
   if (!client) return null;
   return client.fetch(
     `*[_type == "blogPost"] | order(publishedAt desc) {
-      _id, title, slug, excerpt, publishedAt, category, label,
+      _id, title, slug, excerpt, publishedAt, label,
+      "category": category->{ _id, title, slug },
       "author": author->{ name, role },
       "coverImage": coverImage.asset->url,
       "readTime": round(length(pt::text(body)) / 5 / 180)
@@ -46,7 +56,8 @@ export async function getBlogPost(slug: string) {
   if (!client) return null;
   return client.fetch(
     `*[_type == "blogPost" && slug.current == $slug][0] {
-      _id, title, slug, excerpt, publishedAt, category, label, body,
+      _id, title, slug, excerpt, publishedAt, label, body,
+      "category": category->{ _id, title, slug },
       "author": author->{ name, role, image },
       "coverImage": coverImage.asset->url,
       "reportUrl": report.asset->url,
@@ -56,14 +67,15 @@ export async function getBlogPost(slug: string) {
   );
 }
 
-export async function getRelatedPosts(slug: string, category: string) {
+export async function getRelatedPosts(slug: string, categoryId: string) {
   if (!client) return [];
   return client.fetch(
-    `*[_type == "blogPost" && category == $category && slug.current != $slug] | order(publishedAt desc)[0...3] {
-      _id, title, slug, category, publishedAt,
+    `*[_type == "blogPost" && category._ref == $categoryId && slug.current != $slug] | order(publishedAt desc)[0...3] {
+      _id, title, slug, publishedAt,
+      "category": category->{ _id, title, slug },
       "author": author->{ name }
     }`,
-    { slug, category }
+    { slug, categoryId }
   );
 }
 
