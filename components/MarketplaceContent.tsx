@@ -143,6 +143,7 @@ function PartnerCategorySection({
 
       {partners.length === 0 ? (
         <div className="partner-empty">
+          <h4>Live on the platform.</h4>
           <p>This category is active. New partners are onboarded by application and reviewed before going live. <Link href="/contact">Apply →</Link></p>
         </div>
       ) : (
@@ -205,7 +206,6 @@ function PartnersTab({ categories, partners }: { categories: PartnerCategory[]; 
 
   return (
     <>
-      <p className="tab-lede">Data partners — the sources BiotrackOS connects and normalises for your team and your members.</p>
       {categories.map((cat) => (
         <PartnerCategorySection
           key={cat._id}
@@ -230,7 +230,6 @@ function AddonsTab({ addons }: { addons: Addon[] }) {
 
   return (
     <>
-      <p className="tab-lede">First-party features you can add to any plan. Tagged by market — filter to see what&apos;s relevant for your team.</p>
       {addons.length === 0 ? (
         <EmptyState
           message="First-party features are in development. Have an idea for a market-specific module? We want to hear from you."
@@ -280,10 +279,9 @@ function ProgrammesTab({ programmes }: { programmes: Programme[] }) {
 
   return (
     <>
-      <p className="tab-lede">Clinician-authored care programmes — defined protocols, enrolled members, and a 70/30 revenue share with the programme author.</p>
       {programmes.length === 0 ? (
         <EmptyState
-          message="Clinician-authored programmes are open for submission. Authors earn 70% of programme revenue."
+          message="Programmes are open for submission. Authors earn the majority of revenue on every enrolment — BiotrackOS takes a platform fee."
           cta={<Link className="btn btn-ghost" href="/contact">Submit a programme →</Link>}
         />
       ) : (
@@ -316,9 +314,9 @@ function ProgrammesTab({ programmes }: { programmes: Programme[] }) {
       <div className="submit-strip">
         <div>
           <h4>Submit a programme.</h4>
-          <p>Clinicians earn 70% of programme revenue. Submit your protocol for review.</p>
+          <p>Authors earn the majority of revenue on every enrolment. BiotrackOS takes a platform fee. All programmes are reviewed before going live.</p>
         </div>
-        <Link className="btn btn-primary" href="/contact">Submit a programme <span className="arrow">→</span></Link>
+        <Link className="btn btn-primary" href="/contact">Submit <span className="arrow">→</span></Link>
       </div>
     </>
   );

@@ -28,7 +28,9 @@ export default async function MarketplacePage() {
         .partner-cat-head { display:flex; justify-content:space-between; align-items:end; gap:32px; flex-wrap:wrap; margin-bottom:32px; }
         .partner-cat-title { font-family:var(--font-display); font-weight:400; font-size:44px; line-height:1.05; letter-spacing:-0.01em; margin:10px 0 0; }
         .partner-cat-desc { color:var(--muted); max-width:44ch; font-size:14px; }
-        .partner-empty { padding:24px 0 8px; color:var(--muted); font-size:14px; }
+        .partner-empty { text-align:center; padding:56px 0; }
+        .partner-empty h4 { font-size:18px; font-weight:500; margin:0 0 8px; }
+        .partner-empty p { font-size:14px; color:var(--muted); }
         .feat-banner { display:grid; grid-template-columns:1.2fr 1fr; gap:0; background:var(--ink); color:var(--bg); border-radius:24px; overflow:hidden; position:relative; margin-bottom:24px; }
         .feat-banner::before { content:""; position:absolute; inset:0; background:radial-gradient(ellipse at top right,rgba(47,191,163,.16),transparent 60%); }
         .feat-banner > * { position:relative; }
@@ -75,7 +77,7 @@ export default async function MarketplacePage() {
               <span className="eyebrow"><span className="dot"></span> Marketplace</span>
               <h1 className="h1">Partners, add-ons,<br/><em>and programmes.</em></h1>
             </div>
-            <p className="lede">Connect a data partner, activate a feature, or deploy a clinician-authored programme — all from the same platform.</p>
+            <p className="lede">Connect a data partner, activate a feature, or deploy a programme — all from the same platform.</p>
           </div>
           <MarketplaceContent
             partnerCategories={partnerCategories ?? []}
