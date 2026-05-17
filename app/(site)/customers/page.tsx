@@ -60,9 +60,9 @@ export default async function CustomersPage() {
           <div className="g">
             <div>
               <span className="eyebrow"><span className="dot"></span> Customers</span>
-              <h1 className="h1">Clinics. Labs. Sports clubs.<br/><em>One platform underneath.</em></h1>
+              <h1 className="h1">Who&apos;s building<br/><em>on BiotrackOS.</em></h1>
             </div>
-            <p className="lede">Teams who replaced their dashboards, exports, and CSV pipelines with BiotrackOS — and what changed.</p>
+            <p className="lede">The organisations and builders using BiotrackOS — and what happened next.</p>
           </div>
 
           {featured && (
@@ -98,9 +98,13 @@ export default async function CustomersPage() {
 
       <div style={{ background: "var(--bg-2)", borderTop: "1px solid var(--line)", padding: "80px 0" }}>
         <div className="wrap-w" style={{ textAlign: "center" }}>
-          <span className="eyebrow"><span className="dot"></span> Want results like these?</span>
+          <span className="eyebrow"><span className="dot"></span> {customers.length > 0 ? "Want results like these?" : "Ready to be on this page?"}</span>
           <h2 className="h2" style={{ marginTop: 16 }}>See BiotrackOS in action.</h2>
-          <p style={{ color: "var(--muted)", maxWidth: "44ch", margin: "12px auto 0", lineHeight: 1.6 }}>Join the teams already running on BiotrackOS. Book a 20-minute walkthrough with your data.</p>
+          <p style={{ color: "var(--muted)", maxWidth: "44ch", margin: "12px auto 0", lineHeight: 1.6 }}>
+            {customers.length > 0
+              ? "Join the teams already running on BiotrackOS. Book a 20-minute walkthrough with your data."
+              : "We're working with our first customers now. If you'd like to be featured here, get in touch."}
+          </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 28 }}>
             <Link className="btn btn-primary btn-lg" href="/contact">Book a demo <span className="arrow">→</span></Link>
             <Link className="btn btn-ghost btn-lg" href="/pricing">See pricing</Link>

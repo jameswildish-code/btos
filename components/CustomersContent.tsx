@@ -28,7 +28,7 @@ export default function CustomersContent({ customers }: { customers: Customer[] 
     <section className="c-grid">
       <div className="wrap-w">
         <div className="row-head" style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-          <span className="eyebrow"><span className="dot"></span> All stories</span>
+          <span className="eyebrow"><span className="dot"></span> Case studies</span>
           {customers.length > 0 && <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--muted)" }}>{customers.length} stories</span>}
         </div>
 
