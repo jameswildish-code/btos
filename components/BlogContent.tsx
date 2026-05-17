@@ -45,7 +45,7 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
         <div className="wrap-w">
           <div className="g">
             <div>
-              <span className="eyebrow"><span className="dot"></span> Field Notes</span>
+              <span className="eyebrow"><span className="dot"></span> Blog</span>
               <h1 className="h1">Notes from a small<br/>group of people<br/><em>obsessed with signal.</em></h1>
             </div>
             <p className="lede">Clinical studies, product changelogs, opinions from our research team, and the occasional rant about CSV pipelines.</p>
@@ -88,10 +88,12 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
         <div className="wrap-w">
           <div className="row-head">
             <span className="eyebrow"><span className="dot"></span> {active === "All" ? "Latest" : active}</span>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase" }}>{filtered.length} posts</span>
+            {filtered.length > 0 && <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase" }}>{filtered.length} posts</span>}
           </div>
           {filtered.length === 0 && (
-            <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13, marginTop: 32 }}>No posts yet — add some in Sanity Studio.</p>
+            <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13, marginTop: 32 }}>
+              {active === "All" ? "Articles are being written. Subscribe below to be notified when the first one lands." : `No ${active.toLowerCase()} articles yet — check back soon.`}
+            </p>
           )}
           <div className="post-grid">
             {shown.map((post, i) => {

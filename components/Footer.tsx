@@ -88,7 +88,7 @@ export default function Footer() {
             <div>
               <h5>Resources</h5>
               <ul>
-                <li><Link href="/blog">Field notes</Link></li>
+                <li><Link href="/blog">Blog</Link></li>
                 <li><Link href="/customers">Customer stories</Link></li>
                 <li><Link href="/clinical-evidence">Clinical evidence</Link></li>
                 <li><Link href="/trust-security">Trust &amp; security</Link></li>

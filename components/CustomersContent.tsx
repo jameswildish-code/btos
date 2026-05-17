@@ -29,11 +29,15 @@ export default function CustomersContent({ customers }: { customers: Customer[] 
       <div className="wrap-w">
         <div className="row-head" style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
           <span className="eyebrow"><span className="dot"></span> All stories</span>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--muted)" }}>{customers.length} stories</span>
+          {customers.length > 0 && <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--muted)" }}>{customers.length} stories</span>}
         </div>
 
         {customers.length === 0 && (
-          <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13, marginTop: 32 }}>No customer stories yet — add some in Sanity Studio.</p>
+          <div style={{ padding: "56px 0", borderTop: "1px solid var(--line)" }}>
+            <p style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: 28, margin: "0 0 12px" }}>Case studies in production.</p>
+            <p style={{ color: "var(--muted)", fontSize: 15, lineHeight: 1.6, maxWidth: "48ch", margin: "0 0 24px" }}>We&apos;re working with our early customers to document what changed when they moved to BiotrackOS. Want to speak with someone already on the platform?</p>
+            <a href="/contact" style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--ink)", textDecoration: "underline", textUnderlineOffset: 4 }}>Get in touch →</a>
+          </div>
         )}
 
         <div className="c-card-grid">

@@ -22,7 +22,11 @@ function PublishedSection({ studies, showViewAll }: { studies: Study[]; showView
   const hasMore = visible < studies.length;
 
   if (studies.length === 0) {
-    return <p className="ev-empty">No published studies yet — add them in Sanity Studio.</p>;
+    return (
+      <div style={{ borderTop: "1px solid var(--line)", padding: "40px 0" }}>
+        <p className="ev-empty">Studies are being finalised for publication. Contact <strong>research@biotrackos.com</strong> for pre-publication access or dataset enquiries.</p>
+      </div>
+    );
   }
 
   return (
@@ -68,7 +72,7 @@ function InProgressSection({ studies }: { studies: Study[] }) {
   const hasMore = visible < studies.length;
 
   if (studies.length === 0) {
-    return <p className="ev-empty">No in-progress studies yet — add them in Sanity Studio.</p>;
+    return <p className="ev-empty">Ongoing studies are being registered. Contact <strong>research@biotrackos.com</strong> to discuss collaboration or IRB-approved data access.</p>;
   }
 
   return (

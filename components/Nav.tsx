@@ -52,7 +52,7 @@ const NAV: NavEntry[] = [
     id: "resources", type: "mega", label: "Resources",
     columns: [
       { eyebrow: "Learn", items: [
-        { label: "Field notes",      desc: "Research, opinion, changelog.",   href: "/blog" },
+        { label: "Blog",              desc: "Research, opinion, changelog.",   href: "/blog" },
         { label: "Customer stories", desc: "How teams ship with BiotrackOS.", href: "/customers" },
         { label: "Clinical evidence",desc: "Published & ongoing studies.",    href: "/clinical-evidence" },
       ]},

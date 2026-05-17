@@ -2,7 +2,7 @@ import { getBlogPosts } from "@/lib/sanity";
 import BlogContent from "@/components/BlogContent";
 
 export const revalidate = 0;
-export const metadata = { title: "Field Notes — BiotrackOS" };
+export const metadata = { title: "Blog — BiotrackOS" };
 
 export default async function BlogPage() {
   const posts = await getBlogPosts() ?? [];
