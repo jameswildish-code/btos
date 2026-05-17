@@ -37,9 +37,9 @@ export default async function ClinicalEvidencePage() {
 
       <section className="ev-page">
         <div className="wrap">
-          <span className="eyebrow"><span className="dot"></span> Clinical evidence</span>
-          <h1>Published &amp; <em>ongoing studies.</em></h1>
-          <p className="lede">BiotrackOS is built on data that&apos;s reviewed, audited, and replicable. These are the studies our platform supports — by providing the longitudinal record, the dedup engine, or the consent infrastructure.</p>
+          <span className="eyebrow"><span className="dot"></span> Research</span>
+          <h1>Studies &amp; <em>publications.</em></h1>
+          <p className="lede">Research powered by the platform. Studies, publications, and real-world evidence — from our team, researchers and the institutions using BiotrackOS to collect, structure, and analyse health data.</p>
 
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 64 }}>
             <h2 style={{ margin: 0 }}>Published</h2>
@@ -49,7 +49,7 @@ export default async function ClinicalEvidencePage() {
           <ClinicalEvidenceContent studies={studies} />
 
           <h2>For researchers</h2>
-          <p>BiotrackOS supports IRB-approved studies with consent flow, eCRF integration, and FHIR export. Aggregated, de-identified datasets are available under DUA. Email <strong>research@biotrackos.com</strong>.</p>
+          <p>Want to collaborate? We partner with researchers and institutions to generate real-world evidence that matters. Get in touch at <strong>research@biotrackos.com</strong>.</p>
         </div>
       </section>
     </>

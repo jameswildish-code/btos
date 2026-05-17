@@ -24,7 +24,7 @@ function PublishedSection({ studies, showViewAll }: { studies: Study[]; showView
   if (studies.length === 0) {
     return (
       <div style={{ borderTop: "1px solid var(--line)", padding: "40px 0" }}>
-        <p className="ev-empty">Studies are being finalised for publication. Contact <strong>research@biotrackos.com</strong> for pre-publication access or dataset enquiries.</p>
+        <p className="ev-empty">Studies in review. Email <strong>research@biotrackos.com</strong> for early access.</p>
       </div>
     );
   }
@@ -72,7 +72,7 @@ function InProgressSection({ studies }: { studies: Study[] }) {
   const hasMore = visible < studies.length;
 
   if (studies.length === 0) {
-    return <p className="ev-empty">Ongoing studies are being registered. Contact <strong>research@biotrackos.com</strong> to discuss collaboration or IRB-approved data access.</p>;
+    return <p className="ev-empty">Studies underway. Email <strong>research@biotrackos.com</strong> to discuss collaboration.</p>;
   }
 
   return (
