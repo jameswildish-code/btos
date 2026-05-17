@@ -62,7 +62,7 @@ export default async function CustomersPage() {
               <span className="eyebrow"><span className="dot"></span> Customers</span>
               <h1 className="h1">Who&apos;s building<br/><em>on BiotrackOS.</em></h1>
             </div>
-            <p className="lede">The organisations and builders using BiotrackOS — and what happened next.</p>
+            <p className="lede">The organisations and builders using the platform — and what happened next.</p>
           </div>
 
           {featured && (
