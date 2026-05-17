@@ -46,9 +46,9 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
           <div className="g">
             <div>
               <span className="eyebrow"><span className="dot"></span> Blog</span>
-              <h1 className="h1">Notes from a small<br/>group of people<br/><em>obsessed with signal.</em></h1>
+              <h1 className="h1">Research, opinion, and signal<br/>from the team building<br/><em>connected health.</em></h1>
             </div>
-            <p className="lede">Clinical studies, product changelogs, opinions from our research team, and the occasional rant about CSV pipelines.</p>
+            <p className="lede">Clinical evidence, product thinking, and hard takes on what changes when health data is longitudinal, structured, and always up to date.</p>
           </div>
           <div className="filters">
             {CATS.map((c) => (
@@ -92,7 +92,7 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
           </div>
           {filtered.length === 0 && (
             <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13, marginTop: 32 }}>
-              {active === "All" ? "Articles are being written. Subscribe below to be notified when the first one lands." : `No ${active.toLowerCase()} articles yet — check back soon.`}
+              {active === "All" ? "Articles are being written. Subscribe below to be notified when the first one lands." : `No ${active.toLowerCase()} articles yet.`}
             </p>
           )}
           <div className="post-grid">
