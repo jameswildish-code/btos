@@ -32,8 +32,8 @@ export default function ShareCol({ reportUrl }: { reportUrl?: string }) {
       {reportUrl && (
         <>
           <div style={{ margin: "24px 0 12px", borderTop: "1px solid var(--line)", paddingTop: 24, fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", color: "var(--muted)" }}>Report</div>
-          <a href={reportUrl} target="_blank" rel="noopener noreferrer" download style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-2)", textDecoration: "none" }}>
-            Download PDF ↓
+          <a href={reportUrl} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-2)", textDecoration: "none" }}>
+            Download PDF ↗
           </a>
         </>
       )}
