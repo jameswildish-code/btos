@@ -16,28 +16,17 @@ export default function AboutPage() {
         .pri .n { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 24px; }
         .pri h4 { font-family: var(--font-display); font-weight: 400; font-size: 32px; line-height: 1.02; margin: 0 0 12px; }
         .pri p  { color: var(--ink-2); margin: 0; }
-        .timeline { padding: 96px 0; }
-        .tl { display: grid; gap: 0; margin-top: 40px; }
-        .tl-row { display: grid; grid-template-columns: 160px 1fr 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid var(--line); align-items: start; }
-        .tl-row .y { font-family: var(--font-display); font-size: 40px; line-height: 1; }
-        .tl-row h5 { margin: 0; font-size: 17px; font-weight: 500; }
-        .tl-row p  { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
-        .team { padding: 96px 0; background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-        .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
-        .person { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
-        .ava {
-          width: 100%; aspect-ratio: 1/1; border-radius: 12px;
-          background: linear-gradient(135deg, var(--mint) 0%, var(--mint-soft) 100%);
-          display: grid; place-items: center;
-          font-family: var(--font-display); font-size: 64px; color: var(--teal);
-        }
-        .person h5 { margin: 12px 0 4px; font-size: 15px; font-weight: 500; }
-        .person p  { margin: 0; color: var(--muted); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
-        .invest { padding: 96px 0; }
-        .invest-row { display: flex; gap: 56px; flex-wrap: wrap; margin-top: 40px; align-items: center; }
-        .invest-row .name { font-family: var(--font-display); font-size: 32px; letter-spacing: -0.01em; color: var(--ink-2); }
+        .founder { padding: 96px 0; border-top: 1px solid var(--line); }
+        .founder-grid { display: grid; grid-template-columns: 280px 1fr; gap: 80px; align-items: start; margin-top: 48px; }
+        .founder-ava { width: 100%; aspect-ratio: 1/1; border-radius: 20px; background: linear-gradient(135deg, var(--mint) 0%, var(--mint-soft) 100%); display: grid; place-items: center; font-family: var(--font-display); font-size: 96px; color: var(--teal); }
+        .founder-name { font-size: 17px; font-weight: 500; margin: 16px 0 4px; }
+        .founder-role { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+        .founder-message { font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.35; letter-spacing: -0.01em; color: var(--ink-2); }
+        .founder-message em { font-style: italic; color: var(--ink); }
+        .founder-sig { margin-top: 40px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+        .group { padding: 80px 0; background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
         @media (max-width:1000px) {
-          .manifesto, .pri, .team-grid, .tl-row { grid-template-columns: 1fr; gap: 24px; }
+          .manifesto, .pri, .founder-grid { grid-template-columns: 1fr; gap: 32px; }
         }
       `}</style>
 
@@ -46,8 +35,8 @@ export default function AboutPage() {
           <span className="eyebrow"><span className="dot"></span> Company</span>
           <h1 className="h-display" style={{marginTop:"16px"}}>A company built<br/>so a body can <em>be<br/>understood</em> in one place.</h1>
           <div className="manifesto">
-            <p>BiotrackOS was started in 2022 by clinicians, athletes, and engineers tired of the same conversation: <em>&quot;Can you bring your numbers next time?&quot;</em> The numbers always existed. The instrument to read them across a life didn&apos;t.</p>
-            <p>We don&apos;t believe in another wearable. We believe in the operating system that sits between every wearable, every clinic, and every person — quiet, continuous, and trustworthy enough that you stop thinking about it.</p>
+            <p>BiotrackOS started in 2023, but the problem had been building for years. After founding a corporate health platform that was later acquired, bringing a wearable to market, and being approached — again and again — to monitor populations, connect patient devices, and build data donation platforms, the pattern became impossible to ignore.</p>
+            <p>The data was never the problem. The infrastructure was. BiotrackOS was built to be that infrastructure — not another device, not another app, but the layer that connects every source, respects every person, and gives the right information to the right place.</p>
           </div>
         </div>
       </section>
@@ -55,7 +44,7 @@ export default function AboutPage() {
       <section className="principles">
         <div className="wrap-w">
           <span className="eyebrow"><span className="dot"></span> Principles</span>
-          <h2 className="h1" style={{marginTop:"16px",maxWidth:"18ch"}}>Four rules we won&apos;t break.</h2>
+          <h2 className="h1" style={{marginTop:"16px",maxWidth:"18ch"}}>Five rules we won&apos;t break.</h2>
           <div className="pri">
             <div className="p">
               <div className="n">01</div>
@@ -74,8 +63,8 @@ export default function AboutPage() {
             </div>
             <div className="p">
               <div className="n">04</div>
-              <h4>Clinical-grade, calmly.</h4>
-              <p>HIPAA, SOC 2, ISO 27001 are floors. Quiet, careful design is the ceiling.</p>
+              <h4>Built right, or not at all.</h4>
+              <p>Security, compliance, and data integrity are floors, not features. We don&apos;t ship around them.</p>
             </div>
             <div className="p" style={{gridColumn:"span 2"}}>
               <div className="n">05</div>
@@ -86,50 +75,34 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="timeline">
+      <section className="founder">
         <div className="wrap-w">
-          <span className="eyebrow"><span className="dot"></span> Timeline</span>
-          <h2 className="h1" style={{marginTop:"16px",maxWidth:"18ch"}}>Four years, in seven moments.</h2>
-          <div className="tl">
-            <div className="tl-row"><span className="y">2022</span><div><h5>Founded in Copenhagen</h5><p>Three founders — a longevity GP, a sports physiologist, an ex-Spotify ML engineer.</p></div><div><p className="mono" style={{fontFamily:"var(--font-mono)",fontSize:"11px",letterSpacing:".12em",color:"var(--muted)",textTransform:"uppercase"}}>Seed · $4.2M · Sequoia / Atomico</p></div></div>
-            <div className="tl-row"><span className="y">2023</span><div><h5>First clinic deployment</h5><p>Six longevity clinics across Scandinavia run on BiotrackOS&apos; alpha dashboard.</p></div><div></div></div>
-            <div className="tl-row"><span className="y">2024</span><div><h5>Consumer app launch</h5><p>iOS &amp; Android · 12 wearable integrations on day one.</p></div><div><p className="mono" style={{fontFamily:"var(--font-mono)",fontSize:"11px",letterSpacing:".12em",color:"var(--muted)",textTransform:"uppercase"}}>Series A · $22M</p></div></div>
-            <div className="tl-row"><span className="y">2024</span><div><h5>SOC 2 Type II · ISO 27001</h5><p>Annual external audits. EU data residency live.</p></div><div></div></div>
-            <div className="tl-row"><span className="y">2025</span><div><h5>FHIR &amp; EHR pipelines</h5><p>BiotrackOS ships into Epic, Cerner, and 4 Nordic EHRs.</p></div><div></div></div>
-            <div className="tl-row"><span className="y">2025</span><div><h5>Insurer &amp; corporate wellness</h5><p>Aggregate-only dashboards for population-scale customers.</p></div><div></div></div>
-            <div className="tl-row"><span className="y">2026</span><div><h5>Series B · expansion</h5><p>114 clinic customers · 412,000 connected consumers across 12 countries.</p></div><div><p className="mono" style={{fontFamily:"var(--font-mono)",fontSize:"11px",letterSpacing:".12em",color:"var(--muted)",textTransform:"uppercase"}}>Series B · $60M</p></div></div>
+          <span className="eyebrow"><span className="dot"></span> Founder</span>
+          <div className="founder-grid">
+            <div>
+              <div className="founder-ava">JW</div>
+              <div className="founder-name">James Wildish</div>
+              <div className="founder-role">Founder</div>
+            </div>
+            <div>
+              <p className="founder-message">
+                &ldquo;I&apos;ve spent the last decade building in health. A corporate wellness platform, a wearable, and more conversations than I can count with clinics, research teams, and organisations all trying to do the same thing — <em>use the data they already had.</em>
+                <br/><br/>
+                The data was never the problem. The infrastructure was.
+                <br/><br/>
+                BiotrackOS is the company I kept wishing existed. Not another device. Not another app. The layer that connects everything, respects the person behind every data point, and gives the right information to the right place. We&apos;re building it properly, and we&apos;re not stopping until it works.&rdquo;
+              </p>
+              <div className="founder-sig">— James Wildish, Founder</div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="team">
+      <section className="group">
         <div className="wrap-w">
-          <span className="eyebrow"><span className="dot"></span> Team</span>
-          <h2 className="h1" style={{marginTop:"16px",maxWidth:"22ch"}}>52 people in Copenhagen, London, and Lisbon.</h2>
-          <div className="team-grid">
-            <div className="person"><div className="ava">SH</div><h5>Sofia Holm, MD</h5><p>Co-founder &amp; CEO</p></div>
-            <div className="person"><div className="ava" style={{background:"linear-gradient(135deg,var(--sky),#E0EEFB)",color:"#2A6FDB"}}>JR</div><h5>James Rønne</h5><p>Co-founder &amp; CTO</p></div>
-            <div className="person"><div className="ava" style={{background:"linear-gradient(135deg,#FFF1C7,#FBF6E0)",color:"#9A7B1A"}}>NL</div><h5>Nora Lindgren, PhD</h5><p>Co-founder &amp; CSO</p></div>
-            <div className="person"><div className="ava" style={{background:"linear-gradient(135deg,#F4CFCB,#FBE6E4)",color:"#C46A6A"}}>MP</div><h5>Mateo Pereira</h5><p>VP Product</p></div>
-            <div className="person"><div className="ava">EK</div><h5>Eva Kaur</h5><p>Head of Clinical</p></div>
-            <div className="person"><div className="ava" style={{background:"linear-gradient(135deg,var(--sky),#E0EEFB)",color:"#2A6FDB"}}>TM</div><h5>Tomás Macedo</h5><p>VP Engineering</p></div>
-            <div className="person"><div className="ava" style={{background:"linear-gradient(135deg,#FFF1C7,#FBF6E0)",color:"#9A7B1A"}}>AB</div><h5>Asha Bhatt</h5><p>Head of Design</p></div>
-            <div className="person"><div className="ava" style={{background:"linear-gradient(135deg,#F4CFCB,#FBE6E4)",color:"#C46A6A"}}>LD</div><h5>Lina Døssing</h5><p>Head of Security</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="invest">
-        <div className="wrap-w">
-          <span className="eyebrow"><span className="dot"></span> Backed by</span>
-          <div className="invest-row">
-            <span className="name">Sequoia</span>
-            <span className="name">Atomico</span>
-            <span className="name">Index</span>
-            <span className="name">EQT Ventures</span>
-            <span className="name">Northzone</span>
-            <span className="name">+ angels from Whoop, Apple Health, &amp; Oura</span>
-          </div>
+          <span className="eyebrow"><span className="dot"></span> Group</span>
+          <h2 className="h1" style={{marginTop:"16px",maxWidth:"22ch"}}>Part of The Original Fit Factory.</h2>
+          <p style={{marginTop:24,fontSize:19,lineHeight:1.55,color:"var(--ink-2)",maxWidth:"56ch"}}>BiotrackOS sits within The Original Fit Factory — a group with deep roots in health, fitness, and performance. That foundation shapes how we build: with domain knowledge, long-term thinking, and a genuine stake in getting health data right.</p>
         </div>
       </section>
     </>
