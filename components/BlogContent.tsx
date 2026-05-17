@@ -5,7 +5,7 @@ import { useState } from "react";
 import NewsletterForm from "@/components/NewsletterForm";
 
 const ARTS = ["art-a", "art-b", "art-c", "art-d", "art-e", "art-f"];
-const CATS = ["All", "Research", "Clinical", "Engineering", "Product", "Opinion"];
+const CATS = ["All", "AI", "Clinical", "Engineering & Technology", "Opinion", "Product", "Research"];
 const PAGE_SIZE = 6;
 
 type Post = {
