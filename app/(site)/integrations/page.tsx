@@ -68,9 +68,9 @@ export default async function IntegrationsPage() {
           <div className="g">
             <div>
               <span className="eyebrow"><span className="dot"></span> Integrations</span>
-              <h1 className="h1">One record across<br/>devices, labs, genes,<br/><em>and prescriptions.</em></h1>
+              <h1 className="h1">Every source.<br/><em>One record.</em></h1>
             </div>
-            <p className="lede">BiotrackOS ingests, deduplicates, and time-aligns data from {categories.length > 0 ? categories.length : "multiple"} categories of source — and we add new ones every quarter. If your service isn&apos;t here, <Link href="/marketplace#join">apply to join the marketplace</Link>.</p>
+            <p className="lede">From wearables and devices to lab results, genomics, medications, and clinical records — every data point, structured and time-aligned into one longitudinal record.</p>
           </div>
           {categories.length > 0 && (
             <nav className="cat-nav">
@@ -89,18 +89,17 @@ export default async function IntegrationsPage() {
         <div className="wrap-w">
           <div className="panel">
             <div>
-              <span className="eyebrow"><span className="dot"></span> Become a partner</span>
-              <h2>Run a lab, DNA service,<br/>or pharmacy?<br/><em style={{ color: "var(--ink-2)", fontStyle: "italic" }}>Join the marketplace.</em></h2>
-              <p>BiotrackOS is open to qualified data partners across labs, genomics, epigenetics, and pharmacy. Apply once, integrate once, reach every clinic on the platform.</p>
+              <span className="eyebrow"><span className="dot"></span> Integrate your service</span>
+              <h2>Want your service<br/>on the platform?<br/><em style={{ color: "var(--ink-2)", fontStyle: "italic" }}>One integration. Every BiotrackOS customer.</em></h2>
+              <p>BiotrackOS is open to qualified integrations. If your service generates or holds health-relevant data, we want to hear from you.</p>
               <div className="why">
-                <div className="row"><span className="n">01</span><span>Single integration — built and maintained by our engineering team.</span></div>
-                <div className="row"><span className="n">02</span><span>Featured placement in the BiotrackOS marketplace, with consent-gated discovery.</span></div>
-                <div className="row"><span className="n">03</span><span>Co-marketing across our growing customer network.</span></div>
+                <div className="row"><span className="n">01</span><span>Connect once. Your service becomes available to every customer on the platform.</span></div>
+                <div className="row"><span className="n">02</span><span>Consent-gated discovery — customers choose to connect your service, you reach them at the point of intent.</span></div>
+                <div className="row"><span className="n">03</span><span>Co-marketed across our customer network.</span></div>
               </div>
             </div>
             <div>
-              <Link className="btn btn-primary btn-lg" href="/marketplace#join">Apply to join <span className="arrow">→</span></Link>
-              <div style={{ marginTop: "12px" }}><Link className="btn btn-ghost btn-sm" href="/marketplace">Browse the marketplace</Link></div>
+              <Link className="btn btn-primary btn-lg" href="/contact">Apply <span className="arrow">→</span></Link>
             </div>
           </div>
         </div>
