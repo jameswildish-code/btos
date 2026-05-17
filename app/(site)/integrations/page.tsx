@@ -79,7 +79,6 @@ export default async function IntegrationsPage() {
               {categories.map((cat) => (
                 <a key={cat._id} href={`#${cat.slug.current}`}>{cat.title}</a>
               ))}
-              <Link href="/marketplace" style={{ background: "var(--ink)", color: "var(--bg)", borderColor: "var(--ink)" }}>Marketplace →</Link>
             </nav>
           )}
         </div>
@@ -103,7 +102,7 @@ export default async function IntegrationsPage() {
             <div className="panel-points">
               <div className="point">
                 <h5>Connect once.</h5>
-                <p>Your service becomes available to every clinic, team, and individual on the platform immediately.</p>
+                <p>Your service becomes available to every clinic, team, and individual on the platform.</p>
               </div>
               <div className="point">
                 <h5>Reach them at the right moment.</h5>
