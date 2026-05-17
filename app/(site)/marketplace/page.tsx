@@ -77,7 +77,7 @@ export default async function MarketplacePage() {
               <span className="eyebrow"><span className="dot"></span> Marketplace</span>
               <h1 className="h1">Partners, add-ons,<br/><em>and programmes.</em></h1>
             </div>
-            <p className="lede">Connect a data partner, activate a feature, or deploy a programme — all from the same platform.</p>
+            <p className="lede">Connect a partner, activate an add-on, or deploy a programme — all from the same platform.</p>
           </div>
           <MarketplaceContent
             partnerCategories={partnerCategories ?? []}

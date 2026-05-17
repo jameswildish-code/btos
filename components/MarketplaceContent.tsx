@@ -58,7 +58,7 @@ const statusDotColor: Record<string, string> = {
   "Coming soon": "var(--muted)",
 };
 
-function EmptyState({ message, cta }: { message: string; cta?: React.ReactNode }) {
+function EmptyState({ message, cta }: { message: React.ReactNode; cta?: React.ReactNode }) {
   return (
     <div style={{ textAlign: "center", padding: "56px 0" }}>
       <h4 style={{ fontSize: 18, fontWeight: 500, margin: "0 0 8px" }}>Live on the platform.</h4>
@@ -198,8 +198,7 @@ function PartnersTab({ categories, partners }: { categories: PartnerCategory[]; 
   if (categories.length === 0) {
     return (
       <EmptyState
-        message="Partner categories are active. New partners are onboarded by application and reviewed before going live."
-        cta={<Link className="btn btn-ghost" href="/contact">Apply →</Link>}
+        message={<>Partner categories are active. New partners are onboarded by application and reviewed before launch. <Link href="/contact">Apply →</Link></>}
       />
     );
   }
@@ -281,8 +280,8 @@ function ProgrammesTab({ programmes }: { programmes: Programme[] }) {
     <>
       {programmes.length === 0 ? (
         <EmptyState
-          message="Programmes are open for submission. Authors earn the majority of revenue on every enrolment — BiotrackOS takes a platform fee."
-          cta={<Link className="btn btn-ghost" href="/contact">Submit a programme →</Link>}
+          message="Programmes are open for submission."
+          cta={<Link className="btn btn-ghost" href="/contact">Submit →</Link>}
         />
       ) : (
         <>
@@ -314,7 +313,7 @@ function ProgrammesTab({ programmes }: { programmes: Programme[] }) {
       <div className="submit-strip">
         <div>
           <h4>Submit a programme.</h4>
-          <p>Authors earn the majority of revenue on every enrolment. BiotrackOS takes a platform fee. All programmes are reviewed before going live.</p>
+          <p>Authors keep the majority of revenue on every enrolment. All submissions go through our review process before going live.</p>
         </div>
         <Link className="btn btn-primary" href="/contact">Submit <span className="arrow">→</span></Link>
       </div>
