@@ -13,7 +13,7 @@ const Logo = () => (
   </svg>
 );
 
-type MegaItem = { label: string; desc: string; href: string };
+type MegaItem = { label: string; desc: string; href: string; soon?: boolean };
 type MegaCol = { eyebrow: string; items: MegaItem[] };
 type MegaPromo = { kind: "demo" | "article"; eyebrow: string; title: string; body: string; cta: string; href: string };
 type NavEntry =
@@ -52,9 +52,10 @@ const NAV: NavEntry[] = [
     id: "resources", type: "mega", label: "Resources",
     columns: [
       { eyebrow: "Learn", items: [
-        { label: "Blog",              desc: "Research, opinion, changelog.",   href: "/blog" },
-        { label: "Customer stories", desc: "How teams ship with BiotrackOS.", href: "/customers" },
-        { label: "Research",         desc: "Studies, publications & evidence.", href: "/clinical-evidence" },
+        { label: "Blog",                       desc: "Research, opinion, changelog.",              href: "/blog" },
+        { label: "Customer stories",           desc: "How teams ship with BiotrackOS.",            href: "/customers" },
+        { label: "Research",                   desc: "Studies, publications & evidence.",          href: "/clinical-evidence" },
+        { label: "The One Health Collective",  desc: "Our clinician advisory network.",            href: "#", soon: true },
       ]},
       { eyebrow: "Trust", items: [
         { label: "Trust & security",  desc: "Compliance, consent & encryption.", href: "/trust-security" },
@@ -353,8 +354,11 @@ export default function Nav({ featuredPost }: { featuredPost?: FeaturedPost | nu
                       <div className="mega-col-eyebrow">{col.eyebrow}</div>
                       <div className="mega-col-items">
                         {col.items.map((item) => (
-                          <Link key={item.href} className="mega-item" href={item.href}>
-                            <span className="mega-item-label">{item.label}</span>
+                          <Link key={item.href} className="mega-item" href={item.href} style={item.soon ? { pointerEvents: "none", opacity: 0.6 } : {}}>
+                            <span className="mega-item-label" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                              {item.label}
+                              {item.soon && <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: ".12em", textTransform: "uppercase", background: "var(--mint-soft)", color: "var(--teal)", padding: "2px 6px", borderRadius: 999 }}>Soon</span>}
+                            </span>
                             <span className="mega-item-desc">{item.desc}</span>
                           </Link>
                         ))}
