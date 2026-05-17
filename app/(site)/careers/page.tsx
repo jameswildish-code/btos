@@ -83,7 +83,7 @@ export default async function CareersPage() {
           </div>
 
           {roles.length === 0 ? (
-            <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13 }}>No open roles at the moment — check back soon or <a href="mailto:careers@biotrackos.com" style={{ color: "var(--teal)" }}>reach out speculatively</a>.</p>
+            <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13 }}>We&apos;re not actively hiring right now, but we&apos;re always interested in exceptional people. <a href="mailto:careers@biotrackos.com" style={{ color: "var(--teal)" }}>Get in touch.</a></p>
           ) : (
             sortedDepts.map(([dept, deptRoles]) => (
               <div key={dept} className="dept-section">
