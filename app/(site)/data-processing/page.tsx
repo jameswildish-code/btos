@@ -10,7 +10,7 @@ export default function DataProcessingPage() {
         .legal .inner { max-width: 760px; margin: 0 auto; padding: 0 24px; }
         .legal h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(44px,5vw,72px); line-height: 1; letter-spacing: -0.015em; margin: 24px 0 0; }
         .legal h1 em { color: var(--ink-2); font-style: italic; }
-        .legal .meta { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; }
+        .legal .meta { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
         .legal h2 { font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 48px 0 12px; }
         .legal h3 { font-size: 16px; font-weight: 600; margin: 28px 0 8px; }
         .legal p, .legal li { font-size: 15px; line-height: 1.65; color: var(--ink-2); }
@@ -20,6 +20,8 @@ export default function DataProcessingPage() {
         .legal th, .legal td { padding: 12px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
         .legal th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
         .legal a { color: var(--ink); }
+        .notice-box { background: var(--mint-soft); border: 1px solid var(--line); border-radius: 14px; padding: 20px 24px; margin: 32px 0; }
+        .notice-box p { margin: 0; }
       `}</style>
 
       <section className="legal">
@@ -35,8 +37,12 @@ export default function DataProcessingPage() {
             This Data Processing Addendum (&ldquo;DPA&rdquo;) forms part of and is incorporated into the Terms of Service or master agreement between [ENTITY NAME] (&ldquo;Processor&rdquo;) and Customer (&ldquo;Controller&rdquo;). It governs the processing of Personal Data by BiotrackOS on behalf of Customer in the course of providing the Service.
           </p>
 
+          <div className="notice-box">
+            <p><strong>US healthcare customers (HIPAA):</strong> If your organisation is a HIPAA Covered Entity or Business Associate, a separate HIPAA Business Associate Agreement (BAA) is required before processing Protected Health Information (PHI) through BiotrackOS. Contact <strong>legal@biotrackos.com</strong> to request a BAA.</p>
+          </div>
+
           <h2>Definitions</h2>
-          <p>&ldquo;Personal Data&rdquo;, &ldquo;Special Category Data&rdquo;, &ldquo;Processing&rdquo;, &ldquo;Controller&rdquo;, &ldquo;Processor&rdquo;, &ldquo;Data Subject&rdquo;, and &ldquo;Supervisory Authority&rdquo; have the meanings given in applicable Data Protection Law. &ldquo;Data Protection Law&rdquo; means UK GDPR, the UK Data Protection Act 2018, EU GDPR 2016/679, and any applicable successor or equivalent legislation as amended from time to time.</p>
+          <p>&ldquo;Personal Data&rdquo;, &ldquo;Special Category Data&rdquo;, &ldquo;Processing&rdquo;, &ldquo;Controller&rdquo;, &ldquo;Processor&rdquo;, &ldquo;Data Subject&rdquo;, and &ldquo;Supervisory Authority&rdquo; have the meanings given in applicable Data Protection Law. &ldquo;Data Protection Law&rdquo; means UK GDPR, the UK Data Protection Act 2018, EU GDPR 2016/679, the Australian Privacy Act 1988, and any applicable successor or equivalent legislation as amended from time to time.</p>
 
           <h2>1 &mdash; Scope &amp; roles</h2>
           <p>Controller determines the purposes and means of processing Member Personal Data. Processor processes Personal Data solely on documented instructions from Controller, unless required to do so by applicable law, in which case Processor shall inform Controller before processing unless prohibited by law from doing so.</p>
@@ -47,17 +53,16 @@ export default function DataProcessingPage() {
             <li><strong>Purpose:</strong> provision of the BiotrackOS Service as described in the applicable Order Form.</li>
             <li><strong>Duration:</strong> term of the Order Form plus 60 days for data export and deletion.</li>
             <li><strong>Data subjects:</strong> Members enrolled by Controller.</li>
-            <li><strong>Categories of personal data:</strong> identification data (name, email), contact data, and health data (Special Category data under Art. 9 GDPR).</li>
+            <li><strong>Categories of personal data:</strong> identification data (name, email), contact data, and health data (Special Category data under Art. 9 GDPR / sensitive information under Australian Privacy Act).</li>
           </ul>
 
           <h2>3 &mdash; Processor obligations</h2>
-          <p>Processor will:</p>
           <ul>
             <li>Process Personal Data only on documented instructions from Controller.</li>
             <li>Ensure that personnel authorised to process Personal Data are bound by appropriate confidentiality obligations.</li>
             <li>Implement and maintain the technical and organisational security measures described in §4.</li>
             <li>Not engage a subprocessor without prior authorisation from Controller as set out in §5.</li>
-            <li>Assist Controller in fulfilling data subject rights requests, breach notification obligations, and data protection impact assessments using appropriate technical and organisational measures.</li>
+            <li>Assist Controller in fulfilling data subject rights requests, breach notification obligations, and data protection impact assessments.</li>
             <li>Make available all information necessary to demonstrate compliance with this DPA and cooperate with reasonable audits as set out in §8.</li>
           </ul>
 
@@ -79,20 +84,23 @@ export default function DataProcessingPage() {
               <tr>
                 <th>Subprocessor</th>
                 <th>Purpose</th>
+                <th>Data processed</th>
                 <th>Region</th>
               </tr>
             </thead>
             <tbody>
               {[
-                { name: "Amazon Web Services", purpose: "Infrastructure hosting", region: "EU · UK · US" },
-                { name: "Cloudflare", purpose: "WAF, DDoS mitigation, edge delivery", region: "Global edge — no health data" },
-                { name: "Datadog", purpose: "Infrastructure monitoring and logging — no PHI", region: "EU · US" },
-                { name: "Twilio SendGrid", purpose: "Transactional email", region: "EU · US" },
-                { name: "Stripe", purpose: "Billing and payment processing", region: "EU · US" },
+                { name: "Amazon Web Services", purpose: "Infrastructure hosting", data: "All platform data", region: "EU · UK · US" },
+                { name: "Cloudflare", purpose: "WAF, DDoS mitigation, edge delivery", data: "IP address, request metadata — no health data", region: "Global edge" },
+                { name: "Datadog", purpose: "Infrastructure monitoring and logging", data: "System logs — no PHI", region: "EU · US" },
+                { name: "Twilio SendGrid", purpose: "Transactional email", data: "Email address, name", region: "EU · US" },
+                { name: "Stripe", purpose: "Billing and payment processing", data: "Billing and payment data — no health data", region: "EU · US" },
+                { name: "[ANALYTICS PROVIDER]", purpose: "Website and platform analytics", data: "Usage data, IP address (anonymised)", region: "[REGION]" },
               ].map((r) => (
                 <tr key={r.name}>
                   <td>{r.name}</td>
                   <td>{r.purpose}</td>
+                  <td>{r.data}</td>
                   <td>{r.region}</td>
                 </tr>
               ))}
@@ -105,10 +113,11 @@ export default function DataProcessingPage() {
           <ul>
             <li><strong>UK transfers:</strong> International Data Transfer Agreements (IDTAs) approved by the Information Commissioner&rsquo;s Office.</li>
             <li><strong>EU transfers:</strong> Standard Contractual Clauses (Module 2 &mdash; Controller to Processor) approved by the European Commission (Decision 2021/914), supplemented by the technical measures in §4.</li>
+            <li><strong>Australia:</strong> transfers comply with APP 8 cross-border disclosure requirements under the Australian Privacy Act 1988.</li>
           </ul>
 
           <h2>7 &mdash; Data subject requests</h2>
-          <p>Processor will promptly notify Controller (and in any event within 5 business days) of any data subject request received directly by Processor. Processor will provide reasonable technical assistance to enable Controller to respond within applicable statutory timeframes.</p>
+          <p>Processor will notify Controller promptly (and in any event within 5 business days) of any data subject request received directly by Processor. Processor will provide reasonable technical assistance to enable Controller to respond within applicable statutory timeframes.</p>
 
           <h2>8 &mdash; Personal data breach</h2>
           <p>Processor will notify Controller without undue delay and in any event within 24 hours of becoming aware of a Personal Data Breach affecting Controller&rsquo;s data. Notification will include: (a) a description of the breach; (b) categories and approximate number of data subjects and records affected; (c) likely consequences; and (d) measures taken or proposed to address the breach.</p>
@@ -120,7 +129,7 @@ export default function DataProcessingPage() {
           <p>Upon termination or expiry of the Service, Processor will, at Controller&rsquo;s written request, either securely delete or return all Personal Data within 60 days, and delete existing copies unless applicable law requires retention. Processor will provide written certification of deletion upon request.</p>
 
           <h2>11 &mdash; Execution</h2>
-          <p>This DPA is incorporated automatically into all Order Forms signed on or after 17 May 2026. To execute a separately signed copy, contact <strong>legal@biotrackos.com</strong>.</p>
+          <p>This DPA is incorporated automatically into all Order Forms signed on or after 17 May 2026. To execute a separately signed copy, or to request a HIPAA Business Associate Agreement, contact <strong>legal@biotrackos.com</strong>.</p>
 
           <h2>Contact</h2>
           <p>Data Protection Officer: <strong>dpo@biotrackos.com</strong><br />[REGISTERED ADDRESS]</p>

@@ -199,6 +199,7 @@ export default function LoginPage() {
           <div className="auth-foot-legal">
             <Link href="/terms">Terms</Link>
             <Link href="/privacy">Privacy</Link>
+            <Link href="/cookies">Cookies</Link>
             <Link href="/data-processing">Data processing</Link>
           </div>
         </footer>
