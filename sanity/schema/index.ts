@@ -1,6 +1,7 @@
 import blogPost from "./blogPost";
 import blogCategory from "./blogCategory";
 import caseStudy from "./caseStudy";
+import department from "./department";
 import openRole from "./openRole";
 import pressItem from "./pressItem";
 import partner from "./partner";
@@ -16,6 +17,7 @@ export const schemaTypes = [
   blogPost,
   blogCategory,
   caseStudy,
+  department,
   openRole,
   pressItem,
   partner,

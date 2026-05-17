@@ -7,12 +7,7 @@ export default defineType({
   fields: [
     defineField({ name: "title", title: "Job title", type: "string", validation: (r) => r.required() }),
     defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "title" } }),
-    defineField({
-      name: "department",
-      title: "Department",
-      type: "string",
-      options: { list: ["Engineering", "Product", "Design", "Clinical", "Sales", "Marketing", "Operations", "People"] },
-    }),
+    defineField({ name: "department", title: "Department", type: "reference", to: [{ type: "department" }] }),
     defineField({ name: "location", title: "Location", type: "string" }),
     defineField({
       name: "type",

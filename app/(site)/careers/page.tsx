@@ -16,7 +16,7 @@ const deptColors: Record<string, string> = {
 type Role = {
   _id: string;
   title: string;
-  department?: string;
+  department?: { _id: string; title: string };
   location?: string;
   type?: string;
   externalUrl?: string;
@@ -27,11 +27,12 @@ export default async function CareersPage() {
   const roles: Role[] = data ?? [];
 
   const byDept = roles.reduce<Record<string, Role[]>>((acc, r) => {
-    const d = r.department ?? "Other";
+    const d = r.department?.title ?? "Other";
     if (!acc[d]) acc[d] = [];
     acc[d].push(r);
     return acc;
   }, {});
+  const sortedDepts = Object.entries(byDept).sort(([a], [b]) => a.localeCompare(b));
 
   return (
     <>
@@ -95,7 +96,7 @@ export default async function CareersPage() {
           {roles.length === 0 ? (
             <p style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 13 }}>No open roles at the moment — check back soon or <a href="mailto:careers@biotrackos.com" style={{ color: "var(--teal)" }}>reach out speculatively</a>.</p>
           ) : (
-            Object.entries(byDept).map(([dept, deptRoles]) => (
+            sortedDepts.map(([dept, deptRoles]) => (
               <div key={dept} className="dept-section">
                 <div className="dept-head" style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <span style={{ width: 8, height: 8, borderRadius: "50%", background: deptColors[dept] ?? "var(--line)", display: "inline-block" }}></span>
