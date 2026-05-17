@@ -107,9 +107,8 @@ function CategorySection({
 
         {integrations.length === 0 ? (
           <div className="int-empty">
-            <div className="int-empty-icon">∅</div>
-            <h4>No integrations yet</h4>
-            <p>This category is coming soon. <Link href="/marketplace#join">Apply to be our launch partner →</Link></p>
+            <h4>Actively onboarding.</h4>
+            <p>Integrations in this category are open. <Link href="/contact">Become a partner →</Link></p>
           </div>
         ) : (
           <>
@@ -120,9 +119,9 @@ function CategorySection({
               {!hasMore && (
                 <div className="tile soon">
                   <div className="logo">+</div>
-                  <h4>Your service?</h4>
-                  <p><Link href="/marketplace#join">Request to join →</Link></p>
-                  <span className="status"><span className="d" />Open</span>
+                  <h4>Your platform?</h4>
+                  <p>Get your service in front of BiotrackOS customers.</p>
+                  <Link href="/contact" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--teal)", marginTop: "auto" }}>Get listed →</Link>
                 </div>
               )}
             </div>
@@ -142,9 +141,9 @@ function CategorySection({
               <div className="int-grid" style={{ marginTop: 12 }}>
                 <div className="tile soon">
                   <div className="logo">+</div>
-                  <h4>Your service?</h4>
-                  <p><Link href="/marketplace#join">Request to join →</Link></p>
-                  <span className="status"><span className="d" />Open</span>
+                  <h4>Your platform?</h4>
+                  <p>Get your service in front of BiotrackOS customers.</p>
+                  <Link href="/contact" style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--teal)", marginTop: "auto" }}>Get listed →</Link>
                 </div>
               </div>
             )}

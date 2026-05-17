@@ -50,7 +50,6 @@ export default async function IntegrationsPage() {
         .tile.soon .status { color: var(--muted); }
         .tile.soon .status .d { background: var(--muted-2); animation: liveBlink 3.2s ease-in-out infinite; }
         .int-empty { text-align: center; padding: 56px 0; }
-        .int-empty-icon { font-family: var(--font-display); font-size: 48px; color: var(--line); margin-bottom: 16px; }
         .int-empty h4 { font-size: 18px; font-weight: 500; margin: 0 0 8px; }
         .int-empty p { font-size: 14px; color: var(--muted); }
         .partner-cta { margin: 0; background: var(--bg-2); border-top: 1px solid var(--line); padding: 96px 0; }
