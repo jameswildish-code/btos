@@ -231,8 +231,7 @@ function AddonsTab({ addons }: { addons: Addon[] }) {
     <>
       {addons.length === 0 ? (
         <EmptyState
-          message="First-party features are in development. Have an idea for a market-specific module? We want to hear from you."
-          cta={<Link className="btn btn-ghost" href="/contact">Pitch an idea →</Link>}
+          message={<>First-party features are in development. Have an idea for a market-specific module? <Link href="/contact">Pitch an idea →</Link></>}
         />
       ) : (
         <>
@@ -280,8 +279,7 @@ function ProgrammesTab({ programmes }: { programmes: Programme[] }) {
     <>
       {programmes.length === 0 ? (
         <EmptyState
-          message="Programmes are open for submission."
-          cta={<Link className="btn btn-ghost" href="/contact">Submit →</Link>}
+          message={<>Programmes are open for submission. <Link href="/contact">Submit yours →</Link></>}
         />
       ) : (
         <>
@@ -313,7 +311,7 @@ function ProgrammesTab({ programmes }: { programmes: Programme[] }) {
       <div className="submit-strip">
         <div>
           <h4>Submit a programme.</h4>
-          <p>Authors keep the majority of revenue on every enrolment. All submissions go through our review process before going live.</p>
+          <p>Submit your own programme for review, or work with us to develop and activate one. All submissions are evaluated by our team before going live.</p>
         </div>
         <Link className="btn btn-primary" href="/contact">Submit <span className="arrow">→</span></Link>
       </div>
